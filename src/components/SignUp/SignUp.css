@@ -32,7 +32,7 @@
 .text {
     font-family: 'Vazir', sans-serif;
     direction: rtl; 
-    color: #3c009d;
+    color: #5D12D2;
     font-size: 48px;
     font-weight: 700;
 }
@@ -40,7 +40,7 @@
 .underline {
     width: 61px;
     height: 6px;
-    background: #3c009d;
+    background: #5D12D2;
     border-radius: 9px;
 }
 
@@ -83,7 +83,7 @@
 .forgot-password {
     direction: rtl; 
     font-family: 'Vazir', sans-serif;
-    padding-left: 62px;
+    padding-left: 55px;
     margin-top: 27px;
     color: #797979;
     font-size: 18px;
@@ -113,7 +113,7 @@
     width: 220px;
     height: 59px;
     color: white;
-    background: #4c00b4;
+    background: #5D12D2;
     border-radius: 50px;
     font-size: 19px;
     font-weight: 700;
