@@ -1,7 +1,13 @@
 import react from 'react'
 import React, { useState } from 'react';
+import user_icon from '../../assets/person.png'
+import lock_icon from '../../assets/password.png'
+import email_icon from '../../assets/email.png'
+import gender_icon from '../../assets/gender.png'
+
 import './SignUp.css'
 const LoginContainer = () => {
+  const [loginLabelsColor, setLoginLabelsColor] = useState(false);
 
   const handleSignupClick=() =>{
     const loginForm=document.querySelector("form.login");
@@ -15,11 +21,13 @@ const LoginContainer = () => {
     const loginText=document.querySelector(".header .login");
     loginForm.style.marginLeft="0%";
     loginText.style.marginLeft="0%";
+    setLoginLabelsColor(!loginLabelsColor); 
   };
 
   const handleSignupLinkClick=(e) => {
     e.preventDefault();
     const signupBtn=document.querySelector("label.signup");
+    
     signupBtn.click();
   };
 
@@ -27,6 +35,7 @@ const LoginContainer = () => {
 
   return(
       <>
+      <body>
         <div className="wrapper">
           <div className="header">
             <div className="title login">ورود</div>
@@ -37,6 +46,7 @@ const LoginContainer = () => {
             <div className="slider_controls">
               <input type="radio" name="slide" id="login" defaultChecked/>
               <input type="radio" name="slide" id="signup" defaultChecked/>
+            
               <label htmlFor="login" className='slide login' onClick={handleLoginClick}>ورود</label>
               <label htmlFor="signup" className='slide signup' onClick={handleSignupClick}>ثبت نام</label>
               <div className="slider_tab"></div>
@@ -55,7 +65,7 @@ const LoginContainer = () => {
                     <div className='btn_layer'></div>
                     <input type="submit" value="ورود"/>
                 </div>
-                <div className="signup_link"  > اکانت ندارید : <a href="#" onClick={handleSignupLinkClick}> ثبت نام کنید</a></div>
+                {/* <div className="signup_link"  > اکانت ندارید : <a href="#" onClick={handleSignupLinkClick}> ثبت نام کنید</a></div> */}
               </form>
                 {/*signup form*/}
                 <form action="#">
@@ -68,6 +78,7 @@ const LoginContainer = () => {
                   </div>
                  
                   <div className="field">
+                   
                     <input type="password" placeholder='رمز عبور'/>
                   </div>
                   <div className="field">
@@ -78,7 +89,7 @@ const LoginContainer = () => {
                     <input type="submit" value="ثبت نام"/>
                     
                   </div>
-                  <div className="signup_link">  اکانت دارید :<a href='#' onClick={handleLoginClick}> ورود به سایت </a></div>
+                  {/* <div className="signup_link">  اکانت دارید :<a href='#' onClick={handleLoginClick}> ورود به سایت </a></div> */}
 
                 </form>
 
@@ -86,23 +97,8 @@ const LoginContainer = () => {
 
           </div>
         </div>
-      
-      
-      
-      
-      
-      
-      
-      
-      
+        </body>
       </>
-
-
-
-
-
-
-
 
 
 
