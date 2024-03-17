@@ -1,11 +1,11 @@
 import react from 'react'
 import React, { useState } from 'react';
+import './LoginSignup.css'
+
 import user_icon from '../../assets/person.png'
 import lock_icon from '../../assets/password.png'
 import email_icon from '../../assets/email.png'
-import gender_icon from '../../assets/gender.png'
 
-import './SignUp.css'
 const LoginContainer = () => {
   const [loginLabelsColor, setLoginLabelsColor] = useState(false);
 
@@ -45,51 +45,70 @@ const LoginContainer = () => {
           <div className="form_container">
             <div className="slider_controls">
               <input type="radio" name="slide" id="login" defaultChecked/>
-              <input type="radio" name="slide" id="signup" defaultChecked/>
+              <input type="radio" name="slide" id="signup"/>
             
               <label htmlFor="login" className='slide login' onClick={handleLoginClick}>ورود</label>
               <label htmlFor="signup" className='slide signup' onClick={handleSignupClick}>ثبت نام</label>
               <div className="slider_tab"></div>
             </div>
             <div className='form_details'>
-              <form action="#" className='login'>
+            <form action="#" className='login'>
                 <pre></pre>
                 <div className="field">
-                  <input type="text" placeholder='ایمیل'/>
+                <input type="text" placeholder='ایمیل' 
+                    style={{backgroundImage: `url(${email_icon})`, 
+                            backgroundRepeat: 'no-repeat', 
+                            paddingRight: '40px',
+                            backgroundPosition: 'right'}}/>
                 </div>
                 <div className="field">
-                    <input type="password" placeholder='رمز عبور' />
+                <input type="password" placeholder='رمز عبور' 
+                    style={{backgroundImage: `url(${lock_icon})`, 
+                            backgroundRepeat: 'no-repeat', 
+                            paddingRight: '40px',
+                            backgroundPosition: 'right'}}/>
                 </div>
                 <div className='pass_link'><a href="#" > فراموشی رمز عبور</a></div>
                 <div className="field btn">
                     <div className='btn_layer'></div>
                     <input type="submit" value="ورود"/>
                 </div>
-                {/* <div className="signup_link"  > اکانت ندارید : <a href="#" onClick={handleSignupLinkClick}> ثبت نام کنید</a></div> */}
+                {/* <div className="signup_link"  > حساب کاربری ندارید؟ <a href="#" onClick={handleSignupLinkClick}> ثبت نام کنید</a></div> */}
               </form>
                 {/*signup form*/}
                 <form action="#">
 
                   {/*<div className="field">
                     <input type="text" placeholder='Name'/>
-  </div>*/}
+                  </div>*/}
                   <div className="field">
-                    <input type="text" placeholder='ایمیل'/>
+                  <input type="text" placeholder='ایمیل' 
+                    style={{backgroundImage: `url(${email_icon})`, 
+                            backgroundRepeat: 'no-repeat', 
+                            paddingRight: '40px',
+                            backgroundPosition: 'right'}}/>
                   </div>
                  
                   <div className="field">
-                   
-                    <input type="password" placeholder='رمز عبور'/>
+                  <input type="password" placeholder='رمز عبور' 
+                    style={{backgroundImage: `url(${lock_icon})`, 
+                            backgroundRepeat: 'no-repeat', 
+                            paddingRight: '40px',
+                            backgroundPosition: 'right'}}/>
                   </div>
                   <div className="field">
-                    <input type="password" placeholder='تکرار رمز عبور'/>
+                  <input type="password" placeholder='تکرار رمز عبور' 
+                    style={{backgroundImage: `url(${lock_icon})`, 
+                            backgroundRepeat: 'no-repeat', 
+                            paddingRight: '40px',
+                            backgroundPosition: 'right'}}/>
                   </div>
                   <div className="field btn">
                     <div className='btn_layer'></div>
                     <input type="submit" value="ثبت نام"/>
                     
                   </div>
-                  {/* <div className="signup_link">  اکانت دارید :<a href='#' onClick={handleLoginClick}> ورود به سایت </a></div> */}
+                  {/* <div className="signup_link">  حساب کاربری دارید؟<a href='#' onClick={handleLoginClick}>  وارد شوید</a></div> */}
 
                 </form>
 
