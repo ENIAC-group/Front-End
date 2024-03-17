@@ -1,61 +1,115 @@
-import React, { useState } from "react";
+import react from 'react'
+import React, { useState } from 'react';
 import './SignUp.css'
+const LoginContainer = () => {
 
-import user_icon from '../../assets/person.png'
-import lock_icon from '../../assets/password.png'
-import email_icon from '../../assets/email.png'
-import gender_icon from '../../assets/gender.png'
+  const handleSignupClick=() =>{
+    const loginForm=document.querySelector("form.login");
+    const loginText=document.querySelector(".header .login");
+    loginForm.style.marginLeft="-50%";
+    loginText.style.marginLeft="-50%";
+  };
 
-const SignUp = () => {
-    const [action, setAction] = useState("ثبت نام")
-    const genderOptions = [
-        { value: "F", label: "زن" },
-        { value: "M", label: "مرد" },
-    ];
-    return (
-        <div className="container">
-            <div className="header">
-                <div className="text">{action}</div>
-                <div className="underline"></div>
-            </div> 
-            <div className="inputs">
-                {action === "ورود" ? <div></div> : <>
-                    <div className="input"><img src={user_icon} alt="" /><input type="text" placeholder="نام" /></div>
-                    <div className="input"><img src={user_icon} alt="" /><input type="text" placeholder="نام خانوادگی" /></div>
-                </>} 
+  const handleLoginClick=() =>{
+    const loginForm= document.querySelector("form.login");
+    const loginText=document.querySelector(".header .login");
+    loginForm.style.marginLeft="0%";
+    loginText.style.marginLeft="0%";
+  };
 
-                <div className="input">
-                    <img src={email_icon} alt="" />
-                    <input type="email" placeholder="ایمیل" />
-                </div>
-                <div className="input">
-                    <img src={lock_icon} alt="" />
-                    <input type="password" placeholder="رمز عبور" />
-                </div>
-                {action === "ثبت نام" ? (
-                <div className="input">
-                    <img src={gender_icon} alt="" />
-                    <select className="select" id="gender" name="gender" defaultValue="" required>
-                        <option disabled value="">جنسیت</option>
-                        {genderOptions.map((option) => (
-                            <option key={option.value} value={option.value}>
-                                {option.label}
-                            </option>
-                        ))}
-                    </select>
-                </div>
-                ) : (
-                <div className="forgot-password">
-                    رمز عبور خود را فراموش کردید؟ <span>کلیک کنید</span>
-                </div>
-                )}
-                <div className="submit-container">
-                    <div className={action === "ثبت نام" ? "submit gray" : "submit"} onClick={() => {setAction("ورود")}}>ورود</div>
-                    <div className={action === "ورود" ? "submit gray" : "submit"} onClick={() => {setAction("ثبت نام")}}>ثبت نام</div>
-                </div>
+  const handleSignupLinkClick=(e) => {
+    e.preventDefault();
+    const signupBtn=document.querySelector("label.signup");
+    signupBtn.click();
+  };
+
+
+
+  return(
+      <>
+        <div className="wrapper">
+          <div className="header">
+            <div className="title login">ورود</div>
+            <div className="title signup">ثبت نام</div>
+          </div>
+
+          <div className="form_container">
+            <div className="slider_controls">
+              <input type="radio" name="slide" id="login" defaultChecked/>
+              <input type="radio" name="slide" id="signup" defaultChecked/>
+              <label htmlFor="login" className='slide login' onClick={handleLoginClick}>ورود</label>
+              <label htmlFor="signup" className='slide signup' onClick={handleSignupClick}>ثبت نام</label>
+              <div className="slider_tab"></div>
             </div>
-        </div>
-    )
-}
+            <div className='form_details'>
+              <form action="#" className='login'>
+                <pre></pre>
+                <div className="field">
+                  <input type="text" placeholder='ایمیل'/>
+                </div>
+                <div className="field">
+                    <input type="password" placeholder='رمز عبور' />
+                </div>
+                <div className='pass_link'><a href="#" > فراموشی رمز عبور</a></div>
+                <div className="field btn">
+                    <div className='btn_layer'></div>
+                    <input type="submit" value="ورود"/>
+                </div>
+                <div className="signup_link"  > اکانت ندارید : <a href="#" onClick={handleSignupLinkClick}> ثبت نام کنید</a></div>
+              </form>
+                {/*signup form*/}
+                <form action="#">
 
-export default SignUp
+                  {/*<div className="field">
+                    <input type="text" placeholder='Name'/>
+  </div>*/}
+                  <div className="field">
+                    <input type="text" placeholder='ایمیل'/>
+                  </div>
+                 
+                  <div className="field">
+                    <input type="password" placeholder='رمز عبور'/>
+                  </div>
+                  <div className="field">
+                    <input type="password" placeholder='تکرار رمز عبور'/>
+                  </div>
+                  <div className="field btn">
+                    <div className='btn_layer'></div>
+                    <input type="submit" value="ثبت نام"/>
+                    
+                  </div>
+                  <div className="signup_link">  اکانت دارید :<a href='#' onClick={handleLoginClick}> ورود به سایت </a></div>
+
+                </form>
+
+            </div>
+
+          </div>
+        </div>
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      </>
+
+
+
+
+
+
+
+
+
+
+  )
+
+}
+  
+ 
+
+export default LoginContainer;

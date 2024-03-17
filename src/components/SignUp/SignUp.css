@@ -1,151 +1,182 @@
 @import url('https://fonts.googleapis.com/css2?family=Vazir&display=swap');
+.wrapper{
+  max-width: 390px;
+  background: #fff;
+  padding: 30px;
+  border-radius: 15px;
+  overflow: hidden;
+  box-shadow: rgb(66,38,77) 0px 20px 30px -10px;
+
+}
+.wrapper .header{
+  display: flex;
+  width:200%;
 
 
-
-.container {
-    font-family: 'Vazir', sans-serif;
-    direction: rtl; 
-    display: flex;
-    flex-direction: column;
-    margin: auto;
-    margin-top: 80px;
-    background: white;
-    padding-bottom: 30px;
-    width: 600px;
-    border-radius: 20px;
-    box-shadow: 0px 4px 10px rgba(5, 5, 5, 5);
+}
+.wrapper .title{
+  width: 50%;
+  font-size:35px;
+  font-weight: 600;
+  text-align: center;
+  transition: all 0.6s cubic-bezier(0.68 , -0.55 , 0.265, 1.55);
 }
 
-.header {
-    font-family: 'Vazir', sans-serif;
-    font-weight: bold;
-    direction: rtl; 
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    gap: 9px;
-    width: 100%;
-    margin-top: 30px;
-    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.2);
+.wrapper .form_container{
+  width:100%;
+  overflow:hidden;
 }
 
-.text {
-    font-family: 'Vazir', sans-serif;
-    direction: rtl; 
-    color: #5D12D2;
-    font-size: 48px;
-    font-weight: 700;
+.wrapper .slider_controls{
+  position: relative;
+  width:100%;
+  height:50px;
+  overflow:hidden;
+  display: flex;
+  margin:30px 0 10px 0;
+  justify-content: space-between;
+  border: 1px solid lightgray;
+  border-radius: 35px;
 }
 
-.underline {
-    width: 61px;
-    height: 6px;
-    background: #5D12D2;
-    border-radius: 9px;
+.slider_controls .slide{
+  width:100%;
+  color:#fff;
+  height:100%;
+  line-height: 48px;
+  font-size: 22px;
+  font-weight: 500;
+  text-align: center;
+  cursor: pointer;
+  z-index: 1;
+  transition: all 0.6s ease;
 }
-
-.inputs {
-    direction: rtl; 
-    margin-top: 50px;
-    display: flex;
-    flex-direction: column;
-    gap: 25px;
+input[type="radio"]{
+  display: none;
 }
-
-.input {
-    direction: rtl; 
-    display: flex;
-    align-items: center;
-    margin: auto;
-    width: 480px;
-    height: 60px;
-    background: #eaeaea;
-    border-radius: 20px;
-}
-
-.input img {
-    direction: rtl; 
-    margin: 0px 30px;
-}
-
-.input input {
-    direction: rtl; 
-    height: 50px;
-    font-family: 'Vazir', sans-serif;
-    width: 300px;
-    background: transparent;
-    border: none;
-    outline: none;
-    color: #797979;
-    font-size: 19px;
-}
-
-.forgot-password {
-    direction: rtl; 
-    font-family: 'Vazir', sans-serif;
-    padding-left: 55px;
-    margin-top: 27px;
-    color: #797979;
-    font-size: 18px;
-}
-
-.forgot-password span {
-    direction: rtl; 
-    font-family: 'Vazir', sans-serif;
-    color: #4c00b4;
-    cursor: pointer;
-}
-
-.submit-container {
-    direction: rtl; 
-    font-family: 'Vazir', sans-serif;
-    display: flex;
-    gap: 30px;
-    margin: 60px auto;
-}
-
-.submit {
-    direction: rtl; 
-    font-family: 'Vazir', sans-serif;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    width: 220px;
-    height: 59px;
-    color: white;
-    background: #5D12D2;
-    border-radius: 50px;
-    font-size: 19px;
-    font-weight: 700;
-    cursor: pointer;
-}
-
-.gray {
-    background-color: #eaeaea;
-    color: #676767;
-}
-
-.input select {
-    direction: rtl; 
-    font-family: 'Vazir', sans-serif;
-    width: 300px;
-    padding: 8px;
-    color: #797979;
-    border: none;
-    border-radius: 4px;
-    outline: none;
-    font-size: 19px;
-    transition: border-color 0.3s ease;
-}
+.slider_controls label.signup{
+  color: #000;
   
-  .input select:focus {
-    border: none;
-  }
+}
+.slider_controls .slider_tab{
+  height:100%;
+  width: 50%;
+  left:0;
+  z-index: 0;
+  background: -webkit-linear-gradient(left,#5a0066 , #5c0080 , #9500b3,#8a00e6);
+  position: absolute;
+  border-radius: 35px;
+  transition:all 0.6s cubic-bezier(0.68 , -0.55 , 0.265 , 1.55);
+}
+
+#signup:checked ~ .slider_tab{
+  left:50%;
+}
+#signup:checked ~ label.signup{
+  color:#fff;
+  user-select: none;
+}
+
+#signup:checked ~ label.login{
+  color:#000;
+}
+#login:checked ~ label.signup{
+  color:#000;
+}
+#login:checked ~ label.login{
+  user-select: none;
+}
+.form_container .form_details{
+  display:flex;
+  width:200%;
+}
+.form_container .form_details form{
+ 
+  width:50%;
+  transition:all 0.6s cubic-bezier(0.68 , -0.55 , 0.265 , 1.55);
+}
+
+.form_details form .field{
+  width:100%;
+  height:50px;
+  margin-top: 20px;
+  border-bottom: 2px solid #adadad;
+
+}
+.form_details form .field input{
+  width:100%;
+  height:100%;
+  direction: rtl; 
+  outline : none;
+  padding-left: 15px;
+  border: none;
+  border-bottom-width:2px;
+  font-size: 18px;
+  transition:all 0.3s ease;
+
+}
+.form_details form .field input::placeholder{
+  font-family: 'Vazir', sans-serif;
   
-  .input label {
-    display: block;
-    margin-bottom: 8px;
-    font-size: 16px;
-    font-weight: bold;
-    color: #797979f3
-  }
+  color: #999;
+  transition: all 0.3s ease;
+
+}
+form .field input:focus::placeholder{
+  color:#ab1aff;
+}
+.form_details form .pass_link{
+  margin-top: 5px;
+  
+}
+.form_details form .signup_link{
+  margin-top:30px;
+  text-align: center;
+  
+}
+.form_details form .pass_link a,
+.form_details form .signup_link a{
+  color: #a31aff;
+  
+  text-decoration: none;
+  font-size: 15px;
+}
+.form_details form .signup_link{
+  font-size: 17px;
+  text-align: center;
+  
+}
+form .btn{
+  height: 50px;
+  width:100%;
+  border-radius: 35px;
+  position:relative;
+  overflow: hidden;
+
+}
+form .btn .btn_layer{
+  width:300%;
+  height: 100%;
+  position: absolute;
+  left:-100%;
+  border-radius: 30px;
+  background:-webkit-linear-gradient(right,#350066,#710080,#a400b3, #bd4fe9);
+  transition: all 0.3s ease
+}
+form .btn:hover .btn_layer{
+  left:0;
+}
+form .btn input[type="submit"]{
+  height:100%;
+  width:100%;
+  position:relative;
+  color:#fff;
+  z-index: 1;
+  border:none;
+  padding-left: 0;
+  border-radius: 15px;
+  font-size: 20px;
+  font-weight:500;
+  cursor:pointer;
+  background: none;
+}
