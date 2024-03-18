@@ -35,7 +35,8 @@ const LoginContainer = () => {
 
   return(
       <>
-      <body>
+      <body className='bd'>
+        <div className='hello'>
         <div className="wrapper">
           <div className="header">
             <div className="title login">ورود</div>
@@ -115,6 +116,7 @@ const LoginContainer = () => {
             </div>
 
           </div>
+        </div>
         </div>
         </body>
       </>
