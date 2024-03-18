@@ -2,7 +2,10 @@ import react from "react";
 import React, { useState } from "react";
 import "./LoginSignup.css";
 
-import user_icon from "../../assets/person.png";
+import { Icon } from 'react-icons-kit';
+import { eyeOff } from 'react-icons-kit/feather/eyeOff';
+import { eye } from 'react-icons-kit/feather/eye'
+
 import lock_icon from "../../assets/password.png";
 import email_icon from "../../assets/email.png";
 import { useNavigate } from "react-router-dom";
@@ -11,12 +14,30 @@ const LoginContainer = () => {
   const navigate = useNavigate();
 
   const [loginLabelsColor, setLoginLabelsColor] = useState(false);
+  const [passwordType, setPasswordType] = useState('password');
+  const [repeatPasswordType, setRepeatPasswordType] = useState('password');
+  const [passwordIcon, setPasswordIcon] = useState(eyeOff);
+  const [repeatPasswordIcon, setRepeatPasswordIcon] = useState(eyeOff);
+
+  const handlePasswordToggle = () => {
+    setPasswordType(passwordType === 'password' ? 'text' : 'password');
+    setPasswordIcon(passwordIcon === eye ? eyeOff : eye);
+  };
+
+  const handleRepeatPasswordToggle = () => {
+    setRepeatPasswordType(repeatPasswordType === 'password' ? 'text' : 'password');
+    setRepeatPasswordIcon(repeatPasswordIcon === eye ? eyeOff : eye);
+  };
 
   const handleSignupClick = () => {
     const loginForm = document.querySelector("form.login");
     const loginText = document.querySelector(".header .login");
     loginForm.style.marginLeft = "-50%";
     loginText.style.marginLeft = "-50%";
+    setRepeatPasswordType('password');
+    setRepeatPasswordIcon(eyeOff);
+    setPasswordType('password');
+    setPasswordIcon(eyeOff);
   };
 
   const handleLoginClick = () => {
@@ -25,14 +46,20 @@ const LoginContainer = () => {
     loginForm.style.marginLeft = "0%";
     loginText.style.marginLeft = "0%";
     setLoginLabelsColor(!loginLabelsColor);
+    setRepeatPasswordType('password');
+    setRepeatPasswordIcon(eyeOff);
+    setPasswordType('password');
+    setPasswordIcon(eyeOff)
   };
 
-  const handleSignupLinkClick = (e) => {
-    e.preventDefault();
-    const signupBtn = document.querySelector("label.signup");
 
-    signupBtn.click();
-  };
+
+  // const handleSignupLinkClick = (e) => {
+  //   e.preventDefault();
+  //   const signupBtn = document.querySelector("label.signup");
+
+  //   signupBtn.click();
+  // };
 
   return (
     <>
@@ -82,7 +109,7 @@ const LoginContainer = () => {
                   </div>
                   <div className="field">
                     <input
-                      type="password"
+                      type={passwordType}
                       placeholder="رمز عبور"
                       style={{
                         backgroundImage: `url(${lock_icon})`,
@@ -91,6 +118,9 @@ const LoginContainer = () => {
                         backgroundPosition: "right",
                       }}
                     />
+                    <span className="toggle-icon" onClick={handlePasswordToggle}>
+                      <Icon icon={passwordIcon} size={23} />
+                    </span>
                   </div>
                   <div className="pass_link">
                     <a href="#"> فراموشی رمز عبور</a>
@@ -127,7 +157,7 @@ const LoginContainer = () => {
 
                   <div className="field">
                     <input
-                      type="password"
+                      type={passwordType}
                       placeholder="رمز عبور"
                       style={{
                         backgroundImage: `url(${lock_icon})`,
@@ -136,10 +166,13 @@ const LoginContainer = () => {
                         backgroundPosition: "right",
                       }}
                     />
+                    <span className="toggle-icon" onClick={handlePasswordToggle}>
+                      <Icon icon={passwordIcon} size={23} />
+                    </span>
                   </div>
                   <div className="field">
                     <input
-                      type="password"
+                      type={repeatPasswordType}
                       placeholder="تکرار رمز عبور"
                       style={{
                         backgroundImage: `url(${lock_icon})`,
@@ -148,6 +181,9 @@ const LoginContainer = () => {
                         backgroundPosition: "right",
                       }}
                     />
+                    <span className="toggle-icon" onClick={handleRepeatPasswordToggle}>
+                      <Icon icon={repeatPasswordIcon} size={23} />
+                    </span>
                   </div>
                   <div className="field btn">
                     <div className="btn_layer"></div>
