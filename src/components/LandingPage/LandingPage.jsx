@@ -29,10 +29,10 @@ const Landing = () => {
           {/* <button className={styles.signup}>ثبت نام</button> */}
         </p>
           <img className={styles.imageimagecover} src={image} alt="" />
-        <h4 className={styles.footer}>
+        <div className={styles.footer}>
           کاری از دانشجویان 1400 مهندسی کامپیوتر علم و صنعت
           <br />
-        </h4>
+        </div>
       </div>
     </>
   );
