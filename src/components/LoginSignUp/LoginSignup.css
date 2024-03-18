@@ -148,36 +148,38 @@ input[type="radio"]{
   transition:all 0.6s cubic-bezier(0.68 , -0.55 , 0.265 , 1.55);
 }
 
-.form_details form .field{
-  width:100%;
-  height:50px;
+.form_details form .field {
+  width: 100%;
+  height: 50px;
   margin-top: 20px;
-  border-bottom: 2px solid #adadad;
-
 }
-.form_details form .field input{
-  width:100%;
-  height:100%;
-  direction: rtl; 
-  outline : none;
+
+.form_details form .field input {
+  width: 100%;
+  height: 100%;
+  direction: rtl;
+  outline: none;
   padding-left: 15px;
   border: none;
-  border-bottom-width:2px;
+  border-bottom: 2px solid #adadad;
   font-size: 18px;
-  transition:all 0.3s ease;
+  transition: border-color 0.3s ease;
   color: gray;
-  caret-color: rgb(152, 103, 175); 
+  caret-color: rgb(152, 103, 175);
 }
 
 .form_details form .field input:hover {
-  border-bottom: 1px solid rgb(123, 123, 215);
+  border-bottom-color: #cdbdf3;
 }
 
-.form_details form .field input::placeholder{
+.form_details form .field input:focus {
+  border-bottom-color: #b396f6;
+}
+
+.form_details form .field input::placeholder {
   font-family: Ios15Medium;
   color: #999;
   transition: all 0.3s ease;
-
 }
 
 
@@ -192,16 +194,16 @@ input[type="radio"]{
 }
 
 .form_details form .field .toggle-icon:hover {
-  color: rgb(130, 167, 247);
+  color: #aa87fd;
 }
 
 
 form .field input:focus::placeholder{
-  color:#9f78f9;
+  color:#8e69e4;
 }
 
 form .field input:hover::placeholder {
-  color: rgb(130, 167, 247);
+  color: #B799FF;
 }
 .form_details form .pass_link{
   margin-top: 5px;
