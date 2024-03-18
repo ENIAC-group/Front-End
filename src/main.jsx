@@ -1,17 +1,11 @@
 import React from 'react'
 import ReactDOM from 'react-dom/client'
-// import App from './App.jsx'
-// import './index.css'
-import AboutUsPage from './components/aboutus/aboutus.jsx'
-import './components/aboutus/aboutus.css';
-import './fonts/Ios15Medium.ttf';
+import App from './App.jsx'
+import './fonts/Ios15Medium.ttf'
+import './index.css'
 
 ReactDOM.createRoot(document.getElementById('root')).render(
   <React.StrictMode>
-    <div>
-      <AboutUsPage>
-      </AboutUsPage>
-    </div>
-    {/* <App /> */}
+    <App />
   </React.StrictMode>,
 )

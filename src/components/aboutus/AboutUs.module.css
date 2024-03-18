@@ -16,9 +16,7 @@
     z-index:-1;
     width: 100%;
     height: 100%;
-    border-radius: 20px;
     box-shadow: 0 12px 16px 0 rgba(0, 0, 0, 0.24), 0 17px 50px 0 rgba(0, 0, 0, 0.24);
-
 }
 
 
@@ -76,24 +74,6 @@
     /* Safari */
     transition-duration: 0.4s;
     border-radius: 8px;
-}
-
-.button2:hover {
-    background-color: #ACBCFF;
-    border: none;
-    color: #3a61fe;
-    /* padding: 20px 32px; */
-    text-align: center;
-    text-decoration: none;
-    display: inline-block;
-    font-family: Ios15Medium;
-    font-size: 16px;
-    margin: 8px 4px;
-    cursor: pointer;
-    -webkit-transition-duration: 0.4s;
-    /* Safari */
-    transition-duration: 0.4s;
-    border-radius: 8px;
     box-shadow: 0 12px 16px 0 rgba(0, 0, 0, 0.24), 0 17px 50px 0 rgba(0, 0, 0, 0.19);
     border-radius: 8px;
 }
@@ -114,6 +94,8 @@
     transition-duration: 0.4s;
     border-radius: 8px;
     padding: 30px 56px;
+    box-shadow: 0 12px 16px 0 rgba(0, 0, 0, 0.24), 0 17px 50px 0 rgba(0, 0, 0, 0.19);
+    border-radius: 8px;
 }
 
 .button4 {
@@ -132,13 +114,12 @@
     transition-duration: 0.4s;
     border-radius: 8px;
     padding: 20px 40px;
-}
-
-a {
-    text-align: center;
+    box-shadow: 0 12px 16px 0 rgba(0, 0, 0, 0.24), 0 17px 50px 0 rgba(0, 0, 0, 0.19);
+    border-radius: 8px;
 }
 
 .imagegit {
+    align-items: center;
     width: 8%;
 }
 
@@ -157,7 +138,10 @@ a {
     text-align: center;
 }
 
-.imagespace {
+.image1space {
+    border-radius: 50px;
+    width: 25%;
+    box-shadow: 1px 1px 5px rgb(138, 138, 138) inset;
     justify-content: space-between;
     margin-right:2%;
 }
