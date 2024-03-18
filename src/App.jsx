@@ -1,5 +1,5 @@
 import React from 'react';
-import LoginContainer from './components/LoginSigUp/LoginSignUp.jsx';
+import LoginContainer from './components/LoginSignUp/LoginSignUp.jsx';
 import Landing from './components/LandingPage/LandingPage.jsx';
 // import AboutUS from './components/AboutUs/AboutUs.jsx';
 import * as Router from "react-router-dom";
