@@ -1,0 +1,123 @@
+.header
+{
+  width: 100%;
+  height: 60px;
+  display: flex;
+  align-items: center;
+  background-image: linear-gradient(62deg , #B799FF 0%, #AEE2FF 100%);
+  justify-content: space-evenly;
+  justify-content: space-between;
+  margin: auto;
+  padding-right: 0px;
+  border-color: black;
+  border: 4px;
+
+}
+.BrandName
+{
+  display: flex;
+  padding-left: 5%;
+  font-weight: 200;
+  font-family:cursive;  
+}
+
+.StartButton
+{
+  background-color: #AEE2FF;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  padding: .35rem 0.75rem;
+  margin-right: 3%;
+  cursor: pointer;
+  border: 1px;
+  font-family: Ios15Medium;
+  font-weight: bold;
+  border-color: #384d58;
+  border: 3%;
+  border-radius: 5px;
+
+}
+.StartButton:hover
+{
+  background-color: #45bcfc;
+  border-color: rgb(230, 255, 253);
+  align-items: stretch;
+  box-shadow: 0 1px 5px rgb(0, 0, 0);
+  color: rgb(246, 242, 224);
+
+}
+.Desc
+{
+  align-self: center;
+  font-family: 'BSetareh';
+  direction: rtl;
+  background-image: linear-gradient(62deg , #B799FF 0%, #AEE2FF 100%);
+  border-radius: 50px;
+  text-align: center;
+  font-size: 150%;
+  font-display: flex;
+  font-family: Ios15Medium;
+  width: fit-content;
+  height: fit-content;
+  padding: 5% 1% 4% 1%;
+  position: absolute;
+  right: 5%;
+  margin-left: 5%;
+  margin-top: 4%;
+  margin-bottom: 3%;
+  box-shadow: 1px 1.5px 3px 1px rgb(0, 0, 0);
+}
+.Landingbody
+{
+  align-items: center;
+  justify-content: space-between;
+  /* position: relative; */
+}
+.footer
+{
+  position: absolute;
+  bottom: 2.5%;
+  text-align: center;
+  width: 100%;
+  height: -30px;
+  font-size: small;
+  font-family: BNazanin;
+}
+.signup
+{
+  background-image: linear-gradient(-62deg , #B799FF 0%, #AEE2FF 100%);
+  border-color: blue;
+  border: 1.5px solid ;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  padding: .35rem 0.75rem;
+  margin-right: 3%;
+  cursor: pointer;
+  border-radius: 5px;
+  margin-top: 50px;
+  font-size: large;
+  font-weight: bolder;
+  font-family: Ios15Medium;
+  width: 30%;
+}
+.signup:hover
+{
+  background-image: linear-gradient(62deg , #B799FF 0%, #AEE2FF 100%);
+  border-color: rgb(0, 0, 0);
+  align-items: stretch;
+  box-shadow: 0 1px 5px rgb(0, 0, 0);
+  color: rgb(246, 242, 224);
+}
+.imageimagecover
+{
+  position: relative;
+  right: 3%;
+  left: 5%;
+  margin-top: 3%;
+  width: 400px;
+  height: 400px;
+}
