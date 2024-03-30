@@ -186,11 +186,12 @@ input[type="radio"]{
   margin-top: 5px;
   padding-left: 15px;
   border: none;
-  font-size: 11px;
+  font-size: 13px;
   font-weight: bold;
   transition: border-color 0.3s ease;
-  color: #b396f6;
-  caret-color: rgb(152, 103, 175);
+  color: #c0a7f9;
+  caret-color: #c0a7f9;
+  text-align: right; 
 }
 
 

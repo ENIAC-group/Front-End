@@ -5,13 +5,14 @@ import "./LoginSignup.css";
 import { Icon } from 'react-icons-kit';
 import { eyeOff } from 'react-icons-kit/feather/eyeOff';
 import { eye } from 'react-icons-kit/feather/eye'
-import { IsValidEmail } from "./IsValidEmail"
-import { useNavigate } from "react-router-dom";
 
 import lock_icon from "../../assets/password.png";
 import email_icon from "../../assets/email.png";
 
 
+
+import { IsValidEmail } from "./IsValidEmail"
+import { useNavigate } from "react-router-dom";
 
 const LoginContainer = () => {
   const navigate = useNavigate();
@@ -32,7 +33,7 @@ const LoginContainer = () => {
     setRepeatPasswordIcon(repeatPasswordIcon === eye ? eyeOff : eye);
   };
 
-  const handleSliderSignupClick = () => {
+  const handleSignupClick = () => {
     const loginForm = document.querySelector("form.login");
     const loginText = document.querySelector(".header .login");
     loginForm.style.marginLeft = "-50%";
@@ -41,10 +42,9 @@ const LoginContainer = () => {
     setRepeatPasswordIcon(eyeOff);
     setPasswordType('password');
     setPasswordIcon(eyeOff);
-    resetErrors()
   };
 
-  const handleSliderLoginClick = () => {
+  const handleLoginClick = () => {
     const loginForm = document.querySelector("form.login");
     const loginText = document.querySelector(".header .login");
     loginForm.style.marginLeft = "0%";
@@ -53,19 +53,25 @@ const LoginContainer = () => {
     setRepeatPasswordType('password');
     setRepeatPasswordIcon(eyeOff);
     setPasswordType('password');
-    setPasswordIcon(eyeOff);
-    resetErrors()
+    setPasswordIcon(eyeOff)
   };
 
 
-  // function handleChange(event) {
-  //   setErrorMessage("");
-  //   const { name, value } = event.target;
-  //   setFormData((prevFormData) => ({
-  //     ...prevFormData,
-  //     [name]: value,
-  //   }));
-  // }
+
+  // const handleSignupLinkClick = (e) => {
+  //   e.preventDefault();
+  //   const signupBtn = document.querySelector("label.signup");
+
+  //   signupBtn.click();
+  // };
+  function handleChange(event) {
+    setErrorMessage("");
+    const { name, value } = event.target;
+    setFormData((prevFormData) => ({
+      ...prevFormData,
+      [name]: value,
+    }));
+  }
   const [formData, setFormData] = useState({
     profileName: "",
     username: "",
@@ -84,11 +90,14 @@ const LoginContainer = () => {
     subjectError: "",
     backError: "",
   });
-  
   async function handleLoginEnter(event) {
     event.preventDefault();
-    const email = document.querySelector('.email1_input').value;
-    const password = document.querySelector('.password1_input').value;
+
+    const email = document.querySelector('.email_input').value;
+    const password = document.querySelector('.password_input').value;
+    
+    //const password = event.target.elements.password.value;
+
     const errors = [
       {
         profileNameError: "",
@@ -96,15 +105,18 @@ const LoginContainer = () => {
         emailError: "",
         passError: "",
         passErrorRep: "",
-        // genderError: "",
-        // subjectError: "",
+        genderError: "",
+        subjectError: "",
         backError: "",
       },
     ];
 
-  
+    
+    
     if (email.trim().length === 0) {
       errors.emailError = "! وارد کردن ایمیل الزامی است";
+
+
     }
     if (!IsValidEmail(email) && !errors.emailError) {
       errors.emailError = "!قالب ایمیل قابل قبول نیست";
@@ -115,65 +127,16 @@ const LoginContainer = () => {
     if (password.length < 8 && password) {
       errors.passError = "!رمز عبور باید حداقل شامل هشت کاراکتر باشد";
     }
-    
-    setErrorMessage({
-      profileNameError: errors.profileNameError,
-      usernameError: errors.usernameError,
-      emailError: errors.emailError, 
-      passError: errors.passError
-    });
-    if (
-      errors.profileName ||
-      errors.usernameError ||
-      errors.emailError ||
-      errors.passError
-    ) {
-      return;
-    }
-  }
-
-
-  async function handleSignupEnter(event) {
-    event.preventDefault();
-    const email = document.querySelector('.email2_input').value;
-    const password = document.querySelector('.password2_input').value;
-    const passwordConfirm = document.querySelector('.passwordConf_input').value;
-
-    const errors = [
-      {
-        profileNameError: "",
-        usernameError: "",
-        emailError: "",
-        passError: "",
-        passErrorRep: "",
-        backError: "",
-      },
-    ];
-
-    
-    
-    if (email.trim().length === 0) {
-      errors.emailError = "! وارد کردن ایمیل الزامی است";
-    }
-    if (!IsValidEmail(email) && !errors.emailError) {
-      errors.emailError = "!قالب ایمیل قابل قبول نیست";
-    }
-    if (password.trim().length === 0) {
-      errors.passError = "!وارد کردن رمز عبور الزامی است";
-    }
-    if (password.length < 8 && password) {
-      errors.passError = "!رمز عبور باید حداقل شامل هشت کاراکتر باشد";
-    }
-    if (passwordConfirm.trim().length === 0) {
-      errors.passErrorRep = "!وارد کردن تکرار رمز عبور الزامی است";
-    }
-    if (
-      password !== passwordConfirm &&
-      !errors.passError &&
-      !errors.passErrorRep
-    ) {
-      errors.passErrorRep = "!تکرار رمز عبور و رمز عبور یکسان نیست";
-    }
+    // if (formData.passwordConfirm.trim().length === 0) {
+    //   errors.passErrorRep = "!وارد کردن تکرار رمز عبور الزامی است";
+    // }
+    // if (
+    //   formData.password !== formData.passwordConfirm &&
+    //   !errors.passError &&
+    //   !errors.passErrorRep
+    // ) {
+    //   errors.passErrorRep = "!تکرار رمز عبور و رمز عبور یکسان نیست";
+    // }
     
     
     setErrorMessage({
@@ -181,16 +144,18 @@ const LoginContainer = () => {
       usernameError: errors.usernameError,
       emailError: errors.emailError, 
       passError: errors.passError,
-      passErrorRep: errors.passErrorRep
-      // genderError: errors.genderError,
-      // subjectError: errors.subjectError,
+      passErrorRep: errors.passErrorRep,
+      genderError: errors.genderError,
+      subjectError: errors.subjectError,
     });
     if (
       errors.profileName ||
       errors.usernameError ||
       errors.emailError ||
       errors.passError ||
-      errors.passErrorRep
+      errors.passErrorRep ||
+      errors.genderError ||
+      errors.subjectError
     ) {
       return;
     }
@@ -199,19 +164,9 @@ const LoginContainer = () => {
     // }
   }
 
-  const resetErrors = () => {
-    setErrorMessage({
-      profileNameError: "",
-      usernameError: "",
-      emailError: "",
-      passError: "",
-      passErrorRep: "",
-      genderError: "",
-      subjectError: "",
-      backError: "",
-    });
-  };
-  
+
+
+
 
   return (
     <>
@@ -231,14 +186,14 @@ const LoginContainer = () => {
                 <label
                   htmlFor="login"
                   className="slide login"
-                  onClick={handleSliderLoginClick}
+                  onClick={handleLoginClick}
                 >
                   ورود
                 </label>
                 <label
                   htmlFor="signup"
                   className="slide signup"
-                  onClick={handleSliderSignupClick}
+                  onClick={handleSignupClick}
                 >
                   ثبت نام
                 </label>
@@ -249,10 +204,11 @@ const LoginContainer = () => {
                   <pre></pre>
                   <div className="field">
                     <input
-                    className="email1_input"
+                    className="email_input"
                       type="text"
                       name="email"
                       placeholder="ایمیل"
+                      //onChange={handleChange}
                       error={errorMessage.emailError}
                       style={{
                         backgroundImage: `url(${email_icon})`,
@@ -261,13 +217,18 @@ const LoginContainer = () => {
                         backgroundPosition: "right",
                       }}
                     />
+                    
+                    
+                      {/* document.querySelector('.email_input').placeholder=errorMessage.emailError)} */}
+                
+            
                    </div>
-                      {errorMessage.emailError && 
-                      (<div className="error_input" >{errorMessage.emailError}
-                      </div>)}
+                              {errorMessage.emailError && 
+                              (<div className="error_input" >{errorMessage.emailError}
+                              </div>)}
                   <div className="field">
                     <input
-                    className="password1_input"
+                    className="password_input"
                       type={passwordType}
                       placeholder="رمز عبور"
                       style={{
@@ -282,8 +243,8 @@ const LoginContainer = () => {
                     </span>
                   </div>
                   {errorMessage.passError && 
-                      (<div className="error_input" >{errorMessage.passError}
-                      </div>)}
+                              (<div className="error_input" >{errorMessage.passError}
+                              </div>)}
                   
                   <div className="pass_link">
                     <a href="#"> فراموشی رمز عبور</a>
@@ -301,18 +262,14 @@ const LoginContainer = () => {
                   </div>
                 </form>
                 {/*signup form*/}
-                <form action="#" className="signup">
-                <pre></pre>
+                <form action="#">
                   {/*<div className="field">
                     <input type="text" placeholder='Name'/>
                   </div>*/}
                   <div className="field">
                     <input
-                    className="email2_input"
                       type="text"
-                      name="email"
                       placeholder="ایمیل"
-                      error={errorMessage.emailError}
                       style={{
                         backgroundImage: `url(${email_icon})`,
                         backgroundRepeat: "no-repeat",
@@ -320,13 +277,10 @@ const LoginContainer = () => {
                         backgroundPosition: "right",
                       }}
                     />
-                   </div>
-                      {errorMessage.emailError && 
-                      (<div className="error_input" >{errorMessage.emailError}
-                      </div>)}
+                  </div>
+
                   <div className="field">
                     <input
-                    className="password2_input"
                       type={passwordType}
                       placeholder="رمز عبور"
                       style={{
@@ -340,12 +294,8 @@ const LoginContainer = () => {
                       <Icon icon={passwordIcon} size={23} />
                     </span>
                   </div>
-                  {errorMessage.passError && 
-                      (<div className="error_input" >{errorMessage.passError}
-                      </div>)}
                   <div className="field">
                     <input
-                    className="passwordConf_input"
                       type={repeatPasswordType}
                       placeholder="تکرار رمز عبور"
                       style={{
@@ -359,12 +309,9 @@ const LoginContainer = () => {
                       <Icon icon={repeatPasswordIcon} size={23} />
                     </span>
                   </div>
-                  {errorMessage.passErrorRep && 
-                      (<div className="error_input" >{errorMessage.passErrorRep}
-                      </div>)}
                   <div className="field btn">
                     <div className="btn_layer"></div>
-                    <input type="submit" value="ثبت نام" onClick={handleSignupEnter}/>
+                    <input type="submit" value="ثبت نام" />
                   </div>
                   <div className="signup_link">
                     {" "}
