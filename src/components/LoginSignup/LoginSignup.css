@@ -189,9 +189,8 @@ input[type="radio"]{
   font-size: 13px;
   font-weight: bold;
   transition: border-color 0.3s ease;
-  color: #c0a7f9;
-  caret-color: #c0a7f9;
-  text-align: right; 
+  color: #bba2f7;
+  caret-color: #bba2f7;
 }
 
 
