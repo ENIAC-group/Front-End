@@ -192,6 +192,21 @@ input[type="radio"]{
   color: #bba2f7;
   caret-color: #bba2f7;
 }
+.error_input2 {
+  width: 100%;
+  height: 10px;
+  text-align: center;
+  direction: rtl;
+  outline: none;
+  margin-top: 7px;
+  padding-left: 15px;
+  border: none;
+  font-size: 13px;
+  font-weight: bold;
+  transition: border-color 0.3s ease;
+  color: #bba2f7;
+  caret-color: #bba2f7;
+}
 
 
 .form_details form .field input:hover {
@@ -294,6 +309,7 @@ form .btn:hover .btn_layer{
   left:0;
 }
 form .btn input[type="submit"]{
+  display:inline;
   font-family: Ios15Medium;
   height:100%;
   width:100%;

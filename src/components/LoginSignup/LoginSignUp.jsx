@@ -8,6 +8,7 @@ import { eye } from 'react-icons-kit/feather/eye'
 import { IsValidEmail } from "./IsValidEmail"
 import { useNavigate } from "react-router-dom";
 
+import axios from 'axios';
 import lock_icon from "../../assets/password.png";
 import email_icon from "../../assets/email.png";
 
@@ -130,7 +131,79 @@ const LoginContainer = () => {
     ) {
       return;
     }
+    try{
+    axios.defaults.xsrfHeaderName = "X-CSRFTOKEN";
+    axios.defaults.xsrfCookieName = "csrftoken";
+    const response = await axios('http://127.0.0.1:8000/accounts/Login/', {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+        
+      },
+      data: {
+        email: email,
+        password: password,
+      },
+    });
+    const data = response.data;
+    console.log('hellooo')
+    //console.log(data);
+    //console.log("🚀 ~ file: Login.jsx:92 ~ handleSubmit ~ response:", document.cookie.split(';'))
+    //closeLoading();
+    if (response.status === 200) {
+      const accessToken = response.data.access;
+      const refreshToken = response.data.refresh;
+    
+      // Set tokens in local storage
+      localStorage.setItem('accessToken', accessToken);
+      localStorage.setItem('refreshToken', refreshToken);
+    
+      
+    } else if (response.status === 201) {
+      const accessToken = response.data.access;
+      const refreshToken = response.data.refresh;
+    
+      // Set tokens in local storage
+      localStorage.setItem('accessToken', accessToken);
+      localStorage.setItem('refreshToken', refreshToken);
+    } else if(response.status === 400) {
+      errors.backError = "!رمز عبور اشتباه است و یا حساب کاربری ندارید";
+      console.log("you have error");
+      setErrorMessage({
+        
+        ...errorMessage,
+        backError: errors.backError,
+      });
+    }
+    
+  }catch (error) {
+
+    errors.backError = "!رمز عبور اشتباه است و یا حساب کاربری ندارید";
+      console.log("byeee");
+      console.log("you have error");
+      setErrorMessage({
+        
+        ...errorMessage,
+        backError: errors.backError,
+      });
+    
+    // Handle any errors that occur during the API request
+    console.error(error);
+    
+    // Optionally, you can set an error message in the state or display an error to the user
   }
+
+
+
+
+
+
+
+
+  }
+
+
+  
 
 
   async function handleSignupEnter(event) {
@@ -291,6 +364,9 @@ const LoginContainer = () => {
                     <div className="btn_layer"></div>
                     <input type="submit" value="ورود" onClick={handleLoginEnter}  />
                   </div>
+                  {errorMessage.backError && 
+                      (<div className="error_input2" >{errorMessage.backError}
+                      </div>)}
                   <div className="signup_link">
                     {" "}
                     <a href="#" onClick={(e) => navigate("/Landing")}>
