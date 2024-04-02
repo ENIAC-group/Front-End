@@ -59,14 +59,10 @@ const LoginContainer = () => {
   };
 
 
-  // function handleChange(event) {
-  //   setErrorMessage("");
-  //   const { name, value } = event.target;
-  //   setFormData((prevFormData) => ({
-  //     ...prevFormData,
-  //     [name]: value,
-  //   }));
-  // }
+   function handleChange(event) {
+     setErrorMessage("");
+ 
+   }
   const [formData, setFormData] = useState({
     profileName: "",
     username: "",
@@ -92,13 +88,9 @@ const LoginContainer = () => {
     const password = document.querySelector('.password1_input').value;
     const errors = [
       {
-        profileNameError: "",
-        usernameError: "",
+
         emailError: "",
         passError: "",
-        passErrorRep: "",
-        // genderError: "",
-        // subjectError: "",
         backError: "",
       },
     ];
@@ -116,6 +108,9 @@ const LoginContainer = () => {
     if (password.length < 8 && password) {
       errors.passError = "رمز عبور باید حداقل شامل هشت کاراکتر باشد!";
     }
+    if (/^\d+$/.test(password)) {
+      errors.passError = "رمز عبور نمی‌تواند تماماً عددی باشد!";
+    }
     
     setErrorMessage({
       profileNameError: errors.profileNameError,
@@ -132,8 +127,8 @@ const LoginContainer = () => {
       return;
     }
     try{
-    axios.defaults.xsrfHeaderName = "X-CSRFTOKEN";
-    axios.defaults.xsrfCookieName = "csrftoken";
+     axios.defaults.xsrfHeaderName = "X-CSRFTOKEN";
+     axios.defaults.xsrfCookieName = "csrftoken";
     const response = await axios('http://127.0.0.1:8000/accounts/Login/', {
       method: "POST",
       headers: {
@@ -146,9 +141,8 @@ const LoginContainer = () => {
       },
     });
     const data = response.data;
-    console.log('hellooo')
-    //console.log(data);
-    //console.log("🚀 ~ file: Login.jsx:92 ~ handleSubmit ~ response:", document.cookie.split(';'))
+    console.log('you logined successfully');
+    
     //closeLoading();
     if (response.status === 200) {
       const accessToken = response.data.access;
@@ -166,38 +160,59 @@ const LoginContainer = () => {
       // Set tokens in local storage
       localStorage.setItem('accessToken', accessToken);
       localStorage.setItem('refreshToken', refreshToken);
-    } else if(response.status === 400) {
-      errors.backError = "!رمز عبور اشتباه است و یا حساب کاربری ندارید";
-      console.log("you have error");
-      setErrorMessage({
-        
-        ...errorMessage,
-        backError: errors.backError,
-      });
-    }
+    } 
     
   }catch (error) {
 
-    errors.backError = "!رمز عبور اشتباه است و یا حساب کاربری ندارید";
-      console.log("byeee");
-      console.log("you have error");
+    
+
+    if (error.response.status === 400) {
+      console.log(error);
+      if(error.response.data.hasOwnProperty('email') && error.response.data.email.message==='Email does not exist.'){
+        
+        errors.emailError= "حساب کاربری ندارید!";
+      
       setErrorMessage({
         
         ...errorMessage,
-        backError: errors.backError,
+        emailError: errors.emailError,
+        
       });
+      return;
     
-    // Handle any errors that occur during the API request
-    console.error(error);
-    
-    // Optionally, you can set an error message in the state or display an error to the user
+     }
+    else if (error.response.data.hasOwnProperty('message') && error.response.data.message[0]==='Incorrect password.'){
+      
+        errors.passError= "رمز عبور اشتباه است!";
+        setErrorMessage({
+        
+          ...errorMessage,
+          passError: errors.passError,
+        });
+        
+      }
+      else if (error.response.data.hasOwnProperty('message') && error.response.data.message[0]==='User is not verified.'){
+      
+        errors.emailError= "حساب کاربری شما تایید نشده است!";
+        setErrorMessage({
+        
+          ...errorMessage,
+          emailError: errors.emailError,
+        });
+        
+      }
+      
+      
+      
+    } else {
+      // Other error occurred
+      console.log(error);
+      setBanner(error.response.data.msg);
+      toast.error(error.response.data.msg);
+    }
+
+   
   }
-
-
-
-
-
-
 
 
   }
@@ -236,6 +251,9 @@ const LoginContainer = () => {
     if (password.length < 8 && password) {
       errors.passError = "رمز عبور باید حداقل شامل هشت کاراکتر باشد!";
     }
+    if (/^\d+$/.test(password)) {
+      errors.passError = "رمز عبور نمی‌تواند تماماً عددی باشد!";
+    }
     if (passwordConfirm.trim().length === 0) {
       errors.passErrorRep = "وارد کردن تکرار رمز عبور الزامی است!";
     }
@@ -254,8 +272,6 @@ const LoginContainer = () => {
       emailError: errors.emailError, 
       passError: errors.passError,
       passErrorRep: errors.passErrorRep
-      // genderError: errors.genderError,
-      // subjectError: errors.subjectError,
     });
     if (
       errors.profileName ||
@@ -266,9 +282,115 @@ const LoginContainer = () => {
     ) {
       return;
     }
-    // else {
-    //   handleSignUp(formData, subject, gender);
-    // }
+
+
+    try{
+      axios.defaults.xsrfHeaderName = "X-CSRFTOKEN";
+      axios.defaults.xsrfCookieName = "csrftoken";
+     const response = await axios('http://127.0.0.1:8000/accounts/signup/', {
+       method: "POST",
+       headers: {
+         "Content-Type": "application/json",
+         
+       },
+       data: {
+         email: email,
+         password1: password,
+         password2:passwordConfirm,
+       },
+     });
+     const data = response.data;
+     //console.log('you logined successfully');
+     
+     //closeLoading();
+     if (response.status === 200) {
+       //const accessToken = response.data.access;
+       //const refreshToken = response.data.refresh;
+       console.log('you signed in successfully');
+       // Set tokens in local storage
+       //localStorage.setItem('accessToken', accessToken);
+       //localStorage.setItem('refreshToken', refreshToken);
+     
+       
+     } else if (response.status === 201) {
+       //const accessToken = response.data.access;
+       //const refreshToken = response.data.refresh;
+       console.log(response);
+       console.log('you signed in successfully');
+       //navigate("/signup_validation");
+       // Set tokens in local storage
+       //localStorage.setItem('accessToken', accessToken);
+       //localStorage.setItem('refreshToken', refreshToken);
+     } 
+     
+   }catch (error) {
+ 
+     
+ 
+     if (error.response.status === 400) {
+      console.log(error);
+       if(error.response.data.hasOwnProperty('email') && error.response.data.email.message==='Email does not exist.'){
+         
+        
+         errors.emailError= "حساب کاربری ندارید!";
+       
+       setErrorMessage({
+         
+         ...errorMessage,
+         emailError: errors.emailError,
+         
+       });
+       
+     
+      }
+      else if(error.response.data.hasOwnProperty('email') && error.response.data.email[0]==='user with this email already exists.'){
+         
+        
+        errors.emailError= "قبلا ثبت نام کرده اید!";
+      
+      setErrorMessage({
+        
+        ...errorMessage,
+        emailError: errors.emailError,
+        
+      });
+      
+    
+     }
+     else if (error.response.data.hasOwnProperty('message') && error.response.data.message[0]==='Incorrect password.'){
+       
+         errors.passError= "رمز عبور اشتباه است!";
+         setErrorMessage({
+         
+           ...errorMessage,
+           passError: errors.passError,
+         });
+         
+       }
+       else if (error.response.data.hasOwnProperty('password1') && error.response.data.password1[0]==='This password is too common.'){
+      
+        errors.emailError= "پسورد وارد شده رایج است!";
+        setErrorMessage({
+        
+          ...errorMessage,
+          emailError: errors.emailError,
+        });
+        
+      }
+      
+       
+       
+       
+     } else {
+       // Other error occurred
+       console.log(error);
+       setBanner(error.response.data.msg);
+       toast.error(error.response.data.msg);
+     }
+ 
+    
+   }
+    
   }
 
   const resetErrors = () => {
@@ -326,6 +448,7 @@ const LoginContainer = () => {
                       name="email"
                       placeholder="ایمیل"
                       error={errorMessage.emailError}
+                      onChange={handleChange}
                       style={{
                         backgroundImage: `url(${email_icon})`,
                         backgroundRepeat: "no-repeat",
@@ -342,6 +465,7 @@ const LoginContainer = () => {
                     className="password1_input"
                       type={passwordType}
                       placeholder="رمز عبور"
+                      onChange={handleChange}
                       style={{
                         backgroundImage: `url(${lock_icon})`,
                         backgroundRepeat: "no-repeat",
@@ -365,7 +489,7 @@ const LoginContainer = () => {
                     <input type="submit" value="ورود" onClick={handleLoginEnter}  />
                   </div>
                   {errorMessage.backError && 
-                      (<div className="error_input2" >{errorMessage.backError}
+                      (<div className="error_input2" onChange={handleChange}>{errorMessage.backError}
                       </div>)}
                   <div className="signup_link">
                     {" "}
@@ -387,6 +511,7 @@ const LoginContainer = () => {
                       type="text"
                       name="email"
                       placeholder="ایمیل"
+                      onChange={handleChange}
                       error={errorMessage.emailError}
                       style={{
                         backgroundImage: `url(${email_icon})`,
@@ -404,6 +529,7 @@ const LoginContainer = () => {
                     className="password2_input"
                       type={passwordType}
                       placeholder="رمز عبور"
+                      onChange={handleChange}
                       style={{
                         backgroundImage: `url(${lock_icon})`,
                         backgroundRepeat: "no-repeat",
@@ -423,6 +549,7 @@ const LoginContainer = () => {
                     className="passwordConf_input"
                       type={repeatPasswordType}
                       placeholder="تکرار رمز عبور"
+                      onChange={handleChange}
                       style={{
                         backgroundImage: `url(${lock_icon})`,
                         backgroundRepeat: "no-repeat",
