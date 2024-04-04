@@ -545,7 +545,7 @@ const LoginContainer = () => {
                       </div>)}
                   
                   <div className="pass_link">
-                    <a href="#"> فراموشی رمز عبور</a>
+                    <a href="/ForgetPassword"> فراموشی رمز عبور</a>
                   </div>
                   <div className="field btn">
                     <div className="btn_layer"></div>

@@ -3,6 +3,7 @@ import LoginContainer from "./components/LoginSignUp/LoginSignUp.jsx";
 import Landing from "./components/LandingPage/LandingPage.jsx";
 import AboutUS from "./components/aboutus/aboutus.jsx";
 import Verification from "./components/Verification/verification.jsx";
+import ForgetPassword from "./components/ForgetPassword/ForgetPassword.jsx";
 import * as Router from "react-router-dom";
 
 function App() {
@@ -22,6 +23,9 @@ function App() {
           {" "}
         </Router.Route>
         <Router.Route path="/verification" element={<Verification />}>
+          {" "}
+        </Router.Route>
+        <Router.Route path="/ForgetPassword" element={<ForgetPassword />}>
           {" "}
         </Router.Route>
       </Router.Routes>
