@@ -4,11 +4,13 @@ import Landing from "./components/LandingPage/LandingPage.jsx";
 import AboutUS from "./components/aboutus/aboutus.jsx";
 import Verification from "./components/Verification/verification.jsx";
 import ForgetPassword from "./components/ForgetPassword/ForgetPassword.jsx";
+import NavBar_SideBar from './components/SidebarNabar/NavBar_SideBar.jsx';
 import * as Router from "react-router-dom";
 
 function App() {
   return (
     <Router.BrowserRouter>
+    <NavBar_SideBar/>
       <Router.Routes>
         <Router.Route path="/" element={<Landing />}>
           {" "}

@@ -7,11 +7,10 @@ const Landing = () => {
   const navigate = useNavigate()
   return (
     <>
-      <header className={styles.header}>
+      {/* <header className={styles.header}>
         <h1 className={styles.BrandName}>ENIAC</h1>
         <button className={styles.StartButton} onClick={e=>navigate("/AboutUs")}>درباره ما</button>
-        {/* <button className={styles.StartButton}>برای شروع کلیک کنید</button> */}
-      </header>
+      </header> */}
       <div className={styles.Landingbody}>
         <p className={styles.Desc}>
           وسیله ای برای همراهی و پیشروی در سلامت روحی افراد
