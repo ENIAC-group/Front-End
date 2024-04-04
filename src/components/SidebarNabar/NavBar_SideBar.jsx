@@ -84,7 +84,7 @@ const NavBar_SideBar = () => {
             <li className={styles1.side_list_element} 
                 onClick={(e)=>{
                 handsidebarToggle();
-                navigate("/Hme");
+                navigate("/Home");
               }}>
               <label
                 href=""

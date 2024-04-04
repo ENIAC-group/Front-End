@@ -14,7 +14,7 @@ function App() {
     <Router.BrowserRouter>
     <NavBar_SideBar/>
       <Router.Routes>
-        <Router.Route path="/" element={<Home />}>
+        <Router.Route path="/" element={<Landing />}>
           {" "}
         </Router.Route>
         <Router.Route path="/Home" element={<Home />}>
