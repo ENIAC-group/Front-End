@@ -7,6 +7,7 @@ import ForgetPassword from "./components/ForgetPassword/ForgetPassword.jsx";
 import NavBar_SideBar from './components/SidebarNabar/NavBar_SideBar.jsx';
 import Home from './components/Home/Home.jsx';
 import * as Router from "react-router-dom";
+import 'bootstrap/dist/css/bootstrap.min.css';
 
 function App() {
   return (
