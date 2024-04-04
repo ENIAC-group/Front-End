@@ -82,6 +82,44 @@ const LoginContainer = () => {
     backError: "",
   });
   
+  async function ResendCode(email) {
+    
+    
+    try {
+        const response = await axios(
+            'http://127.0.0.1:8000/accounts/activation_resend/',
+          {
+            method: "POST",
+            headers: {
+              "Content-Type": "application/json",
+            },
+            data: {
+              email: email,
+            },
+          }
+        );
+        
+        const data = {
+          email:email,
+          code: response.data.code,
+          url: response.data.url
+        };
+        console.log(response);
+        if (response.status === 200 || response.status === 201) {
+            navigate("/Verification",{state:data});
+            
+          //console.log("you can login now");
+          //navigate("/Signup");
+        }
+      } catch (error) {
+        if (error.response.status === 400) {
+          console.log(error);
+        }
+      }
+  }
+
+
+
   async function handleLoginEnter(event) {
     event.preventDefault();
     const email = document.querySelector('.email1_input').value;
@@ -181,6 +219,20 @@ const LoginContainer = () => {
       return;
     
      }
+     if(error.response.data.hasOwnProperty('email') && error.response.data.email[0]==='Email does not exist.'){
+         
+        
+      errors.emailError= "حساب کاربری ندارید!";
+    
+    setErrorMessage({
+      
+      ...errorMessage,
+      emailError: errors.emailError,
+      
+    });
+    
+  
+   }
     else if (error.response.data.hasOwnProperty('message') && error.response.data.message[0]==='Incorrect password.'){
       
         errors.passError= "رمز عبور اشتباه است!";
@@ -194,6 +246,7 @@ const LoginContainer = () => {
       else if (error.response.data.hasOwnProperty('message') && error.response.data.message[0]==='User is not verified.'){
       
         errors.emailError= "حساب کاربری شما تایید نشده است!";
+        ResendCode(email);
         setErrorMessage({
         
           ...errorMessage,
@@ -219,7 +272,6 @@ const LoginContainer = () => {
 
 
   
-
 
   async function handleSignupEnter(event) {
     event.preventDefault();
@@ -317,7 +369,14 @@ const LoginContainer = () => {
        //const refreshToken = response.data.refresh;
        console.log(response);
        console.log('you signed in successfully');
-       //navigate("/signup_validation");
+      //  { state: data }
+      const data = {
+        email:email,
+        code: response.data.code,
+        url: response.data.url
+      };
+    
+      navigate("/verification", { state: data });
        // Set tokens in local storage
        //localStorage.setItem('accessToken', accessToken);
        //localStorage.setItem('refreshToken', refreshToken);
@@ -343,6 +402,7 @@ const LoginContainer = () => {
        
      
       }
+      
       else if(error.response.data.hasOwnProperty('email') && error.response.data.email[0]==='user with this email already exists.'){
          
         
@@ -369,13 +429,16 @@ const LoginContainer = () => {
        }
        else if (error.response.data.hasOwnProperty('password1') && error.response.data.password1[0]==='This password is too common.'){
       
-        errors.emailError= "پسورد وارد شده رایج است!";
+        errors.passError= "پسورد وارد شده رایج است!";
         setErrorMessage({
         
           ...errorMessage,
-          emailError: errors.emailError,
+          passError: errors.passError,
         });
         
+      }
+      else{
+        console.log(error);
       }
       
        
