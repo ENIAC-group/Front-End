@@ -1,18 +1,18 @@
 import React from "react";
-import { MdEmail , MdSettings  } from "react-icons/md";
-import { FaPhone, FaGithubSquare, FaInfo , FaHome   } from "react-icons/fa";
+import { MdEmail, MdSettings } from "react-icons/md";
+import { FaPhone, FaGithubSquare, FaInfo, FaHome } from "react-icons/fa";
 
 import styles from "./Footer.module.css";
 
 const Footer = () => {
   return (
     <>
-     <div className={styles.footer}>
+      <div className={styles.footer}>
         <div className={styles.org}>
           <div>
             <ul className={styles.social}>
               <h5>راه های ارتباطی</h5>
-              <hr style={{  width: "22rem"  }} />
+              <hr style={{ width: "22rem", color: "white", opacity: "1" }} />
               <li>
                 <MdEmail className={styles.social_icon} />
                 ایمیل: eniakgroupiust@gmail.com
@@ -35,14 +35,14 @@ const Footer = () => {
           <div>
             <ul className={styles.social}>
               <h5>دسترسی آسان</h5>
-              <hr style={{ width: "22rem" }} />
+              <hr style={{ width: "22rem", color: "white", opacity: "1" }} />
               <li>
-              <a
+                <a
                   href="/Aboutus"
                   style={{ color: "#a0aec0", textDecoration: "none" }}
                 >
-                <FaInfo  className={styles.social_icon} />
-                درباره ما
+                  <FaInfo className={styles.social_icon} />
+                  درباره ما
                 </a>
               </li>
               <li>
@@ -50,17 +50,17 @@ const Footer = () => {
                   href="/Home"
                   style={{ color: "#a0aec0", textDecoration: "none" }}
                 >
-                  <FaHome  className={styles.social_icon} />
+                  <FaHome className={styles.social_icon} />
                   صفحه اصلی
                 </a>
               </li>
               <li>
-              <a
+                <a
                   href="/Setting"
                   style={{ color: "#a0aec0", textDecoration: "none" }}
                 >
-                <MdSettings  className={styles.social_icon} />
-                تنظیمات
+                  <MdSettings className={styles.social_icon} />
+                  تنظیمات
                 </a>
               </li>
             </ul>

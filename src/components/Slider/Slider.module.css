@@ -15,7 +15,8 @@
     text-align: center;
     padding-left: 2.7rem;
     padding-top: 11rem;
-    font-size: 2.5rem;
+    font-size: 2rem;
+    font-family: Ios15Medium;
     text-shadow: 0 0 10px #fff, 0 0 20px #fff, 0 0 30px #585657, 0 0 40px #b26fce, 0 0 50px #823083, 0 0 90px #763ff6, 0 0 70px #7965a8;    
 }
    
@@ -34,7 +35,7 @@
 .img3_p {
     direction: rtl;
     padding-right: 30px;
-    line-height: 2rem;
+    line-height: 2.5rem;
     font-size: 30px;
     font-family: Ios15Medium;
     text-align: right;

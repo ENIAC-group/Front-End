@@ -31,8 +31,18 @@ const Doctor_Home = () => {
                 />
                 <div className="project-content">
                   <a href="#" className="text-center">
-                    <h4 className="text-secondary">حوزه تحصیلی</h4>
-                    <p className="m-0 text-white">معرفی روانشناسان</p>
+                    <h4
+                      className="text-secondary"
+                      style={{ fontFamily: "Ios15Medium" }}
+                    >
+                      حوزه تحصیلی
+                    </h4>
+                    <p
+                      className="m-0 text-white"
+                      style={{ fontFamily: "Ios15Medium" }}
+                    >
+                      معرفی روانشناسان
+                    </p>
                   </a>
                 </div>
               </div>
@@ -48,8 +58,18 @@ const Doctor_Home = () => {
                 />
                 <div className="project-content">
                   <a href="#" className="text-center">
-                    <h4 className="text-secondary">حوزه کودک</h4>
-                    <p className="m-0 text-white">معرفی روانشناسان</p>
+                    <h4
+                      className="text-secondary"
+                      style={{ fontFamily: "Ios15Medium" }}
+                    >
+                      حوزه کودک
+                    </h4>
+                    <p
+                      className="m-0 text-white"
+                      style={{ fontFamily: "Ios15Medium" }}
+                    >
+                      معرفی روانشناسان
+                    </p>
                   </a>
                 </div>
               </div>
@@ -65,8 +85,18 @@ const Doctor_Home = () => {
                 />
                 <div className="project-content">
                   <a href="#" className="text-center">
-                    <h4 className="text-secondary">حوزه خانواده</h4>
-                    <p className="m-0 text-white">معرفی روانشناسان</p>
+                    <h4
+                      className="text-secondary"
+                      style={{ fontFamily: "Ios15Medium" }}
+                    >
+                      حوزه خانواده
+                    </h4>
+                    <p
+                      className="m-0 text-white"
+                      style={{ fontFamily: "Ios15Medium" }}
+                    >
+                      معرفی روانشناسان
+                    </p>
                   </a>
                 </div>
               </div>
@@ -82,8 +112,18 @@ const Doctor_Home = () => {
                 />
                 <div className="project-content">
                   <a href="#" className="text-center">
-                    <h4 className="text-secondary">حوزه بالینی</h4>
-                    <p className="m-0 text-white">معرفی روانشناسان</p>
+                    <h4
+                      className="text-secondary"
+                      style={{ fontFamily: "Ios15Medium" }}
+                    >
+                      حوزه بالینی
+                    </h4>
+                    <p
+                      className="m-0 text-white"
+                      style={{ fontFamily: "Ios15Medium" }}
+                    >
+                      معرفی روانشناسان
+                    </p>
                   </a>
                 </div>
               </div>
@@ -99,8 +139,18 @@ const Doctor_Home = () => {
                 />
                 <div className="project-content">
                   <a href="#" className="text-center">
-                    <h4 className="text-secondary">حوزه روانپزشکی</h4>
-                    <p className="m-0 text-white">معرفی روانپزشکان</p>
+                    <h4
+                      className="text-secondary"
+                      style={{ fontFamily: "Ios15Medium" }}
+                    >
+                      حوزه روانپزشکی
+                    </h4>
+                    <p
+                      className="m-0 text-white"
+                      style={{ fontFamily: "Ios15Medium" }}
+                    >
+                      معرفی روانپزشکان
+                    </p>
                   </a>
                 </div>
               </div>
@@ -116,8 +166,18 @@ const Doctor_Home = () => {
                 />
                 <div className="project-content">
                   <a href="#" className="text-center">
-                    <h4 className="text-secondary">حوزه کوچینگ</h4>
-                    <p className="m-0 text-white">معرفی کوچ ها</p>
+                    <h4
+                      className="text-secondary"
+                      style={{ fontFamily: "Ios15Medium" }}
+                    >
+                      حوزه کوچینگ
+                    </h4>
+                    <p
+                      className="m-0 text-white"
+                      style={{ fontFamily: "Ios15Medium" }}
+                    >
+                      معرفی کوچ ها
+                    </p>
                   </a>
                 </div>
               </div>
