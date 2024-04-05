@@ -1,7 +1,4 @@
-body {
-    margin: 0px;
-    min-width: 65%;
-}
+
 
 .navbar {
     background-color: #351f67;
@@ -13,7 +10,7 @@ body {
     display: flex;
     flex-wrap: wrap;
     justify-content: space-between;
-    width: 100%;
+    max-width: 100%;
     /* min-width: 65%; */
 }
 
