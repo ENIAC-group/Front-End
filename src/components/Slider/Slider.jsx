@@ -27,7 +27,7 @@ const Slider = () => {
       <div>
         <div
           style={{
-            background: `url(${slides[currentIndex].name}) no-repeat`,
+            background: `url(${slides[currentIndex].name}) no-repeat center`,
             height: "429px",
             width: "100%",
           }}
