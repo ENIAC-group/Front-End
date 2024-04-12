@@ -127,6 +127,7 @@ const CompleteInfo = () => {
         </div>
         {/* </Modal.Body> */}
       </Modal>
+      {show && <div className="modal-background" />}
     </>
   );
 }
