@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { Button, Modal } from "react-bootstrap";
 import "./styles.css";
 import DatePicker from "react-datepicker";
@@ -8,6 +8,7 @@ import Swal from "sweetalert2";
 import withReactContent from "sweetalert2-react-content";
 import axios from "axios";
 import { isValidPhoneNumber } from "react-phone-number-input";
+import moment from 'moment';
 
 // import { Icon } from "react-icons-kit";
 // import { eyeOff } from "react-icons-kit/feather/eyeOff";
@@ -33,7 +34,7 @@ const CompleteInfo = () => {
   const [firstname, setFirstname] = useState("");
   const [lastname, setLastname] = useState("");
   const [phonenumber, setPhonenumber] = useState("");
-  const [birthdate, setBirthdate] = useState(null);
+  const [date_of_birth, set_date_of_birth] = useState("");
   const [gender, setGender] = useState("");
 
   const [show, setShow] = useState(false);
@@ -52,8 +53,18 @@ const CompleteInfo = () => {
   };
 
   const handleDateChange = (date) => {
-    setBirthdate(date);
+    const formattedDate = moment(date).format("YYYY-MM-DD");
+    set_date_of_birth(formattedDate);
+    console.log(date_of_birth);
+    console.log(formattedDate);
   };
+
+  useEffect(() => {
+    if (date_of_birth !== "") {
+      set_date_of_birth(date_of_birth);
+    }
+  }, [date_of_birth]);
+
 
   const SendUsersNewInfo = async (event) => {
     console.log("helloo");
@@ -62,7 +73,7 @@ const CompleteInfo = () => {
       FirstNameLengthError: "",
       LastNameLengthError: "",
       PhonenumberFormatError: "",
-      BirthdateError: "",
+      date_of_birthError: "",
       GenderError: "",
     };
     const errorMessages = [];
@@ -95,29 +106,29 @@ const CompleteInfo = () => {
     //   errorMessages.push(errors.PhonenumberFormatError);
     // }
 
-    const birthDate = new Date(birthdate);
+    const date_of_birth = new Date(date_of_birth);
     const today = new Date();
-    // Check if the birthdate is a valid date
-    if (isNaN(birthDate.getTime())) {
-      errors.BirthdateError = "تاریخ تولد معتبر نیست!";
-      errorMessages.push(errors.BirthdateError);
+    // Check if the date_of_birth is a valid date
+    if (isNaN(date_of_birth.getTime())) {
+      errors.date_of_birthError = "تاریخ تولد معتبر نیست!";
+      errorMessages.push(errors.date_of_birthError);
     }
 
     //
-    // Check if the birthdate is in the future
-    if (birthDate > today) {
-      errors.BirthdateError = "تاریخ تولد نمی‌تواند در آینده باشد!";
-      errorMessages.push(errors.BirthdateError);
+    // Check if the date_of_birth is in the future
+    if (date_of_birth > today) {
+      errors.date_of_birthError = "تاریخ تولد نمی‌تواند در آینده باشد!";
+      errorMessages.push(errors.date_of_birthError);
     }
 
-    // Calculate the minimum allowed birthdate (e.g., 18 years ago from today)
-    const minBirthDate = new Date();
-    minBirthDate.setFullYear(today.getFullYear() - 18);
+    // Calculate the minimum allowed date_of_birth (e.g., 18 years ago from today)
+    const mindate_of_birth = new Date();
+    mindate_of_birth.setFullYear(today.getFullYear() - 18);
 
-    // Check if the birthdate is below the minimum allowed birthdate
-    if (birthDate > minBirthDate) {
-      errors.BirthdateError = "شما باید حداقل ۱۸ سال داشته باشید!";
-      errorMessages.push(errors.BirthdateError);
+    // Check if the date_of_birth is below the minimum allowed date_of_birth
+    if (date_of_birth > mindate_of_birth) {
+      errors.date_of_birthError = "شما باید حداقل ۱۸ سال داشته باشید!";
+      errorMessages.push(errors.date_of_birthError);
     }
 
     // if (gender === "") {
@@ -145,7 +156,7 @@ const CompleteInfo = () => {
               firstname: firstname,
               lastname: lastname,
               phone_number: phonenumber,
-              date_of_birth: "2000-04-01",
+              date_of_birth: date_of_birth,
               gender: "M",
             },
           }
@@ -206,16 +217,16 @@ const CompleteInfo = () => {
         تکمیل اطلاعات
       </Button>
 
-      <Modal show={show} onHide={handleClose} className="bd wrapper" centered>
-        <Modal.Header className="header">
-          <Modal.Title className="title">تکمیل اطلاعات</Modal.Title>
+      <Modal show={show} onHide={handleClose} className="bd_modal wrapper_modal" centered>
+        <Modal.Header className="header_modal">
+          <Modal.Title className="title_modal">تکمیل اطلاعات</Modal.Title>
         </Modal.Header>
         {/* <Modal.Body className="form_container .login"> */}
-        <div className="form_container">
-          <div className="form_details">
+        <div className="form_container_modal">
+          <div className="form_details_modal">
             <form action="#" className="form login">
               <pre></pre>
-              <div className="field">
+              <div className="field_modal">
                 <input
                   className="input"
                   type="text"
@@ -230,7 +241,7 @@ const CompleteInfo = () => {
                   onChange={(event) => setFirstname(event.target.value)}
                 />
               </div>
-              <div className="field">
+              <div className="field_modal">
                 <input
                   className="input"
                   type="text"
@@ -244,7 +255,7 @@ const CompleteInfo = () => {
                   onChange={(event) => setLastname(event.target.value)}
                 />
               </div>
-              <div className="field">
+              <div className="field_modal">
                 {/* <PhoneInput
                   placeholder="شماره تماس"
                   value={phonenumber}
@@ -272,7 +283,7 @@ const CompleteInfo = () => {
                 />
               </div>
 
-              <div className="field">
+              <div className="field_modal">
                 <select
                   style={{
                     backgroundColor: "white",
@@ -317,11 +328,12 @@ const CompleteInfo = () => {
                   paddingRight: "40px",
                   backgroundPosition: "right",
                 }}
-                className="field"
+                className="field_modal"
               >
                 <DatePicker
-                  selected={birthdate}
-                  value={birthdate}
+                  dateFormat="yyyy-MM-dd"
+                  selected={date_of_birth}
+                  value={date_of_birth}
                   className="input"
                   placeholderText="تاریخ تولد"
                   // selected={selectedDate}
@@ -336,7 +348,7 @@ const CompleteInfo = () => {
                 />
               </div>
               <pre></pre>
-              <div className="field btn">
+              <div className="field_modal btn">
                 <div className="btn_layer"></div>
                 <input
                   type="submit"

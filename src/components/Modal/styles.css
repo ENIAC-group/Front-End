@@ -11,7 +11,7 @@
   font-family: Vazir, Arial, sans-serif;
 }
 
-.bd {
+.bd_modal {
   /* padding-top: 50px; */
   display: flex;
   /* align-items: center;
@@ -30,7 +30,7 @@
   direction: ltr;
 }
 
-.wrapper {
+.wrapper_modal {
   margin-left: 500px;
   margin-top: 40px;
   margin-bottom: 40px;
@@ -43,15 +43,15 @@
   box-shadow: rgb(66, 38, 77) 0px 20px 30px -10px;
 }
 
-.wrapper .header {
+.wrapper_modal .header_modal {
   display: flex;
-  /* justify-content: center;
-  align-items: center; */
+  justify-content: center;
+  align-items: center;
   font-family: Vazir, Arial, sans-serif;
   text-align: center;
 }
 
-.wrapper .title {
+.wrapper_modal .title_modal {
   font-family: Ios15Medium;
   width: 50%;
   font-size: 32px;
@@ -62,12 +62,12 @@
   transition: all 0.6s cubic-bezier(0.68, -0.55, 0.265, 1.55);
 }
 
-.wrapper .form_container {
+.wrapper_modal .form_container_modal {
   width: 100%;
   overflow: hidden;
 }
 
-.wrapper .slider_controls {
+.wrapper_modal .slider_controls {
   position: relative;
   width: 100%;
   height: 50px;
@@ -79,92 +79,20 @@
   border-radius: 35px;
 }
 
-.slider_controls .slide {
-  font-family: Ios15Medium;
-  width: 50%;
-  color: #fff;
-  height: 100%;
-  line-height: 48px;
-  font-size: 22px;
-  font-weight: 500;
-  text-align: center;
-  cursor: pointer;
-  z-index: 1;
-  transition: all 0.6s ease;
-  text-shadow: rgb(214, 215, 218) 0px 0px 4px;
-}
-
-input[type="radio"] {
-  display: none;
-}
-
-.slider_controls label.signup {
-  color: #767575;
-}
-.slider_controls .slider_tab{
-  height:100%;
-  width: 50%;
-  left:0;
-  z-index: 0;
-  /*background: -webkit-linear-gradient(left,#5a0066 , #5c0080 , #9500b3,#8a00e6);*/
-  background: -webkit-linear-gradient(left,#B799FF , #ACBCFF , #AEE2FF);
-  position: absolute;
-  border-radius: 35px;
-  transition:all 0.6s cubic-bezier(0.68 , -0.55 , 0.265 , 1.55);
-}
-/*
-.slide.login.active {
-  left:50%;
-  color: red; 
-  height:100%;
-  width: 50%;
-  left:0;
-  z-index: 0;
-  background: -webkit-linear-gradient(left,#5a0066 , #5c0080 , #9500b3,#8a00e6);
-  position: absolute;
-  border-radius: 35px;
-  transition:all 0.6s cubic-bezier(0.68 , -0.55 , 0.265 , 1.55);
-
-}
-*/
-
-
-
-
-
-#signup:checked ~ .slider_tab{
-  left:50%;
-}
-#signup:checked ~ label.signup{
-  color:#fff;
-  user-select: none;
-}
-
-#signup:checked ~ label.login{
-  /* color:#000; */
-  color:#767575;
-}
-#login:checked ~ label.signup{
-  /* color:#000; */
-  color:#767575;
-}
-#login:checked ~ label.login{
-  user-select: none;
-}
-.form_container .form_details{
+.form_container_modal .form_details_modal{
   display:flex;
   width:200%;
   font-family: Vazir, Arial, sans-serif;
 
 }
-.form_container .form_details form{
+.form_container_modal .form_details_modal form{
  margin-top: 10px;
   width:50%;
   transition:all 0.6s cubic-bezier(0.68 , -0.55 , 0.265 , 1.55);
   font-family: Vazir, Arial, sans-serif;
 
 }
-.form_details form .field {
+.form_details_modal form .field_modal {
   display: flex;
   align-items: center;
   position: relative;
@@ -175,7 +103,7 @@ input[type="radio"] {
 
 }
 
-.form_details .form .field .input {
+.form_details_modal .form .field_modal .input {
   width: 100%;
   height: 100%;
   direction: rtl;
@@ -223,15 +151,15 @@ input[type="radio"] {
 }
 
 
-.form_details form .field input:hover {
+.form_details_modal form .field_modal .input:hover {
   border-bottom-color: #cdbdf3;
 }
 
-.form_details form .field input:focus {
+.form_details_modal form .field_modal .input:focus {
   border-bottom-color: #b396f6;
 }
 
-.form_details form .field input::placeholder {
+.form_details_modal form .field_modal input::placeholder {
   font-family: Vazir, Arial, sans-serif;
   color: #999;
   transition: all 0.3s ease;
@@ -239,7 +167,7 @@ input[type="radio"] {
   
 }
 
-.form_details form .field .toggle-icon {
+.form_details_modal form .field_modal .toggle-icon {
   position: absolute;
   top: 50%;
   left: 10px; /* Adjust the position of the toggle icon */
@@ -249,12 +177,12 @@ input[type="radio"] {
   transition: color 0.3s ease;
 }
 
-.form_details form .field .toggle-icon:hover {
+.form_details_modal form .field_modal .toggle-icon:hover {
   color: #aa87fd;
 }
 
 
-.form_details form .field .toggle-icon2 {
+.form_details_modal form .field_modal .toggle-icon2 {
   position: absolute;
   top: 50%;
   left: 10px; /* Adjust the position of the toggle icon */
@@ -264,36 +192,36 @@ input[type="radio"] {
   transition: color 0.3s ease;
 }
 
-.form_details form .field .toggle-icon2:hover {
+.form_details_modal form .field_modal .toggle-icon2:hover {
   color: #aa87fd;
 }
 
 
-form .field input:focus::placeholder{
+form .field_modal input:focus::placeholder{
   color:#8e69e4;
   font-family: Vazir, Arial, sans-serif;
 
 }
 
-form .field input:hover::placeholder {
+form .field_modal input:hover::placeholder {
   color: #B799FF;
   font-family: Vazir, Arial, sans-serif;
 
 }
-.form_details form .pass_link{
+.form_details_modal form .pass_link{
   margin-top: 5px;
   font-family: Vazir, Arial, sans-serif;
   
 }
-.form_details form .signup_link{
+.form_details_modal form .signup_link{
   margin-top:30px;
   color: #767575;
 
   text-align: center;
   
 }
-.form_details form .pass_link a,
-.form_details form .signup_link a{
+.form_details_modal form .pass_link a,
+.form_details_modal form .signup_link a{
     font-family: Vazir, Arial, sans-serif;
 
     color: #B799FF;
@@ -301,7 +229,7 @@ form .field input:hover::placeholder {
     text-decoration: none;
     font-size: 15px;
 }
-.form_details form .signup_link{
+.form_details_modal form .signup_link{
   font-family: Ios15Medium;
   font-size: 17px;
   text-align: center;
@@ -326,7 +254,7 @@ form .btn .btn_layer{
   position: absolute;
   left:-100%;
   border-radius: 30px;
-  /* background:-webkit-linear-gradient(right,#350066,#710080,#a400b3, #bd4fe9); */
+  /* background:-webkit-linear-gradient(right,#350066,#710080,#a400b3, #bd_modal4fe9); */
   background: -webkit-linear-gradient(left,#B799FF , #ACBCFF , #AEE2FF,#E6FFFD);
   transition: all 0.3s ease
 }
@@ -416,7 +344,7 @@ form .btn input[type="submit"]{
   pointer-events: none;
 }
 
-.select-field option:checked {
+.select-field_modal option:checked {
   color: blue; /* Set the font color for the selected option */
 }
 
