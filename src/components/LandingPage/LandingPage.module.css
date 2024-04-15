@@ -54,6 +54,7 @@
 }
 .Desc
 {
+  line-height: 100%;
   align-self: center;
   direction: rtl;
   background-image: linear-gradient(62deg , #B799FF 0%, #AEE2FF 100%);

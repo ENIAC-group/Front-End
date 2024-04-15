@@ -24,6 +24,8 @@ const ForgetPassword = () => {
   const navigate = useNavigate();
   const [fp_code, setvcode] = useState(0);
   const [fp_Email, setfp_Email] = useState("");
+  const [fp_Pass, setfp_Pass] = useState("");
+  const [fp_RepeatPass, setfp_RepeatPass] = useState("");
   const [check_icon, seticon] = useState({
     checkcolor: "#7a7d7b",
     checkicon: checkmarkCircled,
@@ -76,6 +78,7 @@ const ForgetPassword = () => {
           }
         );
         const data = response.data;
+        console.log(response);
         if (response.status === 200 || response.status === 201) {
           const accessToken = response.data.access;
           const refreshToken = response.data.refresh;
@@ -91,10 +94,11 @@ const ForgetPassword = () => {
             background: "#473a67",
             color: "#b4b3b3",
             width: "35rem",
-            confirmButtonText: "باشه",
+            confirmButtonText: "تایید",
           });
         }
       } catch (error) {
+        console.log(error);
         if (error.response.status === 400) {
           withReactContent(Swal).fire({
             icon: "error",
@@ -102,7 +106,7 @@ const ForgetPassword = () => {
             background: "#473a67",
             color: "#b4b3b3",
             width: "35rem",
-            confirmButtonText: "باشه",
+            confirmButtonText: "تایید",
           });
         }
       }
@@ -115,7 +119,7 @@ const ForgetPassword = () => {
           color: "#b4b3b3",
           width: "26rem",
           height: "18rem",
-          confirmButtonText: "باشه",
+          confirmButtonText: "تایید",
         });
       } else {
         withReactContent(Swal).fire({
@@ -124,15 +128,15 @@ const ForgetPassword = () => {
           background: "#473a67",
           color: "#b4b3b3",
           width: "32rem",
-          confirmButtonText: "باشه",
+          confirmButtonText: "تایید",
         });
       }
     }
   }
   async function SubmitNewPass(event) {
     event.preventDefault();
-    const password = document.querySelector(".fp_pass").value;
-    const passwordConfirm = document.querySelector(".fp_repeatpass").value;
+    const password = fp_Pass;
+    const passwordConfirm = fp_RepeatPass;
     if (
       (password.length === 0) |
       (passwordConfirm.length === 0) |
@@ -145,7 +149,7 @@ const ForgetPassword = () => {
         background: "#473a67",
         color: "#b4b3b3",
         width: "32rem",
-        confirmButtonText: "باشه",
+        confirmButtonText: "تایید",
       });
     } else {
       const response = await axios(fp_response.token, {
@@ -166,10 +170,10 @@ const ForgetPassword = () => {
           background: "#473a67",
           color: "#b4b3b3",
           width: "32rem",
-          confirmButtonText: "باشه",
+          confirmButtonText: "تایید",
         });
       } else {
-        navigate("/Home");
+        navigate("/Signup");
       }
     }
   }
@@ -228,6 +232,7 @@ const ForgetPassword = () => {
                       className={styles.fp_pass}
                       type={passwordType}
                       placeholder="رمز عبور جدید"
+                      onChange={(event) => setfp_Pass(event.target.value)}
                       style={{
                         backgroundImage: `url(${lock_icon})`,
                         backgroundRepeat: "no-repeat",
@@ -246,6 +251,7 @@ const ForgetPassword = () => {
                     <input
                       className={styles.fp_repeatpass}
                       type={repeatPasswordType}
+                      onChange={(event) => setfp_RepeatPass(event.target.value)}
                       placeholder="تکرار رمز عبور جدید"
                       style={{
                         backgroundImage: `url(${lock_icon})`,
