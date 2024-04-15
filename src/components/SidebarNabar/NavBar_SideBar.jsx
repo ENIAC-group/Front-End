@@ -68,59 +68,62 @@ const NavBar_SideBar = () => {
             <h1 className={styles1.side_title}>داشبورد</h1>
           </div>
           <hr style={{ borderBlockColor: "white" }}></hr>
-          <ul className={styles1.side_list}>
+          <ul className={styles1.side_list} >
             <li
               className={styles1.side_list_element}
-              onClick={(e) => {
+              onClick={(e)=>{
                 handsidebarToggle();
-                navigate("/Home");
+                navigate("/Hme");
               }}
+              
             >
               <label href="" className={styles1.side_list_element_text}>
                 <FaHome className={styles1.side_icons} /> خانه
               </label>
             </li>
-            <li
-              className={styles1.side_list_element}
-              onClick={(e) => {
+            <li className={styles1.side_list_element} 
+                onClick={(e)=>{
                 handsidebarToggle();
-                navigate("/Home");
-              }}
-            >
-              <label href="" className={styles1.side_list_element_text}>
+                navigate("/Hme");
+              }}>
+              <label
+                href=""
+                className={styles1.side_list_element_text}
+              >
                 <FaRegFileAlt className={styles1.side_icons} /> تست ها
               </label>
             </li>
-            <li
-              className={styles1.side_list_element}
-              onClick={(e) => {
+            <li className={styles1.side_list_element} onClick={(e)=>{
                 handsidebarToggle();
                 navigate("/Test");
-              }}
-            >
-              <label href="" className={styles1.side_list_element_text}>
+              }}>
+              <label
+                href=""
+                className={styles1.side_list_element_text}
+              >
                 <FaServicestack className={styles1.side_icons} /> خدمات
               </label>
             </li>
-            <li
-              className={styles1.side_list_element}
-              onClick={(e) => {
+            <li className={styles1.side_list_element} onClick={(e)=>{
                 handsidebarToggle();
                 navigate("/--");
-              }}
-            >
-              <label href="" className={styles1.side_list_element_text}>
+              }}>
+              <label
+                href=""
+                className={styles1.side_list_element_text}
+              >
                 <FaRegStickyNote className={styles1.side_icons} /> معرفی
               </label>
             </li>
-            <li
-              className={styles1.side_list_element}
-              onClick={(e) => {
+            <li className={styles1.side_list_element} 
+                onClick={(e)=>{
                 handsidebarToggle();
                 navigate("/Setting");
-              }}
-            >
-              <label href="" className={styles1.side_list_element_text}>
+              }}>
+              <label
+                href=""
+                className={styles1.side_list_element_text}
+              >
                 <FaCog className={styles1.side_icons} /> تنظیمات
               </label>
             </li>
