@@ -376,7 +376,7 @@
 }
 
 .services-item:hover .services-content-icon i {
-    color: var(--bs-secondary) !important;
+    color: #ACBCFF !important;
 }
 
 .services-item:hover .services-content-icon p {
@@ -387,7 +387,6 @@
   .services-item {
     animation: fadeInColorChange 1s forwards;
   }
-  
 
 /*** Services End ***/
 
