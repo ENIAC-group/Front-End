@@ -1,10 +1,12 @@
 import { useState, useEffect } from "react";
 import { Button, Modal } from "react-bootstrap";
 import "./styles.css";
-import DatePicker from "react-datepicker";
-import "react-datepicker/dist/react-datepicker.css";
+import DatePicker from "react-datepicker"
+import 'react-datepicker/dist/react-datepicker.css';
 import { useNavigate } from "react-router-dom";
 import Swal from "sweetalert2";
+// import { toast } from "react-toastify";
+// import "react-toastify/dist/ReactToastify.css";
 import withReactContent from "sweetalert2-react-content";
 import axios from "axios";
 import { isValidPhoneNumber } from "react-phone-number-input";
@@ -19,16 +21,18 @@ import date_icon from "../../assets/date.png";
 import phone_icon from "../../assets/phone.png";
 import person_icon from "../../assets/person.png";
 
-function toFarsiNumber(n) {
-  const farsiDigits = ["۰", "۱", "۲", "۳", "۴", "۵", "۶", "۷", "۸", "۹"];
+// function toFarsiNumber(n) {
+//   const farsiDigits = ["۰", "۱", "۲", "۳", "۴", "۵", "۶", "۷", "۸", "۹"];
 
-  return n
-    .toString()
-    .split("")
-    .map((x) => farsiDigits[x])
-    .join("");
-}
+//   return n
+//     .toString()
+//     .split("")
+//     .map((x) => farsiDigits[x])
+//     .join("");
+// }
 
+
+// toast.configure();
 const CompleteInfo = () => {
   const navigate = useNavigate();
   const [firstname, setFirstname] = useState("");
@@ -43,28 +47,41 @@ const CompleteInfo = () => {
   const handleShow = () => setShow(true);
 
   const ChangeGender = (event) => {
-    if (event.target.value === "مرد") {
-      setGender("M");
-    } else if (event.target.value === "زن") {
-      setGender("F");
-    } else if (event.target.value === "ساير") {
-      setGender("B");
-    }
-  };
+      const selectedValue = event.target.value.toString().trim();
+      if (selectedValue === "male") {
+        setGender("M");
+      } else if (selectedValue === "female") {
+        setGender("F");
+      } else if (selectedValue === "other") {
+        setGender("B");
+      } else {
+        setGender("");
+      }
+    };
+
+    useEffect(() => {
+      // Perform any actions that rely on the updated gender state here
+      console.log(gender);
+    }, [gender]);
+
 
   const handleDateChange = (date) => {
-    const formattedDate = moment(date).format("YYYY-MM-DD");
-    set_date_of_birth(formattedDate);
-    console.log(date_of_birth);
-    console.log(formattedDate);
-  };
-
-  useEffect(() => {
-    if (date_of_birth !== "") {
-      set_date_of_birth(date_of_birth);
+    if (date) {
+      const formattedDate = moment(date).format("YYYY-MM-DD");
+      set_date_of_birth(formattedDate);
+      // console.log(formattedDate);
+    } else {
+      set_date_of_birth("");
+      // console.log("");
     }
+  };
+  
+  useEffect(() => {
+    if (date_of_birth === "") {
+      set_date_of_birth("");
+    }
+    // console.log(date_of_birth);
   }, [date_of_birth]);
-
 
   const SendUsersNewInfo = async (event) => {
     console.log("helloo");
@@ -79,45 +96,54 @@ const CompleteInfo = () => {
     const errorMessages = [];
 
     if (firstname.length === 0) {
-      errors.FirstNameLengthError = "وارد کردن نام الزامی است!";
+      errors.FirstNameLengthError = "!وارد کردن نام الزامی است";
       errorMessages.push(errors.FirstNameLengthError);
     } else if (firstname.length > 20) {
-      errors.FirstNameLengthError = "نام طولانی است!";
+      errors.FirstNameLengthError = "!نام طولانی است";
       errorMessages.push(errors.FirstNameLengthError);
     }
 
     if (lastname.length === 0) {
-      errors.LastNameLengthError = "وارد کردن نام خانوادگی الزامی است!";
+      errors.LastNameLengthError = "!وارد کردن نام خانوادگی الزامی است";
       errorMessages.push(errors.LastNameLengthError);
     } else if (lastname.length > 30) {
-      errors.LastNameLengthError = "نام خانوادگی طولانی است!";
+      errors.LastNameLengthError = "!نام خانوادگی طولانی است";
       errorMessages.push(errors.LastNameLengthError);
     }
 
+    const regex = /^(?:\+98|0)(?:\s?)9[0-9]{9}/;
+
     if (phonenumber === "") {
-      errors.PhonenumberFormatError = "وارد کردن شماره تماس الزامی است!";
+      errors.PhonenumberFormatError = "!وارد کردن شماره تماس الزامی است";
       errorMessages.push(errors.PhonenumberFormatError);
     }
-    //else if (
-    //   !isValidPhoneNumber(phonenumber.toString()) ||
-    //   phonenumber.length > 15
-    // ) {
-    //   errors.PhonenumberFormatError = "قالب شماره درست نیست!";
-    //   errorMessages.push(errors.PhonenumberFormatError);
-    // }
 
-    const date_of_birth = new Date(date_of_birth);
+    else if (
+      !regex.test(phonenumber) ||
+      phonenumber.length > 15
+    ) {
+      errors.PhonenumberFormatError = "!قالب شماره درست نیست";
+      errorMessages.push(errors.PhonenumberFormatError);
+    }
+
+    if (gender === "") {
+      errors.GenderError = "!انتخاب جنسیت الزامی است";
+      errorMessages.push(errors.GenderError);
+    }
+
+    
+    let date_of_birth2 = new Date(date_of_birth);
     const today = new Date();
     // Check if the date_of_birth is a valid date
-    if (isNaN(date_of_birth.getTime())) {
-      errors.date_of_birthError = "تاریخ تولد معتبر نیست!";
+    if (isNaN(date_of_birth2.getTime())) {
+      errors.date_of_birthError = "!تاریخ تولد معتبر نیست";
       errorMessages.push(errors.date_of_birthError);
     }
 
-    //
+
     // Check if the date_of_birth is in the future
-    if (date_of_birth > today) {
-      errors.date_of_birthError = "تاریخ تولد نمی‌تواند در آینده باشد!";
+    if (date_of_birth2 > today) {
+      errors.date_of_birthError = "!تاریخ تولد نمی‌تواند در آینده باشد";
       errorMessages.push(errors.date_of_birthError);
     }
 
@@ -126,21 +152,16 @@ const CompleteInfo = () => {
     mindate_of_birth.setFullYear(today.getFullYear() - 18);
 
     // Check if the date_of_birth is below the minimum allowed date_of_birth
-    if (date_of_birth > mindate_of_birth) {
-      errors.date_of_birthError = "شما باید حداقل ۱۸ سال داشته باشید!";
+    if (date_of_birth2 > mindate_of_birth) {
+      errors.date_of_birthError = "!شما باید حداقل ۱۸ سال داشته باشید";
       errorMessages.push(errors.date_of_birthError);
     }
-
-    // if (gender === "") {
-    //   errors.GenderError = "انتخاب جنسیت الزامی است!";
-    //   errorMessages.push(errors.GenderError);
-    // }
 
     // Check if there are any errors
     if (errorMessages.length === 0) {
       // No errors, proceed with submitting the form
       try {
-        console.log("hello");
+        // console.log("hello");
         // Make an API request to submit the form data
         const token = localStorage.getItem("accessToken");
         console.log(token);
@@ -157,26 +178,32 @@ const CompleteInfo = () => {
               lastname: lastname,
               phone_number: phonenumber,
               date_of_birth: date_of_birth,
-              gender: "M",
+              gender: gender,
             },
           }
         );
 
-        // Handle the response accordingly
         if (response.status === 200) {
           Swal.fire({
             icon: "success",
-            title: "اطلاعات با موفقیت ثبت شد!",
+            title: "!اطلاعات با موفقیت ثبت شد",
             background: "#473a67",
             color: "#b4b3b3",
             width: "26rem",
             height: "18rem",
             confirmButtonText: "تایید",
           });
+          // toast.success("!اطلاعات با موفقیت ثبت شد", {
+          // position: toast.POSITION.BOTTOM_LEFT,
+          // autoClose: true
+          // });
+          setShow(false);
+          setFirstname(""); setLastname(""); setGender(""); setPhonenumber(""); set_date_of_birth("");
+
         } else {
           Swal.fire({
             icon: "error",
-            title: "خطا در ثبت اطلاعات!",
+            title: "!خطا در ثبت اطلاعات",
             background: "#473a67",
             color: "#b4b3b3",
             width: "26rem",
@@ -184,10 +211,11 @@ const CompleteInfo = () => {
             confirmButtonText: "تایید",
           });
         }
+
       } catch (error) {
         Swal.fire({
           icon: "error",
-          title: "خطا در ارسال درخواست!",
+          title: "!خطا در ارسال درخواست",
           background: "#473a67",
           color: "#b4b3b3",
           width: "26rem",
@@ -200,7 +228,7 @@ const CompleteInfo = () => {
       // Display a single pop-up with all the error messages
       Swal.fire({
         icon: "error",
-        title: "خطا",
+        title: "!خطا",
         html: errorMessages.join("<br>"), // Display error messages as separate lines
         background: "#473a67",
         color: "#b4b3b3",
@@ -217,7 +245,7 @@ const CompleteInfo = () => {
         تکمیل اطلاعات
       </Button>
 
-      <Modal show={show} onHide={handleClose} className="bd_modal wrapper_modal" centered>
+      <Modal backdrop="static" show={show} onHide={handleClose} className="bd_modal modal wrapper_modal" centered>
         <Modal.Header className="header_modal">
           <Modal.Title className="title_modal">تکمیل اطلاعات</Modal.Title>
         </Modal.Header>
@@ -325,25 +353,32 @@ const CompleteInfo = () => {
                 style={{
                   backgroundImage: `url(${date_icon})`,
                   backgroundRepeat: "no-repeat",
-                  paddingRight: "40px",
+                  // paddingRight: "40px",
                   backgroundPosition: "right",
+                  borderBottom: "2px solid #adadad",
+                  // transition: "border-color 0.3s ease"
+                  marginBottom: "45px"
                 }}
                 className="field_modal"
               >
                 <DatePicker
-                  dateFormat="yyyy-MM-dd"
+                  id="datePicker"
+                  format="YYYY/MM/DD"
                   selected={date_of_birth}
                   value={date_of_birth}
-                  className="input"
                   placeholderText="تاریخ تولد"
-                  // selected={selectedDate}
-                  // onChange={handleDateChange}
-                  style={{
-                    borderBottom: "2px solid #adadad",
-                    transition: "border-color 0.3s ease",
-                    width: "100%",
-                    height: "100%",
-                  }}
+                  // style={{
+                  //   width: "95%",
+                  //   border: "none",
+                  //   height: "100%",
+                  //   direction: "rtl",
+                  //   outline: "none",
+                  //   paddingLeft: "15px",
+                  //   fontSize: "18px",
+                  //   color: "gray",
+                  //   caretColor: "rgb(152, 103, 175)",
+                  //   fontFamily: "Vazir, Arial, sans-serif",
+                  // }}
                   onChange={handleDateChange}
                 />
               </div>
