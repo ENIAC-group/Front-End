@@ -33,3 +33,8 @@ export const convertToPersianNumbers = (value) => {
   
     return value.replace(/[۰-۹]/g, (char) => englishNumbersMap[char] || char);
   };
+
+  export const isPersianString = (str) => {
+    const persianRegex = /^[\u0600-\u06FF\s]+$/;
+    return persianRegex.test(str);
+  }

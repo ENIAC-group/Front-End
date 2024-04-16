@@ -4,14 +4,12 @@ import Footer from "../Footer/Footer";
 import Statistic from "../Counter/Statistic.jsx";
 import Tests from "../Tests/Tests.jsx";
 import Doctors_Home from "../Doctor/doctor.jsx";
-import CompleteInfo from "../Complete Info Modal/Complete_Info.jsx";
 
 function Home() {
   return (
     <>
       <Slider />
       <Doctors_Home />
-      <CompleteInfo />
       <Statistic />
       <Tests />
       <Footer />

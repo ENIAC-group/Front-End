@@ -210,6 +210,14 @@
   border-bottom: none !important;
 }
 
+
+.custom-calendar {
+  position: absolute;
+  top: -100%; /* Adjust this value to position the calendar correctly */
+  left: 0;
+  z-index: 9999; /* Adjust the z-index as needed */
+}
+
 .jb-date-input-web-component .input-box input {
   font-size: 15px;
 }
@@ -453,3 +461,72 @@ form .btn input[type="submit"]{
   z-index: -1; /* Ensure the overlay appears above other elements */
 }
 
+
+.field_modal .custom-select {
+  position: relative;
+  display: inline-block;
+}
+
+.field_modal .select-trigger {
+  background-color: white;
+  padding: 0 30px 0 10px;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  border: none;
+  outline: none;
+  color: rgb(188, 186, 186);
+}
+
+.field_modal .select-trigger:hover {
+  background-color: #f0f0f0;
+}
+
+.field_modal .arrow-down {
+  width: 0;
+  height: 0;
+  border-left: 4px solid transparent;
+  border-right: 4px solid transparent;
+  border-top: 4px solid rgb(188, 186, 186);
+}
+
+.field_modal .options {
+  position: absolute;
+  top: 100%;
+  left: 0;
+  list-style: none;
+  background-color: white;
+  padding: 0;
+  margin: 0;
+  border: 1px solid #ccc;
+  border-top: none;
+  display: none;
+}
+
+.field_modal .options li {
+  padding: 10px;
+  cursor: pointer;
+  font-family: "Vazir", Arial, sans-serif;
+}
+
+.field_modal .options li:hover {
+  background-color: #f0f0f0;
+}
+
+.field_modal .custom-select.open .options {
+  display: block;
+}
+
+.custom-swal-container .swal2-popup {
+  border-radius: 15px; /* Adjust the radius as per your preference */
+  box-shadow: 0px 0px 30px rgba(0, 0, 0, 0.5); 
+}
+
+.custom-swal-container .swal2-title {
+  text-shadow: 2px 2px 2px rgba(0, 0, 0, 0.5); /* Adjust the shadow values as per your preference */
+}
+
+.custom-swal-container .swal2-content {
+  text-shadow: 2px 2px 2px rgba(0, 0, 0, 0.5); /* Adjust the shadow values as per your preference */
+}
