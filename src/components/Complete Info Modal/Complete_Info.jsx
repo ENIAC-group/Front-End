@@ -2,6 +2,7 @@ import { useState, useEffect } from "react";
 import { Button, Modal } from "react-bootstrap";
 import "./styles.css";
 import DatePicker from "react-datepicker"
+import {JBDateInput} from 'jb-date-input-react';
 import 'react-datepicker/dist/react-datepicker.css';
 import { useNavigate } from "react-router-dom";
 import Swal from "sweetalert2";
@@ -11,6 +12,8 @@ import withReactContent from "sweetalert2-react-content";
 import axios from "axios";
 import { isValidPhoneNumber } from "react-phone-number-input";
 import moment from 'moment';
+
+import { convertToPersianNumbers, convertToEnglishNumbers } from './NumberConverter.js';
 
 // import { Icon } from "react-icons-kit";
 // import { eyeOff } from "react-icons-kit/feather/eyeOff";
@@ -32,6 +35,7 @@ import person_icon from "../../assets/person.png";
 // }
 
 
+
 // toast.configure();
 const CompleteInfo = () => {
   const navigate = useNavigate();
@@ -45,6 +49,7 @@ const CompleteInfo = () => {
 
   const handleClose = () => setShow(false);
   const handleShow = () => setShow(true);
+  
 
   const ChangeGender = (event) => {
       const selectedValue = event.target.value.toString().trim();
@@ -66,6 +71,7 @@ const CompleteInfo = () => {
 
 
   const handleDateChange = (date) => {
+    // console.log(date);
     if (date) {
       const formattedDate = moment(date).format("YYYY-MM-DD");
       set_date_of_birth(formattedDate);
@@ -300,8 +306,8 @@ const CompleteInfo = () => {
                   className="input"
                   type="text"
                   placeholder="شماره تماس"
-                  value={phonenumber.toString()}
-                  onChange={(event) => setPhonenumber(event.target.value)}
+                  value={convertToPersianNumbers(phonenumber)}
+                  onChange={(event) => setPhonenumber(convertToEnglishNumbers(event.target.value))}
                   style={{
                     backgroundImage: `url(${phone_icon})`,
                     backgroundRepeat: "no-repeat",
@@ -357,11 +363,11 @@ const CompleteInfo = () => {
                   backgroundPosition: "right",
                   borderBottom: "2px solid #adadad",
                   // transition: "border-color 0.3s ease"
-                  marginBottom: "45px"
+                  marginBottom: "100px"
                 }}
                 className="field_modal"
               >
-                <DatePicker
+                {/* <DatePicker
                   id="datePicker"
                   format="YYYY/MM/DD"
                   selected={date_of_birth}
@@ -380,7 +386,30 @@ const CompleteInfo = () => {
                   //   fontFamily: "Vazir, Arial, sans-serif",
                   // }}
                   onChange={handleDateChange}
-                />
+                /> */}
+                <div
+                style={{
+                  border: "none",
+                  height: "40px",
+                  width: "92%",
+                  direction: "rtl",
+                  fonySize: "15px"
+                }}>
+                 <JBDateInput placeholder="تاریخ تولد"
+                 usePersianNumber={true}
+                 onSelect={(event) => {
+                  console.log(event.target.value);
+                  set_date_of_birth(event.target.value)}}
+                 format="YYYY-MM-DD"
+                 id="datePicker"
+                 style={{
+                  border:"none !important",
+                  backgroundColor: "white"
+                 }}
+                 className="jb-date-input-web-component"
+                 >
+                </JBDateInput>
+                </div>
               </div>
               <pre></pre>
               <div className="field_modal btn">

@@ -187,6 +187,32 @@
   font-family: Vazir, Arial, sans-serif;
 
 }
+
+.field_modal .jb-date-input-web-component .input-box {
+  overflow: auto;
+  text-align: right;
+  width: 145%;
+  border-color: white !important;
+  z-index: 2000;
+  /* margin-top: 39px; */
+  height: 100%;
+  direction: rtl;
+  outline: none;
+  padding-left: 15px;
+  /* border-bottom: 2px solid #adadad; */
+  font-size: 18px;
+  /* transition: border-color 0.3s ease; */
+  color: gray;
+  caret-color: rgb(152, 103, 175);
+  font-family: Vazir, Arial, sans-serif;
+  background-color: white;
+  border: none !important;
+  border-bottom: none !important;
+}
+
+.jb-date-input-web-component .input-box input {
+  font-size: 15px;
+}
 #datePicker {
   overflow: auto;
   text-align: right;
@@ -206,7 +232,11 @@
   color: gray;
   caret-color: rgb(152, 103, 175);
   font-family: Vazir, Arial, sans-serif;
+  border: none !important;
+  border-bottom: none !important;
 }
+
+
 .form_details_modal form .field_modal_date {
   display: flex;
   align-items: center;
