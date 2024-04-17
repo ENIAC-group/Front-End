@@ -21,12 +21,14 @@ const CompleteInfo = () => {
   const [phonenumber, setPhonenumber] = useState("");
   const [dateOfBirth, setDateOfBirth] = useState("");
   const [gender, setGender] = useState("");
+  const [genderOption, setGenderOption] = useState("")
   const [show, setShow] = useState(false);
   // const navigate = useNavigate();
 
   const handleClose = () => setShow(false);
   const handleShow = () => setShow(true);
 
+  
   const ChangeGender = (event) => {
     const selectedValue = event.target.value.toString().trim();
     if (selectedValue === "male") {
@@ -39,6 +41,7 @@ const CompleteInfo = () => {
       setGender("");
     }
   };
+
   useEffect(() => {
     console.log(gender);
   }, [gender]);
@@ -46,6 +49,74 @@ const CompleteInfo = () => {
   useEffect(() => {
     console.log(dateOfBirth);
   }, [dateOfBirth]);
+
+  async function GetUserInfo() {
+    try {
+      const token = localStorage.getItem("accessToken");
+      console.log(token);
+      const response = await axios.get(
+        "http://127.0.0.1:8000/accounts/get_user/",
+        {
+          headers: {
+            "Content-Type": "application/json",
+             Authorization: `Bearer ${token}`,
+          },
+        }
+      );
+
+      if (response.status === 200) {
+        // console.log(response.data)
+        setFirstname(response.data.user.firstname);
+        setLastname(response.data.user.lastname);
+        setPhonenumber(response.data.user.phone_number);
+        if (response.data.user.gender === "M") {
+          setGender("M");
+          setGenderOption("male");
+        } else if (response.data.user.gender === "F"){
+          setGender("F");
+          setGenderOption("female");
+        } else {
+          setGender("B");
+          setGenderOption("other");
+        }
+        setDateOfBirth(response.data.user.date_of_birth);
+        if (
+          firstname.length === 0 ||
+          lastname.length  === 0 ||
+          phonenumber.length === 0 ||
+          gender === "" ||
+          dateOfBirth === ""
+        ) {
+            setShow(true);
+        } else {
+          toast.warn('!شما قبلا اطلاعات خود را ثبت کرده اید', {
+            position: "bottom-left",
+            autoClose: 3000,
+            hideProgressBar: false,
+            closeOnClick: true,
+            pauseOnHover: true,
+            draggable: true,
+            progress: undefined,
+          });
+          setShow(true);
+          // Swal.fire({
+          //   icon: "warning",
+          //   title: "!شما قبلا اطلاعات خود را ثبت کرده اید",
+          //   background: "#473a67",
+          //   color: "#b4b3b3",
+          //   width: "26rem",
+          //   height: "18rem",
+          //   confirmButtonText: "تایید",
+          //   customClass: {
+          //     container: 'custom-swal-container'
+          //   }
+          // });
+        }
+      }
+    } catch (error) {
+      console.log("something went wrong");
+    }
+  }
 
   const SendUsersNewInfo = async (event) => {
     event.preventDefault();
@@ -117,6 +188,7 @@ const CompleteInfo = () => {
     if (errorMessages.length === 0) {
       try {
         const token = localStorage.getItem("accessToken");
+        console.log(token);
         const response = await axios.post("http://127.0.0.1:8000/accounts/complete_info/", {
           firstname,
           lastname,
@@ -193,7 +265,7 @@ const CompleteInfo = () => {
 
   return (
     <>
-      <Button variant="primary" onClick={handleShow} className="button-20">
+      <Button variant="primary" onClick={GetUserInfo} className="button-20">
         تکمیل اطلاعات
       </Button>
 
@@ -218,6 +290,7 @@ const CompleteInfo = () => {
                     paddingRight: "40px",
                     backgroundPosition: "right",
                   }}
+                  value={firstname}
                   onChange={(event) => setFirstname(event.target.value)}
                 />
               </div>
@@ -232,6 +305,7 @@ const CompleteInfo = () => {
                     paddingRight: "40px",
                     backgroundPosition: "right",
                   }}
+                  value={lastname} 
                   onChange={(event) => setLastname(event.target.value)}
                 />
               </div>
@@ -240,7 +314,7 @@ const CompleteInfo = () => {
                   className="input"
                   type="text"
                   placeholder="شماره تماس"
-                  value={convertToPersianNumbers(phonenumber)}
+                  value={phonenumber ? convertToPersianNumbers(phonenumber) : ""}
                   onChange={(event) => setPhonenumber(convertToEnglishNumbers(event.target.value))}
                   style={{
                     backgroundImage: `url(${phone_icon})`,
@@ -262,10 +336,11 @@ const CompleteInfo = () => {
                     color: "rgb(188, 186, 186)",
                   }}
                   className="input"
-                  defaultValue=""
-                  onChange={(event) => ChangeGender(event)}
+                  defaultValue={genderOption} 
+                  onChange={(event) => {ChangeGender(event)
+                                        setGenderOption(event.target.value)}}
                 >
-                  <option className="input" value="" disabled hidden>
+                  <option className="input" disabled hidden>
                     جنسیت
                   </option>
                   <option
@@ -340,6 +415,7 @@ const CompleteInfo = () => {
                   border:"none !important",
                   backgroundColor: "white"
                  }}
+                 value={dateOfBirth}
                  className="jb-date-input-web-component .calendar-container"
                  calendarClassName="custom-calendar"
                  >
@@ -362,7 +438,7 @@ const CompleteInfo = () => {
                 <input
                   type="submit"
                   value="بستن"
-                  onClick={() => setShow(false)}
+                  onClick={handleClose}
                 />
               </div>
               <div className="field_modal btn" style={{ marginLeft: '10px' }}>
