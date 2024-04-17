@@ -49,19 +49,10 @@ const CompleteInfo = () => {
     GetUserInfo();
   }, []);
 
-
-  useEffect(() => {
-    console.log(gender);
-  }, [gender]);
-
-  useEffect(() => {
-    console.log(dateOfBirth);
-  }, [dateOfBirth]);
-
   async function GetUserInfo() {
     try {
       const token = localStorage.getItem("accessToken");
-      console.log(token);
+      // console.log(token);
       const response = await axios.get(
         "http://127.0.0.1:8000/accounts/get_user/",
         {
@@ -73,26 +64,51 @@ const CompleteInfo = () => {
       );
 
       if (response.status === 200) {
-        console.log(response.data)
+        // console.log(response.data)
         const userData = response.data.user;
-        console.log(userData.firstname, userData.lastname, userData.phone_number, userData.gender); // Log user data
-        setFirstname(userData.firstname);
-        setLastname(userData.lastname);
-        setPhonenumber(userData.phone_number);
-        if (userData.gender === "M") {
-          setGender("M");
-          setGenderOption("male");
-        } else if (userData.gender === "F"){
-          setGender("F");
-          setGenderOption("female");
+        // console.log(userData.firstname, userData.lastname, userData.phone_number, userData.gender); // Log user data
+        if (userData.firstname === null) {
+          setFirstname("");
         } else {
-          setGender("B");
-          setGenderOption("other");
+          setFirstname(userData.firstname);
         }
-        setDateOfBirth(response.data.user.date_of_birth);
+
+        if (userData.lastname === null) {
+          setLastname("");
+        } else {
+          setLastname(userData.lastname);
+        }
+
+        if (userData.phone_number === null) {
+          setPhonenumber("");
+        } else {
+          setPhonenumber(userData.phone_number);
+        }
+
+        if (userData.gender === null) {
+          setGenderOption("gender");
+          setGender("");
+        } else {
+          if (userData.gender === "M") {
+            setGender("M");
+            setGenderOption("male");
+          } else if (userData.gender === "F"){
+            setGender("F");
+            setGenderOption("female");
+          } else if (userData.gender === "B"){
+            setGender("B");
+            setGenderOption("other");
+          }
+        }
+        
+        if (userData.date_of_birth === null){
+          setDateOfBirth("");
+        } else {
+          setDateOfBirth(response.data.user.date_of_birth);
+        }
       }
     } catch (error) {
-      console.log("something went wrong");
+      console.log("something went wrong: ", error);
     }
   }
 
@@ -104,9 +120,9 @@ const CompleteInfo = () => {
       genderOption === "" ||
       dateOfBirth === ""
     ) {
-      console.log("has empty");
+      // console.log("has empty");
       setShow(true);
-      console.log(firstname, lastname, phonenumber, genderOption, dateOfBirth);
+      // console.log(firstname, lastname, phonenumber, genderOption, dateOfBirth);
     } else {
       toast.warn('!شما قبلا اطلاعات خود را ثبت کرده اید', {
         position: "bottom-left",
@@ -203,7 +219,7 @@ const CompleteInfo = () => {
     if (errorMessages.length === 0) {
       try {
         const token = localStorage.getItem("accessToken");
-        console.log(token);
+        // console.log(token);
         const response = await axios.post("http://127.0.0.1:8000/accounts/complete_info/", {
           firstname,
           lastname,
@@ -355,7 +371,7 @@ const CompleteInfo = () => {
                   onChange={(event) => {ChangeGender(event)
                                         setGenderOption(event.target.value)}}
                 >
-                  <option className="input" disabled hidden>
+                  <option className="input" value="gender" disabled hidden>
                     جنسیت
                   </option>
                   <option
@@ -424,6 +440,7 @@ const CompleteInfo = () => {
                  placeholder="تاریخ تولد"
                  usePersianNumber={true}
                  onSelect={(event) => {setDateOfBirth(event.target.value)}}
+                 onChange={(event) => {setDateOfBirth(event.target.value)}}
                  format="YYYY-MM-DD"
                  id="datePicker"
                  style={{
