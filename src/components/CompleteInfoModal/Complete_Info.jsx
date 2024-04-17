@@ -140,26 +140,26 @@ const CompleteInfo = () => {
 
     // firstname field validations
     if (firstname.length === 0) {
-      errors.FirstNameLengthError = "!وارد کردن نام الزامی است";
-      errorMessages.push(errors.FirstNameLengthError);
+      errors.FirstNameError = "!وارد کردن نام الزامی است";
+      errorMessages.push(errors.FirstNameError);
     } else if (!isPersianString(firstname)) {
-      errors.FirstNameLengthError = "!نام باید فقط شامل حروف فارسی باشد";
-      errorMessages.push(errors.FirstNameLengthError);
+      errors.FirstNameError = "!نام باید فقط شامل حروف فارسی باشد";
+      errorMessages.push(errors.FirstNameError);
     } else if (firstname.length > 20) {
-      errors.FirstNameLengthError = "!نام طولانی است";
-      errorMessages.push(errors.FirstNameLengthError);
+      errors.FirstNameError = "!نام طولانی است";
+      errorMessages.push(errors.FirstNameError);
     }
 
     // lastname field validations
     if (lastname.length === 0) {
-      errors.LastNameLengthError = "!وارد کردن نام خانوادگی الزامی است";
-      errorMessages.push(errors.LastNameLengthError);
+      errors.LastNameError = "!وارد کردن نام خانوادگی الزامی است";
+      errorMessages.push(errors.LastNameError);
     } else if (!isPersianString(lastname)) {
-      errors.LastNameLengthError = "!نام خانوادگی باید فقط شامل حروف فارسی باشد";
-      errorMessages.push(errors.LastNameLengthError);
+      errors.LastNameError = "!نام خانوادگی باید فقط شامل حروف فارسی باشد";
+      errorMessages.push(errors.LastNameError);
     } else if (lastname.length > 30) {
-      errors.LastNameLengthError = "!نام خانوادگی طولانی است";
-      errorMessages.push(errors.LastNameLengthError);
+      errors.LastNameError = "!نام خانوادگی طولانی است";
+      errorMessages.push(errors.LastNameError);
     }
 
     // phonenumebr field validations
