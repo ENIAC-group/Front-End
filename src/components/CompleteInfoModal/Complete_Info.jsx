@@ -25,7 +25,10 @@ const CompleteInfo = () => {
   const [show, setShow] = useState(false);
   // const navigate = useNavigate();
 
-  const handleClose = () => setShow(false);
+  const handleClose = (event) => {
+    event.preventDefault();
+    setShow(false);
+  }
   const handleShow = () => setShow(true);
 
   
@@ -41,6 +44,11 @@ const CompleteInfo = () => {
       setGender("");
     }
   };
+
+  useEffect(() => {
+    GetUserInfo();
+  }, []);
+
 
   useEffect(() => {
     console.log(gender);
@@ -65,14 +73,16 @@ const CompleteInfo = () => {
       );
 
       if (response.status === 200) {
-        // console.log(response.data)
-        setFirstname(response.data.user.firstname);
-        setLastname(response.data.user.lastname);
-        setPhonenumber(response.data.user.phone_number);
-        if (response.data.user.gender === "M") {
+        console.log(response.data)
+        const userData = response.data.user;
+        console.log(userData.firstname, userData.lastname, userData.phone_number, userData.gender); // Log user data
+        setFirstname(userData.firstname);
+        setLastname(userData.lastname);
+        setPhonenumber(userData.phone_number);
+        if (userData.gender === "M") {
           setGender("M");
           setGenderOption("male");
-        } else if (response.data.user.gender === "F"){
+        } else if (userData.gender === "F"){
           setGender("F");
           setGenderOption("female");
         } else {
@@ -80,41 +90,46 @@ const CompleteInfo = () => {
           setGenderOption("other");
         }
         setDateOfBirth(response.data.user.date_of_birth);
-        if (
-          firstname.length === 0 ||
-          lastname.length  === 0 ||
-          phonenumber.length === 0 ||
-          gender === "" ||
-          dateOfBirth === ""
-        ) {
-            setShow(true);
-        } else {
-          toast.warn('!شما قبلا اطلاعات خود را ثبت کرده اید', {
-            position: "bottom-left",
-            autoClose: 3000,
-            hideProgressBar: false,
-            closeOnClick: true,
-            pauseOnHover: true,
-            draggable: true,
-            progress: undefined,
-          });
-          setShow(true);
-          // Swal.fire({
-          //   icon: "warning",
-          //   title: "!شما قبلا اطلاعات خود را ثبت کرده اید",
-          //   background: "#473a67",
-          //   color: "#b4b3b3",
-          //   width: "26rem",
-          //   height: "18rem",
-          //   confirmButtonText: "تایید",
-          //   customClass: {
-          //     container: 'custom-swal-container'
-          //   }
-          // });
-        }
       }
     } catch (error) {
       console.log("something went wrong");
+    }
+  }
+
+  const CheckInfo = () => {
+    if (
+      firstname.length === 0 ||
+      lastname.length  === 0 ||
+      phonenumber.length === 0 ||
+      genderOption === "" ||
+      dateOfBirth === ""
+    ) {
+      console.log("has empty");
+      setShow(true);
+      console.log(firstname, lastname, phonenumber, genderOption, dateOfBirth);
+    } else {
+      toast.warn('!شما قبلا اطلاعات خود را ثبت کرده اید', {
+        position: "bottom-left",
+        autoClose: 3000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+      });
+      setShow(true);
+      // Swal.fire({
+      //   icon: "warning",
+      //   title: "!شما قبلا اطلاعات خود را ثبت کرده اید",
+      //   background: "#473a67",
+      //   color: "#b4b3b3",
+      //   width: "26rem",
+      //   height: "18rem",
+      //   confirmButtonText: "تایید",
+      //   customClass: {
+      //     container: 'custom-swal-container'
+      //   }
+      // });
     }
   }
 
@@ -213,11 +228,11 @@ const CompleteInfo = () => {
             progress: undefined,
           });
           setShow(false);
-          setFirstname("");
-          setLastname("");
-          setGender("");
-          setPhonenumber("");
-          setDateOfBirth("");
+          // setFirstname("");
+          // setLastname("");
+          // setGender("");
+          // setPhonenumber("");
+          // setDateOfBirth("");
         } else {
           Swal.fire({
             icon: "error",
@@ -265,7 +280,7 @@ const CompleteInfo = () => {
 
   return (
     <>
-      <Button variant="primary" onClick={GetUserInfo} className="button-20">
+      <Button variant="primary" onClick={CheckInfo} className="button-20">
         تکمیل اطلاعات
       </Button>
 
