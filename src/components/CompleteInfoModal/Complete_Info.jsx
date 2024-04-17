@@ -321,6 +321,7 @@ const CompleteInfo = () => {
                   onChange={handleDateChange}
                 /> */}
                 <div
+                className="field-date"
                 style={{
                   border: "none",
                   height: "40px",
@@ -329,7 +330,8 @@ const CompleteInfo = () => {
                   fonySize: "15px",
                   marginBottom: "10px"
                 }}>
-                 <JBDateInput placeholder="تاریخ تولد"
+                 <JBDateInput 
+                 placeholder="تاریخ تولد"
                  usePersianNumber={true}
                  onSelect={(event) => {setDateOfBirth(event.target.value)}}
                  format="YYYY-MM-DD"
@@ -338,7 +340,7 @@ const CompleteInfo = () => {
                   border:"none !important",
                   backgroundColor: "white"
                  }}
-                 className="jb-date-input-web-component input-box"
+                 className="jb-date-input-web-component .calendar-container"
                  calendarClassName="custom-calendar"
                  >
                 </JBDateInput>

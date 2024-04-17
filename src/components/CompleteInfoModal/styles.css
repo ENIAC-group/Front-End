@@ -211,40 +211,6 @@
 }
 
 
-.custom-calendar {
-  position: absolute;
-  top: -100%; /* Adjust this value to position the calendar correctly */
-  left: 0;
-  z-index: 9999; /* Adjust the z-index as needed */
-}
-
-.jb-date-input-web-component .input-box input {
-  font-size: 15px;
-}
-#datePicker {
-  overflow: auto;
-  text-align: right;
-  width: 145%;
-  border-color: none;
-  z-index: 2000;
-  /* margin-top: 39px; */
-  border: none;
-  height: 100%;
-  direction: rtl;
-  outline: none;
-  padding-left: 15px;
-  border: none;
-  /* border-bottom: 2px solid #adadad; */
-  font-size: 18px;
-  /* transition: border-color 0.3s ease; */
-  color: gray;
-  caret-color: rgb(152, 103, 175);
-  font-family: Vazir, Arial, sans-serif;
-  border: none !important;
-  border-bottom: none !important;
-}
-
-
 .form_details_modal form .field_modal_date {
   display: flex;
   align-items: center;
@@ -256,12 +222,78 @@
   transition: border-color 0.3s ease;
   border-bottom: "2px solid #adadad",
 }
-.form_details_modal form .field_modal_date:hover {
+.field_modal_date:hover {
   border-bottom-color: #cdbdf3;
 }
 
 .form_details_modal form .field_modal_date:focus {
   border-bottom-color: #b396f6;
+}
+
+.field-date{
+  margin-right: 10px;
+  height: 35px;
+  width: 400px;
+  position: relative;
+  font-size: 17px;
+  color: rgb(222, 218, 218);
+  --jb-date-input-border: none !important;
+  --jb-date-input-border-radius:none;
+  --jb-date-input-border-color: white;
+  --jb-date-input-border-size: 2px;
+  --jb-date-input-border-color-focus:white;
+  --jb-date-input-bgcolor:#fff;
+  --jb-date-input-border-bottom-width:1px;
+  --jb-date-input-label-font-size  :12px;
+  --jb-date-input-value-color:rgb(117, 117, 117);
+  --jb-date-input-value-font-size:18px;
+  --jb-date-input-placeholder-font-size:18px;
+  --jb-date-input-calender-wrapper-bg-color:#ACBCFF;
+  --jb-date-input-calender-wrapper-border-radius:0;
+  --jb-calendar-arrow-button-border-radius:5px;
+  --jb-date-input-calendar-wrapper-z-index: 9999999;
+  --jb-date-input-web-component-calendar-container---show-transform: translateY(-600px);
+}
+
+.custom-calendar {
+  top: calc(100% + 10px); /* Position the calendar wrapper below the input field */
+  left: 0; /* Align the calendar wrapper with the left edge of the input field */
+  width: 100%; /* Ensure the calendar wrapper spans the full width of the modal */
+  max-height: calc(100vh - 200px); /* Limit the maximum height of the calendar wrapper to fit within the modal */
+  overflow-y: auto; /* Enable vertical scrolling if the calendar exceeds the maximum height */
+}
+
+.field-date .jb-date-input-web-component .calendar-container .--show{
+  transform: translateY(-100px); /* Adjust the translateY value as needed */
+}
+
+.jb-date-input-web-component .calendar-container {
+  will-change: transform;
+  transition: transform 0.5s 0s ease;
+  position: fixed !important;
+  top:100px;
+  right: 200px;
+}
+
+.jb-date-input-web-component .calendar-container.--show {
+  transform: translateY(-200px);
+}
+
+.custom-calendar {
+  top: -300px; /* Adjust this value as needed */
+  position: absolute;
+}
+
+.calendar-container --show {
+  transform: translateY(-200px);
+}
+
+.field-date::placeholder {
+  color: rgb(222, 218, 218); /* Change the color of the placeholder text */
+}
+
+.field-date:hover {
+  color: #b396f6;
 }
 /* 
 .form_details_modal form .field_modal_date::placeholder {
