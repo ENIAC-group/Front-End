@@ -34,7 +34,7 @@ const NavBar_SideBar = () => {
               <div className={styles.profile_menu}>
                 <ul className={styles.prof_list}>
                   <li>
-                    <label onClick={(e) => navigate("/Profile")}>پروفایل</label>
+                    <label onClick={(e) => navigate("/User_Panel")}>پروفایل</label>
                   </li>
                   <li>
                     <label>خروج از حساب کاربری</label>
