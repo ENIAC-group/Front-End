@@ -19,7 +19,6 @@ const NavBar_SideBar = () => {
   const [sideBarToggle, setsideBarToggle] = useState(false);
   const handsidebarToggle = () => {
     setsideBarToggle(!sideBarToggle);
-    console.log("gfhj");
   };
   return (
     <>
@@ -34,19 +33,24 @@ const NavBar_SideBar = () => {
               <div className={styles.profile_menu}>
                 <ul className={styles.prof_list}>
                   <li>
-                    <label onClick={(e) => navigate("/User_Panel")}>پروفایل</label>
+                    <label onClick={(e) => navigate("/User_Panel")}>
+                      پروفایل
+                    </label>
                   </li>
-                  <li>
-                    <label>خروج از حساب کاربری</label>
-                  </li>
+                  {localStorage.getItem("accessToken") != null ? (
+                    <li>
+                      <label onClick={(e)=>{navigate("/Home");}}>خروج از حساب کاربری</label>
+                    </li>
+                  ) : (
+                    <li>
+                      <label onClick={(e)=>navigate("/signup")}>ورود به حساب کاربری</label>
+                    </li>
+                  )}
                 </ul>
               </div>
             </div>
           </div>
-          <div className={styles.con} onClick={(e) => navigate("/Aboutus")}>
-            <GrContactInfo className={styles.FB} />
-          </div>
-          <a className={styles.con} onClick={(e) => navigate("/Home")}>
+          <a className={styles.con} onClick={(e) => navigate("/Doctors")}>
             <FaUserDoctor className={styles.FB} />
           </a>
           <a className={styles.con}>
