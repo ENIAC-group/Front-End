@@ -5,6 +5,9 @@ import { FaUserDoctor } from "react-icons/fa6";
 import { GrContactInfo } from "react-icons/gr";
 import { FaBars, FaBell, FaUserCircle } from "react-icons/fa";
 import styles from "./NavBar.module.css";
+import axios from "axios";
+import Swal from "sweetalert2";
+import withReactContent from "sweetalert2-react-content";
 
 import {
   FaCog,
@@ -20,6 +23,54 @@ const NavBar_SideBar = () => {
   const handsidebarToggle = () => {
     setsideBarToggle(!sideBarToggle);
   };
+
+  async function LogOut(event) {
+    event.preventDefault();
+    const accessToken = localStorage.getItem("accessToken");
+    try {
+      const response = await axios("http://127.0.0.1:8000/accounts/Logout/", {
+        method: "GET",
+        headers: {
+          Authorization: `Bearer ${accessToken}`, // Bearer <access token >
+          "Content-Type": "application/json",
+        },
+      });
+      if (response.status === 200) {
+        localStorage.removeItem("accessToken");
+        console.log(response);
+        const data = response.data;
+        console.log(data);
+        withReactContent(Swal).fire({
+          icon: "success",
+          title: "!خروج از حساب با موفقیت رخ داد",
+          background: "#473a67",
+          color: "#b4b3b3",
+          width: "35rem",
+          backdrop: `
+          rgba(84, 75, 87.0.9)
+          left top
+          no-repeat`,
+          confirmButtonText: "تایید",
+        });
+      }
+    } catch (error) {
+      console.log(error);
+      if (error.response.status === 403) {
+        withReactContent(Swal).fire({
+          icon: "error",
+          title: "!",
+          background: "#473a67",
+          color: "#b4b3b3",
+          width: "35rem",
+          backdrop: `
+          rgba(84, 75, 87.0.9)
+          left top
+          no-repeat`,
+          confirmButtonText: "تایید",
+        });
+      }
+    }
+  }
   return (
     <>
       <div
@@ -39,11 +90,20 @@ const NavBar_SideBar = () => {
                   </li>
                   {localStorage.getItem("accessToken") != null ? (
                     <li>
-                      <label onClick={(e)=>{navigate("/Home");}}>خروج از حساب کاربری</label>
+                      <label
+                        onClick={(e) => {
+                          LogOut(e);
+                          navigate("/Signup");
+                        }}
+                      >
+                        خروج از حساب کاربری
+                      </label>
                     </li>
                   ) : (
                     <li>
-                      <label onClick={(e)=>navigate("/signup")}>ورود به حساب کاربری</label>
+                      <label onClick={(e) => navigate("/signup")}>
+                        ورود به حساب کاربری
+                      </label>
                     </li>
                   )}
                 </ul>
@@ -85,23 +145,25 @@ const NavBar_SideBar = () => {
               </label>
             </li>
             {localStorage.getItem("accessToken") != null ? (
-                    <li
-                    className={styles1.side_list_element}
-                    onClick={(e) => {
-                      handsidebarToggle();
-                      navigate("/User_panel");
-                    }}
-                  >
-                    <label href="" className={styles1.side_list_element_text}>
-                      <FaUserCircle className={styles1.side_icons} /> پروفایل
-                    </label>
-                  </li>
-                  ) : <></>}
+              <li
+                className={styles1.side_list_element}
+                onClick={(e) => {
+                  handsidebarToggle();
+                  navigate("/User_panel");
+                }}
+              >
+                <label href="" className={styles1.side_list_element_text}>
+                  <FaUserCircle className={styles1.side_icons} /> پروفایل
+                </label>
+              </li>
+            ) : (
+              <></>
+            )}
             <li
               className={styles1.side_list_element}
               onClick={(e) => {
                 handsidebarToggle();
-                navigate("/Tests");
+                navigate("/TestPage");
               }}
             >
               <label href="" className={styles1.side_list_element_text}>

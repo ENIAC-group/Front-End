@@ -229,7 +229,7 @@ function ChangePassword({ p_pages }) {
                   height: "30px",
                 }}
               />
-              <span style={{width:'160px'}}>تکرار رمز عبور جدید :</span>
+              <span style={{width:'165px'}}>تکرار رمز عبور جدید :</span>
               <input
                 type={repeatPasswordType}
                 id="n_repeat_password"

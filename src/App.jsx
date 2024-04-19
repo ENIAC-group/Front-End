@@ -4,11 +4,12 @@ import Landing from "./components/LandingPage/LandingPage.jsx";
 import AboutUS from "./components/aboutus/aboutus.jsx";
 import Verification from "./components/Verification/verification.jsx";
 import ForgetPassword from "./components/ForgetPassword/ForgetPassword.jsx";
-import  User_Panel from './components/User_Panel/User_Panel.jsx';
-import Home from './components/Home/Home.jsx';
+import User_Panel from "./components/User_Panel/User_Panel.jsx";
+import Home from "./components/Home/Home.jsx";
 import * as Router from "react-router-dom";
 import "bootstrap/dist/css/bootstrap.min.css";
 import DoctorList from "./components/DoctorsList/DoctorsList.jsx";
+import CourseList from "./components/TestPage/TestPage.jsx";
 
 function App() {
   return (

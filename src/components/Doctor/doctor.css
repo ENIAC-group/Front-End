@@ -1,7 +1,3 @@
-:root {
-    font-family: Ios15Medium;
-}
-
 /*** Spinner Start ***/
 
 #spinner {
@@ -9,20 +5,13 @@
     visibility: hidden;
     transition: opacity .8s ease-out, visibility 0s linear .5s;
     z-index: 99999;
-}
+ }
 
-#spinner.show {
-    transition: opacity .8s ease-out, visibility 0s linear .0s;
-    visibility: visible;
-    opacity: 1;
-}
-
-
-.Doctor_List_title{
-    font-family: Ios15Medium;
-    color:gray;
-}
-
+ #spinner.show {
+     transition: opacity .8s ease-out, visibility 0s linear .0s;
+     visibility: visible;
+     opacity: 1;
+ }
 
 /*** Spinner End ***/
 
@@ -31,8 +20,6 @@
 .btn {
     font-weight: 600;
     transition: .5s;
-    background-color: #ACBCFF;
-    font-family: Ios15Medium;
 }
 
 .btn-square {
@@ -107,13 +94,8 @@
 }
 
 @keyframes mymove {
-    from {
-        left: -100%;
-    }
-
-    to {
-        left: 100%;
-    }
+    from {left: -100%;}
+    to {left: 100%;}
 }
 
 /*** Topbar End ***/
@@ -129,7 +111,7 @@
     color: var(--bs-white);
     font-size: 18px;
     outline: none;
-
+    
 }
 
 .navbar .navbar-nav .nav-link:hover,
@@ -281,7 +263,7 @@
     .carousel-item {
         min-height: 500px;
     }
-
+    
     .carousel-item img {
         min-height: 500px;
         object-fit: cover;
@@ -300,7 +282,7 @@
     .carousel-item {
         min-height: 400px;
     }
-
+    
     .carousel-item img {
         min-height: 400px;
         object-fit: cover;
@@ -342,11 +324,7 @@
     border-radius: 10px;
     padding: 10px 0;
     position: relative;
-    background: light;
-
 }
-
-
 
 
 .services-content::after {
@@ -357,25 +335,20 @@
     top: 0;
     left: 0;
     border-radius: 10px 10px 0 0;
+    background: rgba(3, 43, 243, 0.8);
     transition: .5s;
-    text-align: center;
-    background-color: #ACBCFF;
 }
 
 .services-content::after {
     top: 0;
     bottom: auto;
     border-radius: 10px 10px 10px 10px;
-    text-align: center;
-    background-color: #ACBCFF;
 }
 
 .services-item:hover .services-content::after {
     height: 100%;
     opacity: 1;
     transition: .5s;
-    text-align: center;
-    background-color: #ACBCFF;
 }
 
 .services-item:hover .services-content-icon {
@@ -395,13 +368,14 @@
 .services-item:hover .services-content-icon p {
     color: var(--bs-white);
 }
-
-
-.services-item {
-    animation: fadeInColorChange 1s forwards;
+.z-4
+{
+    z-index: 100;
 }
-
-
+.relativ
+{
+    position: relative;
+}
 /*** Services End ***/
 
 
@@ -410,8 +384,13 @@
 .project-img {
     position: relative;
     padding: 15px;
+
 }
 
+.doctor_h1{
+    font-family: Ios15Medium;
+    color: gray;
+}
 .project-img::before {
     content: "";
     position: absolute;
@@ -420,9 +399,10 @@
     top: 0;
     left: 0;
     background: var(--bs-secondary);
+    background-color: #B799FF;
     border-radius: 10px;
     opacity: 1;
-    z-index: -1;
+    z-index: 1;
     transition: .5s;
 }
 
@@ -432,30 +412,36 @@
     height: 150px;
     position: absolute;
     right: 0;
-    bottom: 0;
+    bottom: 100px;
     background: var(--bs-primary);
+    background-color: #ACBCFF;
     border-radius: 10px;
     opacity: 1;
-    z-index: -1;
+    z-index: 1;
     transition: .5s;
 }
 
 .project-content {
-    position: absolute;
+    position:relative;
     width: 100%;
     height: 100%;
-    top: 0;
+    top: -10px;
     left: 0;
     display: flex;
     align-items: center;
     justify-content: center;
     opacity: 0;
+    z-index: 6;
 }
 
 .project-content a {
+    position: relative;
     display: inline-block;
+    text-decoration: none;
+    color:#26d48c;
     padding: 20px 25px;
     background: var(--bs-primary);
+    background-color: #a48dda;
     border-radius: 10px;
 }
 
@@ -488,7 +474,7 @@
     position: absolute;
     top: 6px;
     left: -140px;
-
+    
 }
 
 .blog-btn-icon:hover .blog-icon-2 {
@@ -497,12 +483,10 @@
     top: 6px;
     padding-bottom: 5px;
 }
-
 .blog-icon-1 {
     position: relative;
     top: -4px;
 }
-
 .blog-btn-icon:hover .blog-icon-1 {
     top: 0;
     right: -140px;
@@ -515,7 +499,7 @@
 /*** Team Start ***/
 
 .team-item {
-    border-top: 30px solid #B799FF !important;
+    border-top: 30px solid var(--bs-secondary) !important;
     background: rgba(239, 239, 241, 0.8);
 }
 
@@ -525,7 +509,7 @@
     content: "";
     position: relative;
     top: -101px;
-    background: #B799FF;
+    background: var(--bs-secondary);
     clip-path: polygon(50% 50%, 100% 50%, 50% 100%, 0% 50%);
     padding: 60px;
     opacity: 1;
@@ -543,7 +527,7 @@
 }
 
 .team-img img {
-    border: 10px solid #B799FF;
+    border: 10px solid var(--bs-secondary);
     transition: .5s;
 }
 
@@ -662,7 +646,7 @@
     width: 100%;
     top: 0;
     left: 0;
-    background: linear-gradient(rgb(69, 95, 89), rgba(230, 250, 245, .3)), url(../img/background.jpg) center center no-repeat;
+    background: linear-gradient(rgb(210, 243, 235, 1), rgba(230, 250, 245, .3)), url(../img/background.jpg) center center no-repeat;
     background-size: cover;
     border-radius: 10px;
     z-index: -1;
@@ -699,36 +683,3 @@
 }
 
 /*** Footer End ***/
-
-
-.TestHeader {
-    text-align: center;
-    font-size: 4rem;
-    color: rgb(143, 142, 142);
-    font-family: Ios15Medium;
-}
-
-.TestName {
-    margin-bottom: 0.75rem;
-    font-size: 2.75rem;
-    font-family: Ios15Medium;
-}
-
-.distanceBetween {
-    display: flex;
-    flex-direction: row;
-    gap: 2rem;
-    justify-content: center;
-    flex-wrap: wrap;
-}
-
-@media (max-width: 800px) {
-    .distanceBetween {
-        flex-direction: column;
-    }
-}
-
-.buttonReserve {
-    display: flex;
-    flex-direction: column-reverse;
-}

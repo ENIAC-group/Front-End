@@ -11,6 +11,8 @@ import { ToastContainer } from 'react-toastify';
 
 const DoctorProfile = ({ key, name, Description, Image, ProfileType, IsPrivate, Psychiatrist }) => {
     {
+        console.log(Image);
+        
         const navigate = useNavigate();
         async function GetUserInfo(event) {
             event.preventDefault();
@@ -213,14 +215,14 @@ const DoctorProfile = ({ key, name, Description, Image, ProfileType, IsPrivate, 
                         no-repeat`})
         } else {
             return (
-                <div className="rounded team-item">
+                <div className="rounded team-item" style={{ fontFamily:'Ios15Medium' }}>
                     <div className="team-content">
                         <div className="team-img-icon">
                             <div className="team-img rounded-circle">
-                                <img src="Image" className="img-fluid w-100 rounded-circle" alt={`${name}'s Image`} />
+                                <img src={Image} className="img-fluid w-100 rounded-circle" alt={`${name}'s Image`} />
                             </div>
                             <div className="team-name text-center py-3">
-                                <h4 className="">{name}</h4>
+                                <h4 className="" style={{ color:'gray' }}>{name}</h4>
                                 <p className="m-0">{ProfileType}</p>
                                 <p className="m-0">{Description}</p>
                             </div>
