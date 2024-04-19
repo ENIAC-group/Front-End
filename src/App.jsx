@@ -7,6 +7,8 @@ import ForgetPassword from "./components/ForgetPassword/ForgetPassword.jsx";
 import  User_Panel from './components/User_Panel/User_Panel.jsx';
 import Home from './components/Home/Home.jsx';
 import * as Router from "react-router-dom";
+import "bootstrap/dist/css/bootstrap.min.css";
+import DoctorList from "./components/DoctorsList/DoctorsList.jsx";
 
 function App() {
   return (
@@ -34,6 +36,12 @@ function App() {
           {" "}
         </Router.Route>
         <Router.Route path="/ForgetPassword" element={<ForgetPassword />}>
+          {" "}
+        </Router.Route>
+        <Router.Route path="/TestPage" element={<CourseList />}>
+          {" "}
+        </Router.Route>
+        <Router.Route path="/Doctors" element={<DoctorList />}>
           {" "}
         </Router.Route>
       </Router.Routes>
