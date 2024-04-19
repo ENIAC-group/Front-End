@@ -334,8 +334,6 @@
 }
 
 
-
-
 .services-content::after {
     position: absolute;
     content: "";
@@ -346,7 +344,7 @@
     border-radius: 10px 10px 0 0;
     transition: .5s;
     text-align: center;
-    background-color: #ACBCFF;
+    background-color: #AEE2FF;
 }
 
 .services-content::after {
@@ -354,7 +352,7 @@
     bottom: auto;
     border-radius: 10px 10px 10px 10px;
     text-align: center;
-    background-color:#ACBCFF;
+    background-color:#AEE2FF;
 }
 
 .services-item:hover .services-content::after {
@@ -362,7 +360,7 @@
     opacity: 1;
     transition: .5s;
     text-align: center;
-    background-color: #ACBCFF;
+    background-color: #AEE2FF;
 }
 
 .services-item:hover .services-content-icon {
@@ -376,17 +374,12 @@
 }
 
 .services-item:hover .services-content-icon i {
-    color: #ACBCFF !important;
+    color: var(--bs-secondary) !important;
 }
 
 .services-item:hover .services-content-icon p {
     color: var(--bs-white);
 }
-
-  
-  .services-item {
-    animation: fadeInColorChange 1s forwards;
-  }
 
 /*** Services End ***/
 
@@ -687,8 +680,7 @@
 
 .TestHeader {
     text-align: center;
-    font-size: 4rem;
-    color: rgb(143, 142, 142);
+    font-size: 8rem;
     font-family: Ios15Medium;
 }
 

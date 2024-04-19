@@ -10,12 +10,13 @@
   box-sizing: border-box;
 }
 .pt_bd{
-  display: flex;
-  position: relative;
+  display: grid;
   height:100%;
   width:100%;
-  justify-content: center;
-  background-image: linear-gradient(62deg , #B799FF 0%, #AEE2FF 100%);
+  place-items: center;
+  /*background-image: linear-gradient(62deg , #e68efc 0%, #E0C3FC 100%);*/
+  /* background-image: linear-gradient(62deg , #B799FF 0%, #E0C3FC 100%); */
+/* background-image: linear-gradient(62deg , #B799FF 0%, #AEE2FF 100%); */
 } 
 
 
