@@ -4,6 +4,8 @@ import { useNavigate } from "react-router-dom";
 import key_icon from "../../assets/key.png";
 import { useLocation } from "react-router-dom";
 import axios from "axios";
+import Swal from "sweetalert2";
+import withReactContent from "sweetalert2-react-content";
 import "./verification.css";
 
 const Verification = () => {
@@ -83,6 +85,14 @@ const Verification = () => {
         const data = response.data;
         if (response.status === 200 || response.status === 201) {
           console.log("you can login now");
+          withReactContent(Swal).fire({
+            icon: "success",
+            title: "!ثبت نام با موفقیت انجام شد",
+            background: "#473a67",
+            color: "#b4b3b3",
+            width: "35rem",
+            confirmButtonText: "تایید",
+          });
           navigate("/Signup");
         }
       } catch (error) {

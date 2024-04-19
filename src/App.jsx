@@ -4,17 +4,20 @@ import Landing from "./components/LandingPage/LandingPage.jsx";
 import AboutUS from "./components/aboutus/aboutus.jsx";
 import Verification from "./components/Verification/verification.jsx";
 import ForgetPassword from "./components/ForgetPassword/ForgetPassword.jsx";
-import NavBar_SideBar from './components/SidebarNabar/NavBar_SideBar.jsx';
-import Home from './components/Home/Home.jsx';
+import User_Panel from "./components/User_Panel/User_Panel.jsx";
+import Home from "./components/Home/Home.jsx";
+import CourseList from "./components/TestPage/TestPage.jsx";
 import * as Router from "react-router-dom";
-import 'bootstrap/dist/css/bootstrap.min.css';
+import "bootstrap/dist/css/bootstrap.min.css";
 
 function App() {
   return (
     <Router.BrowserRouter>
-    <NavBar_SideBar/>
       <Router.Routes>
         <Router.Route path="/" element={<Landing />}>
+          {" "}
+        </Router.Route>
+        <Router.Route path="/User_Panel" element={<User_Panel />}>
           {" "}
         </Router.Route>
         <Router.Route path="/Home" element={<Home />}>
@@ -33,6 +36,9 @@ function App() {
           {" "}
         </Router.Route>
         <Router.Route path="/ForgetPassword" element={<ForgetPassword />}>
+          {" "}
+        </Router.Route>
+        <Router.Route path="/TestPage" element={<CourseList />}>
           {" "}
         </Router.Route>
       </Router.Routes>

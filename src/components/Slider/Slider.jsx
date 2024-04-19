@@ -20,7 +20,7 @@ const Slider = () => {
   useEffect(() => {
     setTimeout(() => {
       setCurrentUser(currentIndex == 3 ? 0 : currentIndex + 1);
-    }, 8000);
+    }, 5000);
   });
   return (
     <>

@@ -2,6 +2,7 @@ import React from "react";
 import styles from "./LandingPage.module.css";
 import { useNavigate } from "react-router-dom";
 import image from "../../assets/Landing.png";
+import NavBar_SideBar from "../SidebarNabar/NavBar_SideBar";
 
 const Landing = () => {
   const navigate = useNavigate()
@@ -11,6 +12,7 @@ const Landing = () => {
         <h1 className={styles.BrandName}>ENIAC</h1>
         <button className={styles.StartButton} onClick={e=>navigate("/AboutUs")}>درباره ما</button>
       </header> */}
+      <NavBar_SideBar/>
       <div className={styles.Landingbody}>
         <p className={styles.Desc}>
           وسیله ای برای همراهی و پیشروی در سلامت روحی افراد
