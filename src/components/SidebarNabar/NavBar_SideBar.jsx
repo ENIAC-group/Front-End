@@ -19,7 +19,6 @@ const NavBar_SideBar = () => {
   const [sideBarToggle, setsideBarToggle] = useState(false);
   const handsidebarToggle = () => {
     setsideBarToggle(!sideBarToggle);
-    console.log("gfhj");
   };
   return (
     <>
@@ -34,19 +33,24 @@ const NavBar_SideBar = () => {
               <div className={styles.profile_menu}>
                 <ul className={styles.prof_list}>
                   <li>
-                    <label onClick={(e) => navigate("/Profile")}>پروفایل</label>
+                    <label onClick={(e) => navigate("/User_Panel")}>
+                      پروفایل
+                    </label>
                   </li>
-                  <li>
-                    <label>خروج از حساب کاربری</label>
-                  </li>
+                  {localStorage.getItem("accessToken") != null ? (
+                    <li>
+                      <label onClick={(e)=>{navigate("/Home");}}>خروج از حساب کاربری</label>
+                    </li>
+                  ) : (
+                    <li>
+                      <label onClick={(e)=>navigate("/signup")}>ورود به حساب کاربری</label>
+                    </li>
+                  )}
                 </ul>
               </div>
             </div>
           </div>
-          <div className={styles.con} onClick={(e) => navigate("/Aboutus")}>
-            <GrContactInfo className={styles.FB} />
-          </div>
-          <a className={styles.con} onClick={(e) => navigate("/Home")}>
+          <a className={styles.con} onClick={(e) => navigate("/Doctors")}>
             <FaUserDoctor className={styles.FB} />
           </a>
           <a className={styles.con}>
@@ -68,62 +72,72 @@ const NavBar_SideBar = () => {
             <h1 className={styles1.side_title}>داشبورد</h1>
           </div>
           <hr style={{ borderBlockColor: "white" }}></hr>
-          <ul className={styles1.side_list} >
+          <ul className={styles1.side_list}>
             <li
               className={styles1.side_list_element}
-              onClick={(e)=>{
+              onClick={(e) => {
                 handsidebarToggle();
-                navigate("/Hme");
+                navigate("/Home");
               }}
-              
             >
               <label href="" className={styles1.side_list_element_text}>
                 <FaHome className={styles1.side_icons} /> خانه
               </label>
             </li>
-            <li className={styles1.side_list_element} 
-                onClick={(e)=>{
+            {localStorage.getItem("accessToken") != null ? (
+                    <li
+                    className={styles1.side_list_element}
+                    onClick={(e) => {
+                      handsidebarToggle();
+                      navigate("/User_panel");
+                    }}
+                  >
+                    <label href="" className={styles1.side_list_element_text}>
+                      <FaUserCircle className={styles1.side_icons} /> پروفایل
+                    </label>
+                  </li>
+                  ) : <></>}
+            <li
+              className={styles1.side_list_element}
+              onClick={(e) => {
                 handsidebarToggle();
-                navigate("/Hme");
-              }}>
-              <label
-                href=""
-                className={styles1.side_list_element_text}
-              >
+                navigate("/Tests");
+              }}
+            >
+              <label href="" className={styles1.side_list_element_text}>
                 <FaRegFileAlt className={styles1.side_icons} /> تست ها
               </label>
             </li>
-            <li className={styles1.side_list_element} onClick={(e)=>{
+            <li
+              className={styles1.side_list_element}
+              onClick={(e) => {
                 handsidebarToggle();
-                navigate("/Test");
-              }}>
-              <label
-                href=""
-                className={styles1.side_list_element_text}
-              >
+                navigate("/Landing");
+              }}
+            >
+              <label href="" className={styles1.side_list_element_text}>
                 <FaServicestack className={styles1.side_icons} /> خدمات
               </label>
             </li>
-            <li className={styles1.side_list_element} onClick={(e)=>{
+            <li
+              className={styles1.side_list_element}
+              onClick={(e) => {
                 handsidebarToggle();
-                navigate("/--");
-              }}>
-              <label
-                href=""
-                className={styles1.side_list_element_text}
-              >
+                navigate("/Aboutus");
+              }}
+            >
+              <label href="" className={styles1.side_list_element_text}>
                 <FaRegStickyNote className={styles1.side_icons} /> معرفی
               </label>
             </li>
-            <li className={styles1.side_list_element} 
-                onClick={(e)=>{
+            <li
+              className={styles1.side_list_element}
+              onClick={(e) => {
                 handsidebarToggle();
                 navigate("/Setting");
-              }}>
-              <label
-                href=""
-                className={styles1.side_list_element_text}
-              >
+              }}
+            >
+              <label href="" className={styles1.side_list_element_text}>
                 <FaCog className={styles1.side_icons} /> تنظیمات
               </label>
             </li>

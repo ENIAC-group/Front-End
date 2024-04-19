@@ -96,14 +96,17 @@ body {
 
 .profile_menu {
     direction: rtl;
+    display: grid;
+    position: relative;
     text-align: center;
+    vertical-align:middle;
     width: 9rem;
-    background-color: white;
-    border-radius: 1rem;
+    background-color: rgb(235, 235, 235);
+    border-radius: 15px;
     box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
-    z-index: 50;
-    top: 100%;
-    left: 0px;
+    z-index: 10;
+    /* top: 100%; */
+    /* left: 8rem; */
 
 }
 
@@ -114,7 +117,8 @@ body {
 .prof_list {
     list-style-type: none;
     padding-top: 0.5rem;
-    padding-bottom: 0.75rem;
+    padding-left: 0px;
+    padding-right: 0px;
     font-size: 12px;
     color: #807f7f;
     font-family: Ios15Medium;
@@ -124,5 +128,6 @@ body {
 .prof_list li :hover {
     color: #351f67;
     font-size: 14px;
+    text-shadow: 1px 1px rgb(148, 148, 148);
 
 }

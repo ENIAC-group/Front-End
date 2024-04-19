@@ -556,7 +556,7 @@ const LoginContainer = () => {
                       </div>)}
                   <div className="signup_link">
                     {" "}
-                    <a href="#" onClick={(e) => navigate("/Landing")}>
+                    <a href="#" onClick={(e) => navigate("/Home")}>
                       {" "}
                       صفحه اصلی
                     </a>
@@ -633,7 +633,7 @@ const LoginContainer = () => {
                   </div>
                   <div className="signup_link">
                     {" "}
-                    <a href="#" onClick={(e) => navigate("/Landing")}>
+                    <a href="#" onClick={(e) => navigate("/Home")}>
                       {" "}
                       صفحه اصلی
                     </a>

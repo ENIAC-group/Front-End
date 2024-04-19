@@ -1,6 +1,4 @@
-:root.Landingbody {
-  background: #ffffff;
-}
+
 .header
 {
   width: 100%;
@@ -69,12 +67,15 @@
   position: absolute;
   right: 5%;
   margin-left: 5%;
-  margin-top: 2.75%;
   margin-bottom: 3%;
   box-shadow: 1px 1.5px 3px 1px rgb(0, 0, 0);
 }
 .Landingbody
 {
+  padding-top: 0%;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0px;
   align-items: center;
   justify-content: space-between;
   background-color: #ffffff;
@@ -84,6 +85,7 @@
 {
   position: absolute;
   bottom: 2.5%;
+  min-height: 80px;
   text-align: center;
   width: 100%;
   font-size: smaller;
@@ -126,10 +128,7 @@
 }
 .imageimagecover
 {
-  position: relative;
-  right: 3%;
-  left: 5%;
-  margin-top: 3%;
+  margin-left: 3.6%;
   width: 380px;
   height: 400px;
 }
