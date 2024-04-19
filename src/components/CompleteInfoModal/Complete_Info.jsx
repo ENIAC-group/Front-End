@@ -5,7 +5,7 @@ import { useNavigate } from "react-router-dom";
 import Swal from "sweetalert2";
 import axios from "axios";
 import {JBDateInput} from 'jb-date-input-react';
-import 'react-datepicker/dist/react-datepicker.css';
+// import 'react-datepicker/dist/react-datepicker.css';
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import { convertToPersianNumbers, convertToEnglishNumbers, isPersianString } from './Coverters_Checkers.js';
@@ -297,7 +297,7 @@ const CompleteInfo = () => {
   return (
     <>
       <Button variant="primary" onClick={CheckInfo} className="button-20">
-        تکمیل اطلاعات
+        رزرو نوبت
       </Button>
 
       <Modal backdrop="static" show={show} onHide={handleClose} className="bd_modal modal wrapper_modal" centered>
