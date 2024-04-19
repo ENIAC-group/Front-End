@@ -84,11 +84,24 @@ const NavBar_SideBar = () => {
                 <FaHome className={styles1.side_icons} /> خانه
               </label>
             </li>
+            {localStorage.getItem("accessToken") != null ? (
+                    <li
+                    className={styles1.side_list_element}
+                    onClick={(e) => {
+                      handsidebarToggle();
+                      navigate("/User_panel");
+                    }}
+                  >
+                    <label href="" className={styles1.side_list_element_text}>
+                      <FaUserCircle className={styles1.side_icons} /> پروفایل
+                    </label>
+                  </li>
+                  ) : <></>}
             <li
               className={styles1.side_list_element}
               onClick={(e) => {
                 handsidebarToggle();
-                navigate("/Home");
+                navigate("/Tests");
               }}
             >
               <label href="" className={styles1.side_list_element_text}>
@@ -99,7 +112,7 @@ const NavBar_SideBar = () => {
               className={styles1.side_list_element}
               onClick={(e) => {
                 handsidebarToggle();
-                navigate("/Test");
+                navigate("/Landing");
               }}
             >
               <label href="" className={styles1.side_list_element_text}>
@@ -110,7 +123,7 @@ const NavBar_SideBar = () => {
               className={styles1.side_list_element}
               onClick={(e) => {
                 handsidebarToggle();
-                navigate("/--");
+                navigate("/Aboutus");
               }}
             >
               <label href="" className={styles1.side_list_element_text}>
