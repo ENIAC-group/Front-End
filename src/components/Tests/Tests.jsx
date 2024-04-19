@@ -1,4 +1,6 @@
 import React from "react";
+import { useNavigate } from "react-router-dom";
+import { Link, Element } from "react-scroll";
 import "./Tests.css";
 
 const Tests = () => {
@@ -45,7 +47,7 @@ const Tests = () => {
                   <i className="fa fa-book fa-7x mb-4 text-primary"></i>
                   <h4 className="TestName">تست های تحصیلی</h4>
                   <a
-                    href=""
+                    href="http://localhost:5173/TestPage#testTitle"
                     className="btn btn-secondary text-white px-5 py-3 rounded-pill"
                   >
                     دیدن تست ها
@@ -64,7 +66,7 @@ const Tests = () => {
                   ></i>
                   <h4 className="TestName">تست های پیش از ازدواج</h4>
                   <a
-                    href=""
+                    href="http://localhost:5173/TestPage#testTitle2"
                     className="btn btn-secondary text-white px-5 py-3 rounded-pill"
                   >
                     دیدن تست ها
