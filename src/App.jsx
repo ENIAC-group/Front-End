@@ -9,6 +9,7 @@ import Home from './components/Home/Home.jsx';
 import * as Router from "react-router-dom";
 import "bootstrap/dist/css/bootstrap.min.css";
 import DoctorList from "./components/DoctorsList/DoctorsList.jsx";
+import CourseList from "./components/TestPage/TestPage.jsx";
 
 function App() {
   return (
