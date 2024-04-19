@@ -15,7 +15,7 @@ function App() {
   return (
     <Router.BrowserRouter>
       <Router.Routes>
-        <Router.Route path="/" element={<Landing />}>
+        <Router.Route path="/" element={<Home />}>
           {" "}
         </Router.Route>
         <Router.Route path="/User_Panel" element={<User_Panel />}>

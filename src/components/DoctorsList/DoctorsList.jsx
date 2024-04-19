@@ -167,6 +167,7 @@ const DoctorsList = () => {
           "http://127.0.0.1:8000/profile/doctors/"
         );
         setDoctorProfile(response.data);
+        // console.log(response.data);
       } catch (error) {
         console.error("Error fetching doctor profile:", error);
       }

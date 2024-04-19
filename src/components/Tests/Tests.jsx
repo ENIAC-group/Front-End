@@ -28,7 +28,7 @@ const Tests = () => {
                     className="fa fa-user fa-7x mb-4 text-primary"
                     style={{ color: "#ACBCFF" }}
                   ></i>
-                  <h4 className="TestName">تست های فردی</h4>
+                  <h5 className="TestName">تست های فردی</h5>
                   <a
                     href=""
                     className="btn btn-secondary text-white px-5 py-3 rounded-pill"
@@ -44,7 +44,7 @@ const Tests = () => {
               <div className="p-4 text-center services-content">
                 <div className="services-content-icon">
                   <i className="fa fa-book fa-7x mb-4 text-primary"></i>
-                  <h4 className="TestName">تست های تحصیلی</h4>
+                  <h5 className="TestName">تست های تحصیلی</h5>
                   <a
                     href="http://localhost:5173/TestPage#testTitle"
                     className="btn btn-secondary text-white px-5 py-3 rounded-pill"
@@ -63,7 +63,7 @@ const Tests = () => {
                     className="fa fa-venus-double fa-7x mb-4 text-primary"
                     style={{ color: "#ACBCFF" }}
                   ></i>
-                  <h4 className="TestName">تست های پیش از ازدواج</h4>
+                  <h5 className="TestName">تست های پیش از ازدواج</h5>
                   <a
                     href="http://localhost:5173/TestPage#testTitle2"
                     className="btn btn-secondary text-white px-5 py-3 rounded-pill"

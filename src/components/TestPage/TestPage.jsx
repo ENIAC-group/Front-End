@@ -74,7 +74,7 @@ const CourseList = () => {
                 <h6 className="text-white Test_font-secondary Test_mb-50">
                   برای شرکت در تست ها در اینیاک ثبت نام کنید
                 </h6>
-                <a href="contact.html" className="Test_btn Test_btn-secondary">
+                <a href="/Signup" className="Test_btn Test_btn-secondary">
                   ثبت نام
                 </a>
               </div>
