@@ -17,3 +17,34 @@
   transition: transform 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275);
   font-family: Vazir, Arial, sans-serif;
 }
+
+/* styles.css */
+
+.statistics-container {
+  background-color: white;
+}
+
+.statistics-row {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+
+.statistics-item {
+  flex: 1;
+  margin: 10px;
+}
+
+@media (max-width: 768px) {
+  .statistics-item {
+    flex-basis: 50%;
+  }
+}
+
+@media (max-width: 480px) {
+  .statistics-item {
+    flex-basis: 100%;
+  }
+}
+
+

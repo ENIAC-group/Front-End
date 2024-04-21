@@ -36,12 +36,14 @@ const CounterUp = ({ EndNum, label }) => {
           style={{
             textAlign: "center",
             verticalAlign: "center",
-            fontSize: "44px",
+            // fontSize: "44px",
             fontWeight: "bolder",
             textShadow: "2px 2px 2px 4px rgb(0, 0, 0, 0.5)",
             transition:
               "transform 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275)",
             fontFamily: "Ios15Medium",
+            color: "white",
+            fontSize: "42px"
           }}
         >
           {label}
