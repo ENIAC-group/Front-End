@@ -16,26 +16,11 @@ VERSION:	Versoin Number
   font-style: normal;
 }
 
-/* body {
-  line-height: 1.2;
-  direction: rtl;
-  font-family: "Poppins", sans-serif;
-  -webkit-font-smoothing: antialiased;
-  font-size: 15px;
-  color: #5c5c77;
-} */
-
 .Test_Card_title{
   color:#ACBCFF;
 }
 
-
-
-
 .test_header{
-  color:white;
-  list-style-type: none;
-  direction: ltr;
   font-family: Ios15Medium;
 }
  .test_raygan{
@@ -47,77 +32,78 @@ VERSION:	Versoin Number
 }
 
 
-p, .paragraph {
+.paragraph {
   font-weight: 400;
   color: #5c5c77;
   font-size: 15px;
   line-height: 1.9;
-  font-family: "Poppins", sans-serif;
+  font-family:Ios15Medium;
+  direction: rtl;
 }
 
- h2, h3, h4, h5, h6 {
-  color: white;
+.htitles {
+  direction: rtl;
+  color: rgb(116, 114, 114);
   font-family: Ios15Medium;
   font-weight: 700;
   line-height: 1.2;
 }
 
-h1, .h1 {
+.h1 {
   font-size: 60px;
 }
 
 @media (max-width: 575px) {
-  h1, .h1 {
+  .h1 {
     font-size: 45px;
   }
 }
-
-h2, .h2 {
+ .h2 {
   font-size: 40px;
 }
 
 @media (max-width: 575px) {
-  h2, .h2 {
+   .h2 {
     font-size: 30px;
   }
 }
 
-h3, .Test_h3 {
+ .h3 {
   font-size: 25px;
 }
 
 @media (max-width: 575px) {
-  h3, .Test_h3 {
+  .h3 {
     font-size: 20px;
   }
 }
 
-h4, .h4 {
+ .h4 {
   font-size: 20px;
 }
 
 @media (max-width: 575px) {
-  h4, .h4 {
+  .h4 {
     font-size: 18px;
   }
 }
 
-h5, .h5 {
+ .h5 {
   font-size: 18px;
 }
 
 @media (max-width: 575px) {
-  h5, .h5 {
+   .h5 {
     font-size: 16px;
   }
 }
 
-h6, .h6 {
+ .h6 {
   font-size: 16px;
 }
 
 @media (max-width: 575px) {
-  h6, .h6 {
+  .h6 {
     font-size: 14px;
   }
 }
@@ -125,7 +111,7 @@ h6, .h6 {
 /* Button style */
 .Test_btn {
   font-size: 16px;
-  font-family: "Poppins", sans-serif;
+  font-family: Ios15Medium;
   text-transform: capitalize;
   padding: 15px 40px;
   border-radius: 0;
@@ -156,7 +142,7 @@ h6, .h6 {
 
 .Test_btn:focus {
   outline: 0;
-  box-shadow: none !important;
+  /* box-shadow: none !important; */
 }
 
 .Test_btn:active {
@@ -185,23 +171,22 @@ h6, .h6 {
   color: #fff;
 }
 
-.btn-primary::before {
-  background: #fff;
+.btn-primary:hover {
+  background: #e6e6e6;
+  color:#B799FF ;
+  border-radius: 10px;
 }
 
 .btn-primary:active {
-  background: #B799FF !important;
-  color: #B799FF;
+  background-color: #e3e3e3;
+  color: #B799FF; 
 }
 
 .btn-primary:active::before {
   height: 80%;
 }
 
-.btn-primary:hover {
-  background: #B799FF;
-  color: #B799FF;
-}
+
 
 .btn-primary:not(:disabled):not(.disabled).active,
 .btn-primary:not(:disabled):not(.disabled):active,
@@ -228,14 +213,14 @@ h6, .h6 {
 }
 
 .Test_btn-secondary:hover {
-  background: #fff;
-  color: #fff;
+  background: #ffffff;
+  color: #8d8d8d;
   border: 1px solid #fff;
 }
 
 .btn-primary-outline {
   border: 1px solid #B799FF;
-  color: #B799FF;
+  /* color: #B799FF; */
   background: transparent;
 }
 
@@ -253,10 +238,10 @@ h6, .h6 {
   color: #fff;
 }
 
-body {
+/* body {
   background-color: #fff;
   overflow-x: hidden;
-}
+} */
 
 ::-moz-selection {
   background: #B799FF;
@@ -282,59 +267,51 @@ body {
   justify-content: center;
 }
 
-ol,
-ul {
+.Tul {
   list-style-type: none;
   margin: 0px;
+  color: red;
   
 }
 
 
-img {
+.Timg {
   vertical-align: middle;
   border: 0;
 }
 
-a {
-  color: #B799FF;
+.Ta {
+  /* color: #f5f3f3; */
+  text-decoration: none;
+
 }
 
-a,
-a:hover,
-a:focus {
+
+.Ta:hover {
   text-decoration: none;
 }
 
-a,
+.Ta,
 button,
 select {
   cursor: pointer;
+  text-decoration: none;
   transition: .2s ease;
 }
 
-a:focus,
+.Ta:focus,
 button:focus,
 select:focus {
   outline: 0;
 }
 
-a:hover {
-  color: #B799FF;
-}
 
-a.text-primary:hover {
-  color: #B799FF !important;
-}
 
-a.text-light:hover {
-  color: #B799FF !important;
-}
-
-h4 {
+.h4 {
   transition: .2s ease;
-}
+} 
 
-a h4:hover {
+.Ta .h4:hover {
   color: #B799FF;
 }
 
@@ -505,24 +482,18 @@ a h4:hover {
   padding-left: 25px;
 }
 
-.Test_custom-breadcrumb li.Test_nasted::before {
-  position: absolute;
-  font-family: "themify";
-  content: "\e649";
-  font-size: 20px;
-  top: 50%;
-  left: -5px;
-  color: #fff;
-  -webkit-transform: translateY(-50%);
-          transform: translateY(-50%);
-}
 
 /* /page title */
 .list-styled {
   padding-left: 25px;
+
+  list-style-type: none;
+
 }
 
 .list-styled li {
+  list-style-type: none;
+
   position: relative;
   margin-bottom: 15px;
 }
@@ -538,10 +509,10 @@ a h4:hover {
   top: 5px;
 }
 
-textarea.form-control {
+/* textarea.form-control {
   height: 200px;
   padding: 20px;
-}
+} */
 
 #map_canvas {
   height: 500px;
@@ -635,11 +606,11 @@ textarea.form-control {
 .navbar-light .navbar-nav .nav-link {
   color: #fff;
 }
-
+/* 
 link:focus,
 .navbar-light .navbar-nav .nav-link:hover {
   color: #fff;
-}
+} */
 
 .navbar-light .navbar-nav .active > .nav-link,
 .navbar-light .navbar-nav .nav-link.active,
@@ -994,17 +965,17 @@ link:focus,
   }
 }
 
-.input-wrapper {
+/* .input-wrapper {
   position: relative;
-}
+} */
 
-.input-wrapper button {
+/* .input-wrapper button {
   position: absolute;
   right: 25px;
   top: 50%;
   -webkit-transform: translateY(-50%);
           transform: translateY(-50%);
-}
+} */
 
 .form-control {
   height: 60px;
@@ -1382,12 +1353,12 @@ link:focus,
   padding-top: 100px
 }
 
-.faq h1 {
+.faq .h1 {
   color: #333;
   font-size: 23px
 }
 
-.faq h2 {
+.faq .h2 {
   color: #333;
   font-size: 17px;
   line-height: 30px
@@ -1408,7 +1379,7 @@ link:focus,
   color: #1ef9f3
 }
 
-.faq p {
+.faq .paragraph {
   color: #999;
   font-size: 17px
 }
@@ -1417,7 +1388,7 @@ link:focus,
   position: relative
 }
 
-.faq .affix-top li:first-child a {
+.faq .affix-top li:first-child .Ta {
   color: #333;
   border-right-color: #b0d400;
   font-size: 18px
@@ -1432,23 +1403,23 @@ link:focus,
   position: absolute
 }
 
-.faq ul li {
+.faq .Tul li {
   padding: 10px 0;
   border-bottom: 1px solid #007575
 }
 
-.faq ul li a {
+.faq .Tul li .Ta {
   font-size: 16px;
   border-right: 10px solid transparent;
   color: #999;
   padding: 7px 4px
 }
 
-.faq ul li a:focus,.faq ul li a:hover {
+.faq .Tul li .Ta:focus,.faq .Tul li .Ta:hover {
   background-color: transparent
 }
 
-.faq ul li.active a {
+.faq .Tul li.active .Ta {
   border-right-color: #b0d400;
   color: #333;
   font-size: 18px
@@ -1478,14 +1449,14 @@ link:focus,
   padding: 0
 }
 
-.faq .panel-heading .panel-title a {
+.faq .panel-heading .panel-title .Ta {
   padding: 35px 15px;
   background: #ededed;
   display: block;
   color: #007575
 }
 
-.faq .panel-heading .panel-title a.collapsed {
+.faq .panel-heading .panel-title .Ta.collapsed {
   background-color: #fff
 }
 
@@ -1496,19 +1467,19 @@ link:focus,
   border-radius: 0
 }
 
-.faq .panel-heading+.panel-collapse>.panel-body ul {
+.faq .panel-heading+.panel-collapse>.panel-body .Tul {
   padding: 0 50px 0 30px;
   list-style-type: square;
   margin-top: 15px
 }
 
-.faq .panel-heading+.panel-collapse>.panel-body ul li {
+.faq .panel-heading+.panel-collapse>.panel-body .Tul li {
   border-right: 0;
   border-bottom: 0;
   color: #666
 }
 
-.faq .panel-heading+.panel-collapse>.panel-body p {
+.faq .panel-heading+.panel-collapse>.panel-body .paragraph {
   font-size: 15px;
   padding: 0 30px;
   line-height: 30px;
@@ -1516,7 +1487,7 @@ link:focus,
   color: #666
 }
 
-.faq .panel-heading+.panel-collapse>.panel-body p strong {
+.faq .panel-heading+.panel-collapse>.panel-body .paragraph strong {
   font-size: 20px
 }
 

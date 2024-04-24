@@ -6,6 +6,8 @@
     justify-content: space-around;
     padding-top: 2.5%;
     padding-bottom: 2.5%;
+    /* font-family: Ios15Medium; */
+
     /* gap: 20px; */
 }
 
@@ -25,6 +27,8 @@
 
 .profile-nav {
     margin-top: 20px;
+    /* font-family: Ios15Medium; */
+
 }
 
 .profile-nav .user-heading {
@@ -77,8 +81,9 @@
 .profile-nav ul>li {
     border-bottom: 1px solid #8e95b5;
     margin-top: 0px;
-    line-height: 25px;
+    line-height: 22px;
     width: 100%;
+
 }
 
 .profile-nav ul>li:last-child {
@@ -93,6 +98,8 @@
     border-left: 5px solid #fff;
     font-size: medium;
     width: initial;
+    font-family: Ios15Medium;
+
 
 }
 
@@ -109,7 +116,7 @@
 
 
 
-.bio-graph-heading {
+/* .bio-graph-heading {
     background: #fbc02d;
     color: #fff;
     text-align: center;
@@ -120,16 +127,16 @@
     font-size: 16px;
     font-weight: 300;
     
-}
+} */
 
 .bio-graph-info {
     color: #89817e;
-    font-family: Ios15Medium;
     padding-right:  50px;
 
 }
 
 .bio-graph-info h1 {
+    font-family: Ios15Medium;
     font-size: 25px;
     font-weight: bold;
     margin: 0 0 20px;
@@ -143,8 +150,13 @@
     padding: 0 15px;
     font-size: larger;
 }
+.bio-row p {
+    font-family: Ios15Medium;
+   
+}
 
 .bio-row p span {
+    font-family: Ios15Medium;
     padding-right: 10px;
     width: 150px;
     display: inline-block;
@@ -162,11 +174,12 @@
 }
 .row form
 {
+    font-family: Ios15Medium;
     min-width: fit-content;
 }
 
 .profile_input {
-
+    font-family: Ios15Medium;
     border-radius: 15px;
     padding-right: 15px;
     margin-right: 50px;
@@ -196,7 +209,10 @@
     --jb-date-input-value-font-size:1.3em;
     --jb-date-input-calender-wrapper-bg-color:#fefefe;
     --jb-date-input-calender-wrapper-border-radius:0;
+    --jb-calendar-day-bgcolor-hover	:#849dff;
     --jb-calendar-arrow-button-border-radius:5px;
+    --jb-calendar-section-position:absolute;
+
   }
 
 
