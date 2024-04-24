@@ -11,7 +11,8 @@ import { useNavigate } from "react-router-dom";
 import axios from 'axios';
 import lock_icon from "../../assets/password.png";
 import email_icon from "../../assets/email.png";
-
+import Swal from "sweetalert2";
+import withReactContent from "sweetalert2-react-content";
 
 
 const LoginContainer = () => {
@@ -199,6 +200,16 @@ const LoginContainer = () => {
       localStorage.setItem('accessToken', accessToken);
       localStorage.setItem('refreshToken', refreshToken);
     } 
+    withReactContent(Swal).fire({
+      icon: "success",
+      title: "!با موفقیت وارد شدید",
+      background: "#473a67",
+      color: "#b4b3b3",
+      width: "32rem",
+      confirmButtonText: "باشه",
+      preConfirm: () => {
+        navigate("/Home");
+      },    });
     
   }catch (error) {
 

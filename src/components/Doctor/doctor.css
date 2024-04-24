@@ -381,7 +381,7 @@
 
 /*** Project Start ***/
 
-.project-img {
+.project1-img {
     position: relative;
     padding: 15px;
 
@@ -391,7 +391,7 @@
     font-family: Ios15Medium;
     color: gray;
 }
-.project-img::before {
+.project1-img::before {
     content: "";
     position: absolute;
     width: 150px;
@@ -406,10 +406,10 @@
     transition: .5s;
 }
 
-.project-img::after {
+.project1-img::after {
     content: "";
     width: 150px;
-    height: 150px;
+    height: 150px; 
     position: absolute;
     right: 0;
     bottom: 100px;
@@ -421,7 +421,7 @@
     transition: .5s;
 }
 
-.project-content {
+.project1-content {
     position:relative;
     width: 100%;
     height: 100%;
@@ -434,7 +434,7 @@
     z-index: 6;
 }
 
-.project-content a {
+.project1-content a {
     position: relative;
     display: inline-block;
     text-decoration: none;
@@ -445,13 +445,13 @@
     border-radius: 10px;
 }
 
-.project-item:hover .project-content {
+.project1-item:hover .project1-content {
     opacity: 1;
     transition: .5s;
 }
 
-.project-item:hover .project-img::before,
-.project-item:hover .project-img::after {
+.project1-item:hover .project1-img::before,
+.project1-item:hover .project1-img::after {
     opacity: 0;
 }
 

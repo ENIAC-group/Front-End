@@ -30,7 +30,7 @@ const CourseList = () => {
   return (
     <>
       <NavBar_SideBar />
-      <div>
+      <div dir="rtl">
         <section
           className="Test_page-title-section Test_overlay"
           data-background={third_image}
@@ -39,27 +39,12 @@ const CourseList = () => {
           <div className="container">
             <div className="row">
               <div className="col-md-8">
-                <ul className="list-inline Test_custom-breadcrumb mb-2">
-                  <li className="list-inline-item">
-                    {/* <a
-                    className="h2 text-primary font-secondary text-white nasted"
-                    href="courses.html"
-                  >
-                    تست های روانشناسی
-                  </a> */}
-                    {/* <span className="list-inline-item text-white h3 font-secondary nasted">
-                    hello
-                  </span> */}
-                  </li>
-                  <li className="list-inline-item text-white Test_h3 Test_font-secondary Test_nasted test_header">
+                <ul className=" Test_custom-breadcrumb mb-2 Tul" >
+                  <li className=" text-white h3  Test_nasted test_header" >
                     انواع تست های شخصیت شناسی معتبر
                   </li>
                 </ul>
-                {/* <p className="text-lighten mb-0">
-                Our courses offer a good compromise between the continuous
-                assessment favoured by some universities and the emphasis placed
-                on final exams by others.
-              </p> */}
+                
               </div>
             </div>
           </div>
@@ -68,13 +53,12 @@ const CourseList = () => {
           <div className="container">
             <div className="row">
               <div className="col-12 text-center">
-                <h2 className="Test_section-title text-white">
-                  با تست روانشناسی و شخصیت شناسی توانایی‌هایتان را بشناسید
+                <h2 className="Test_section-title text-white htitles h2">با تست روانشناسی و شخصیت شناسی توانایی‌هایتان را بشناسید
                 </h2>
-                <h6 className="text-white Test_font-secondary Test_mb-50">
+                <h6 className="text-white Test_font-secondary Test_mb-50 htitles h6">
                   برای شرکت در تست ها در اینیاک ثبت نام کنید
                 </h6>
-                <a href="/Signup" className="Test_btn Test_btn-secondary">
+                <a href="/Signup" className="Test_btn Test_btn-secondary Ta">
                   ثبت نام
                 </a>
               </div>
@@ -88,7 +72,7 @@ const CourseList = () => {
                 <div className="d-flex align-items-center Test_section-title justify-content-between">
                   <h2
                     id="testTitle"
-                    className="Test_test_title_part1 mb-0 text-nowrap mr-3"
+                    className="Test_test_title_part1 mb-0 text-nowrap mr-3 htitles h2"
                   >
                     تست های فردی
                   </h2>
@@ -104,28 +88,28 @@ const CourseList = () => {
                 <div className="card p-0 Test_border-primary rounded-0 Test_hover-shadow">
                   <img
                     src={second_image}
-                    className="card-img-top rounded-0"
+                    className="Timg card-img-top rounded-0"
                     alt="course thumb"
                   />
                   <div className="card-body">
-                    <ul className="list-inline mb-2">
+                    <ul className="list-inline mb-2 Tul">
                       <li className="list-inline-item test_raygan">
                         <i className="ti-calendar mr-1 Test_text-color "></i>
-                        رایگان#
+                        #رایگان
                       </li>
                       <li className="list-inline-item"></li>
                     </ul>
-                    <a href="course-single.html" className="test_title">
-                      <h4 className="card-title">MBTI</h4>
+                    <a href="course-single.html" className="test_title Ta">
+                      <h4 className="card-title htitles h4">MBTI</h4>
                     </a>
-                    <p className="card-text mb-4">
+                    <p className="card-text mb-4 paragraph">
                       {" "}
                       تست شخصیت شناسی MBTI با ارزیابی چهار مشخصه رفتاری ، افراد
                       را به شانزده تیپ شخصیتی تقسیم میکند.
                     </p>
                     <a
                       href="course-single.html"
-                      className="Test_btn btn-primary btn-sm"
+                      className="Test_btn btn-primary btn-sm Ta"
                     >
                       شروع
                     </a>
@@ -141,7 +125,7 @@ const CourseList = () => {
               <div className="col-12 ">
                 <a
                   href="courses.html"
-                  className="Test_btn btn-sm btn-primary-outline d-sm-none d-inline-block"
+                  className="Test_btn btn-sm btn-primary-outline d-sm-none d-inline-block Ta"
                 >
                   sell all
                 </a>
@@ -152,7 +136,7 @@ const CourseList = () => {
             <div className="row">
               <div className="col-12">
                 <div className="d-flex align-items-center Test_section-title justify-content-between">
-                  <h2 className="Test_test_title_part1 mb-0 text-nowrap mr-3">
+                  <h2 className="Test_test_title_part1 mb-0 text-nowrap mr-3 htitles h2">
                     تست های پیش از ازدواج
                   </h2>
                   <div className="border-top w-100 Test_border-primary d-none d-sm-block"></div>
@@ -167,29 +151,29 @@ const CourseList = () => {
                 <div className="card p-0 Test_border-primary rounded-0 Test_hover-shadow">
                   <img
                     src={first_image}
-                    className="card-img-top rounded-0"
+                    className="Timg card-img-top rounded-0"
                     alt="course thumb"
                   />
                   <div className="card-body">
-                    <ul className="list-inline mb-2">
+                    <ul className="list-inline mb-2 Tul">
                       <li className="list-inline-item test_raygan">
                         <i className="ti-calendar mr-1 text-color "></i>
-                        رایگان#
+                        #رایگان
                       </li>
 
                       <li className="list-inline-item"></li>
                     </ul>
-                    <a href="course-single.html" className="test_title">
-                      <h4 className="card-title Test_Card_title">Glasser</h4>
+                    <a href="course-single.html" className="test_title Ta">
+                      <h4 className="card-title Test_Card_title htitles h4">Glasser</h4>
                     </a>
-                    <p className="card-text mb-4">
+                    <p className="card-text mb-4 paragraph">
                       {" "}
                       تست شخصیت شناسی گلاسر 5 نیاز اساسی شما را بررسی کرده و در
                       فرآیند شناخت پیش از ازدواج کمک میکند
                     </p>
                     <a
                       href="course-single.html"
-                      className="Test_btn btn-primary btn-sm"
+                      className="Test_btn btn-primary btn-sm Ta"
                     >
                       شروع
                     </a>
@@ -205,7 +189,7 @@ const CourseList = () => {
               <div className="col-12 text-center">
                 <a
                   href="courses.html"
-                  className="Test_btn btn-sm btn-primary-outline d-sm-none d-inline-block"
+                  className="Test_btn btn-sm btn-primary-outline d-sm-none d-inline-block Ta"
                 >
                   sell all
                 </a>
@@ -217,11 +201,11 @@ const CourseList = () => {
           <div className="script-only">
             <section className="jobs-faq m-t-60">
               <div className="jobs-faq-container">
-                <h2 className="faq-title">
+                <h2 className="faq-title htitles h2">
                   سؤالات متداول درباره‌ی تست شخصیت شناسی
                 </h2>
                 <ul
-                  className="question-list no-list-style p-0 m-t-60"
+                  className="question-list no-list-style p-0 m-t-60 Tul"
                   id="accordion"
                 >
                   <li className="question-item">
@@ -231,7 +215,7 @@ const CourseList = () => {
                       }`}
                       onClick={toggleExpansionone}
                     >
-                      <h3 className="question-title">
+                      <h3 className="question-title htitles h3">
                         <span
                           className={`plus-icon ${
                             isExpandedone ? "minus-icon" : ""
@@ -247,7 +231,7 @@ const CourseList = () => {
                     </div>
                     {isExpandedone && (
                       <div className="panel-collapse">
-                        <p className="faq-answer">
+                        <p className="faq-answer paragraph">
                           استفاده از انواع تست های خودشناسی و تست شخصیت به
                           مدیران استخدام برای شناسایی متناسب‌ترین افراد برای
                           سازمانشان کمک می‌کند. این کار باعث می‌شود تا هنگام
@@ -265,7 +249,7 @@ const CourseList = () => {
                       }`}
                       onClick={toggleExpansiontwo}
                     >
-                      <h3 className="question-title">
+                      <h3 className="question-title htitles h3">
                         <span
                           className={`plus-icon ${
                             isExpandedtwo ? "minus-icon" : ""
@@ -281,7 +265,7 @@ const CourseList = () => {
                     </div>
                     {isExpandedtwo && (
                       <div className="panel-collapse">
-                        <p className="faq-answer">
+                        <p className="faq-answer paragraph">
                           انواع تست روانشناسی شخصت در اینیاک نگاه به خودشناسی از
                           بُعد روانشناسی تهیه شده است تا صفات، ویژگی‌ها و
                           ساختاری شخصیتی را بااستفاده از یک سری الگوها، مورد
@@ -298,7 +282,7 @@ const CourseList = () => {
                       }`}
                       onClick={toggleExpansionthree}
                     >
-                      <h3 className="question-title">
+                      <h3 className="question-title htitles h3">
                         <span
                           className={`plus-icon ${
                             isExpandedthree ? "minus-icon" : ""
@@ -313,7 +297,7 @@ const CourseList = () => {
                     </div>
                     {isExpandedthree && (
                       <div className="panel-collapse">
-                        <p className="faq-answer">
+                        <p className="faq-answer paragraph">
                           کاربوم با ارائه شناخته‌شده‌ترین و معتبرترین تست‌های
                           دنیا در تلاش است تا به شما برای شناخت بهتر خودتان کمک
                           کند. از جمله این تست‌ها می‌توان از تست MBTI، تست شخصیت
@@ -329,7 +313,7 @@ const CourseList = () => {
                       }`}
                       onClick={toggleExpansionfour}
                     >
-                      <h3 className="question-title">
+                      <h3 className="question-title htitles h3">
                         <span
                           className={`plus-icon ${
                             isExpandedfour ? "minus-icon" : ""
@@ -345,7 +329,7 @@ const CourseList = () => {
                     </div>
                     {isExpandedfour && (
                       <div className="panel-collapse">
-                        <p className="faq-answer">
+                        <p className="faq-answer paragraph">
                           سه تست شخصیت شناسی MBTI، تست هوش ریون و تست شخصیت
                           شناسی هارتمن از تست‌های رایگان شخصیت شناسی به حساب
                           می‌آیند. البته به سایر تست‌های شخصیت شناسی آنلاین را

@@ -1,5 +1,5 @@
 import React from "react";
-import LoginContainer from "./components/LoginSignUp/LoginSignup.jsx";
+import LoginContainer from "./components/LoginSignUp/LoginSignUp.jsx";
 import Landing from "./components/LandingPage/LandingPage.jsx";
 import AboutUS from "./components/aboutus/aboutus.jsx";
 import Verification from "./components/Verification/verification.jsx";

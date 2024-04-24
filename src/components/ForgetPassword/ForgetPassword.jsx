@@ -131,8 +131,8 @@ const ForgetPassword = () => {
   }
   async function SubmitNewPass(event) {
     event.preventDefault();
-    const password = document.querySelector(".fp_pass").value;
-    const passwordConfirm = document.querySelector(".fp_repeatpass").value;
+    const password = document.getElementById("pass").value;
+    const passwordConfirm = document.getElementById("rpass").value;
     if (
       (password.length === 0) |
       (passwordConfirm.length === 0) |
@@ -225,6 +225,7 @@ const ForgetPassword = () => {
                 >
                   <div className={styles.fp_field}>
                     <input
+                    id="pass"
                       className={styles.fp_pass}
                       type={passwordType}
                       placeholder="رمز عبور جدید"
@@ -244,6 +245,7 @@ const ForgetPassword = () => {
                   </div>
                   <div className={styles.fp_field}>
                     <input
+                    id="rpass"
                       className={styles.fp_repeatpass}
                       type={repeatPasswordType}
                       placeholder="تکرار رمز عبور جدید"
