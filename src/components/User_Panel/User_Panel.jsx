@@ -1,5 +1,7 @@
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
+import DateObject from "react-date-object";
+import persian from "react-date-object/calendars/persian";
 
 import { TbGenderBigender } from "react-icons/tb";
 import { FaRegCalendarDays, FaPhoneFlip } from "react-icons/fa6";
@@ -30,7 +32,8 @@ const User_Panel = () => {
     Gender: "",
     PhoneNumber: "",
   });
-
+  var date = new DateObject(user_info.BirthDay);
+  date.convert(persian);
   async function GetUserInfo(event) {
     event.preventDefault();
     const accessToken = localStorage.getItem("accessToken");
@@ -284,7 +287,7 @@ const User_Panel = () => {
                       <p>
                         <FaRegCalendarDays style={{ color: "#ACBCFF" }} />
                         <span>تاریخ تولد</span>:{" "}
-                        {user_info.BirthDay.split("-").join("/")}
+                        {date.format("YYYY/MM/DD")}
                       </p>
                     </div>
                     <div className="bio-row">
