@@ -1,0 +1,129 @@
+@import url('https://fonts.googleapis.com/css2?family=Anek+Malayalam:wght@100;200;300;400;500;600;700;800&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Vazir&display=swap');
+body {
+  direction: rtl;
+  font-family: 'Anek Malayalam', sans-serif;
+  background: linear-gradient(62deg, #b799ff 0%, #aee2ff 100%) no-repeat;
+  color: #413f45;
+  display: flex;
+  justify-content: center;
+  margin: 0;
+  padding: 0 30px;
+  font-family: Vazir, Arial, sans-serif;
+}
+
+.tests-lib-quiz-container {
+  width: 600px; /* Set a wider width */
+  height: auto; /* You can adjust the height as needed */
+  max-width: 100%; /* Ensure it doesn't exceed the viewport width */
+  min-height: 400px;
+  background: #ffffff;
+  border-radius: 20px; /* Increase border-radius for more curve */
+  margin-top: 50px;
+  padding: 30px 60px;
+  box-sizing: border-box; /* Ensure padding is included in the width */
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1); /* Add box shadow */
+
+}
+
+.tests-lib-quiz-container .tests-lib-active-question-no {
+  font-size: 32px;
+  font-weight: 500;
+  color:#ACBCFF;
+}
+
+.tests-lib-quiz-container .tests-lib-total-question {
+  font-size: 16px;
+  font-weight: 500;
+  color: #959496;
+}
+
+.tests-lib-quiz-container h2 {
+  font-size: 20px;
+  font-weight: 500;
+  margin: 0;
+}
+
+.tests-lib-quiz-container ul {
+  margin-top: 20px;
+  margin-right: -40px;
+}
+
+.tests-lib-quiz-container ul li {
+  text-decoration: none;
+  list-style: none;
+  color: #47464e;
+  font-size: 16px;
+  background: #ffffff;
+  border: 1px solid #eaeaea;
+  border-radius: 16px;
+  padding: 11px;
+  margin-top: 15px;
+  cursor: pointer;
+}
+
+.tests-lib-quiz-container ul .tests-lib-selected-answer {
+  background: #ccc9fd;
+  border: 1px solid #9a94fb;
+}
+
+.tests-lib-quiz-container button {
+  background: -webkit-linear-gradient(left,#B799FF , #ACBCFF , #AEE2FF);
+  border-radius: 9px;
+  font-size: 18px;
+  color: #ffffff;
+  padding: 10px 42px;
+  outline: none;
+  border: none;
+  cursor: pointer;
+  margin-top: 15px;
+}
+
+
+
+.tests-lib-quiz-container button:disabled {
+  background: #e7e8e9;
+  color: #9fa3a9;
+  cursor: not-allowed;
+}
+
+.tests-lib-flex-right {
+  display: flex;
+  justify-content: flex-end;
+}
+
+.tests-lib-result h3 {
+  font-size: 24px;
+  letter-spacing: 1.4px;
+  text-align: center;
+}
+
+.tests-lib-result p {
+  font-size: 16px;
+  font-weight: 500;
+}
+
+.tests-lib-result p span {
+  color: #6459fa;
+  font-size: 22px;
+}
+
+.tests-lib-button-group {
+  display: flex;
+  justify-content: space-between; /* Ensure buttons are spaced evenly */
+  margin-top: 30px; /* Add some margin between the buttons and the content */
+}
+
+.tests-lib-button-group button {
+  flex: 0 0 120px; /* Set a fixed width for the buttons */
+  margin: 0 5px;
+}
+
+
+.tests-lib-progress-bar {
+  height: 20px; /* Adjust the height as needed */
+}
+
+.tests-lib-progress-bar .progress-bar {
+  background-color: #800080; /* Set background color for the progress bar */
+}
