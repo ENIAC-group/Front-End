@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import MBTI from './questions_MBTI';
 import ProgressBar from 'react-bootstrap/ProgressBar';
+import Swal from 'sweetalert2';
 import "./tests_lib_style.css";
 
 const MBTITest = () => {
@@ -54,10 +55,64 @@ const MBTITest = () => {
   };
 
   const onAnswerSelected = (index) => {
+    console.log(activeQuestion);
     const updatedAnswers = [...selectedAnswers];
     updatedAnswers[activeQuestion] = index;
     setSelectedAnswers(updatedAnswers);
+
   };
+
+  const showConfirmSwal = () => {
+    Swal.fire({
+      icon: "warning",
+      title: "آیا از ادامۀ آزمون منصرف شده اید؟",
+      html: "در صورت اتمام آزمون پاسخ‌های شما ثبت نمی‌شوند",
+      background: "#473a67",
+      color: "#b4b3b3",
+      width: "29rem",
+      height: "15rem",
+      showCancelButton: true,
+      confirmButtonText: "بله",
+      cancelButtonText: "ادامه می‌دهم",
+      customClass: {
+        container: 'custom-swal-container'
+      }
+    }).then((result) => {
+      if (result.isConfirmed) {
+        // Redirect to another page upon confirmation
+        // window.location.href = '/another-page'; // Replace '/another-page' with the actual URL of the page you want to redirect to
+      } else {
+        // Handle the case when "ادامه می‌دهم" button is clicked (optional)
+        // You can add any additional logic here, such as closing the dialog
+      }
+    });
+  };
+
+  const cancelTest = () => {
+    Swal.fire({
+      icon: "warning",
+      title: "از انجام آزمون منصرف شده اید؟",
+      background: "#473a67",
+      color: "#b4b3b3",
+      width: "26rem",
+      height: "18rem",
+      showCancelButton: true,
+      confirmButtonText: "بله",
+      cancelButtonText: "ادامه می‌دهم",
+      customClass: {
+        container: 'custom-swal-container'
+      }
+    }).then((result) => {
+      if (result.isConfirmed) {
+        // Redirect to another page upon confirmation
+        // window.location.href = '/another-page'; // Replace '/another-page' with the actual URL of the page you want to redirect to
+      } else {
+        // Handle the case when "ادامه می‌دهم" button is clicked (optional)
+        // You can add any additional logic here, such as closing the dialog
+      }
+    });
+  }
+  
 
   const addLeadingZero = (number) => (number > 9 ? number : `0${number}`);
 
@@ -93,13 +148,14 @@ const MBTITest = () => {
             {activeQuestion === 0 ? (
               <>
                 <button style={{width: "40px"}}onClick={onClickNext}>شروع آزمون</button>
-                <button onClick={null}>انصراف</button>
+                <button onClick={cancelTest}>انصراف</button>
               </>
             ) : (
               <>
                 <button onClick={onClickNext} disabled={selectedAnswers[activeQuestion] === null}>
                   {activeQuestion === questions.length - 1 ? 'پایان آزمون' : 'بعدی'}
                 </button>
+                <span onClick={showConfirmSwal}className="tests-lib-complete-test">اتمام آزمون</span>
                 <button onClick={onClickPrevious} disabled={activeQuestion === 0}>
                   قبلی
                 </button>
