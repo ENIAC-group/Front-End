@@ -116,6 +116,13 @@ const MBTITest = () => {
 
   const addLeadingZero = (number) => (number > 9 ? number : `0${number}`);
 
+  const persianNumbers = ['۰', '۱', '۲', '۳', '۴', '۵', '۶', '۷', '۸', '۹'];
+
+  const convertToPersianNumbers = (number) => {
+    return String(number).replace(/\d/g, (digit) => persianNumbers[digit]);
+  };
+
+
   return (
     <div className="tests-lib-quiz-container">
       {!showResult && ( // Conditionally render content when not showing result
@@ -152,9 +159,14 @@ const MBTITest = () => {
               </>
             ) : (
               <>
-                <button onClick={onClickNext} disabled={selectedAnswers[activeQuestion] === null}>
+               <button 
+                  onClick={onClickNext} 
+                  disabled={selectedAnswers[activeQuestion] === null}
+                  title={selectedAnswers[activeQuestion] === null && activeQuestion !== questions.length - 1 ? "برای ادامه باید حتما یک گزینه را انتخاب کنید" : ""}
+                >
                   {activeQuestion === questions.length - 1 ? 'پایان آزمون' : 'بعدی'}
                 </button>
+
                 <span onClick={showConfirmSwal}className="tests-lib-complete-test">اتمام آزمون</span>
                 <button onClick={onClickPrevious} disabled={activeQuestion === 0}>
                   قبلی
