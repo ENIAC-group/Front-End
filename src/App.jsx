@@ -10,6 +10,7 @@ import * as Router from "react-router-dom";
 import "bootstrap/dist/css/bootstrap.min.css";
 import DoctorList from "./components/DoctorsList/DoctorsList.jsx";
 import CourseList from "./components/TestPage/TestPage.jsx";
+import ReservationPage from "./components/Reservation/Reservation.jsx";
 
 function App() {
   return (
@@ -43,6 +44,9 @@ function App() {
           {" "}
         </Router.Route>
         <Router.Route path="/Doctors" element={<DoctorList />}>
+          {" "}
+        </Router.Route>
+        <Router.Route path="/Reserve" element={<ReservationPage />}>
           {" "}
         </Router.Route>
       </Router.Routes>
