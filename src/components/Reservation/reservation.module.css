@@ -9,7 +9,7 @@
 }
 
 .reserve_Box {
-  gap: 50px;
+    gap: 50px;
   padding: 3%;
   border-radius: 35px;
   height: 100%;
@@ -76,10 +76,14 @@
     border-radius: 1rem 1rem 0rem 0rem !important;
 
   }
-
   .reserve_wrap .reserve_hour_wrap {
     width: 363px;
     border-radius: 0rem 0rem 1rem 1rem;
+  }
+  .reserve_result
+  {
+    background-color: #112a90;
+    width: 1000px;
   }
 }
 
@@ -103,6 +107,7 @@
 
   .reserve_wrap .reserve_hour_wrap {
     width: 400px;
+
   }
 }
 
@@ -122,8 +127,83 @@
   color: rgb(66, 38, 77);
 }
 
-.res_hcard_body{
-  background-color: #ffffff;
+.reserve_hour_items
+{
+  padding-top: 20px;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 30px;
+  justify-content: space-around;
+}
+
+.reserve_hcard_bd{
+  font-family: Ios15Medium;
+  font-size: large;
+  text-align: center;
+  padding: 5px;
+  padding-left: 15px;
+  padding-right: 15px;
+  background: linear-gradient(10deg , #B799FF 0%, #AEE2FF 100%) ;
+  border-radius: 30px;
+  box-shadow: #949393 4px 4px 0 0;
   border-radius: 5px;
-  box-shadow: 0 1em 4em rgba(244, 75, 75, 0.07);
+  height: fit-content;
+  width: fit-content;
+}
+.reserve_hcard_bd:hover{
+  font-size: larger;
+  cursor: pointer;
+  background: linear-gradient(-10deg , #B799FF 0%, #AEE2FF 100%) no-repeat 100%;
+}
+
+.reserve_result
+{
+  padding-top: 8%;
+  list-style-type: none;
+  text-align: center;
+  direction: rtl;
+  font-family: Ios15Medium;
+  width: 200px;
+}
+.reserve_result span
+{
+  padding-left: 5px;
+}
+
+
+/* CSS */
+.button_74 {
+  background-color: #9c7aed;
+  border: 2px solid #b2a2d9;
+  border-radius: 30px;
+  box-shadow: #939393 4px 4px 0 0;
+  color: #000000;
+  cursor: pointer;
+  display: inline-block;
+  font-family: Ios15Medium;
+  font-weight: 300;
+  font-size: 18px;
+  padding: 0 18px;
+  line-height: 50px;
+  text-align: center;
+  text-decoration: none;
+  user-select: none;
+  -webkit-user-select: none;
+  touch-action: manipulation;
+}
+
+.button_74:hover {
+  background-color: #e9e3f7;
+}
+
+.button_74:active {
+  box-shadow: #422800 2px 2px 0 0;
+  transform: translate(2px, 2px);
+}
+
+@media (min-width: 768px) {
+  .button_74 {
+    min-width: 120px;
+    padding: 0 25px;
+  }
 }
