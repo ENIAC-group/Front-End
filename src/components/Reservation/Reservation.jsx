@@ -1,4 +1,5 @@
-import React, { useState } from "react";
+import React, { useState  } from "react";
+import { useLocation } from "react-router-dom";
 import NavBar_SideBar from "../SidebarNabar/NavBar_SideBar";
 import Footer from "../Footer/Footer";
 import img from "../../assets/Female_Avatar.jpg";
@@ -10,7 +11,6 @@ import persian from "react-date-object/calendars/persian";
 import HourCard from "./HourCard";
 import { BsCalendarDate } from "react-icons/bs";
 import { IoMdTime } from "react-icons/io";
-
 
 function ChangeDate(input) {
   var date = new DateObject(input);
@@ -24,12 +24,17 @@ function ChangeDate(input) {
 }
 
 const ReservationPage = () => {
+  const today = ChangeDate(utils().getToday());
+  // const location = useLocation();
+  // const doctorID = location.state.id;
   const hours = ["19:00", "18:00", "17:00", "20:00"];
   const [selectedDay, setSelectedDay] = useState(
     ChangeDate(utils().getToday())
   );
   const [selected, setSelect] = useState(-1);
-  
+  async function sendReservationInfo(event){
+    
+  }
   return (
     <>
       <NavBar_SideBar />
@@ -47,7 +52,8 @@ const ReservationPage = () => {
               <Calendar
                 value={selectedDay}
                 onChange={setSelectedDay}
-                minimumDate={ChangeDate(utils().getToday())}
+                minimumDate={today}
+                maximumDate={{year:today.year,month:today.month+1,day:today.day}}
                 shouldHighlightWeekends
                 locale="fa"
                 colorPrimary="#9c7aed"
@@ -75,17 +81,39 @@ const ReservationPage = () => {
               style={selected == -1 ? { display: "none" } : {}}
             >
               تاریخ و زمان انتخابی:
-              <br/>
-              <span><BsCalendarDate/></span>
+              <br />
+              <span>
+                <BsCalendarDate />
+              </span>
               تاریخ:
-              <br/>
+              <br />
               {selectedDay.year}/{selectedDay.month}/{selectedDay.day}
-              <br/>
-              <span><IoMdTime/></span>
+              <br />
+              <span>
+                <IoMdTime />
+              </span>
               ساعت:
-              <br/>
-              {hours[selected]}<br/><br/>
-              <button className={styles.button_74} onClick>رزرو</button>
+              <br />
+              {hours[selected]}
+              <br />
+              <div className={styles.reverse_choices_box}>
+              <ul className={styles.reserve_choices}>
+                {/* <li> */}
+                  <label className={styles.reserve_choices_op}>
+                  <input type="radio" name="q1" value="حضوری" checked={true} />
+                   <span>حضوری</span> 
+                  </label>
+                {/* </li> */}
+                {/* <li> */}
+                  <label className={styles.reserve_choices_op}>
+                  <input type="radio" name="q1" value="مجازی" />
+                    <span>مجازی</span>
+                  </label>
+                {/* </li> */}
+              </ul></div>
+              <button className={styles.button_74} onClick={sendReservationInfo}>
+                رزرو
+              </button>
             </div>
           </div>
         </div>

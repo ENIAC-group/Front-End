@@ -82,7 +82,6 @@
   }
   .reserve_result
   {
-    background-color: #112a90;
     width: 1000px;
   }
 }
@@ -206,4 +205,24 @@
     min-width: 120px;
     padding: 0 25px;
   }
+}
+.reserve_choices
+{
+  /* text-align:justify; */
+  list-style-type: none;
+}
+
+input[type="radio"] {
+  cursor: pointer;
+  display: inline-flex;
+  /* display:inline */
+}
+.reserve_choices .reserve_choices_op
+{
+  font-family: Ios15Medium;
+  padding-right: 0px;
+
+}
+.reserve_choices .reserve_choices_op span{
+  padding-right: 5px;
 }
