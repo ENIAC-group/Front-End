@@ -3,6 +3,8 @@ import MBTI from './questions_MBTI';
 import ProgressBar from 'react-bootstrap/ProgressBar';
 import Swal from 'sweetalert2';
 import "./mbti_style.css";
+import axios from 'axios';
+import { useNavigate } from 'react-router-dom';
 
 const MBTITest = () => {
   const [activeQuestion, setActiveQuestion] = useState(0);
@@ -25,8 +27,68 @@ const MBTITest = () => {
       updatedAnswers[activeQuestion] = selectedAnswers[activeQuestion];
       return updatedAnswers;
     });
-    console.log(selectedAnswers);
   }, [activeQuestion]);
+
+  const sendAsnwersToBack = async(updatedSelectedAnswersForBack) => {
+      try {
+        const token = localStorage.getItem("accessToken");
+        // console.log(token);
+        const response = await axios.post("http://127.0.0.1:8000/TherapyTests/MBTI/", {
+          data: updatedSelectedAnswersForBack
+          },{
+          method: "POST",
+          headers: {
+            Authorization: `Bearer ${token}`,
+            "Content-Type": "application/json",
+          },
+        });
+
+        if (response.status === 200) {
+          toast.success('!اطلاعات شما با موفقیت ثبت شد', {
+            position: "bottom-left",
+            autoClose: 3000,
+            hideProgressBar: false,
+            closeOnClick: true,
+            pauseOnHover: true,
+            draggable: true,
+            progress: undefined,
+          });
+          setShow(false);
+          // setFirstname("");
+          // setLastname("");
+          // setGender("");
+          // setPhonenumber("");
+          // setDateOfBirth("");
+        } else {
+          Swal.fire({
+            icon: "error",
+            title: "!خطا در ثبت اطلاعات",
+            background: "#473a67",
+            color: "#b4b3b3",
+            width: "26rem",
+            height: "18rem",
+            confirmButtonText: "تایید",
+            customClass: {
+              container: 'custom-swal-container'
+            }
+          });
+        }
+      } catch (error) {
+        Swal.fire({
+          icon: "error",
+          title: "!خطا در ارسال درخواست",
+          background: "#473a67",
+          color: "#b4b3b3",
+          width: "26rem",
+          height: "18rem",
+          confirmButtonText: "تایید",
+          customClass: {
+            container: 'custom-swal-container'
+          }
+        });
+      }
+    } 
+  
 
   const onClickNext = () => {
     if (selectedAnswers[activeQuestion] !== null) {
@@ -45,6 +107,17 @@ const MBTITest = () => {
       setActiveQuestion(prev => prev + 1);
     } else {
       setShowResult(true);
+      const updatedSelectedAnswersForBack = {};
+      for (let i = 1; i < questions.length; i++) {
+        if (selectedAnswers[i] == 0)
+          updatedSelectedAnswersForBack[i] = 'a';
+        else {
+          updatedSelectedAnswersForBack[i] = 'b';
+        }
+      }
+      // console.log(selectedAnswers);
+      // console.log(updatedSelectedAnswersForBack);
+      sendAsnwersToBack(updatedSelectedAnswersForBack);
     }
   };
 
@@ -55,7 +128,7 @@ const MBTITest = () => {
   };
 
   const onAnswerSelected = (index) => {
-    console.log(activeQuestion);
+    // console.log(activeQuestion);
     const updatedAnswers = [...selectedAnswers];
     updatedAnswers[activeQuestion] = index;
     setSelectedAnswers(updatedAnswers);
@@ -112,6 +185,7 @@ const MBTITest = () => {
       }
     });
   }
+
   
 
   const addLeadingZero = (number) => (number > 9 ? number : `0${number}`);
@@ -123,7 +197,9 @@ const MBTITest = () => {
   };
 
 
+
   return (
+    <body className='mbti-body'>
     <div className="mbti-quiz-container">
       {!showResult && ( // Conditionally render content when not showing result
         <div>
@@ -154,7 +230,7 @@ const MBTITest = () => {
           <div className="mbti-button-group">
             {activeQuestion === 0 ? (
               <>
-                <button style={{width: "40px"}}onClick={onClickNext}>شروع آزمون</button>
+                <button style={{width: "40px", fontSize: "16px"}}onClick={onClickNext}>شروع آزمون</button>
                 <button onClick={cancelTest}>انصراف</button>
               </>
             ) : (
@@ -186,6 +262,7 @@ const MBTITest = () => {
         </div>
       )}
     </div>
+    </body>
   );
   
 };

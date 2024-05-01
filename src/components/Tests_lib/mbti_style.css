@@ -1,6 +1,6 @@
 @import url('https://fonts.googleapis.com/css2?family=Anek+Malayalam:wght@100;200;300;400;500;600;700;800&display=swap');
 @import url('https://fonts.googleapis.com/css2?family=Vazir&display=swap');
-body {
+.mbti-body {
   direction: rtl;
   font-family: 'Anek Malayalam', sans-serif;
   background: linear-gradient(62deg, #b799ff 0%, #aee2ff 100%) no-repeat;

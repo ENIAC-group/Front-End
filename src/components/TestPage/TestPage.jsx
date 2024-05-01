@@ -108,7 +108,7 @@ const CourseList = () => {
                       را به شانزده تیپ شخصیتی تقسیم میکند.
                     </p>
                     <a
-                      href="course-single.html"
+                      href="/MBTI"
                       className="Test_btn btn-primary btn-sm Ta"
                     >
                       شروع
