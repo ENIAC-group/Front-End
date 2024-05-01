@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import MBTI from './questions_MBTI';
 import ProgressBar from 'react-bootstrap/ProgressBar';
 import Swal from 'sweetalert2';
-import "./tests_lib_style.css";
+import "./mbti_style.css";
 
 const MBTITest = () => {
   const [activeQuestion, setActiveQuestion] = useState(0);
@@ -124,18 +124,18 @@ const MBTITest = () => {
 
 
   return (
-    <div className="tests-lib-quiz-container">
+    <div className="mbti-quiz-container">
       {!showResult && ( // Conditionally render content when not showing result
         <div>
           {activeQuestion === 0 && ( // Conditionally render the header for the first question
             <h2 style={{fontSize: "30px", color: "#9a94fb", marginBottom: "10px", textAlign: "center"}}>توجه!</h2>
           )}
-          <div className="tests-lib-header">
+          <div className="mbti-header">
             {activeQuestion !== 0 && ( // Conditionally render the counter starting from the second question
               <>
                 <ProgressBar now={(activeQuestion + 1) * (100 / questions.length)} />
-                <span className="tests-lib-active-question-no">{addLeadingZero(activeQuestion)}</span>
-                <span className="tests-lib-total-question">/{addLeadingZero(questions.length - 1)}</span>
+                <span className="mbti-active-question-no">{addLeadingZero(activeQuestion)}</span>
+                <span className="mbti-total-question">/{addLeadingZero(questions.length - 1)}</span>
               </>
             )}
           </div>
@@ -144,14 +144,14 @@ const MBTITest = () => {
             {choices.map((choice, index) => (
               <li
                 key={index}
-                className={selectedAnswers[activeQuestion] === index ? "tests-lib-selected-answer" : ""}
+                className={selectedAnswers[activeQuestion] === index ? "mbti-selected-answer" : ""}
                 onClick={() => onAnswerSelected(index)}
               >
                 {choice.text}
               </li>
             ))}
           </ul>
-          <div className="tests-lib-button-group">
+          <div className="mbti-button-group">
             {activeQuestion === 0 ? (
               <>
                 <button style={{width: "40px"}}onClick={onClickNext}>شروع آزمون</button>
@@ -167,7 +167,7 @@ const MBTITest = () => {
                   {activeQuestion === questions.length - 1 ? 'پایان آزمون' : 'بعدی'}
                 </button>
 
-                <span onClick={showConfirmSwal}className="tests-lib-complete-test">اتمام آزمون</span>
+                <span onClick={showConfirmSwal}className="mbti-complete-test">اتمام آزمون</span>
                 <button onClick={onClickPrevious} disabled={activeQuestion === 0}>
                   قبلی
                 </button>
@@ -177,7 +177,7 @@ const MBTITest = () => {
         </div>
       )}
       {showResult && ( // Conditionally render result
-        <div className="tests-lib-result">
+        <div className="mbti-result">
           <h3 style={{color: "#9a94fb", marginBottom: "10px"}}>آزمون شما به پایان رسید!</h3>
           <p>
             پاسخ‌های شما پردازش شد. برای دیدن نتیجۀ آزمون خود، برروی دکمۀ زیر کلیک کنید.
