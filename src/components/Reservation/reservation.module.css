@@ -54,7 +54,7 @@
 }
 
 .custom_calendar {
-  font-size: 10px !important;
+  font-size: 12px !important;
   border-radius: 1rem 0rem 0rem 1rem !important;
   top: 0px !important;
 
@@ -62,7 +62,7 @@
 
 @media (max-width: 1450px) {
   .custom_calendar {
-    font-size: 11px !important;
+    font-size: 12px !important;
   }
 
   .reserve_wrap .reserve_hour_wrap {
@@ -72,12 +72,12 @@
 
 @media (max-width: 870px) {
   .custom_calendar {
-    font-size: 11px !important;
+    font-size: 12px !important;
     border-radius: 1rem 1rem 0rem 0rem !important;
 
   }
   .reserve_wrap .reserve_hour_wrap {
-    width: 363px;
+    width: 397px;
     border-radius: 0rem 0rem 1rem 1rem;
   }
   .reserve_result
@@ -88,12 +88,12 @@
 
 @media (max-width: 800px) {
   .custom_calendar {
-    font-size: 10px !important;
+    font-size: 11px !important;
     border-radius: 1rem 1rem 0rem 0rem !important;
   }
 
   .reserve_wrap .reserve_hour_wrap {
-    width: 330px;
+    width: 364px;
     border-radius: 0rem 0rem 1rem 1rem;
   }
 }

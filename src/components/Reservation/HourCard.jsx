@@ -2,7 +2,6 @@ import React, { useState } from "react";
 import styles from  "./reservation.module.css";
 
 const HourCard = ({time, index, onClick,selected}) => {
-    console.log(index);
   return (
     <>
       <div className={styles.reserve_hcard_bd} onClick={onClick}

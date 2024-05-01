@@ -72,8 +72,24 @@ const ReservationPage = () => {
   const [selectedDay, setSelectedDay] = useState(
     ChangeDate(utils().getToday())
   );
+  const [LeftTimes, setTime] = useState([]);
   const today = ChangeDate(utils().getToday());
   const [selected, setSelect] = useState(-1);
+
+  const setdatetime = () => {
+    setSelect(-1);
+    const temp = hours.slice();
+    setTime(temp);
+    for (let i = 0; i < responseData.length; i++) {
+      if (responseData[i].date == DateString(selectedDay)) {
+        var ind = temp.indexOf(responseData[i].time);
+        if (ind > -1) {
+          temp.splice(ind, 1);
+        }
+      }
+    }
+    return temp;
+  };
 
   async function getReservation() {
     try {
@@ -128,7 +144,6 @@ const ReservationPage = () => {
           },
         });
         setDoctorProfile(response.data);
-        console.log(response.data);
       } catch (error) {
         console.error("Error fetching doctor profile:", error);
       }
@@ -139,7 +154,6 @@ const ReservationPage = () => {
   async function CreateReservation() {
     try {
       const ReservationDate = DateString(selectedDay); // Format today's date as "yyyy-mm-dd" string
-      // const endDate = formatDate(addDays(new Date(), 30)); // Format 30 days later as "yyyy-mm-dd" string
       const token = localStorage.getItem("accessToken");
       const response = await axios("http://127.0.0.1:8000/reserve/create/", {
         method: "POST",
@@ -150,7 +164,7 @@ const ReservationPage = () => {
         data: {
           type: res_type,
           date: ReservationDate,
-          time: hours[selected],
+          time: LeftTimes[selected],
           doctor_id: doctor_id,
         },
       });
@@ -162,7 +176,6 @@ const ReservationPage = () => {
         // console.log("last data");
         // console.log(responseData);
         console.log("you reserved successfully");
-        // navigate("/Verification", { state: data });
         toast.success("رزرو شما با موفیت انجام شد", {
           position: "bottom-left",
           autoClose: 3000,
@@ -172,17 +185,28 @@ const ReservationPage = () => {
           draggable: true,
           progress: undefined,
         });
+        // navigate("/Verification", { state: data });
         //console.log("you can login now");
         //navigate("/Signup");
       }
     } catch (error) {
       console.log(error);
+      toast.error("!رزرو موفقیت آمیز نبود، رفرش کنید", {
+        position: "bottom-left",
+        autoClose: 3000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+      });
     }
   }
 
   return (
     <>
       <NavBar_SideBar />
+      <ToastContainer />
 
       <div className={styles.reserve_body}>
         <div className={styles.reserve_Box}>
@@ -196,7 +220,10 @@ const ReservationPage = () => {
             <div className={styles.reserve_date_wrap}>
               <Calendar
                 value={selectedDay}
-                onChange={setSelectedDay}
+                onChange={(e) => {
+                  setSelectedDay(e);
+                  setdatetime();
+                }}
                 minimumDate={today}
                 maximumDate={{
                   year: today.year,
@@ -214,7 +241,7 @@ const ReservationPage = () => {
             <div className={styles.reserve_hour_wrap}>
               <h6>ساعت های قابل رزرو</h6>
               <div className={styles.reserve_hour_items}>
-                {hours.map((time, index) => (
+                {LeftTimes.map((time, index,key) => (
                   <HourCard
                     time={time}
                     index={index}
@@ -237,14 +264,18 @@ const ReservationPage = () => {
               </span>
               تاریخ:
               <br />
-              {DateString(selectedDay)}
+              {selectedDay.year +
+                "-" +
+                selectedDay.month +
+                "-" +
+                selectedDay.day}
               <br />
               <span>
                 <IoMdTime />
               </span>
               ساعت:
               <br />
-              {hours[selected]}
+              {LeftTimes[selected]}
               <br />
               <div className={styles.reverse_choices_box}>
                 <ul className={styles.reserve_choices}>
@@ -271,10 +302,16 @@ const ReservationPage = () => {
                 </ul>
                 <button
                   className={styles.button_74}
-                  onClick={CreateReservation}
+                  onClick={(e) => {
+                    CreateReservation(e);
+                    getReservation();
+                    setTime(setdatetime());
+
+                  }}
                 >
                   ثبت
                 </button>
+
               </div>
             </div>
           </div>
