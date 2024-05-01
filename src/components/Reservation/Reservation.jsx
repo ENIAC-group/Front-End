@@ -1,4 +1,5 @@
-import React, { useState } from "react";
+import React, { useState  } from "react";
+import { useLocation } from "react-router-dom";
 import NavBar_SideBar from "../SidebarNabar/NavBar_SideBar";
 import Footer from "../Footer/Footer";
 import img from "../../assets/Female_Avatar.jpg";
@@ -16,6 +17,7 @@ import { useLocation } from "react-router-dom";
 import { useNavigate } from "react-router-dom";
 import * as shamsi from "shamsi-date-converter";
 
+
 function DateString(input) {
   var changed = shamsi.jalaliToGregorian(input.year, input.month, input.day);
   var y = `${changed[0]}`;
@@ -23,6 +25,7 @@ function DateString(input) {
   var d = changed[2] < 10 ? `0${changed[2]}` : `${changed[2]}`;
   return [y, m, d].join("-");
 }
+
 
 function ChangeDate(input) {
   var date = new DateObject(input);
@@ -49,6 +52,7 @@ function addDays(date, days) {
 }
 
 const ReservationPage = () => {
+
   const navigate = useNavigate();
   const location = useLocation();
   const initialState = location.state || {};
@@ -58,10 +62,17 @@ const ReservationPage = () => {
   console.log(doctor_id);
   const hours = ["19:00:00", "18:00:00", "17:00:00", "20:00:00"];
   const [responseData, setResponseData] = useState([]);
+
+  const today = ChangeDate(utils().getToday());
+  // const location = useLocation();
+  // const doctorID = location.state.id;
+  const hours = ["19:00", "18:00", "17:00", "20:00"];
+
   const [selectedDay, setSelectedDay] = useState(
     ChangeDate(utils().getToday())
   );
   const [selected, setSelect] = useState(-1);
+
   async function getReservation() {
     try {
       console.log("hello");
@@ -170,6 +181,11 @@ const ReservationPage = () => {
     }
   }
 
+
+  async function sendReservationInfo(event){
+    
+  }
+
   return (
     <>
       <NavBar_SideBar />
@@ -187,7 +203,8 @@ const ReservationPage = () => {
               <Calendar
                 value={selectedDay}
                 onChange={setSelectedDay}
-                minimumDate={ChangeDate(utils().getToday())}
+                minimumDate={today}
+                maximumDate={{year:today.year,month:today.month+1,day:today.day}}
                 shouldHighlightWeekends
                 locale="fa"
                 colorPrimary="#9c7aed"
@@ -231,8 +248,27 @@ const ReservationPage = () => {
               <br />
               {hours[selected]}
               <br />
+
               <br />
               <button className={styles.button_74} onClick={CreateReservation}>
+
+              <div className={styles.reverse_choices_box}>
+              <ul className={styles.reserve_choices}>
+                {/* <li> */}
+                  <label className={styles.reserve_choices_op}>
+                  <input type="radio" name="q1" value="حضوری" checked={true} />
+                   <span>حضوری</span> 
+                  </label>
+                {/* </li> */}
+                {/* <li> */}
+                  <label className={styles.reserve_choices_op}>
+                  <input type="radio" name="q1" value="مجازی" />
+                    <span>مجازی</span>
+                  </label>
+                {/* </li> */}
+              </ul></div>
+              <button className={styles.button_74} onClick={sendReservationInfo}>
+
                 رزرو
               </button>
             </div>
