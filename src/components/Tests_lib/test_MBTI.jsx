@@ -5,13 +5,14 @@ import Swal from 'sweetalert2';
 import "./mbti_style.css";
 import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
+import NavBar_SideBar from '../SidebarNabar/NavBar_SideBar';
 
 const MBTITest = () => {
+  const navigate = useNavigate();
   const [activeQuestion, setActiveQuestion] = useState(0);
   const [selectedAnswers, setSelectedAnswers] = useState(Array(MBTI.questions.length).fill(null));
   const [showResult, setShowResult] = useState(false);
   const [result, setResult] = useState({
-    score: 0,
     doneAnswers: 0,
     emptyAnswers: 0,
   });
@@ -29,40 +30,26 @@ const MBTITest = () => {
     });
   }, [activeQuestion]);
 
-  const sendAsnwersToBack = async(updatedSelectedAnswersForBack) => {
+  const sendAsnwersToBack = async(data) => {
       try {
         const token = localStorage.getItem("accessToken");
-        // console.log(token);
-        const response = await axios.post("http://127.0.0.1:8000/TherapyTests/MBTI/", {
-          data: updatedSelectedAnswersForBack
-          },{
+        console.log(data)
+        const response = await axios.post("http://127.0.0.1:8000/TherapyTests/MBTI/", 
+          data,{
           method: "POST",
           headers: {
             Authorization: `Bearer ${token}`,
             "Content-Type": "application/json",
           },
+          
         });
-
+        
         if (response.status === 200) {
-          toast.success('!اطلاعات شما با موفقیت ثبت شد', {
-            position: "bottom-left",
-            autoClose: 3000,
-            hideProgressBar: false,
-            closeOnClick: true,
-            pauseOnHover: true,
-            draggable: true,
-            progress: undefined,
-          });
-          setShow(false);
-          // setFirstname("");
-          // setLastname("");
-          // setGender("");
-          // setPhonenumber("");
-          // setDateOfBirth("");
+          setShowResult(true);
         } else {
           Swal.fire({
             icon: "error",
-            title: "!خطا در ثبت اطلاعات",
+            title: "!خطا در ارسال درخواست",
             background: "#473a67",
             color: "#b4b3b3",
             width: "26rem",
@@ -106,7 +93,6 @@ const MBTITest = () => {
     if (activeQuestion !== questions.length - 1) {
       setActiveQuestion(prev => prev + 1);
     } else {
-      setShowResult(true);
       const updatedSelectedAnswersForBack = {};
       for (let i = 1; i < questions.length; i++) {
         if (selectedAnswers[i] == 0)
@@ -116,7 +102,7 @@ const MBTITest = () => {
         }
       }
       // console.log(selectedAnswers);
-      // console.log(updatedSelectedAnswersForBack);
+      console.log(updatedSelectedAnswersForBack);
       sendAsnwersToBack(updatedSelectedAnswersForBack);
     }
   };
@@ -152,8 +138,7 @@ const MBTITest = () => {
       }
     }).then((result) => {
       if (result.isConfirmed) {
-        // Redirect to another page upon confirmation
-        // window.location.href = '/another-page'; // Replace '/another-page' with the actual URL of the page you want to redirect to
+        navigate("/");
       } else {
         // Handle the case when "ادامه می‌دهم" button is clicked (optional)
         // You can add any additional logic here, such as closing the dialog
@@ -170,15 +155,14 @@ const MBTITest = () => {
       width: "26rem",
       height: "18rem",
       showCancelButton: true,
-      confirmButtonText: "بله",
       cancelButtonText: "ادامه می‌دهم",
+      confirmButtonText: "بله",
       customClass: {
         container: 'custom-swal-container'
       }
     }).then((result) => {
       if (result.isConfirmed) {
-        // Redirect to another page upon confirmation
-        // window.location.href = '/another-page'; // Replace '/another-page' with the actual URL of the page you want to redirect to
+        navigate("/");
       } else {
         // Handle the case when "ادامه می‌دهم" button is clicked (optional)
         // You can add any additional logic here, such as closing the dialog
@@ -199,6 +183,8 @@ const MBTITest = () => {
 
 
   return (
+    <>
+  <NavBar_SideBar/>
     <body className='mbti-body'>
     <div className="mbti-quiz-container">
       {!showResult && ( // Conditionally render content when not showing result
@@ -209,7 +195,7 @@ const MBTITest = () => {
           <div className="mbti-header">
             {activeQuestion !== 0 && ( // Conditionally render the counter starting from the second question
               <>
-                <ProgressBar now={(activeQuestion + 1) * (100 / questions.length)} />
+                <ProgressBar variant="purple" className='mbti-progress-bar' now={(activeQuestion + 1) * (100 / questions.length)} />
                 <span className="mbti-active-question-no">{addLeadingZero(activeQuestion)}</span>
                 <span className="mbti-total-question">/{addLeadingZero(questions.length - 1)}</span>
               </>
@@ -263,6 +249,7 @@ const MBTITest = () => {
       )}
     </div>
     </body>
+    </>
   );
   
 };

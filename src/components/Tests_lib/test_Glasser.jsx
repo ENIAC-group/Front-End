@@ -1,15 +1,18 @@
 import React, { useState, useEffect } from 'react';
-import Glasser from './Glasser';
+import Glasser from './questions_Glasser';
 import ProgressBar from 'react-bootstrap/ProgressBar';
 import Swal from 'sweetalert2';
 import "./glasser_style.css";
+import axios from 'axios';
+import { useNavigate } from 'react-router-dom';
+import NavBar_SideBar from '../SidebarNabar/NavBar_SideBar';
 
 const GlasserTest = () => {
+  const navigate = useNavigate();
   const [activeQuestion, setActiveQuestion] = useState(0);
   const [selectedAnswers, setSelectedAnswers] = useState(Array(Glasser.questions.length).fill(null));
   const [showResult, setShowResult] = useState(false);
   const [result, setResult] = useState({
-    score: 0,
     doneAnswers: 0,
     emptyAnswers: 0,
   });
@@ -28,6 +31,65 @@ const GlasserTest = () => {
     console.log(selectedAnswers);
   }, [activeQuestion]);
 
+  const sendAnswersToBack = async (data) => {
+    try {
+        const token = localStorage.getItem("accessToken");
+        console.log(data)
+        const response = await axios.post("http://127.0.0.1:8000/TherapyTests/glasser/", 
+            data
+        ,{
+          method: "POST",
+          headers: {
+            Authorization: `Bearer ${token}`,
+            "Content-Type": "application/json",
+          },
+          
+        });
+        
+        if (response.status === 200) {
+          setShowResult(true);
+          Swal.fire({
+            icon: "success",
+            title: "موفقیت",
+            background: "#473a67",
+            color: "#b4b3b3",
+            width: "26rem",
+            height: "18rem",
+            confirmButtonText: "تایید",
+            customClass: {
+              container: 'custom-swal-container'
+            }
+          });
+        } else {
+          Swal.fire({
+            icon: "error",
+            title: "!خطا در ارسال درخواست",
+            background: "#473a67",
+            color: "#b4b3b3",
+            width: "26rem",
+            height: "18rem",
+            confirmButtonText: "تایید",
+            customClass: {
+              container: 'custom-swal-container'
+            }
+          });
+        }
+      } catch (error) {
+        Swal.fire({
+          icon: "error",
+          title: "!خطا در ارسال درخواست",
+          background: "#473a67",
+          color: "#b4b3b3",
+          width: "26rem",
+          height: "18rem",
+          confirmButtonText: "تایید",
+          customClass: {
+            container: 'custom-swal-container'
+          }
+        });
+      }
+  }
+
   const onClickNext = () => {
     if (selectedAnswers[activeQuestion] !== null) {
       setResult(prev => ({
@@ -44,7 +106,12 @@ const GlasserTest = () => {
     if (activeQuestion !== questions.length - 1) {
       setActiveQuestion(prev => prev + 1);
     } else {
-      setShowResult(true);
+    //   setShowResult(true);
+      const updatedAnswersForBack = {}
+      for (let i = 1; i < questions.length; i++){
+        updatedAnswersForBack[i] = {"category": questions[i].category, "res": selectedAnswers[i] + 1}
+      }
+      sendAnswersToBack(updatedAnswersForBack);
     }
   };
 
@@ -79,8 +146,7 @@ const GlasserTest = () => {
       }
     }).then((result) => {
       if (result.isConfirmed) {
-        // Redirect to another page upon confirmation
-        // window.location.href = '/another-page'; // Replace '/another-page' with the actual URL of the page you want to redirect to
+        navigate("/");
       } else {
         // Handle the case when "ادامه می‌دهم" button is clicked (optional)
         // You can add any additional logic here, such as closing the dialog
@@ -104,8 +170,7 @@ const GlasserTest = () => {
       }
     }).then((result) => {
       if (result.isConfirmed) {
-        // Redirect to another page upon confirmation
-        // window.location.href = '/another-page'; // Replace '/another-page' with the actual URL of the page you want to redirect to
+        navigate("/");
       } else {
         // Handle the case when "ادامه می‌دهم" button is clicked (optional)
         // You can add any additional logic here, such as closing the dialog
@@ -124,6 +189,9 @@ const GlasserTest = () => {
 
 
   return (
+    <>
+    <NavBar_SideBar/>
+    <body className='glasser-body'>
     <div className="glasser-quiz-container">
       {!showResult && ( // Conditionally render content when not showing result
         <div>
@@ -186,6 +254,8 @@ const GlasserTest = () => {
         </div>
       )}
     </div>
+    </body>
+    </>
   );
   
 };

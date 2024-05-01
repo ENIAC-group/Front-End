@@ -172,7 +172,7 @@ const CourseList = () => {
                       فرآیند شناخت پیش از ازدواج کمک میکند
                     </p>
                     <a
-                      href="course-single.html"
+                      href="/Glasser"
                       className="Test_btn btn-primary btn-sm Ta"
                     >
                       شروع
