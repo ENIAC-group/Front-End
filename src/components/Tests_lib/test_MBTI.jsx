@@ -195,7 +195,7 @@ const MBTITest = () => {
           <div className="mbti-header">
             {activeQuestion !== 0 && ( // Conditionally render the counter starting from the second question
               <>
-                <ProgressBar variant="purple" className='mbti-progress-bar' now={(activeQuestion + 1) * (100 / questions.length)} />
+                <ProgressBar animated className='mbti-progress-bar custom-color' now={(activeQuestion + 1) * (100 / questions.length)} />
                 <span className="mbti-active-question-no">{addLeadingZero(activeQuestion)}</span>
                 <span className="mbti-total-question">/{addLeadingZero(questions.length - 1)}</span>
               </>
@@ -244,7 +244,7 @@ const MBTITest = () => {
           <p>
             پاسخ‌های شما پردازش شد. برای دیدن نتیجۀ آزمون خود، برروی دکمۀ زیر کلیک کنید.
           </p>
-          <button style={{ display: 'flex', justifyContent: 'center', alignItems: 'center', marginTop: "120px", marginRight: "34%"}}onClick={onClickNext}>دیدن نتایج</button>
+          <button style={{ display: 'flex', justifyContent: 'center', alignItems: 'center', marginTop: "120px", marginRight: "34%"}}onClick={showTheResult}>دیدن نتایج</button>
         </div>
       )}
     </div>

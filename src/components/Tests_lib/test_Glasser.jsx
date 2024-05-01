@@ -22,7 +22,6 @@ const GlasserTest = () => {
 
 
   useEffect(() => {
-    // Ensure that the effect runs only when activeQuestion changes
     setSelectedAnswers(prevSelectedAnswers => {
       const updatedAnswers = [...prevSelectedAnswers];
       updatedAnswers[activeQuestion] = selectedAnswers[activeQuestion];
@@ -34,10 +33,12 @@ const GlasserTest = () => {
   const sendAnswersToBack = async (data) => {
     try {
         const token = localStorage.getItem("accessToken");
-        console.log(data)
+        const dataString = JSON.stringify(data); // Convert data to a JSON string
+        console.log(dataString);
         const response = await axios.post("http://127.0.0.1:8000/TherapyTests/glasser/", 
-            data
-        ,{
+        {
+            data: dataString // Send the JSON string as data
+        },{
           method: "POST",
           headers: {
             Authorization: `Bearer ${token}`,
@@ -201,7 +202,7 @@ const GlasserTest = () => {
           <div className="glasser-header">
             {activeQuestion !== 0 && ( // Conditionally render the counter starting from the second question
               <>
-                <ProgressBar now={(activeQuestion + 1) * (100 / questions.length)} />
+                <ProgressBar animated className='mbti-progress-bar custom-color'now={(activeQuestion + 1) * (100 / questions.length)} />
                 <span className="glasser-active-question-no">{addLeadingZero(activeQuestion)}</span>
                 <span className="glasser-total-question">/{addLeadingZero(questions.length - 1)}</span>
               </>
