@@ -15,6 +15,8 @@ import { useEffect } from "react";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
 import * as shamsi from "shamsi-date-converter";
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 function DateString(input) {
   var changed = shamsi.jalaliToGregorian(input.year, input.month, input.day);
@@ -52,9 +54,19 @@ const ReservationPage = () => {
   const navigate = useNavigate();
   const location = useLocation();
   const initialState = location.state || {};
-  const [res_type,setres_type] = useState("حضوری");
+  const [res_type, setres_type] = useState("حضوری");
   const [doctor_id, setCode] = useState(initialState.doctorId || "");
-  const hours = ["9:00:00","10:00:00","11:00:00","14:00:00","15:00:00","16:30:00", "18:00:00","19:00:00", "20:00:00"];
+  const hours = [
+    "9:00:00",
+    "10:00:00",
+    "11:00:00",
+    "14:00:00",
+    "15:00:00",
+    "16:30:00",
+    "18:00:00",
+    "19:00:00",
+    "20:00:00",
+  ];
   const [responseData, setResponseData] = useState([]);
 
   const [selectedDay, setSelectedDay] = useState(
@@ -149,9 +161,17 @@ const ReservationPage = () => {
         // setResponseData(response.data);
         // console.log("last data");
         // console.log(responseData);
-        // console.log("you reserved successfully");
+        console.log("you reserved successfully");
         // navigate("/Verification", { state: data });
-
+        toast.success("رزرو شما با موفیت انجام شد", {
+          position: "bottom-left",
+          autoClose: 3000,
+          hideProgressBar: false,
+          closeOnClick: true,
+          pauseOnHover: true,
+          draggable: true,
+          progress: undefined,
+        });
         //console.log("you can login now");
         //navigate("/Signup");
       }
@@ -225,34 +245,36 @@ const ReservationPage = () => {
               ساعت:
               <br />
               {hours[selected]}
-              <br />              
+              <br />
               <div className={styles.reverse_choices_box}>
-                <ul className={styles.reserve_choices} >
+                <ul className={styles.reserve_choices}>
                   <label className={styles.reserve_choices_op}>
                     <input
                       type="radio"
                       name="q1"
                       value="حضوری"
                       checked={res_type == "حضوری"}
-                      onClick={(e)=>setres_type("حضوری")}
-
+                      onClick={(e) => setres_type("حضوری")}
                     />
                     <span>حضوری</span>
                   </label>
                   <label className={styles.reserve_choices_op}>
-                    <input 
-                    type="radio" 
-                    name="q1" 
-                    value="مجازی" 
-                    checked={res_type == "مجازی"}
-                    onClick={(e)=>setres_type("مجازی")}
+                    <input
+                      type="radio"
+                      name="q1"
+                      value="مجازی"
+                      checked={res_type == "مجازی"}
+                      onClick={(e) => setres_type("مجازی")}
                     />
                     <span>مجازی</span>
                   </label>
                 </ul>
-                <button className={styles.button_74} onClick={CreateReservation}>
-                ثبت
-              </button>
+                <button
+                  className={styles.button_74}
+                  onClick={CreateReservation}
+                >
+                  ثبت
+                </button>
               </div>
             </div>
           </div>
