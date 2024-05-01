@@ -1,4 +1,4 @@
-import React, { useState  } from "react";
+import React, { useState } from "react";
 import { useLocation } from "react-router-dom";
 import NavBar_SideBar from "../SidebarNabar/NavBar_SideBar";
 import Footer from "../Footer/Footer";
@@ -13,10 +13,8 @@ import { BsCalendarDate } from "react-icons/bs";
 import { IoMdTime } from "react-icons/io";
 import { useEffect } from "react";
 import axios from "axios";
-import { useLocation } from "react-router-dom";
 import { useNavigate } from "react-router-dom";
 import * as shamsi from "shamsi-date-converter";
-
 
 function DateString(input) {
   var changed = shamsi.jalaliToGregorian(input.year, input.month, input.day);
@@ -25,7 +23,6 @@ function DateString(input) {
   var d = changed[2] < 10 ? `0${changed[2]}` : `${changed[2]}`;
   return [y, m, d].join("-");
 }
-
 
 function ChangeDate(input) {
   var date = new DateObject(input);
@@ -52,30 +49,22 @@ function addDays(date, days) {
 }
 
 const ReservationPage = () => {
-
   const navigate = useNavigate();
   const location = useLocation();
   const initialState = location.state || {};
-
+  const [res_type,setres_type] = useState("حضوری");
   const [doctor_id, setCode] = useState(initialState.doctorId || "");
-  console.log("doctor_id:");
-  console.log(doctor_id);
-  const hours = ["19:00:00", "18:00:00", "17:00:00", "20:00:00"];
+  const hours = ["9:00:00","10:00:00","11:00:00","14:00:00","15:00:00","16:30:00", "18:00:00","19:00:00", "20:00:00"];
   const [responseData, setResponseData] = useState([]);
-
-  const today = ChangeDate(utils().getToday());
-  // const location = useLocation();
-  // const doctorID = location.state.id;
-  const hours = ["19:00", "18:00", "17:00", "20:00"];
 
   const [selectedDay, setSelectedDay] = useState(
     ChangeDate(utils().getToday())
   );
+  const today = ChangeDate(utils().getToday());
   const [selected, setSelect] = useState(-1);
 
   async function getReservation() {
     try {
-      console.log("hello");
       const startDate = formatDate(new Date()); // Format today's date as "yyyy-mm-dd" string
       const endDate = formatDate(addDays(new Date(), 30)); // Format 30 days later as "yyyy-mm-dd" string
 
@@ -91,22 +80,15 @@ const ReservationPage = () => {
           data: {
             start_date: startDate,
             end_date: endDate,
-            doctor_id: 1,
+            doctor_id: doctor_id,
           },
         }
       );
 
-      console.log("hello2");
-      console.log(response);
       if (response.status === 200 || response.status === 201) {
         setResponseData(response.data);
-        console.log("last data");
-        console.log(responseData);
-        //
-        // navigate("/Verification", { state: data });
-
-        //console.log("you can login now");
-        //navigate("/Signup");
+        console.log("res list:");
+        console.log(response.data);
       }
     } catch (error) {
       console.log(error);
@@ -145,9 +127,7 @@ const ReservationPage = () => {
   async function CreateReservation() {
     try {
       const ReservationDate = DateString(selectedDay); // Format today's date as "yyyy-mm-dd" string
-      console.log(ReservationDate);
       // const endDate = formatDate(addDays(new Date(), 30)); // Format 30 days later as "yyyy-mm-dd" string
-
       const token = localStorage.getItem("accessToken");
       const response = await axios("http://127.0.0.1:8000/reserve/create/", {
         method: "POST",
@@ -156,21 +136,20 @@ const ReservationPage = () => {
           Authorization: `Bearer ${token}`,
         },
         data: {
-          type: "حضوری",
+          type: res_type,
           date: ReservationDate,
           time: hours[selected],
           doctor_id: doctor_id,
-          //psychiatrist: doctor_id,
         },
       });
 
       // console.log("hello2");
-      console.log(response);
+      // console.log(response);
       if (response.status === 200 || response.status === 201) {
-        setResponseData(response.data);
-        console.log("last data");
-        console.log(responseData);
-        console.log("you reserved successfully");
+        // setResponseData(response.data);
+        // console.log("last data");
+        // console.log(responseData);
+        // console.log("you reserved successfully");
         // navigate("/Verification", { state: data });
 
         //console.log("you can login now");
@@ -179,11 +158,6 @@ const ReservationPage = () => {
     } catch (error) {
       console.log(error);
     }
-  }
-
-
-  async function sendReservationInfo(event){
-    
   }
 
   return (
@@ -204,7 +178,11 @@ const ReservationPage = () => {
                 value={selectedDay}
                 onChange={setSelectedDay}
                 minimumDate={today}
-                maximumDate={{year:today.year,month:today.month+1,day:today.day}}
+                maximumDate={{
+                  year: today.year,
+                  month: today.month + 1,
+                  day: today.day,
+                }}
                 shouldHighlightWeekends
                 locale="fa"
                 colorPrimary="#9c7aed"
@@ -239,7 +217,7 @@ const ReservationPage = () => {
               </span>
               تاریخ:
               <br />
-              {selectedDay.year}/{selectedDay.month}/{selectedDay.day}
+              {DateString(selectedDay)}
               <br />
               <span>
                 <IoMdTime />
@@ -247,30 +225,35 @@ const ReservationPage = () => {
               ساعت:
               <br />
               {hours[selected]}
-              <br />
-
-              <br />
-              <button className={styles.button_74} onClick={CreateReservation}>
-
+              <br />              
               <div className={styles.reverse_choices_box}>
-              <ul className={styles.reserve_choices}>
-                {/* <li> */}
+                <ul className={styles.reserve_choices} >
                   <label className={styles.reserve_choices_op}>
-                  <input type="radio" name="q1" value="حضوری" checked={true} />
-                   <span>حضوری</span> 
+                    <input
+                      type="radio"
+                      name="q1"
+                      value="حضوری"
+                      checked={res_type == "حضوری"}
+                      onClick={(e)=>setres_type("حضوری")}
+
+                    />
+                    <span>حضوری</span>
                   </label>
-                {/* </li> */}
-                {/* <li> */}
                   <label className={styles.reserve_choices_op}>
-                  <input type="radio" name="q1" value="مجازی" />
+                    <input 
+                    type="radio" 
+                    name="q1" 
+                    value="مجازی" 
+                    checked={res_type == "مجازی"}
+                    onClick={(e)=>setres_type("مجازی")}
+                    />
                     <span>مجازی</span>
                   </label>
-                {/* </li> */}
-              </ul></div>
-              <button className={styles.button_74} onClick={sendReservationInfo}>
-
-                رزرو
+                </ul>
+                <button className={styles.button_74} onClick={CreateReservation}>
+                ثبت
               </button>
+              </div>
             </div>
           </div>
         </div>
