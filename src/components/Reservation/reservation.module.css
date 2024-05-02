@@ -226,3 +226,18 @@ input[type="radio"] {
 .reserve_choices .reserve_choices_op span{
   padding-right: 5px;
 }
+.Reservation_error_input{
+  width: 100%;
+  height: 10px;
+  text-align: center;
+  direction: rtl;
+  outline: none;
+  margin-top: 7px;
+  padding-left: 15px;
+  border: none;
+  font-size: 15px;
+  font-weight: bold;
+  transition: border-color 0.3s ease;
+  color: #bba2f7;
+  caret-color: #bba2f7;
+}

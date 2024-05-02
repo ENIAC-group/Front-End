@@ -181,7 +181,7 @@ const ReservationPage = () => {
       if (response.status === 200 || response.status === 201) {
         console.log("you reserved successfully");
         getReservation();
-        toast.success("رزرو شما با موفیت انجام شد", {
+        toast.success("رزرو شما با موفقیت انجام شد", {
           position: "bottom-left",
           autoClose: 3000,
           hideProgressBar: false,
@@ -243,6 +243,11 @@ const ReservationPage = () => {
             <div className={styles.reserve_hour_wrap}>
               <h6>ساعت های قابل رزرو</h6>
               <div className={styles.reserve_hour_items}>
+                {LeftTimes.length == 0 && (
+                  <div className={styles.Reservation_error_input}>
+                    زمانی جهت مشاوره یافت نشد
+                  </div>
+                )}
                 {LeftTimes.map((time, index, key) => (
                   <HourCard
                     time={time}
