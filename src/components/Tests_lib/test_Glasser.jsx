@@ -12,6 +12,7 @@ const GlasserTest = () => {
   const [activeQuestion, setActiveQuestion] = useState(0);
   const [selectedAnswers, setSelectedAnswers] = useState(Array(Glasser.questions.length).fill(null));
   const [showResult, setShowResult] = useState(false);
+  const [glasserResult, setGlasserResult] = useState({});
   const [result, setResult] = useState({
     doneAnswers: 0,
     emptyAnswers: 0,
@@ -33,11 +34,11 @@ const GlasserTest = () => {
   const sendAnswersToBack = async (data) => {
     try {
         const token = localStorage.getItem("accessToken");
-        const dataString = JSON.stringify(data); // Convert data to a JSON string
+        const dataString = JSON.stringify(data); 
         console.log(dataString);
         const response = await axios.post("http://127.0.0.1:8000/TherapyTests/glasser/", 
         {
-            data: dataString // Send the JSON string as data
+            data: dataString 
         },{
           method: "POST",
           headers: {
@@ -49,17 +50,14 @@ const GlasserTest = () => {
         
         if (response.status === 200) {
           setShowResult(true);
-          Swal.fire({
-            icon: "success",
-            title: "موفقیت",
-            background: "#473a67",
-            color: "#b4b3b3",
-            width: "26rem",
-            height: "18rem",
-            confirmButtonText: "تایید",
-            customClass: {
-              container: 'custom-swal-container'
-            }
+          console.log(response);
+          console.log(response.data.result);
+          setGlasserResult({
+            "love": response.data.result.love,
+            "survive": response.data.result.survive,
+            "freedom": response.data.result.freedom,
+            "power": response.data.result.power,
+            "fun": response.data.result.fun,
           });
         } else {
           Swal.fire({
@@ -79,6 +77,7 @@ const GlasserTest = () => {
         Swal.fire({
           icon: "error",
           title: "!خطا در ارسال درخواست",
+          html: error,
           background: "#473a67",
           color: "#b4b3b3",
           width: "26rem",
@@ -90,6 +89,32 @@ const GlasserTest = () => {
         });
       }
   }
+
+  const loginMessage = () => {
+    Swal.fire({
+      icon: "warning",
+      title: "!برای انجام تست، ورود به حساب خود الزامی است",
+      html: "آیا می‌خواهید وارد شوید؟",
+      background: "#473a67",
+      color: "#b4b3b3",
+      width: "26rem",
+      height: "18rem",
+      showCancelButton: true,
+      confirmButtonText: "ورود",
+      cancelButtonText: "صفحۀ اصلی",
+      customClass: {
+        container: 'custom-swal-container'
+      }
+     }).then((result) => {
+        if (result.isConfirmed) {
+          navigate("/Signup");
+        } else {
+          navigate("/");
+        }
+      }
+      )
+    }
+    
 
   const onClickNext = () => {
     if (selectedAnswers[activeQuestion] !== null) {
@@ -107,12 +132,12 @@ const GlasserTest = () => {
     if (activeQuestion !== questions.length - 1) {
       setActiveQuestion(prev => prev + 1);
     } else {
-    //   setShowResult(true);
       const updatedAnswersForBack = {}
       for (let i = 1; i < questions.length; i++){
         updatedAnswersForBack[i] = {"category": questions[i].category, "res": selectedAnswers[i] + 1}
       }
       sendAnswersToBack(updatedAnswersForBack);
+      setShowResult(true);
     }
   };
 
@@ -149,8 +174,7 @@ const GlasserTest = () => {
       if (result.isConfirmed) {
         navigate("/");
       } else {
-        // Handle the case when "ادامه می‌دهم" button is clicked (optional)
-        // You can add any additional logic here, such as closing the dialog
+        // do nothing
       }
     });
   };
@@ -173,10 +197,38 @@ const GlasserTest = () => {
       if (result.isConfirmed) {
         navigate("/");
       } else {
-        // Handle the case when "ادامه می‌دهم" button is clicked (optional)
-        // You can add any additional logic here, such as closing the dialog
+        // do nothing
       }
     });
+  }
+
+  const showTheResult = () => {
+    console.log(glasserResult);
+    Swal.fire({
+      icon: "info",
+      title: "نتیجۀ گلاسر شما",
+      html: `
+          <p>عشق: ${convertToPersianNumbers(glasserResult["love"])} از ۵</p>
+          <p>بقا: ${convertToPersianNumbers((glasserResult["survive"]))} از ۵</p>
+          <p>آزادی: ${convertToPersianNumbers(glasserResult["freedom"])} از ۵</p>
+          <p>قدرت: ${convertToPersianNumbers(glasserResult["power"])} از ۵</p>
+          <p>سرگرمی: ${convertToPersianNumbers(glasserResult["fun"])} از ۵</p>
+        `,
+      background: "#473a67",
+      color: "#b4b3b3",
+      width: "26rem",
+      height: "18rem",
+      // showCancelButton: true,
+      confirmButtonText: "تایید و رفتن به صفحۀ اصلی",
+      // cancelButtonText: "صفحۀ اصلی",
+      customClass: {
+        container: 'custom-swal-container'
+      }
+     }).then((result) => {
+      if (result.isConfirmed) {
+        navigate("/");
+      }
+     })
   }
   
 
@@ -193,14 +245,15 @@ const GlasserTest = () => {
     <>
     <NavBar_SideBar/>
     <body className='glasser-body'>
-    <div className="glasser-quiz-container">
-      {!showResult && ( // Conditionally render content when not showing result
+    <div className="glasser-quiz-container"
+      style={activeQuestion === 0 || showResult ? {marginTop: "6%"} : {marginTop: "2%"}}>
+      {!showResult && ( 
         <div>
-          {activeQuestion === 0 && ( // Conditionally render the header for the first question
+          {activeQuestion === 0 && ( 
             <h2 style={{fontSize: "30px", color: "#9a94fb", marginBottom: "10px", textAlign: "center"}}>توجه!</h2>
           )}
           <div className="glasser-header">
-            {activeQuestion !== 0 && ( // Conditionally render the counter starting from the second question
+            {activeQuestion !== 0 && ( 
               <>
                 <ProgressBar animated className='mbti-progress-bar custom-color'now={(activeQuestion + 1) * (100 / questions.length)} />
                 <span className="glasser-active-question-no">{addLeadingZero(activeQuestion)}</span>
@@ -208,7 +261,9 @@ const GlasserTest = () => {
               </>
             )}
           </div>
-          <h2>{question}</h2>
+          <h2 style={activeQuestion === 0 ? {lineHeight: "1.8", fontSize: "22px", paddingTop: "20px"} : {}}>
+          {question}
+        </h2>
           <ul>
             {choices.map((choice, index) => (
               <li
@@ -220,23 +275,31 @@ const GlasserTest = () => {
               </li>
             ))}
           </ul>
-          <div className="glasser-button-group">
+          <div className="glasser-button-group" style={{fontSize: "14px"}}>
             {activeQuestion === 0 ? (
               <>
-                <button style={{width: "40px", fontSize: "16px"}}onClick={onClickNext}>شروع آزمون</button>
+                <button style={{width: "40px", fontSize: "14px"}}
+                onClick={() => {
+                  if (localStorage.getItem("accessToken") !== null) {
+                    onClickNext();
+                  } else {
+                    loginMessage();
+                  }
+                }}
+                >شروع آزمون</button>
                 <button onClick={cancelTest}>انصراف</button>
               </>
             ) : (
               <>
                <button 
-                  onClick={onClickNext} 
+                  onClick={onClickNext}
                   disabled={selectedAnswers[activeQuestion] === null}
                   title={selectedAnswers[activeQuestion] === null && activeQuestion !== questions.length - 1 ? "برای ادامه باید حتما یک گزینه را انتخاب کنید" : ""}
-                >
+                  style={(activeQuestion === questions.length - 1) ? {fontSize: "14px"} : {}}>
                   {activeQuestion === questions.length - 1 ? 'پایان آزمون' : 'بعدی'}
                 </button>
 
-                <span onClick={showConfirmSwal}className="glasser-complete-test">اتمام آزمون</span>
+                <span style={{fontSize: "16px"}}onClick={showConfirmSwal}className="glasser-complete-test">اتمام آزمون</span>
                 <button onClick={onClickPrevious} disabled={activeQuestion === 0}>
                   قبلی
                 </button>
@@ -245,13 +308,13 @@ const GlasserTest = () => {
           </div>
         </div>
       )}
-      {showResult && ( // Conditionally render result
-        <div className="glasser-result">
+      {showResult && (
+        <div className="glasser-result" style={{marginTop: "40px"}}>
           <h3 style={{color: "#9a94fb", marginBottom: "10px"}}>آزمون شما به پایان رسید!</h3>
-          <p>
-            پاسخ‌های شما پردازش شد. برای دیدن نتیجۀ آزمون خود، برروی دکمۀ زیر کلیک کنید.
+          <p style={{fontSize: "20px", paddingTop: "30px"}}>
+            پاسخ‌های شما پردازش شد. نتیجۀ این آزمون می‌گوید نیاز شما به هر یک از موارد "عشق"، "بقا"، "آزادی"، "قدرت" و "سرگرمی و تفریح" چقدر است. برای دیدن نتیجۀ آزمون خود، برروی دکمۀ زیر کلیک کنید.
           </p>
-          <button style={{ display: 'flex', justifyContent: 'center', alignItems: 'center', marginTop: "120px", marginRight: "34%"}}onClick={onClickNext}>دیدن نتایج</button>
+          <button style={{ display: 'flex', justifyContent: 'center', alignItems: 'center', marginTop: "120px", marginRight: "34%"}}onClick={showTheResult}>دیدن نتایج</button>
         </div>
       )}
     </div>

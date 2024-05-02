@@ -19,7 +19,7 @@
   min-height: 300px; /* Decrease minimum height */
   background: #ffffff;
   border-radius: 15px; /* Decrease border radius */
-  margin-top: 20px; /* Decrease margin top */
+  margin-top: 5px; /* Decrease margin top */
   padding: 40px 60px; /* Adjust padding */
   box-sizing: border-box;
   box-shadow: 5px 5px 10px rgba(0, 0, 0, 0.1); /* Decrease box shadow */
@@ -42,7 +42,7 @@
   font-size: 18px; /* Decrease font size */
   font-weight: 500;
   margin: 0;
-  text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.2); /* Decrease text shadow */
+  text-shadow: 0px 0px 5px rgba(0, 0, 0, 0.2);
   color: #636363;
 }
 
@@ -63,6 +63,8 @@
   margin-top: 15px; /* Decrease margin top */
   cursor: pointer;
   transition: color 0.3s ease;
+  margin-right: 41px;
+  text-align: center;
 }
 
 .glasser-quiz-container ul .glasser-selected-answer {

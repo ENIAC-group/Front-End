@@ -12,6 +12,7 @@ const MBTITest = () => {
   const [activeQuestion, setActiveQuestion] = useState(0);
   const [selectedAnswers, setSelectedAnswers] = useState(Array(MBTI.questions.length).fill(null));
   const [showResult, setShowResult] = useState(false);
+  const [mbtiResult, setMbtiResult] = useState(null);
   const [result, setResult] = useState({
     doneAnswers: 0,
     emptyAnswers: 0,
@@ -22,7 +23,6 @@ const MBTITest = () => {
 
 
   useEffect(() => {
-    // Ensure that the effect runs only when activeQuestion changes
     setSelectedAnswers(prevSelectedAnswers => {
       const updatedAnswers = [...prevSelectedAnswers];
       updatedAnswers[activeQuestion] = selectedAnswers[activeQuestion];
@@ -46,10 +46,12 @@ const MBTITest = () => {
         
         if (response.status === 200) {
           setShowResult(true);
+          console.log(response.data);
+          setMbtiResult(response.data.result);
         } else {
           Swal.fire({
             icon: "error",
-            title: "!خطا در ارسال درخواست",
+            title: "!خطا در ارسال پاسخ‌ها",
             background: "#473a67",
             color: "#b4b3b3",
             width: "26rem",
@@ -75,6 +77,32 @@ const MBTITest = () => {
         });
       }
     } 
+
+    const loginMessage = () => {
+      Swal.fire({
+        icon: "warning",
+        title: "!برای انجام تست، ورود به حساب کاربری الزامی است",
+        html: "آیا می‌خواهید وارد شوید؟",
+        background: "#473a67",
+        color: "#b4b3b3",
+        width: "26rem",
+        height: "18rem",
+        showCancelButton: true,
+        confirmButtonText: "ورود",
+        cancelButtonText: "صفحۀ اصلی",
+        customClass: {
+          container: 'custom-swal-container'
+        }
+       }).then((result) => {
+          if (result.isConfirmed) {
+            navigate("/Signup");
+          } else {
+            navigate("/");
+          }
+        }
+        )
+      }
+      
   
 
   const onClickNext = () => {
@@ -101,9 +129,9 @@ const MBTITest = () => {
           updatedSelectedAnswersForBack[i] = 'b';
         }
       }
-      // console.log(selectedAnswers);
-      console.log(updatedSelectedAnswersForBack);
+      // console.log(updatedSelectedAnswersForBack);
       sendAsnwersToBack(updatedSelectedAnswersForBack);
+      setShowResult(true);
     }
   };
 
@@ -114,7 +142,6 @@ const MBTITest = () => {
   };
 
   const onAnswerSelected = (index) => {
-    // console.log(activeQuestion);
     const updatedAnswers = [...selectedAnswers];
     updatedAnswers[activeQuestion] = index;
     setSelectedAnswers(updatedAnswers);
@@ -140,8 +167,7 @@ const MBTITest = () => {
       if (result.isConfirmed) {
         navigate("/");
       } else {
-        // Handle the case when "ادامه می‌دهم" button is clicked (optional)
-        // You can add any additional logic here, such as closing the dialog
+        // do nothing
       }
     });
   };
@@ -164,10 +190,32 @@ const MBTITest = () => {
       if (result.isConfirmed) {
         navigate("/");
       } else {
-        // Handle the case when "ادامه می‌دهم" button is clicked (optional)
-        // You can add any additional logic here, such as closing the dialog
+        // do nothing
       }
     });
+  }
+
+  const showTheResult = () => {
+    console.log(mbtiResult);
+    Swal.fire({
+      icon: "info",
+      title: "نتیجۀ تست شخصیت‌شناسی شما",
+      html: mbtiResult,
+      background: "#473a67",
+      color: "#b4b3b3",
+      width: "26rem",
+      height: "18rem",
+      // showCancelButton: true,
+      confirmButtonText: "تایید و رفتن به صفحۀ اصلی",
+      // cancelButtonText: "صفحۀ اصلی",
+      customClass: {
+        container: 'custom-swal-container'
+      }
+     }).then((result) => {
+      if (result.isConfirmed) {
+        navigate("/");
+      }
+     })
   }
 
   
@@ -186,14 +234,14 @@ const MBTITest = () => {
     <>
   <NavBar_SideBar/>
     <body className='mbti-body'>
-    <div className="mbti-quiz-container">
-      {!showResult && ( // Conditionally render content when not showing result
+    <div className="mbti-quiz-container" style={showResult ? {marginTop: "6%"} : {}}>
+      {!showResult && (
         <div>
-          {activeQuestion === 0 && ( // Conditionally render the header for the first question
+          {activeQuestion === 0 && ( 
             <h2 style={{fontSize: "30px", color: "#9a94fb", marginBottom: "10px", textAlign: "center"}}>توجه!</h2>
           )}
           <div className="mbti-header">
-            {activeQuestion !== 0 && ( // Conditionally render the counter starting from the second question
+            {activeQuestion !== 0 && (
               <>
                 <ProgressBar animated className='mbti-progress-bar custom-color' now={(activeQuestion + 1) * (100 / questions.length)} />
                 <span className="mbti-active-question-no">{addLeadingZero(activeQuestion)}</span>
@@ -201,7 +249,9 @@ const MBTITest = () => {
               </>
             )}
           </div>
-          <h2>{question}</h2>
+          <h2 style={activeQuestion === 0 ? {lineHeight: "1.8", fontSize: "22px", paddingTop: "20px"} : {}}>
+              {question}
+            </h2>
           <ul>
             {choices.map((choice, index) => (
               <li
@@ -216,7 +266,15 @@ const MBTITest = () => {
           <div className="mbti-button-group">
             {activeQuestion === 0 ? (
               <>
-                <button style={{width: "40px", fontSize: "16px"}}onClick={onClickNext}>شروع آزمون</button>
+                <button style={{width: "40px", fontSize: "16px"}}
+                  onClick={() => {
+                    if (localStorage.getItem("accessToken") !== null) {
+                      onClickNext();
+                    } else {
+                      loginMessage();
+                    }
+                  }}
+                >شروع آزمون</button>
                 <button onClick={cancelTest}>انصراف</button>
               </>
             ) : (
@@ -225,11 +283,11 @@ const MBTITest = () => {
                   onClick={onClickNext} 
                   disabled={selectedAnswers[activeQuestion] === null}
                   title={selectedAnswers[activeQuestion] === null && activeQuestion !== questions.length - 1 ? "برای ادامه باید حتما یک گزینه را انتخاب کنید" : ""}
-                >
+                  style={(activeQuestion === questions.length - 1) ? {fontSize: "18px"} : {}}>
                   {activeQuestion === questions.length - 1 ? 'پایان آزمون' : 'بعدی'}
                 </button>
 
-                <span onClick={showConfirmSwal}className="mbti-complete-test">اتمام آزمون</span>
+                <span style={{fontSize: "19px"}} onClick={showConfirmSwal}className="mbti-complete-test">اتمام آزمون</span>
                 <button onClick={onClickPrevious} disabled={activeQuestion === 0}>
                   قبلی
                 </button>
@@ -240,7 +298,7 @@ const MBTITest = () => {
       )}
       {showResult && ( // Conditionally render result
         <div className="mbti-result">
-          <h3 style={{color: "#9a94fb", marginBottom: "10px"}}>آزمون شما به پایان رسید!</h3>
+          <h3 style={showResult ? {fontWeight: "bolder", color: "#9a94fb", marginBottom: "33px"} : {}}>آزمون شما به پایان رسید!</h3>
           <p>
             پاسخ‌های شما پردازش شد. برای دیدن نتیجۀ آزمون خود، برروی دکمۀ زیر کلیک کنید.
           </p>
