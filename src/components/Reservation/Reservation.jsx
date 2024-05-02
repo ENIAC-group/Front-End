@@ -77,25 +77,39 @@ const ReservationPage = () => {
   const [selected, setSelect] = useState(-1);
 
   const setdatetime = () => {
-    setSelect(-1);
-    const temp = hours.slice();
-    setTime(temp);
-    for (let i = 0; i < responseData.length; i++) {
-      if (responseData[i].date == DateString(selectedDay)) {
-        var ind = temp.indexOf(responseData[i].time);
-        if (ind > -1) {
-          temp.splice(ind, 1);
+    var d = new Date(
+      selectedDay.year,
+      selectedDay.month,
+      selectedDay.day
+    ).getDay();
+    var temp;
+    if (d == 1) temp = [];
+    else {
+      temp = hours.slice();
+      setTime(temp);
+      for (let i = 0; i < responseData.length; i++) {
+        if (responseData[i].date == DateString(selectedDay)) {
+          var ind = temp.indexOf(responseData[i].time);
+          if (ind > -1) {
+            temp.splice(ind, 1);
+          }
         }
       }
     }
     return temp;
   };
+  useEffect(() => {
+    setTimeout(() => {
+      {
+        setTime(setdatetime(selectedDay));
+      }
+    }, 10);
+  });
 
   async function getReservation() {
     try {
       const startDate = formatDate(new Date()); // Format today's date as "yyyy-mm-dd" string
       const endDate = formatDate(addDays(new Date(), 30)); // Format 30 days later as "yyyy-mm-dd" string
-
       const token = localStorage.getItem("accessToken");
       const response = await axios(
         "http://127.0.0.1:8000/reserve/between_dates/",
@@ -115,16 +129,11 @@ const ReservationPage = () => {
 
       if (response.status === 200 || response.status === 201) {
         setResponseData(response.data);
-        console.log("res list:");
-        console.log(response.data);
       }
     } catch (error) {
       console.log(error);
     }
   }
-  useEffect(() => {
-    getReservation();
-  }, []);
 
   const [doctorProfile, setDoctorProfile] = useState([]);
   const baseUrl = "http://127.0.0.1:8000/profile/doctors/";
@@ -169,13 +178,9 @@ const ReservationPage = () => {
         },
       });
 
-      // console.log("hello2");
-      // console.log(response);
       if (response.status === 200 || response.status === 201) {
-        // setResponseData(response.data);
-        // console.log("last data");
-        // console.log(responseData);
         console.log("you reserved successfully");
+        getReservation();
         toast.success("رزرو شما با موفیت انجام شد", {
           position: "bottom-left",
           autoClose: 3000,
@@ -185,9 +190,6 @@ const ReservationPage = () => {
           draggable: true,
           progress: undefined,
         });
-        // navigate("/Verification", { state: data });
-        //console.log("you can login now");
-        //navigate("/Signup");
       }
     } catch (error) {
       console.log(error);
@@ -207,8 +209,7 @@ const ReservationPage = () => {
     <>
       <NavBar_SideBar />
       <ToastContainer />
-
-      <div className={styles.reserve_body}>
+      <div className={styles.reserve_body} onLoad={getReservation}>
         <div className={styles.reserve_Box}>
           <div className={styles.reserve_docProfile}>
             <a href="#">
@@ -222,7 +223,7 @@ const ReservationPage = () => {
                 value={selectedDay}
                 onChange={(e) => {
                   setSelectedDay(e);
-                  setdatetime();
+                  setSelect(-1);
                 }}
                 minimumDate={today}
                 maximumDate={{
@@ -235,13 +236,14 @@ const ReservationPage = () => {
                 colorPrimary="#9c7aed"
                 calendarClassName={styles.custom_calendar}
                 calendarTodayClassName="custom-today-day"
+                // disabledDays = [{utils().weekDaysList}]
               />
             </div>
 
             <div className={styles.reserve_hour_wrap}>
               <h6>ساعت های قابل رزرو</h6>
               <div className={styles.reserve_hour_items}>
-                {LeftTimes.map((time, index,key) => (
+                {LeftTimes.map((time, index, key) => (
                   <HourCard
                     time={time}
                     index={index}
@@ -304,14 +306,11 @@ const ReservationPage = () => {
                   className={styles.button_74}
                   onClick={(e) => {
                     CreateReservation(e);
-                    getReservation();
-                    setTime(setdatetime());
-
+                    setSelect(-1);
                   }}
                 >
                   ثبت
                 </button>
-
               </div>
             </div>
           </div>
