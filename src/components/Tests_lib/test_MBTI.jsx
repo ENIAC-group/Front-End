@@ -174,7 +174,7 @@ const MBTITest = () => {
       }
     }).then((result) => {
       if (result.isConfirmed) {
-        navigate("/");
+        navigate("/TestPage");
       } else {
         // do nothing
       }
@@ -197,7 +197,7 @@ const MBTITest = () => {
       }
     }).then((result) => {
       if (result.isConfirmed) {
-        navigate("/");
+        navigate("/TestPage");
       } else {
         // do nothing
       }
