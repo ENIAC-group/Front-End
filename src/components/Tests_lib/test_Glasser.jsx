@@ -62,7 +62,8 @@ const GlasserTest = () => {
         } else {
           Swal.fire({
             icon: "error",
-            title: "!خطا در ارسال درخواست",
+            title: "!خطا در ارسال پاسخ‌ها",
+            html: "متاسفانه مشکلی رخ داد",
             background: "#473a67",
             color: "#b4b3b3",
             width: "26rem",
@@ -71,13 +72,17 @@ const GlasserTest = () => {
             customClass: {
               container: 'custom-swal-container'
             }
+          }).then((result) => {
+            if (result.isConfirmed) {
+              navigate("/");
+            }
           });
         }
       } catch (error) {
         Swal.fire({
           icon: "error",
           title: "!خطا در ارسال درخواست",
-          html: error,
+          html: "متاسفانه مشکلی رخ داد",
           background: "#473a67",
           color: "#b4b3b3",
           width: "26rem",
@@ -85,6 +90,10 @@ const GlasserTest = () => {
           confirmButtonText: "تایید",
           customClass: {
             container: 'custom-swal-container'
+          }
+        }).then((result) => {
+          if (result.isConfirmed) {
+            navigate("/");
           }
         });
       }
@@ -137,7 +146,7 @@ const GlasserTest = () => {
         updatedAnswersForBack[i] = {"category": questions[i].category, "res": selectedAnswers[i] + 1}
       }
       sendAnswersToBack(updatedAnswersForBack);
-      setShowResult(true);
+      // setShowResult(true);
     }
   };
 
@@ -246,11 +255,11 @@ const GlasserTest = () => {
     <NavBar_SideBar/>
     <body className='glasser-body'>
     <div className="glasser-quiz-container"
-      style={activeQuestion === 0 || showResult ? {marginTop: "6%"} : {marginTop: "2%"}}>
+      style={activeQuestion === 0 || showResult ? {marginTop: "4%"} : {marginTop: "2%"}}>
       {!showResult && ( 
         <div>
           {activeQuestion === 0 && ( 
-            <h2 style={{fontSize: "30px", color: "#9a94fb", marginBottom: "10px", textAlign: "center"}}>توجه!</h2>
+            <h2 style={{fontSize: "30px", color: "#9a94fb", marginBottom: "10px", textAlign: "center"}}>تست شخصیت‌شناسی گلاسر</h2>
           )}
           <div className="glasser-header">
             {activeQuestion !== 0 && ( 
@@ -261,7 +270,7 @@ const GlasserTest = () => {
               </>
             )}
           </div>
-          <h2 style={activeQuestion === 0 ? {lineHeight: "1.8", fontSize: "22px", paddingTop: "20px"} : {}}>
+          <h2 style={activeQuestion === 0 ? {lineHeight: "1.8", fontSize: "21px", paddingTop: "20px"} : {}}>
           {question}
         </h2>
           <ul>
@@ -310,9 +319,9 @@ const GlasserTest = () => {
       )}
       {showResult && (
         <div className="glasser-result" style={{marginTop: "40px"}}>
-          <h3 style={{color: "#9a94fb", marginBottom: "10px"}}>آزمون شما به پایان رسید!</h3>
+          <h3 style={showResult ? {fontWeight: "bolder", color: "#9a94fb", marginBottom: "33px"} : {}}>آزمون شما به پایان رسید!</h3>
           <p style={{fontSize: "20px", paddingTop: "30px"}}>
-            پاسخ‌های شما پردازش شد. نتیجۀ این آزمون می‌گوید نیاز شما به هر یک از موارد "عشق"، "بقا"، "آزادی"، "قدرت" و "سرگرمی و تفریح" چقدر است. برای دیدن نتیجۀ آزمون خود، برروی دکمۀ زیر کلیک کنید.
+            پاسخ‌های شما پردازش شد. نتیجۀ این آزمون می‌گوید نیاز شما به هر یک از نیازهای اساسی "عشق"، "بقا"، "آزادی"، "قدرت" و "سرگرمی و تفریح" چقدر است. برای دیدن نتیجۀ آزمون خود، برروی دکمۀ زیر کلیک کنید.
           </p>
           <button style={{ display: 'flex', justifyContent: 'center', alignItems: 'center', marginTop: "120px", marginRight: "34%"}}onClick={showTheResult}>دیدن نتایج</button>
         </div>

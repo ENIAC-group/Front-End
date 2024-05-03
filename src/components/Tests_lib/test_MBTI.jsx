@@ -52,6 +52,7 @@ const MBTITest = () => {
           Swal.fire({
             icon: "error",
             title: "!خطا در ارسال پاسخ‌ها",
+            html: "متاسفانه مشکلی رخ داد",
             background: "#473a67",
             color: "#b4b3b3",
             width: "26rem",
@@ -60,12 +61,17 @@ const MBTITest = () => {
             customClass: {
               container: 'custom-swal-container'
             }
+          }).then((result) => {
+            if (result.isConfirmed) {
+              navigate("/");
+            }
           });
         }
       } catch (error) {
         Swal.fire({
           icon: "error",
           title: "!خطا در ارسال درخواست",
+          html: "متاسفانه مشکلی رخ داد",
           background: "#473a67",
           color: "#b4b3b3",
           width: "26rem",
@@ -73,6 +79,10 @@ const MBTITest = () => {
           confirmButtonText: "تایید",
           customClass: {
             container: 'custom-swal-container'
+          }
+        }).then((result) => {
+          if (result.isConfirmed) {
+            navigate("/");
           }
         });
       }
@@ -131,7 +141,6 @@ const MBTITest = () => {
       }
       // console.log(updatedSelectedAnswersForBack);
       sendAsnwersToBack(updatedSelectedAnswersForBack);
-      setShowResult(true);
     }
   };
 
@@ -238,7 +247,7 @@ const MBTITest = () => {
       {!showResult && (
         <div>
           {activeQuestion === 0 && ( 
-            <h2 style={{fontSize: "30px", color: "#9a94fb", marginBottom: "10px", textAlign: "center"}}>توجه!</h2>
+            <h2 style={{fontSize: "30px", color: "#9a94fb", marginBottom: "10px", textAlign: "center"}}>تست شخصیت‌شناسی MBTI</h2>
           )}
           <div className="mbti-header">
             {activeQuestion !== 0 && (
