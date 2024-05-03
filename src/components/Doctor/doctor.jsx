@@ -1,5 +1,6 @@
 import React from "react";
 import "./doctor.css";
+import { HashLink } from 'react-router-hash-link'
 
 import myImage1 from "./img/teenagers2.jpg";
 import myImage2 from "./img/kids.jpg";
@@ -30,20 +31,15 @@ const Doctor_Home = () => {
                   alt="img1"
                 />
                 <div className="project1-content">
-                  <a href="#" className="text-center">
-                    <h4
-                      className="text-secondary"
-                      style={{ fontFamily: "Ios15Medium" }}
-                    >
-                      حوزه تحصیلی
-                    </h4>
+                  <HashLink to="/Doctors#edu" className="text-center text-secondary" style={{ fontFamily: "Ios15Medium" }}>
+                    حوزه تحصیلی
                     <p
                       className="m-0 text-white"
                       style={{ fontFamily: "Ios15Medium" }}
                     >
                       معرفی روانشناسان
                     </p>
-                  </a>
+                  </HashLink>
                 </div>
               </div>
             </div>
@@ -57,20 +53,15 @@ const Doctor_Home = () => {
                   alt="img2"
                 />
                 <div className="project1-content">
-                  <a href="#" className="text-center">
-                    <h4
-                      className="text-secondary"
-                      style={{ fontFamily: "Ios15Medium" }}
-                    >
-                      حوزه کودک
-                    </h4>
+                  <HashLink to="/Doctors#Baby" className="text-center text-secondary" style={{ fontFamily: "Ios15Medium" }}>
+                    حوزه کودک
                     <p
                       className="m-0 text-white"
                       style={{ fontFamily: "Ios15Medium" }}
                     >
                       معرفی روانشناسان
                     </p>
-                  </a>
+                  </HashLink>
                 </div>
               </div>
             </div>
@@ -84,20 +75,15 @@ const Doctor_Home = () => {
                   alt="img3"
                 />
                 <div className="project1-content">
-                  <a href="#" className="text-center">
-                    <h4
-                      className="text-secondary"
-                      style={{ fontFamily: "Ios15Medium" }}
-                    >
-                      حوزه خانواده
-                    </h4>
+                  <HashLink to="/Doctors#Family" className="text-center text-secondary" style={{ fontFamily: "Ios15Medium" }}>
+                    حوزه خانواده
                     <p
                       className="m-0 text-white"
                       style={{ fontFamily: "Ios15Medium" }}
                     >
                       معرفی روانشناسان
                     </p>
-                  </a>
+                  </HashLink>
                 </div>
               </div>
             </div>
@@ -111,20 +97,15 @@ const Doctor_Home = () => {
                   alt="img4"
                 />
                 <div className="project1-content">
-                  <a href="#" className="text-center">
-                    <h4
-                      className="text-secondary"
-                      style={{ fontFamily: "Ios15Medium" }}
-                    >
-                      حوزه بالینی
-                    </h4>
+                  <HashLink to="/Doctors#Individual" className="text-center text-secondary" style={{ fontFamily: "Ios15Medium" }}>
+                    حوزه بالینی
                     <p
                       className="m-0 text-white"
                       style={{ fontFamily: "Ios15Medium" }}
                     >
                       معرفی روانشناسان
                     </p>
-                  </a>
+                  </HashLink>
                 </div>
               </div>
             </div>
@@ -138,20 +119,15 @@ const Doctor_Home = () => {
                   alt="img5"
                 />
                 <div className="project1-content">
-                  <a href="#" className="text-center">
-                    <h4
-                      className="text-secondary"
-                      style={{ fontFamily: "Ios15Medium" }}
-                    >
-                      حوزه روانپزشکی
-                    </h4>
+                  <HashLink to="/Doctors#psychiatry" className="text-center text-secondary" style={{ fontFamily: "Ios15Medium" }}>
+                    حوزه روانپزشکی
                     <p
                       className="m-0 text-white"
                       style={{ fontFamily: "Ios15Medium" }}
                     >
-                      معرفی روانپزشکان
+                      معرفی روانشناسان
                     </p>
-                  </a>
+                  </HashLink>
                 </div>
               </div>
             </div>
@@ -165,20 +141,15 @@ const Doctor_Home = () => {
                   alt="img6"
                 />
                 <div className="project1-content">
-                  <a href="#" className="text-center">
-                    <h4
-                      className="text-secondary"
-                      style={{ fontFamily: "Ios15Medium" }}
-                    >
-                      حوزه کوچینگ
-                    </h4>
+                  <HashLink to="/Doctors#migration" className="text-center text-secondary" style={{ fontFamily: "Ios15Medium" }}>
+                    حوزه کوچینگ
                     <p
                       className="m-0 text-white"
                       style={{ fontFamily: "Ios15Medium" }}
                     >
-                      معرفی کوچ ها
+                      معرفی روانشناسان
                     </p>
-                  </a>
+                  </HashLink>
                 </div>
               </div>
             </div>

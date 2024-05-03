@@ -309,7 +309,7 @@ const CompleteInfo = (doctorId) => {
 
   return (
     <>
-      <Button variant="primary" onClick={CheckInfo} className="button-20">
+      <Button variant="primary" onClick={CheckInfo} className="button-20 " >
         رزرو نوبت
       </Button>
 
