@@ -115,8 +115,8 @@ const DoctorsList = () => {
               : data.phone_number == null
               ? false
               : true;
-          if (check)
-            navigate("/Reserve"); // ی جوری باید بهش بگی برای کدوم دکتره
+          if (check) navigate("/Reserve", { state: data });
+          // ی جوری باید بهش بگی برای کدوم دکتره
           else {
             //modal بچه ها نشون داده بشه
           }
@@ -126,7 +126,7 @@ const DoctorsList = () => {
           withReactContent(Swal)
             .fire({
               icon: "warning",
-              title: "!برای رزور وقت ورود به  اکانت خود الزامی است",
+              title: "!برای رزور وقت ورود به اکانت خود الزامی است",
               background: "#473a67",
               color: "#b4b3b3",
               width: "35rem",
@@ -158,7 +158,7 @@ const DoctorsList = () => {
   }
 
   const [doctorProfile, setDoctorProfile] = useState([]);
-
+  
   useEffect(() => {
     //  تابع برای دریافت اطلاعات پروفایل دکترها از بک‌اند
     const fetchDoctorProfile = async () => {
@@ -167,7 +167,7 @@ const DoctorsList = () => {
           "http://127.0.0.1:8000/profile/doctors/"
         );
         setDoctorProfile(response.data);
-        // console.log(response.data);
+        console.log(response.data);
       } catch (error) {
         console.error("Error fetching doctor profile:", error);
       }
@@ -217,7 +217,7 @@ const DoctorsList = () => {
               <div className="distanceBetween">
                 {doctorProfile.map((index) => (
                   <DoctorProfile
-                    key={index}
+                    doctor_id={index?.id}
                     name={index?.name}
                     Description={index?.description}
                     Image={index?.image}

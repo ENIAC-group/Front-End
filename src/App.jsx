@@ -12,6 +12,8 @@ import DoctorList from "./components/DoctorsList/DoctorsList.jsx";
 import CourseList from "./components/TestPage/TestPage.jsx";
 import MBTITest from "./components/Tests_lib/test_MBTI.jsx";
 import GlasserTest from "./components/Tests_lib/test_Glasser.jsx";
+import ReservationPage from "./components/Reservation/Reservation.jsx";
+
 
 function App() {
   return (
@@ -47,10 +49,14 @@ function App() {
         <Router.Route path="/Doctors" element={<DoctorList />}>
           {" "}
         </Router.Route>
+
         <Router.Route path="/MBTI" element={<MBTITest />}>
           {" "}
         </Router.Route>
         <Router.Route path="/Glasser" element={<GlasserTest />}>
+          {" "}
+        </Router.Route>
+        <Router.Route path="/Reserve" element={<ReservationPage />}>
           {" "}
         </Router.Route>
       </Router.Routes>

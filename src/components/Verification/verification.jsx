@@ -36,6 +36,7 @@ const Verification = () => {
   async function resendCode(event) {
     event.preventDefault();
     try {
+      const token = localStorage.getItem("accessToken");
       const response = await axios(
         "http://127.0.0.1:8000/accounts/activation_resend/",
         {
