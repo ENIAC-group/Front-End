@@ -56,109 +56,7 @@ const DoctorsList = () => {
     }
   }
 
-  async function GetUserInfo2(event) {
-    event.preventDefault();
-    const accessToken = localStorage.getItem("accessToken");
-    if (accessToken == null)
-      withReactContent(Swal)
-        .fire({
-          icon: "warning",
-          title: "!برای رزور وقت ورود به  اکانت خود الزامی است",
-          background: "#473a67",
-          color: "#b4b3b3",
-          width: "35rem",
-          backdrop: `
-          rgba(84, 75, 87.0.9)
-          left top
-          no-repeat`,
-          showDenyButton: true,
-          confirmButtonText: "ورود به سایت",
-          denyButtonText: "صفحه اصلی",
-          denyButtonColor: "#89817e",
-          confirmButtonColor: "rgb(183, 153, 255)",
-          customClass: {
-            actions: "my-actions",
-            confirmButton: "order-2",
-            denyButton: "order-3",
-          },
-        })
-        .then((result) => {
-          if (result.isConfirmed) {
-            navigate("/Signup");
-          } else if (result.isDenied) {
-            navigate("/Home");
-          }
-        });
-    else {
-      try {
-        const response = await axios(
-          "http://127.0.0.1:8000/accounts/get_user/",
-          {
-            method: "GET",
-            headers: {
-              Authorization: `Bearer ${accessToken}`, // Bearer <access token >
-              "Content-Type": "application/json",
-            },
-          }
-        );
-        if (response.status == 200) {
-          const data = response.data.user;
-          const check =
-            data.firstname == null
-              ? false
-              : data.lastname == null
-              ? false
-              : data.date_of_birth == null
-              ? false
-              : data.gender == null
-              ? false
-              : data.phone_number == null
-              ? false
-              : true;
-          if (check) navigate("/Reserve", { state: data });
-          // ی جوری باید بهش بگی برای کدوم دکتره
-          else {
-            //modal بچه ها نشون داده بشه
-          }
-        }
-      } catch (error) {
-        if (error.response.status == 403) {
-          withReactContent(Swal)
-            .fire({
-              icon: "warning",
-              title: "!برای رزور وقت ورود به اکانت خود الزامی است",
-              background: "#473a67",
-              color: "#b4b3b3",
-              width: "35rem",
-              backdrop: `
-                rgba(84, 75, 87.0.9)
-                left top
-                no-repeat`,
-              showDenyButton: true,
-              confirmButtonText: "ورود به سایت",
-              denyButtonText: "صفحه اصلی",
-              denyButtonColor: "#89817e",
-              confirmButtonColor: "rgb(183, 153, 255)",
-              customClass: {
-                actions: "my-actions",
-                confirmButton: "order-2",
-                denyButton: "order-3",
-              },
-            })
-            .then((result) => {
-              if (result.isConfirmed) {
-                navigate("/Signup");
-              } else if (result.isDenied) {
-                navigate("/Home");
-              }
-            });
-        }
-      }
-    }
-  }
-
   const [doctorProfile, setDoctorProfile] = useState([]);
-  
   useEffect(() => {
     //  تابع برای دریافت اطلاعات پروفایل دکترها از بک‌اند
     const fetchDoctorProfile = async () => {
@@ -167,7 +65,6 @@ const DoctorsList = () => {
           "http://127.0.0.1:8000/profile/doctors/"
         );
         setDoctorProfile(response.data);
-        console.log(response.data);
       } catch (error) {
         console.error("Error fetching doctor profile:", error);
       }
@@ -175,6 +72,100 @@ const DoctorsList = () => {
 
     fetchDoctorProfile();
   }, []);
+
+  const [doctorProfileFardi, setDoctorProfileFardi] = useState([]);
+  useEffect(() => {
+
+    const fetchDoctorProfileFardi = async () => {
+      try {
+        const response1 = await axios.get(
+          "http://127.0.0.1:8000/profile/doctors/typed/",
+          {
+            params: {
+              "profile_type": "فردی"
+            }
+
+          }
+        );
+        setDoctorProfileFardi(response1.data);
+        // console.log(response1);
+      } catch (error) {
+        console.error("Error fetching doctor profile:", error);
+      }
+    };
+
+    fetchDoctorProfileFardi();
+  }, []);
+
+  const [doctorProfileBaby, setDoctorProfileBaby] = useState([]);
+  useEffect(() => {
+
+    const fetchDoctorProfileBaby = async () => {
+      try {
+        const response1 = await axios.get(
+          "http://127.0.0.1:8000/profile/doctors/typed/",
+          {
+            params: {
+              "profile_type": "کودک"
+            }
+          }
+        );
+        setDoctorProfileBaby(response1.data);
+        // console.log(response1);
+      } catch (error) {
+        console.error("Error fetching doctor profile:", error);
+      }
+    };
+
+    fetchDoctorProfileBaby();
+  }, []);
+
+  const [doctorProfileFamily, setDoctorProfileFamily] = useState([]);
+  useEffect(() => {
+
+    const fetchDoctorProfileFamily = async () => {
+      try {
+        const response1 = await axios.get(
+          "http://127.0.0.1:8000/profile/doctors/typed/",
+          {
+            params: {
+              "profile_type": "زوج"
+            }
+          }
+        );
+        setDoctorProfileFamily(response1.data);
+      } catch (error) {
+        console.error("Error fetching doctor profile:", error);
+      }
+    };
+
+    fetchDoctorProfileFamily();
+  }, []);
+
+  const [doctorProfileEdu, setDoctorProfileEdu] = useState([]);
+  useEffect(() => {
+
+    const fetchDoctorProfileEdu = async () => {
+      try {
+        const response1 = await axios.get(
+          "http://127.0.0.1:8000/profile/doctors/typed/",
+          {
+            params: {
+              "profile_type": "نوجوان"
+            }
+          }
+        );
+        setDoctorProfileEdu(response1.data);
+      } catch (error) {
+        console.error("Error fetching doctor profile:", error);
+      }
+    };
+
+    fetchDoctorProfileEdu();
+  }, []);
+
+
+
 
   return (
     <>
@@ -205,7 +196,7 @@ const DoctorsList = () => {
               data-wow-delay=".3s"
               style={{ maxWidth: "600px" }}
             >
-              <h1>لیست مشاورها</h1>
+              <h1 style={{ fontFamily: "Ios15Medium" }}>لیست مشاورها</h1>
             </div>
             <br />
 
@@ -217,7 +208,7 @@ const DoctorsList = () => {
               <div className="distanceBetween">
                 {doctorProfile.map((index) => (
                   <DoctorProfile
-                    doctor_id={index?.id}
+                    Id={index?.id}
                     name={index?.name}
                     Description={index?.description}
                     Image={index?.image}
@@ -231,6 +222,139 @@ const DoctorsList = () => {
           </div>
         </div>
       </div>
+
+      <div className="scallop-up"></div>
+      <div id="Individual" className="colour-block">
+        <h1
+          className="text-center mx-auto pb-2 wow fadeIn Doctor_List_title"
+          data-wow-delay=".3s"
+          style={{ maxWidth: "600px", fontFamily: "Ios15Medium" }}>حوزه فردی</h1>
+        <div className="distanceBetween">
+          {doctorProfileFardi.map((index) => (
+            <DoctorProfile
+              Id={index?.id}
+              name={index?.name}
+              Description={index?.description}
+              Image={index?.image}
+              ProfileType={index?.profile_type}
+              IsPrivate={index?.is_private}
+              Psychiatrist={index?.psychiatrist}
+            />
+          ))}
+          
+
+
+        </div>
+      </div>
+      <div className="scallop-down"></div>
+
+      <div id="Baby" className="white-block">
+        <h1
+        className="text-center mx-auto pb-2 wow fadeIn Doctor_List_title"
+        data-wow-delay=".3s"
+        style={{ maxWidth: "600px", fontFamily: "Ios15Medium" }}
+        >حوزه کودک</h1>
+        <div className="distanceBetween">
+          {doctorProfileBaby.map((index) => (
+            <DoctorProfile
+              Id={index?.id}
+              name={index?.name}
+              Description={index?.description}
+              Image={index?.image}
+              ProfileType={index?.profile_type}
+              IsPrivate={index?.is_private}
+              Psychiatrist={index?.psychiatrist}
+            />
+          ))}
+        </div>
+      </div>
+
+      <div className="scallop-up"></div>
+      <div id="edu" className="colour-block">
+        <h1
+          className="text-center mx-auto pb-2 wow fadeIn Doctor_List_title"
+          data-wow-delay=".3s"
+          style={{ maxWidth: "600px", fontFamily: "Ios15Medium" }}>حوزه تحصیلی</h1>
+        <div className="distanceBetween">
+          {doctorProfileEdu.map((index) => (
+            <DoctorProfile
+              Id={index?.id}
+              name={index?.name}
+              Description={index?.description}
+              Image={index?.image}
+              ProfileType={index?.profile_type}
+              IsPrivate={index?.is_private}
+              Psychiatrist={index?.psychiatrist}
+            />
+          ))}
+        </div>
+      </div>
+      <div className="scallop-down"></div>
+
+      <div id="Family" className="white-block">
+        <h1
+        className="text-center mx-auto pb-2 wow fadeIn Doctor_List_title"
+        data-wow-delay=".3s"
+        style={{ maxWidth: "600px", fontFamily: "Ios15Medium" }}
+        >حوزه خانواده</h1>
+        <div className="distanceBetween">
+          {doctorProfileFamily.map((index) => (
+            <DoctorProfile
+              Id={index?.id}
+              name={index?.name}
+              Description={index?.description}
+              Image={index?.image}
+              ProfileType={index?.profile_type}
+              IsPrivate={index?.is_private}
+              Psychiatrist={index?.psychiatrist}
+            />
+          ))}
+        </div>
+      </div>
+
+      <div className="scallop-up"></div>
+      <div id="migration" className="colour-block">
+        <h1
+          className="text-center mx-auto pb-2 wow fadeIn Doctor_List_title"
+          data-wow-delay=".3s"
+          style={{ maxWidth: "600px", fontFamily: "Ios15Medium" }}>حوزه کوچینگ</h1>
+        <div className="distanceBetween">
+          {/* {doctorProfileFardi.map((index) => (
+            <DoctorProfile
+              Id={index?.id}
+              name={index?.name}
+              Description={index?.description}
+              Image={index?.image}
+              ProfileType={index?.profile_type}
+              IsPrivate={index?.is_private}
+              Psychiatrist={index?.psychiatrist}
+            />
+          ))} */}
+        </div>
+      </div>
+      <div className="scallop-down"></div>
+
+      <div id="psychiatry" className="white-block">
+        <h1
+        className="text-center mx-auto pb-2 wow fadeIn Doctor_List_title"
+        data-wow-delay=".3s"
+        style={{ maxWidth: "600px", fontFamily: "Ios15Medium" }}
+        >حوزه روان پزشکی</h1>
+        <div className="distanceBetween">
+          {/* {doctorProfileFardi.map((index) => (
+            <DoctorProfile
+              Id={index?.id}
+              name={index?.name}
+              Description={index?.description}
+              Image={index?.image}
+              ProfileType={index?.profile_type}
+              IsPrivate={index?.is_private}
+              Psychiatrist={index?.psychiatrist}
+            />
+          ))} */}
+        </div>
+      </div>
+
       <Footer />
     </>
   );
