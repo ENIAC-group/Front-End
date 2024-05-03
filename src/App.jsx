@@ -13,6 +13,7 @@ import CourseList from "./components/TestPage/TestPage.jsx";
 import MBTITest from "./components/Tests_lib/test_MBTI.jsx";
 import GlasserTest from "./components/Tests_lib/test_Glasser.jsx";
 import ReservationPage from "./components/Reservation/Reservation.jsx";
+import DoctorPage from "./components/DoctorsList/DoctorPage.jsx";
 
 
 function App() {
@@ -57,6 +58,9 @@ function App() {
           {" "}
         </Router.Route>
         <Router.Route path="/Reserve" element={<ReservationPage />}>
+          {" "}
+        </Router.Route>
+        <Router.Route path="/DoctorPage" element={<DoctorPage />}>
           {" "}
         </Router.Route>
       </Router.Routes>
