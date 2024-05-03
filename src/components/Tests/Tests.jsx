@@ -1,5 +1,6 @@
 import React from "react";
 import { useNavigate } from "react-router-dom";
+import { HashLink } from "react-router-hash-link";
 import "./Tests.css";
 
 const Tests = () => {
@@ -29,12 +30,14 @@ const Tests = () => {
                     style={{ color: "#ACBCFF" }}
                   ></i>
                   <h5 className="TestName">تست های فردی</h5>
-                  <a
-                    href=""
-                    className="btn btn-secondary text-white px-5 py-3 rounded-pill"
+                  <HashLink
+                    to="/TestPage#testTitle"
+                    className="btn btn-secondary text-white px-5 py-3 rounded-pill
+                    "
+                    style={{ fontFamily: "Ios15Medium" }}
                   >
                     دیدن تست ها
-                  </a>
+                  </HashLink>
                 </div>
               </div>
             </div>
@@ -64,12 +67,14 @@ const Tests = () => {
                     style={{ color: "#ACBCFF" }}
                   ></i>
                   <h5 className="TestName">تست های پیش از ازدواج</h5>
-                  <a
-                    href="http://localhost:5173/TestPage#testTitle2"
-                    className="btn btn-secondary text-white px-5 py-3 rounded-pill"
+                  <HashLink
+                    to="/TestPage#testTitle2"
+                    className="btn btn-secondary text-white px-5 py-3 rounded-pill
+                    "
+                    style={{ fontFamily: "Ios15Medium" }}
                   >
                     دیدن تست ها
-                  </a>
+                  </HashLink>
                 </div>
               </div>
             </div>
