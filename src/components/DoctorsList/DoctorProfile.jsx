@@ -8,6 +8,7 @@ import { useState, useEffect } from 'react';
 import CompleteInfoModal from "../CompleteInfoModal/Complete_Info.jsx";
 import { ToastContainer } from 'react-toastify';
 import DoctorPage from './DoctorPage.jsx';
+import RatingModal from '../RatingDoctor/RatingModal.jsx';
 
 
 const DoctorProfile = ({ Id, name, Description, Image, ProfileType, IsPrivate, Psychiatrist }) => {
@@ -239,6 +240,7 @@ const DoctorProfile = ({ Id, name, Description, Image, ProfileType, IsPrivate, P
                                 </div>
                                 <div className='buttonReserve' onLoad={GetUserInfo} onClick={GetUserInfo2}>
                                     <CompleteInfoModal doctorId={Id}/>
+                                    <RatingModal />
                                     <ToastContainer />
                                 </div>
                             </div>
