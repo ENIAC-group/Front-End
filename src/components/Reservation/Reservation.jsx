@@ -17,6 +17,7 @@ import { useNavigate } from "react-router-dom";
 import * as shamsi from "shamsi-date-converter";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
+import MedicalInfoModal from "../MedicalInfoModal/MedicalInfoModal";
 
 function DateString(input) {
   var changed = shamsi.jalaliToGregorian(input.year, input.month, input.day);
@@ -52,6 +53,7 @@ function addDays(date, days) {
 
 const ReservationPage = () => {
   const navigate = useNavigate();
+  const [openModal, setOpenModal] = useState(false);
   const location = useLocation();
   const initialState = location.state || {};
   const [res_type, setres_type] = useState("حضوری");
@@ -75,6 +77,12 @@ const ReservationPage = () => {
   const [LeftTimes, setTime] = useState([]);
   const today = ChangeDate(utils().getToday());
   const [selected, setSelect] = useState(-1);
+  const [showModal, setShowModal] = useState(false);
+
+  // Function to toggle the modal state
+  const toggleModal = () => {
+    setShowModal(!showModal);
+  };
 
   const setdatetime = () => {
     var d = new Date(
@@ -312,14 +320,20 @@ const ReservationPage = () => {
                   onClick={(e) => {
                     CreateReservation(e);
                     setSelect(-1);
+                    toggleModal();
+                    console.log(showModal);
                   }}
                 >
                   ثبت
                 </button>
               </div>
+
             </div>
+            <MedicalInfoModal showModal={showModal} toggleModal={toggleModal}/>
+
           </div>
         </div>
+
       </div>
       <Footer />
     </>
