@@ -154,7 +154,7 @@ function ChangePassword({ p_pages }) {
     }
   }
   return (
-    <div className="panel" style={{ direction: "rtl" }}>
+    <div className="panel" style={{ direction: "rtl", width:'770px' }}>
       <div
         className="panel-body bio-graph-info"
         style={p_pages == 3 ? { display: "inline-block" } : { display: "none" }}
@@ -229,7 +229,7 @@ function ChangePassword({ p_pages }) {
                   height: "30px",
                 }}
               />
-              <span style={{width:'165px'}}>تکرار رمز عبور جدید :</span>
+              <span style={{width:'160px'}}>تکرار رمز عبور جدید :</span>
               <input
                 type={repeatPasswordType}
                 id="n_repeat_password"
