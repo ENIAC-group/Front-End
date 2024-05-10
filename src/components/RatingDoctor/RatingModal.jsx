@@ -18,7 +18,7 @@ const RatingModal = (doctorId) => {
   return (
     <>
       <Button variant="primary" onClick={() => setShow(true)} className="rating-button-20">
-        دادن امتیاز
+      امتیازدهی
       </Button>
 
       <Modal
@@ -29,7 +29,7 @@ const RatingModal = (doctorId) => {
         centered
       >
         <Modal.Header className="rating-header_modal">
-          <Modal.Title className="rating-title_modal">دادن امتیاز</Modal.Title>
+          <Modal.Title className="rating-title_modal">امتیاز دادن</Modal.Title>
         </Modal.Header>
         {/* <Modal.Body className="form_container .login"> */}
         <div className="rating-form_container_modal">

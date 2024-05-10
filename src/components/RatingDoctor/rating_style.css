@@ -426,10 +426,12 @@
   .MuiOutlinedInput-input {
     padding: 18.5px 14px ;
     font-family: Ios15Medium !important;
+    color: #73629b !important;
   }
 
   .MuiOutlinedInput-multiline {
     padding: 18.5px 14px;
     color: #73629b;
   }
+
   
