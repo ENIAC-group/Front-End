@@ -25,7 +25,6 @@ import circle_icon from "../../assets/circle.png";
 function MedicalInfoModal({ showModal, toggleModal, daySelected, doctorId , resType , left_times, selectIndex, getReserve}) {
   const [childrenNum, setChildrenNum] = useState("");
   const [medicalHistory, setMedicalHistory] = useState(true);
-  const [medicalHistoryStr, setMedicalHistoryStr] = useState("True");
   const [ssid, setSsid] = useState("");
 
   const [endDate1, setEndDate1] = useState("");
@@ -36,9 +35,9 @@ function MedicalInfoModal({ showModal, toggleModal, daySelected, doctorId , resT
   const [isFinished2, setIsFinished2] = useState(true);
   const [isFinished3, setIsFinished3] = useState(true);
 
-  const [isFinished1str, setIsFinished1str] = useState("True");
-  const [isFinished2str, setIsFinished2str] = useState("True");
-  const [isFinished3str, setIsFinished3str] = useState("True");
+  const [isFinished1str, setIsFinished1str] = useState("yes");
+  const [isFinished2str, setIsFinished2str] = useState("yes");
+  const [isFinished3str, setIsFinished3str] = useState("yes");
 
   const [length1, setLength1] = useState("");
   const [length2, setLength2] = useState("");
@@ -60,7 +59,7 @@ function MedicalInfoModal({ showModal, toggleModal, daySelected, doctorId , resT
   const [hasHistory2, setHasHistory2] = useState(false);
   const [hasHistory3, setHasHistory3] = useState(false);
 
-  const [sentData, setSentData] = useState(null);
+  const [record, setrecord] = useState(null);
 
 
   function DateString(input) {
@@ -138,12 +137,13 @@ function MedicalInfoModal({ showModal, toggleModal, daySelected, doctorId , resT
       try {
         event.preventDefault()
         const token = localStorage.getItem("accessToken");
-        console.log("response", sentData)
+        console.log("response: ", record)
+        const recordStr = JSON.stringify(record);
+        console.log(recordStr)
+        console.log(recordStr.toString())
         const response = await axios.post(
           "http://localhost:8000/TherapyTests/record/",
-          {
-            sentData
-          },
+          JSON.stringify(record),
           {
             headers: {
               Authorization: `Bearer ${token}`,
@@ -280,12 +280,12 @@ function MedicalInfoModal({ showModal, toggleModal, daySelected, doctorId , resT
   //   console.log("2:",endDate2, isFinished2,isFinished2str, length2, reason2leave2, method2, drugs2);
   //   console.log("3:",endDate3, isFinished3, isFinished3str,length3, reason2leave3, method3, drugs3);
   //   console.log("others",hasHistory1, hasHistory2, hasHistory3);
-  //   console.log("new:", childrenNum, sentData, ssid, medicalHistory, medicalHistoryStr);
+  //   console.log("new:", childrenNum, record, ssid, medicalHistory, medicalHistoryStr);
 
   //   // GenerateData(hasHistory1, hasHistory2, hasHistory3)
   //   // GenerateData(hasHistory1, hasHistory2, hasHistory3);
   // }, [
-  //   childrenNum, ssid, sentData,
+  //   childrenNum, ssid, record,
   //   endDate1, isFinished1, length1, reason2leave1, method1, drugs1, 
   //   endDate2, isFinished2, length2, reason2leave2, method2, drugs2,
   //   endDate3, isFinished3, length3, reason2leave3, method3, drugs3, medicalHistory, medicalHistoryStr
@@ -295,7 +295,7 @@ function MedicalInfoModal({ showModal, toggleModal, daySelected, doctorId , resT
   // useEffect(() => {
   //   console.log("data");
   //   GenerateData();
-  //   console.log("data :", sentData)
+  //   console.log("data :", record)
   // }, [hasHistory1, hasHistory2, hasHistory3, medicalHistoryStr, childrenNum, ssid, medicalHistory]);
   
 
@@ -320,8 +320,8 @@ function MedicalInfoModal({ showModal, toggleModal, daySelected, doctorId , resT
     updateHistoryStates();
   }, [endDate1, length1, isFinished1, reason2leave1, method1, drugs1, 
     endDate2, length2 ,isFinished2, reason2leave2, method2, drugs2,
-     endDate3, length3, isFinished3, reason2leave3, method3, drugs3, 
-     isFinished1str, isFinished2str, isFinished3str, medicalHistory, medicalHistoryStr, ssid, childrenNum]);
+     endDate3, length3, isFinished3, reason2leave3, method3, drugs3
+     , medicalHistory,ssid, childrenNum, isFinished1str, isFinished2str, isFinished3str]);
   // useEffect(() => {
   //   console.log("endDate2 value changed:", endDate2);
   // }, [endDate2]);
@@ -338,16 +338,16 @@ function MedicalInfoModal({ showModal, toggleModal, daySelected, doctorId , resT
       const data = {
         child_num: parseInt(childrenNum),
         nationalID: ssid,
-        family_history: medicalHistoryStr,
+        family_history: medicalHistory,
       }
-      setSentData(data);
+      setrecord(data);
     }
     else if (hasHistory1 && !hasHistory2 && !hasHistory3){
-      console.log("alan tooye if am")
+      console.log("alan tooye if1 am")
       const treatHist1 = {
         end_date: endDate1,
         length: parseInt(length1),
-        is_finished: isFinished1str,
+        is_finished: isFinished1,
         reason_to_leave: reason2leave1,
         approach: method1,
         special_drugs: drugs1
@@ -355,17 +355,17 @@ function MedicalInfoModal({ showModal, toggleModal, daySelected, doctorId , resT
       const data = {
         child_num: parseInt(childrenNum),
         nationalID: ssid,
-        family_history: medicalHistoryStr,
+        family_history: medicalHistory,
         treatementHistory1: treatHist1,
       }
       console.log(data);
-      setSentData(data);
+      setrecord(data);
     }
     else if (hasHistory1 && hasHistory2 && !hasHistory3){
       const treatHist1 = {
         end_date: endDate1,
         length: parseInt(length1),
-        is_finished: isFinished1str,
+        is_finished: isFinished1,
         reason_to_leave: reason2leave1,
         approach: method1,
         special_drugs: drugs1
@@ -374,7 +374,7 @@ function MedicalInfoModal({ showModal, toggleModal, daySelected, doctorId , resT
       const treatHist2 = {
         end_date: endDate2,
         length: parseInt(length2),
-        is_finished: isFinished2str,
+        is_finished: isFinished2,
         reason_to_leave: reason2leave2,
         approach: method2,
         special_drugs: drugs2
@@ -383,18 +383,18 @@ function MedicalInfoModal({ showModal, toggleModal, daySelected, doctorId , resT
       const data = {
         child_num: parseInt(childrenNum),
         nationalID: ssid,
-        family_history: medicalHistoryStr,
+        family_history: medicalHistory,
         treatementHistory1: treatHist1,
         treatementHistory2: treatHist2,
       }
 
-      setSentData(data);
+      setrecord(data);
     }
     else if (hasHistory1 && hasHistory2 && hasHistory3){
       const treatHist1 = {
         end_date: endDate1,
         length: parseInt(length1),
-        is_finished: isFinished1str,
+        is_finished: isFinished1,
         reason_to_leave: reason2leave1,
         approach: method1,
         special_drugs: drugs1
@@ -403,7 +403,7 @@ function MedicalInfoModal({ showModal, toggleModal, daySelected, doctorId , resT
       const treatHist2 = {
         end_date: endDate2,
         length: parseInt(length2),
-        is_finished: isFinished2str,
+        is_finished: isFinished2,
         reason_to_leave: reason2leave2,
         approach: method2,
         special_drugs: drugs2
@@ -412,7 +412,7 @@ function MedicalInfoModal({ showModal, toggleModal, daySelected, doctorId , resT
       const treatHist3 = {
         end_date: endDate3,
         length: parseInt(length3),
-        is_finished: isFinished3str,
+        is_finished: isFinished3,
         reason_to_leave: reason2leave3,
         approach: method3,
         special_drugs: drugs3
@@ -421,13 +421,13 @@ function MedicalInfoModal({ showModal, toggleModal, daySelected, doctorId , resT
       const data = {
         child_num: parseInt(childrenNum),
         nationalID: ssid,
-        family_history: medicalHistoryStr,
+        family_history: medicalHistory,
         treatementHistory1: treatHist1,
         treatementHistory2: treatHist2,
         treatementHistory3: treatHist3,
       }
 
-      setSentData(data);
+      setrecord(data);
     }
   }
   const ChangeIsFinished1 = (event) => {
@@ -437,18 +437,15 @@ function MedicalInfoModal({ showModal, toggleModal, daySelected, doctorId , resT
         return true; // Return the new value
       });
       // console.log(isFinished1); // Log previous value
-      setIsFinished1str("True");
 
     } else if (selectedValue === "no") {
       setIsFinished1((prevValue) => {
         return false; // Return the new value
       });
-      setIsFinished1str("False");
       // console.log(isFinished1); // Log previous value
 
     } else {
-      setIsFinished1str("");
-      setIsFinished1("");
+      setIsFinished1(null);
     }
   };
 
@@ -458,7 +455,6 @@ function MedicalInfoModal({ showModal, toggleModal, daySelected, doctorId , resT
       setIsFinished2((prevValue) => {
         return true; // Return the new value
       });
-      setIsFinished2str("True");
       // console.log(isFinished2); // Log previous value
 
     } else if (selectedValue === "no") {
@@ -466,10 +462,9 @@ function MedicalInfoModal({ showModal, toggleModal, daySelected, doctorId , resT
         return false; // Return the new value
       });
       // console.log(isFinished1); // Log previous value
-      setIsFinished2str("False");
 
     } else {
-      setIsFinished2str("");
+      setIsFinished2(null);
     }
   };
 
@@ -479,7 +474,6 @@ function MedicalInfoModal({ showModal, toggleModal, daySelected, doctorId , resT
       setIsFinished3((prevValue) => {
         return true; // Return the new value
       });
-      setIsFinished3str("True");
 
       // console.log(isFinished1); // Log previous value
 
@@ -487,13 +481,11 @@ function MedicalInfoModal({ showModal, toggleModal, daySelected, doctorId , resT
       setIsFinished3((prevValue) => {
         return false; // Return the new value
       });
-      setIsFinished3str("False");
 
       // console.log(isFinished1); // Log previous value
 
     } else {
-      setIsFinished3str("");
-      setIsFinished3("");
+      setIsFinished3(null);
     }
   };
 
@@ -593,7 +585,7 @@ function MedicalInfoModal({ showModal, toggleModal, daySelected, doctorId , resT
                     type="radio"
                     value="no"
                     checked={medicalHistory === false} 
-                    onChange={() => {setMedicalHistory(false); setMedicalHistoryStr("False") ;console.log(medicalHistory)}}
+                    onChange={() => {setMedicalHistory(false) ;console.log(medicalHistory)}}
                   /> خیر
                 </label>
                 <label style={{ direction: "rtl"}}>
@@ -601,7 +593,7 @@ function MedicalInfoModal({ showModal, toggleModal, daySelected, doctorId , resT
                     type="radio"
                     value="yes"
                     checked={medicalHistory === true} // Check if medicalHistory is true
-                    onChange={() => {setMedicalHistory(true); setMedicalHistoryStr("True"); console.log(medicalHistory)}}
+                    onChange={() => {setMedicalHistory(true); console.log(medicalHistory)}}
                   /> بله
                 </label>
 
