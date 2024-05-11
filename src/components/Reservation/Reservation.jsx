@@ -53,7 +53,6 @@ function addDays(date, days) {
 
 const ReservationPage = () => {
   const navigate = useNavigate();
-  const [openModal, setOpenModal] = useState(false);
   const location = useLocation();
   const initialState = location.state || {};
   const [res_type, setres_type] = useState("حضوری");
@@ -70,7 +69,7 @@ const ReservationPage = () => {
     "20:00:00",
   ];
   const [responseData, setResponseData] = useState([]);
-
+  const [selectVal, setSelectVal] = useState(-1);
   const [selectedDay, setSelectedDay] = useState(
     ChangeDate(utils().getToday())
   );
@@ -134,7 +133,7 @@ const ReservationPage = () => {
           },
         }
       );
-
+      console.log(doctor_id)
       if (response.status === 200 || response.status === 201) {
         setResponseData(response.data);
       }
@@ -168,10 +167,12 @@ const ReservationPage = () => {
 
     fetchDoctorProfile();
   }, []);
+
   async function CreateReservation() {
     try {
       const ReservationDate = DateString(selectedDay); // Format today's date as "yyyy-mm-dd" string
       const token = localStorage.getItem("accessToken");
+      console.log(LeftTimes[selected])
       const response = await axios("http://127.0.0.1:8000/reserve/create/", {
         method: "POST",
         headers: {
@@ -318,9 +319,11 @@ const ReservationPage = () => {
                 <button
                   className={styles.button_74}
                   onClick={(e) => {
-                    CreateReservation(e);
+                    // CreateReservation(e);
+                    setSelectVal(selected);
                     setSelect(-1);
                     toggleModal();
+                    // console.log(LeftTimes[selected])
                     console.log(showModal);
                   }}
                 >
@@ -329,7 +332,7 @@ const ReservationPage = () => {
               </div>
 
             </div>
-            <MedicalInfoModal showModal={showModal} toggleModal={toggleModal}/>
+            <MedicalInfoModal getReserve = {getReservation} selectIndex = {selectVal} doctorId = {doctor_id} resType = {res_type} left_times = {LeftTimes} daySelected = {selectedDay}  showModal={showModal} toggleModal={toggleModal}/>
 
           </div>
         </div>

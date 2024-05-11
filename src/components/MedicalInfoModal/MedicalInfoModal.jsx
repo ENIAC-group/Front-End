@@ -2,24 +2,30 @@ import React, { useState, useEffect } from 'react';
 import { Modal } from 'react-bootstrap';
 import { JBDateInput } from "jb-date-input-react";
 import './medical-info-modal-styles.css';
+import axios from 'axios';
+import { ToastContainer, toast } from "react-toastify";
+import DateObject from "react-date-object";
+import * as shamsi from "shamsi-date-converter";
+import { Calendar, utils } from "react-modern-calendar-datepicker";
+import Swal from "sweetalert2";
+
+
 
 import kid_icon from "../../assets/kid.png";
-import date_icon from "../../assets/date2.png";
 import ssid_icon from "../../assets/id.png";
 import one_icon from "../../assets/one.png";
 import two_icon from "../../assets/two.png";
 import three_icon from "../../assets/three.png";
 import four_icon from "../../assets/four.png";
 import doc_icon from "../../assets/doc.png";
-import finished_icon from "../../assets/finished.png";
 import circle_icon from "../../assets/circle.png";
-import time_icon from "../../assets/time.png";
-import reason_icon from "../../assets/reason.png";
 
 
-function MedicalInfoModal({ showModal, toggleModal }) {
+
+function MedicalInfoModal({ showModal, toggleModal, daySelected, doctorId , resType , left_times, selectIndex, getReserve}) {
   const [childrenNum, setChildrenNum] = useState("");
   const [medicalHistory, setMedicalHistory] = useState(true);
+  const [medicalHistoryStr, setMedicalHistoryStr] = useState("True");
   const [ssid, setSsid] = useState("");
 
   const [endDate1, setEndDate1] = useState("");
@@ -30,9 +36,9 @@ function MedicalInfoModal({ showModal, toggleModal }) {
   const [isFinished2, setIsFinished2] = useState(true);
   const [isFinished3, setIsFinished3] = useState(true);
 
-  const [isFinished1str, setIsFinished1str] = useState("");
-  const [isFinished2str, setIsFinished2str] = useState("");
-  const [isFinished3str, setIsFinished3str] = useState("");
+  const [isFinished1str, setIsFinished1str] = useState("True");
+  const [isFinished2str, setIsFinished2str] = useState("True");
+  const [isFinished3str, setIsFinished3str] = useState("True");
 
   const [length1, setLength1] = useState("");
   const [length2, setLength2] = useState("");
@@ -50,41 +56,380 @@ function MedicalInfoModal({ showModal, toggleModal }) {
   const [drugs2, setDrugs2] = useState("");
   const [drugs3, setDrugs3] = useState("");
 
+  const [hasHistory1, setHasHistory1] = useState(false);
+  const [hasHistory2, setHasHistory2] = useState(false);
+  const [hasHistory3, setHasHistory3] = useState(false);
+
+  const [sentData, setSentData] = useState(null);
+
+
+  function DateString(input) {
+    var changed = shamsi.jalaliToGregorian(input.year, input.month, input.day);
+    var y = `${changed[0]}`;
+    var m = changed[1] < 10 ? `0${changed[1]}` : `${changed[1]}`;
+    var d = changed[2] < 10 ? `0${changed[2]}` : `${changed[2]}`;
+    return [y, m, d].join("-");
+  }
+
+  const getReserved = async(event) => {
+    event.preventDefault();
+    getReserve();
+  }
+  
+  
+  async function SendMedicalInfo (event) {
+    event.preventDefault();
+    const errors = {};
+    const errorMessages = [];
+
+    // firstname field validations
+    if (childrenNum === 0 || childrenNum === null) {
+      errors.childNumError = "!به سوال اول پاسخ ندادید";
+      errorMessages.push(errors.childNumError);
+    } 
+
+
+    // phonenumebr field validations
+    if (!ssid.trim()) {
+      errors.ssidError = "!وارد کردن کد ملی الزامی است";
+      errorMessages.push(errors.ssidError);
+    } else if (ssid.length !== 10) {
+      errors.ssidError = "!قالب کد ملی درست نیست";
+      errorMessages.push(errors.ssidError);
+    }
+
+    // date of brith validation
+    const endDate1Format = new Date(endDate1);
+    const today = new Date();
+    if (endDate1 !== "" && isNaN(endDate1Format.getTime())) {
+      errors.endDate1Error = "!تاریخ پایان معتبر نیست";
+      errorMessages.push(errors.endDate1Error);
+    } else if (endDate1Format > today) {
+      errors.endDate1Error = "!تاریخ پایان نمی‌تواند در آینده باشد";
+      errorMessages.push(errors.endDate1Error);
+    } 
+
+      // date of brith validation
+    const endDate2Format = new Date(endDate2);
+    if (endDate2 !== "" && isNaN(endDate2Format.getTime())) {
+      errors.endDate2Error = "!تاریخ پایان معتبر نیست";
+      errorMessages.push(errors.endDate2Error);
+    } else if (endDate2Format > today) {
+      errors.endDate2Error = "!تاریخ پایان نمی‌تواند در آینده باشد";
+      errorMessages.push(errors.endDate2Error);
+    } 
+
+    const endDate3Format = new Date(endDate3);
+    if (endDate3 !== "" && isNaN(endDate3Format.getTime())) {
+      errors.endDate3Error = "!تاریخ پایان معتبر نیست";
+      errorMessages.push(errors.endDate3Error);
+    } else if (endDate3Format > today) {
+      errors.endDate3Error = "!تاریخ پایان نمی‌تواند در آینده باشد";
+      errorMessages.push(errors.endDate3Error);
+    } 
+
+
+    console.log(errorMessages)
+
+    console.log(hasHistory1, hasHistory2, hasHistory3)
+
+    // send POST requesnt and handle errors
+    if (errorMessages.length === 0) {
+      try {
+        event.preventDefault()
+        const token = localStorage.getItem("accessToken");
+        console.log("response", sentData)
+        const response = await axios.post(
+          "http://localhost:8000/TherapyTests/record/",
+          {
+            sentData
+          },
+          {
+            headers: {
+              Authorization: `Bearer ${token}`,
+              "Content-Type": "application/json",
+            },
+          }
+        );
+
+        if (response.status === 200 || response.status === 201) {
+          toast.success("!اطلاعات پزشکی شما با موفقیت ثبت شد", {
+            position: "bottom-left",
+            autoClose: 3000,
+            hideProgressBar: false,
+            closeOnClick: true,
+            pauseOnHover: true,
+            draggable: true,
+            progress: undefined,
+          });
+          CreateReservation(event);
+          handleClose();
+        } else {
+          Swal.fire({
+            icon: "error",
+            title: "!خطا در ثبت اطلاعات",
+            background: "#473a67",
+            color: "#b4b3b3",
+            width: "26rem",
+            height: "18rem",
+            confirmButtonText: "تایید",
+            customClass: {
+              container: "custom-swal-container",
+            },
+          });
+        }
+      } catch (error) {
+        console.log(error)
+        Swal.fire({
+          icon: "error",
+          title: "!خطا در ارسال درخواست",
+          background: "#473a67",
+          color: "#b4b3b3",
+          width: "26rem",
+          height: "18rem",
+          confirmButtonText: "تایید",
+          customClass: {
+            container: "custom-swal-container",
+          },
+        });
+      }
+    } else {
+      Swal.fire({
+        icon: "error",
+        title: "!خطا",
+        html: errorMessages.join("<br>"),
+        background: "#473a67",
+        color: "#b4b3b3",
+        width: "26rem",
+        height: "18rem",
+        confirmButtonText: "تایید",
+        customClass: {
+          container: "custom-swal-container",
+        },
+      });
+    }
+  }
+
+  async function CreateReservation(event) {
+    try {
+      event.preventDefault()
+      const ReservationDate = DateString(daySelected); // Format today's date as "yyyy-mm-dd" string
+      const token = localStorage.getItem("accessToken");
+
+      console.log("1")
+      console.log(ReservationDate);
+      console.log(token);
+      console.log(resType);
+      console.log(left_times[selectIndex]);
+      console.log(doctorId);
+
+      const response = await axios("http://127.0.0.1:8000/reserve/create/", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: `Bearer ${token}`,
+        },
+        data: {
+          type: resType,
+          date: ReservationDate,
+          time: left_times[selectIndex],
+          doctor_id: doctorId,
+        },
+      });
+      console.log("2")
+
+      if (response.status === 200 || response.status === 201) {
+        console.log("you reserved successfully");
+        getReserved(event);
+        toast.success("رزرو شما با موفقیت انجام شد", {
+          position: "bottom-left",
+          autoClose: 3000,
+          hideProgressBar: false,
+          closeOnClick: true,
+          pauseOnHover: true,
+          draggable: true,
+          progress: undefined,
+        });
+      }
+    } catch (error) {
+      console.log(error);
+      toast.error("!رزرو موفقیت آمیز نبود، رفرش کنید", {
+        position: "bottom-left",
+        autoClose: 3000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+      });
+    }
+  }
+
   const handleClose = (event) => {
     event.preventDefault(); // Prevent form submission
     toggleModal();
   };
 
-  useEffect(() => {
-    console.log("isFinished1 value changed:", isFinished1);
-  }, [isFinished1]);
-  
-  useEffect(() => {
-    console.log("endDate1 value changed:", endDate1);
-    console.log("isFinished1 value changed:", isFinished1);
-    console.log("length1 value changed:", length1);
-    console.log("reason2leave1 value changed:", reason2leave1);
-    console.log("method1 value changed:", method1);
-    console.log("drugs1 value changed:", drugs1);
-
-  }, [endDate1, isFinished1, length1, reason2leave1, method1, drugs1]);
-  
-  // Repeat the pattern for the remaining states
-  useEffect(() => {
-    console.log("isFinished2 value changed:", isFinished2);
-  }, [isFinished2]);
-  
-  useEffect(() => {
-    console.log("endDate2 value changed:", endDate2);
-  }, [endDate2]);
-  
-  useEffect(() => {
-    console.log("length2 value changed:", length2);
-  }, [length2]);
-  
-  // Repeat the pattern for isFinished3, endDate3, length3, and other states
+  // useEffect(() => {
+  //   console.log("Effect: ", hasHistory1, hasHistory2, hasHistory3)
+  // }, [hasHistory1, hasHistory2, hasHistory3]);
   
 
+  // useEffect(() => {
+  //   console.log("1:",endDate1, isFinished1, isFinished1str, length1, reason2leave1, method1, drugs1);
+  //   console.log("2:",endDate2, isFinished2,isFinished2str, length2, reason2leave2, method2, drugs2);
+  //   console.log("3:",endDate3, isFinished3, isFinished3str,length3, reason2leave3, method3, drugs3);
+  //   console.log("others",hasHistory1, hasHistory2, hasHistory3);
+  //   console.log("new:", childrenNum, sentData, ssid, medicalHistory, medicalHistoryStr);
+
+  //   // GenerateData(hasHistory1, hasHistory2, hasHistory3)
+  //   // GenerateData(hasHistory1, hasHistory2, hasHistory3);
+  // }, [
+  //   childrenNum, ssid, sentData,
+  //   endDate1, isFinished1, length1, reason2leave1, method1, drugs1, 
+  //   endDate2, isFinished2, length2, reason2leave2, method2, drugs2,
+  //   endDate3, isFinished3, length3, reason2leave3, method3, drugs3, medicalHistory, medicalHistoryStr
+  // ]);
+  
+  // // // Repeat the pattern for the remaining states
+  // useEffect(() => {
+  //   console.log("data");
+  //   GenerateData();
+  //   console.log("data :", sentData)
+  // }, [hasHistory1, hasHistory2, hasHistory3, medicalHistoryStr, childrenNum, ssid, medicalHistory]);
+  
+
+  const updateHistoryStates = () => {
+    setHasHistory1(!(endDate1 === "" && length1 === "" && reason2leave1 === "" && method1 === "" && drugs1 === ""));
+    setHasHistory2(!(endDate2 === "" && length2 === "" && reason2leave2 === "" && method2 === "" && drugs2 === ""));
+    setHasHistory3(!(endDate3 === "" && length3 === "" && reason2leave3 === "" && method3 === "" && drugs3 === ""));
+    GenerateData()
+  };
+  
+  // useEffect(() => {
+  //   const intervalId = setInterval(() => {
+  //     updateHistoryStates();
+  //     GenerateData();
+  //   }, 3000); // 30 milliseconds
+
+  //   return () => clearInterval(intervalId); // Cleanup the interval on component unmount
+  // }, []);
+
+  useEffect(() => {
+    console.log("changed")
+    updateHistoryStates();
+  }, [endDate1, length1, isFinished1, reason2leave1, method1, drugs1, 
+    endDate2, length2 ,isFinished2, reason2leave2, method2, drugs2,
+     endDate3, length3, isFinished3, reason2leave3, method3, drugs3, 
+     isFinished1str, isFinished2str, isFinished3str, medicalHistory, medicalHistoryStr, ssid, childrenNum]);
+  // useEffect(() => {
+  //   console.log("endDate2 value changed:", endDate2);
+  // }, [endDate2]);
+  
+  // useEffect(() => {
+  //   console.log("length2 value changed:", length2);
+  // }, [length2]);
+  
+  // // Repeat the pattern for isFinished3, endDate3, length3, and other states
+  // // Repeat the pattern for isFinished3, endDate3, length3, and other states
+  
+  const GenerateData = () => {
+    if (!hasHistory1 && !hasHistory2 && !hasHistory3){
+      const data = {
+        child_num: parseInt(childrenNum),
+        nationalID: ssid,
+        family_history: medicalHistoryStr,
+      }
+      setSentData(data);
+    }
+    else if (hasHistory1 && !hasHistory2 && !hasHistory3){
+      console.log("alan tooye if am")
+      const treatHist1 = {
+        end_date: endDate1,
+        length: parseInt(length1),
+        is_finished: isFinished1str,
+        reason_to_leave: reason2leave1,
+        approach: method1,
+        special_drugs: drugs1
+      };
+      const data = {
+        child_num: parseInt(childrenNum),
+        nationalID: ssid,
+        family_history: medicalHistoryStr,
+        treatementHistory1: treatHist1,
+      }
+      console.log(data);
+      setSentData(data);
+    }
+    else if (hasHistory1 && hasHistory2 && !hasHistory3){
+      const treatHist1 = {
+        end_date: endDate1,
+        length: parseInt(length1),
+        is_finished: isFinished1str,
+        reason_to_leave: reason2leave1,
+        approach: method1,
+        special_drugs: drugs1
+      };
+
+      const treatHist2 = {
+        end_date: endDate2,
+        length: parseInt(length2),
+        is_finished: isFinished2str,
+        reason_to_leave: reason2leave2,
+        approach: method2,
+        special_drugs: drugs2
+      };
+
+      const data = {
+        child_num: parseInt(childrenNum),
+        nationalID: ssid,
+        family_history: medicalHistoryStr,
+        treatementHistory1: treatHist1,
+        treatementHistory2: treatHist2,
+      }
+
+      setSentData(data);
+    }
+    else if (hasHistory1 && hasHistory2 && hasHistory3){
+      const treatHist1 = {
+        end_date: endDate1,
+        length: parseInt(length1),
+        is_finished: isFinished1str,
+        reason_to_leave: reason2leave1,
+        approach: method1,
+        special_drugs: drugs1
+      };
+
+      const treatHist2 = {
+        end_date: endDate2,
+        length: parseInt(length2),
+        is_finished: isFinished2str,
+        reason_to_leave: reason2leave2,
+        approach: method2,
+        special_drugs: drugs2
+      };
+
+      const treatHist3 = {
+        end_date: endDate3,
+        length: parseInt(length3),
+        is_finished: isFinished3str,
+        reason_to_leave: reason2leave3,
+        approach: method3,
+        special_drugs: drugs3
+      };
+
+      const data = {
+        child_num: parseInt(childrenNum),
+        nationalID: ssid,
+        family_history: medicalHistoryStr,
+        treatementHistory1: treatHist1,
+        treatementHistory2: treatHist2,
+        treatementHistory3: treatHist3,
+      }
+
+      setSentData(data);
+    }
+  }
   const ChangeIsFinished1 = (event) => {
     const selectedValue = event.target.value.toString().trim();
     if (selectedValue === "yes") {
@@ -92,13 +437,13 @@ function MedicalInfoModal({ showModal, toggleModal }) {
         return true; // Return the new value
       });
       // console.log(isFinished1); // Log previous value
-      setIsFinished1str("yes");
+      setIsFinished1str("True");
 
     } else if (selectedValue === "no") {
       setIsFinished1((prevValue) => {
         return false; // Return the new value
       });
-      setIsFinished1str("no");
+      setIsFinished1str("False");
       // console.log(isFinished1); // Log previous value
 
     } else {
@@ -113,7 +458,7 @@ function MedicalInfoModal({ showModal, toggleModal }) {
       setIsFinished2((prevValue) => {
         return true; // Return the new value
       });
-      setIsFinished2str("yes");
+      setIsFinished2str("True");
       // console.log(isFinished2); // Log previous value
 
     } else if (selectedValue === "no") {
@@ -121,7 +466,7 @@ function MedicalInfoModal({ showModal, toggleModal }) {
         return false; // Return the new value
       });
       // console.log(isFinished1); // Log previous value
-      setIsFinished2str("no");
+      setIsFinished2str("False");
 
     } else {
       setIsFinished2str("");
@@ -134,7 +479,7 @@ function MedicalInfoModal({ showModal, toggleModal }) {
       setIsFinished3((prevValue) => {
         return true; // Return the new value
       });
-      setIsFinished3str("yes");
+      setIsFinished3str("True");
 
       // console.log(isFinished1); // Log previous value
 
@@ -142,7 +487,7 @@ function MedicalInfoModal({ showModal, toggleModal }) {
       setIsFinished3((prevValue) => {
         return false; // Return the new value
       });
-      setIsFinished3str("no");
+      setIsFinished3str("False");
 
       // console.log(isFinished1); // Log previous value
 
@@ -243,22 +588,23 @@ function MedicalInfoModal({ showModal, toggleModal }) {
                 }}>آیا در خانواده شما تاریخچه پزشکی وجود دارد؟</h4>
               </div>
               <div style={{ justifyContent: "center", alignItems: "center" }} className="medical-field_modal">
-                <label style={{ direction: "rtl", marginRight: "30%" }}>
+              <label style={{ direction: "rtl", marginRight: "30%" }}>
                   <input
                     type="radio"
-                    value="yes"
-                    checked={medicalHistory === true} // Check if medicalHistory is true
-                    onChange={() => {setMedicalHistory(true); console.log(medicalHistory)}}
+                    value="no"
+                    checked={medicalHistory === false} 
+                    onChange={() => {setMedicalHistory(false); setMedicalHistoryStr("False") ;console.log(medicalHistory)}}
                   /> خیر
                 </label>
                 <label style={{ direction: "rtl"}}>
                   <input
                     type="radio"
-                    value="no"
-                    checked={medicalHistory === false} 
-                    onChange={() => {setMedicalHistory(false); console.log(medicalHistory)}}
+                    value="yes"
+                    checked={medicalHistory === true} // Check if medicalHistory is true
+                    onChange={() => {setMedicalHistory(true); setMedicalHistoryStr("True"); console.log(medicalHistory)}}
                   /> بله
                 </label>
+
               </div>
               <div style={{ marginTop: "10%" }}>
                 <h4 style={{
@@ -967,7 +1313,7 @@ function MedicalInfoModal({ showModal, toggleModal }) {
                 </div>
                 <div className="medical-field_modal medical-btn" style={{ marginLeft: '10px' }}>
                   <div className="medical-btn_layer"></div>
-                  <input type="submit" value="ارسال" />
+                  <input type="submit" value="ارسال" onClick={(e) => SendMedicalInfo(e)} />
                 </div>
               </div>
             </form>
