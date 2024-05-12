@@ -590,7 +590,7 @@ form .medical-btn input[type="submit"]{
     font-size: 18px;
     transition: border-color 0.3s ease;
     color: rgb(164, 161, 161);
-    caret-color: rgb(105, 194, 226);
+    caret-color: #54bafd;
     font-family: Vazir, Arial, sans-serif;
     background-color: white;
   
@@ -598,12 +598,12 @@ form .medical-btn input[type="submit"]{
   
   
   .medical-form_details_modal form .medical-field_modal2:hover {
-    border-bottom-color: #72d6fa;
-    color: #72d6fa;
+    border-bottom-color: #54bafd;
+    color: #729dfa;
   }
   
   .medical-form_details_modal form .medical-field_modal2:focus {
-    border-bottom-color: #52c7f2;
+    border-bottom-color: #54bafd;
   }
   
   .medical-form_details_modal form .medical-field_modal2::placeholder {
@@ -616,11 +616,11 @@ form .medical-btn input[type="submit"]{
   
 
   .medical-form_details_modal form .medical-field_modal2 .input:hover {
-    border-bottom-color: #b3e8fb;
+    border-bottom-color:#54bafd
   }
   
   .medical-form_details_modal form .medical-field_modal2 .input:focus {
-    border-bottom-color:#95e0fb;
+    border-bottom-color:#54bafd;
   }
   
   .medical-form_details_modal form .medical-field_modal2 input::placeholder {
@@ -634,33 +634,33 @@ form .medical-btn input[type="submit"]{
   
   
   form .medical-field_modal2 input:focus::placeholder{
-    color:#72d6fa;
+    color:#54bafd;
     font-family: Vazir, Arial, sans-serif;
   
   }
   
   
   form .medical-field_modal2 input:hover::placeholder {
-    color:#72d6fa;
+    color:#54bafd;
     font-family: Vazir, Arial, sans-serif;
   
   }
   
   
   form .medical-field_modal2:focus::placeholder{
-    color:#72d6fa;
+    color:#54bafd;
     font-family: Vazir, Arial, sans-serif;
   
   }
   
   
   form .medical-field_modal2:hover::placeholder {
-    color: #72d6fa;
+    color: #54bafd;
     font-family: Vazir, Arial, sans-serif;
   
   }
   
   
   .medical-field_modal2 select:hover option[value=""]:not(:disabled) {
-    color: #72d6fa; /* Change the color to your desired hover color */
+    color: #54bafd; /* Change the color to your desired hover color */
   }

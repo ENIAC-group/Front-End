@@ -163,7 +163,7 @@ function MedicalInfoModal({ showModal, toggleModal, daySelected, doctorId , resT
             progress: undefined,
           });
           CreateReservation(event);
-          handleClose();
+          handleClose(event);
         } else {
           Swal.fire({
             icon: "error",
@@ -344,14 +344,14 @@ function MedicalInfoModal({ showModal, toggleModal, daySelected, doctorId , resT
     }
     else if (hasHistory1 && !hasHistory2 && !hasHistory3){
       console.log("alan tooye if1 am")
-      const treatHist1 = {
+      const treatHist1 = JSON.stringify({
         end_date: endDate1,
         length: parseInt(length1),
         is_finished: isFinished1,
         reason_to_leave: reason2leave1,
         approach: method1,
         special_drugs: drugs1
-      };
+      });
       const data = {
         child_num: parseInt(childrenNum),
         nationalID: ssid,
@@ -362,23 +362,23 @@ function MedicalInfoModal({ showModal, toggleModal, daySelected, doctorId , resT
       setrecord(data);
     }
     else if (hasHistory1 && hasHistory2 && !hasHistory3){
-      const treatHist1 = {
+      const treatHist1 = JSON.stringify({
         end_date: endDate1,
         length: parseInt(length1),
         is_finished: isFinished1,
         reason_to_leave: reason2leave1,
         approach: method1,
         special_drugs: drugs1
-      };
+      });
 
-      const treatHist2 = {
+      const treatHist2 = JSON.stringify({
         end_date: endDate2,
         length: parseInt(length2),
         is_finished: isFinished2,
         reason_to_leave: reason2leave2,
         approach: method2,
         special_drugs: drugs2
-      };
+      });
 
       const data = {
         child_num: parseInt(childrenNum),
@@ -391,32 +391,32 @@ function MedicalInfoModal({ showModal, toggleModal, daySelected, doctorId , resT
       setrecord(data);
     }
     else if (hasHistory1 && hasHistory2 && hasHistory3){
-      const treatHist1 = {
+      const treatHist1 = JSON.stringify({
         end_date: endDate1,
         length: parseInt(length1),
         is_finished: isFinished1,
         reason_to_leave: reason2leave1,
         approach: method1,
         special_drugs: drugs1
-      };
+      });
 
-      const treatHist2 = {
+      const treatHist2 = JSON.stringify({
         end_date: endDate2,
         length: parseInt(length2),
         is_finished: isFinished2,
         reason_to_leave: reason2leave2,
         approach: method2,
         special_drugs: drugs2
-      };
+      });
 
-      const treatHist3 = {
+      const treatHist3 = JSON.stringify({
         end_date: endDate3,
         length: parseInt(length3),
         is_finished: isFinished3,
         reason_to_leave: reason2leave3,
         approach: method3,
         special_drugs: drugs3
-      };
+      });
 
       const data = {
         child_num: parseInt(childrenNum),
@@ -1301,7 +1301,7 @@ function MedicalInfoModal({ showModal, toggleModal, daySelected, doctorId , resT
               <div style={{ display: 'flex', justifyContent: 'space-between' }}>
                 <div className="medical-field_modal medical-btn" style={{ marginRight: '10px' }}>
                   <div className="medical-btn_layer"></div>
-                  <input type="submit" value="بستن" onClick={handleClose} />
+                  <input type="submit" value="بستن" onClick={(e) => handleClose(e)} />
                 </div>
                 <div className="medical-field_modal medical-btn" style={{ marginLeft: '10px' }}>
                   <div className="medical-btn_layer"></div>
