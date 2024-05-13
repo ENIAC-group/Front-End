@@ -23,7 +23,7 @@ import circle_icon from "../../assets/circle.png";
 
 
 function MedicalInfoModal({ showModal, toggleModal, daySelected, doctorId , resType , left_times, selectIndex, getReserve}) {
-  const [childrenNum, setChildrenNum] = useState("");
+  const [childrenNum, setChildrenNum] = useState(null);
   const [medicalHistory, setMedicalHistory] = useState(true);
   const [ssid, setSsid] = useState("");
 
@@ -126,6 +126,19 @@ function MedicalInfoModal({ showModal, toggleModal, daySelected, doctorId , resT
       errors.endDate3Error = "!تاریخ پایان نمی‌تواند در آینده باشد";
       errorMessages.push(errors.endDate3Error);
     } 
+
+    if (isFinished1 === false && reason2leave1 === "") {
+      errors.reason2leave1Error = ".دلیل ترک درمان اول را بنویسید";
+      errorMessages.push(errors.reason2leave1Error);
+    }
+    if (isFinished2 === false && reason2leave2 === "") {
+      errors.reason2leave2Error = ".دلیل ترک درمان دوم را بنویسید";
+      errorMessages.push(errors.reason2leave1Error);
+    }
+    if (isFinished3 === false && reason2leave3 === "") {
+      errors.reason2leave3Error = ".دلیل ترک درمان سوم را بنویسید";
+      errorMessages.push(errors.reason2leave3Error);
+    }
 
 
     console.log(errorMessages)
@@ -436,6 +449,7 @@ function MedicalInfoModal({ showModal, toggleModal, daySelected, doctorId , resT
       setIsFinished1((prevValue) => {
         return true; // Return the new value
       });
+      setIsFinished1str("yes");
       // console.log(isFinished1); // Log previous value
 
     } else if (selectedValue === "no") {
@@ -443,9 +457,12 @@ function MedicalInfoModal({ showModal, toggleModal, daySelected, doctorId , resT
         return false; // Return the new value
       });
       // console.log(isFinished1); // Log previous value
+      setIsFinished1str("no");
 
     } else {
       setIsFinished1(null);
+      setIsFinished1str("");
+
     }
   };
 
@@ -456,15 +473,21 @@ function MedicalInfoModal({ showModal, toggleModal, daySelected, doctorId , resT
         return true; // Return the new value
       });
       // console.log(isFinished2); // Log previous value
+      setIsFinished2str("yes");
+
 
     } else if (selectedValue === "no") {
       setIsFinished2((prevValue) => {
         return false; // Return the new value
       });
       // console.log(isFinished1); // Log previous value
+      setIsFinished2str("no");
+
 
     } else {
       setIsFinished2(null);
+      setIsFinished2str("");
+
     }
   };
 
@@ -474,6 +497,7 @@ function MedicalInfoModal({ showModal, toggleModal, daySelected, doctorId , resT
       setIsFinished3((prevValue) => {
         return true; // Return the new value
       });
+      setIsFinished3str("yes");
 
       // console.log(isFinished1); // Log previous value
 
@@ -481,11 +505,15 @@ function MedicalInfoModal({ showModal, toggleModal, daySelected, doctorId , resT
       setIsFinished3((prevValue) => {
         return false; // Return the new value
       });
+      setIsFinished3str("no");
+
 
       // console.log(isFinished1); // Log previous value
 
     } else {
       setIsFinished3(null);
+      setIsFinished1str("");
+
     }
   };
 
@@ -533,7 +561,7 @@ function MedicalInfoModal({ showModal, toggleModal, daySelected, doctorId , resT
         centered
       >
         <Modal.Header className="medical-header_modal">
-          <Modal.Title className="medical-title_modal">اطلاعات پزشکی</Modal.Title>
+          <Modal.Title className="medical-title_modal">تکمیل اطلاعات پزشکی</Modal.Title>
         </Modal.Header>
         <div className="medical-form_container_modal">
           <div className="medical-form_details_modal">

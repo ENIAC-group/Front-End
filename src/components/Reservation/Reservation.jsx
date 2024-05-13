@@ -18,6 +18,8 @@ import * as shamsi from "shamsi-date-converter";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import MedicalInfoModal from "../MedicalInfoModal/MedicalInfoModal";
+import Swal from "sweetalert2";
+
 
 function DateString(input) {
   var changed = shamsi.jalaliToGregorian(input.year, input.month, input.day);
@@ -77,11 +79,48 @@ const ReservationPage = () => {
   const today = ChangeDate(utils().getToday());
   const [selected, setSelect] = useState(-1);
   const [showModal, setShowModal] = useState(false);
+  const [hasMedicalInfo, setHasMedicalInfo] = useState(null);
 
   // Function to toggle the modal state
   const toggleModal = () => {
     setShowModal(!showModal);
   };
+
+  async function CheckMedicalInfo(event) {
+    try {
+      event.preventDefault();
+      const token = localStorage.getItem("accessToken");
+      // console.log(token);
+      const response = await axios.get(
+        "http://127.0.0.1:8000/TherapyTests/record_check/",
+        {
+          headers: {
+            "Content-Type": "application/json",
+            Authorization: `Bearer ${token}`,
+          },
+        }
+      );
+      console.log(response.status);
+
+      if (response.status === 200) {
+        setHasMedicalInfo(response.data.message);
+      }
+    } catch (error) {
+      console.log("something went wrong: ", error);
+      Swal.fire({
+        icon: "error",
+        title: "!خطا ",
+        background: "#473a67",
+        color: "#b4b3b3",
+        width: "26rem",
+        height: "18rem",
+        confirmButtonText: "تایید",
+        customClass: {
+          container: "custom-swal-container",
+        },
+      });
+    }
+  }
 
   const setdatetime = () => {
     var d = new Date(
@@ -319,12 +358,38 @@ const ReservationPage = () => {
                 <button
                   className={styles.button_74}
                   onClick={(e) => {
-                    // CreateReservation(e);
+                    // CheckMedicalInfo(e);
                     setSelectVal(selected);
                     setSelect(-1);
-                    toggleModal();
+                    if (hasMedicalInfo) {
+                      CreateReservation(e);
+                    } else {
+                      Swal.fire({
+                        icon: "info",
+                        title: "!توجه ",
+                        html: "برای ادامۀ فرایند رزرو باید اطلاعات پزشکی خود را کامل کنید",
+                        background: "#473a67",
+                        color: "#b4b3b3",
+                        width: "26rem",
+                        height: "18rem",
+                        showCancelButton: true,
+                        cancelButtonText: "انصراف",
+                        confirmButtonText: "تکمیل اطلاعات",
+                        customClass: {
+                          container: "custom-swal-container",
+                        },
+                      }).then((result) => {
+                        if (result.isConfirmed) {
+                          toggleModal();
+                        } else {
+
+                        }
+                      });
                     // console.log(LeftTimes[selected])
-                    console.log(showModal);
+                      console.log(showModal);
+                    }
+                    
+                    
                   }}
                 >
                   ثبت
