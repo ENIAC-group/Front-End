@@ -24,24 +24,29 @@ import circle_icon from "../../assets/circle.png";
 
 function MedicalInfoModal({ showModal, toggleModal, daySelected, doctorId , resType , left_times, selectIndex, getReserve}) {
   const [childrenNum, setChildrenNum] = useState(null);
-  const [medicalHistory, setMedicalHistory] = useState(true);
+  const [childrenNumStr, setChildrenNumStr] = useState(null);
+  const [medicalHistory, setMedicalHistory] = useState(null);
   const [ssid, setSsid] = useState("");
 
   const [endDate1, setEndDate1] = useState("");
   const [endDate2, setEndDate2] = useState("");
   const [endDate3, setEndDate3] = useState("");
 
-  const [isFinished1, setIsFinished1] = useState(true);
-  const [isFinished2, setIsFinished2] = useState(true);
-  const [isFinished3, setIsFinished3] = useState(true);
+  const [isFinished1, setIsFinished1] = useState(null);
+  const [isFinished2, setIsFinished2] = useState(null);
+  const [isFinished3, setIsFinished3] = useState(null);
 
-  const [isFinished1str, setIsFinished1str] = useState("yes");
-  const [isFinished2str, setIsFinished2str] = useState("yes");
-  const [isFinished3str, setIsFinished3str] = useState("yes");
+  const [isFinished1str, setIsFinished1str] = useState("finished");
+  const [isFinished2str, setIsFinished2str] = useState("finished");
+  const [isFinished3str, setIsFinished3str] = useState("finished");
 
   const [length1, setLength1] = useState("");
   const [length2, setLength2] = useState("");
   const [length3, setLength3] = useState("");
+
+  const [length1str, setLength1str] = useState("");
+  const [length2str, setLength2str] = useState("");
+  const [length3str, setLength3str] = useState("");
 
   const [reason2leave1, setReason2leave1] = useState("");
   const [reason2leave2, setReason2leave2] = useState("");
@@ -82,10 +87,15 @@ function MedicalInfoModal({ showModal, toggleModal, daySelected, doctorId , resT
     const errorMessages = [];
 
     // firstname field validations
-    if (childrenNum === 0 || childrenNum === null) {
-      errors.childNumError = "!به سوال اول پاسخ ندادید";
+    if (childrenNum === "0" || childrenNum === null) {
+      errors.childNumError = "!به سوال اول به درستی پاسخ نداده اید";
       errorMessages.push(errors.childNumError);
     } 
+
+    if (medicalHistory === null) {
+      errors.familyHistError = "!به سوال دوم پاسخ نداده اید";
+      errorMessages.push(errors.familyHistError)
+    }
 
 
     // phonenumebr field validations
@@ -127,20 +137,38 @@ function MedicalInfoModal({ showModal, toggleModal, daySelected, doctorId , resT
       errorMessages.push(errors.endDate3Error);
     } 
 
+    
+
+    if ((endDate1 === "" || length1 === "") && (isFinished1 !== null || reason2leave1 !== "" || method1 !== "" || drugs1 !== "")
+    || (endDate1 !== "" && length1 === "") || (endDate1 === "" && length1 !== "")){
+      errors.firstHist = ".پر کردن دو فیلد اول درمان اول اجباری است";
+      errorMessages.push(errors.firstHist);
+    }
+
+    if (((endDate2 === "" || length2 === "") && (isFinished2 !== null || reason2leave2 !== "" || method2 !== "" || drugs2 !== ""))
+         || (endDate2 !== "" && length2 === "") || (endDate2 === "" && length2 !== "")){
+      errors.secondHist = ".پر کردن دو فیلد اول درمان دوم اجباری است";
+      errorMessages.push(errors.secondHist);
+    }
+
+    if ((endDate3 === "" || length3 === "") && (isFinished3 !== null || reason2leave3 !== "" || method3 !== "" || drugs3 !== "")
+    || (endDate3 !== "" && length3 === "") || (endDate3 === "" && length3 !== "")){
+      errors.thirdHist = ".پر کردن دو فیلد اول درمان سوم اجباری است";
+      errorMessages.push(errors.thirdHist);
+    }
+
     if (isFinished1 === false && reason2leave1 === "") {
       errors.reason2leave1Error = ".دلیل ترک درمان اول را بنویسید";
       errorMessages.push(errors.reason2leave1Error);
     }
     if (isFinished2 === false && reason2leave2 === "") {
       errors.reason2leave2Error = ".دلیل ترک درمان دوم را بنویسید";
-      errorMessages.push(errors.reason2leave1Error);
+      errorMessages.push(errors.reason2leave2Error);
     }
     if (isFinished3 === false && reason2leave3 === "") {
       errors.reason2leave3Error = ".دلیل ترک درمان سوم را بنویسید";
       errorMessages.push(errors.reason2leave3Error);
     }
-
-
     console.log(errorMessages)
 
     console.log(hasHistory1, hasHistory2, hasHistory3)
@@ -166,17 +194,28 @@ function MedicalInfoModal({ showModal, toggleModal, daySelected, doctorId , resT
         );
 
         if (response.status === 200 || response.status === 201) {
-          toast.success("!اطلاعات پزشکی شما با موفقیت ثبت شد", {
-            position: "bottom-left",
-            autoClose: 3000,
-            hideProgressBar: false,
-            closeOnClick: true,
-            pauseOnHover: true,
-            draggable: true,
-            progress: undefined,
-          });
-          CreateReservation(event);
           handleClose(event);
+          Swal.fire({
+            icon: "success",
+            title: "!اطلاعات پزشکی شما با موفقیت ثبت شد",
+            background: "#473a67",
+            color: "#b4b3b3",
+            width: "26rem",
+            height: "18rem",
+            confirmButtonText: "تایید",
+            customClass: {
+              container: "custom-swal-container",
+            },
+          }).then((response) => {
+            if (response.isConfirmed) {
+              CreateReservation(event);
+              getReserve(event);
+            } else {
+              CreateReservation(event);
+              getReserve(event);
+            }
+          });
+          
         } else {
           Swal.fire({
             icon: "error",
@@ -229,13 +268,6 @@ function MedicalInfoModal({ showModal, toggleModal, daySelected, doctorId , resT
       const ReservationDate = DateString(daySelected); // Format today's date as "yyyy-mm-dd" string
       const token = localStorage.getItem("accessToken");
 
-      console.log("1")
-      console.log(ReservationDate);
-      console.log(token);
-      console.log(resType);
-      console.log(left_times[selectIndex]);
-      console.log(doctorId);
-
       const response = await axios("http://127.0.0.1:8000/reserve/create/", {
         method: "POST",
         headers: {
@@ -282,51 +314,15 @@ function MedicalInfoModal({ showModal, toggleModal, daySelected, doctorId , resT
     event.preventDefault(); // Prevent form submission
     toggleModal();
   };
-
-  // useEffect(() => {
-  //   console.log("Effect: ", hasHistory1, hasHistory2, hasHistory3)
-  // }, [hasHistory1, hasHistory2, hasHistory3]);
-  
-
-  // useEffect(() => {
-  //   console.log("1:",endDate1, isFinished1, isFinished1str, length1, reason2leave1, method1, drugs1);
-  //   console.log("2:",endDate2, isFinished2,isFinished2str, length2, reason2leave2, method2, drugs2);
-  //   console.log("3:",endDate3, isFinished3, isFinished3str,length3, reason2leave3, method3, drugs3);
-  //   console.log("others",hasHistory1, hasHistory2, hasHistory3);
-  //   console.log("new:", childrenNum, record, ssid, medicalHistory, medicalHistoryStr);
-
-  //   // GenerateData(hasHistory1, hasHistory2, hasHistory3)
-  //   // GenerateData(hasHistory1, hasHistory2, hasHistory3);
-  // }, [
-  //   childrenNum, ssid, record,
-  //   endDate1, isFinished1, length1, reason2leave1, method1, drugs1, 
-  //   endDate2, isFinished2, length2, reason2leave2, method2, drugs2,
-  //   endDate3, isFinished3, length3, reason2leave3, method3, drugs3, medicalHistory, medicalHistoryStr
-  // ]);
-  
-  // // // Repeat the pattern for the remaining states
-  // useEffect(() => {
-  //   console.log("data");
-  //   GenerateData();
-  //   console.log("data :", record)
-  // }, [hasHistory1, hasHistory2, hasHistory3, medicalHistoryStr, childrenNum, ssid, medicalHistory]);
   
 
   const updateHistoryStates = () => {
-    setHasHistory1(!(endDate1 === "" && length1 === "" && reason2leave1 === "" && method1 === "" && drugs1 === ""));
-    setHasHistory2(!(endDate2 === "" && length2 === "" && reason2leave2 === "" && method2 === "" && drugs2 === ""));
-    setHasHistory3(!(endDate3 === "" && length3 === "" && reason2leave3 === "" && method3 === "" && drugs3 === ""));
+    setHasHistory1(!(endDate1 === "" && length1 === "" && isFinished1 === null && reason2leave1 === "" && method1 === "" && drugs1 === ""));
+    setHasHistory2(!(endDate2 === "" && length2 === "" && isFinished2 === null && reason2leave2 === "" && method2 === "" && drugs2 === ""));
+    setHasHistory3(!(endDate3 === "" && length3 === "" && isFinished3 === null && reason2leave3 === "" && method3 === "" && drugs3 === ""));
     GenerateData()
   };
   
-  // useEffect(() => {
-  //   const intervalId = setInterval(() => {
-  //     updateHistoryStates();
-  //     GenerateData();
-  //   }, 3000); // 30 milliseconds
-
-  //   return () => clearInterval(intervalId); // Cleanup the interval on component unmount
-  // }, []);
 
   useEffect(() => {
     console.log("changed")
@@ -335,17 +331,8 @@ function MedicalInfoModal({ showModal, toggleModal, daySelected, doctorId , resT
     endDate2, length2 ,isFinished2, reason2leave2, method2, drugs2,
      endDate3, length3, isFinished3, reason2leave3, method3, drugs3
      , medicalHistory,ssid, childrenNum, isFinished1str, isFinished2str, isFinished3str]);
-  // useEffect(() => {
-  //   console.log("endDate2 value changed:", endDate2);
-  // }, [endDate2]);
-  
-  // useEffect(() => {
-  //   console.log("length2 value changed:", length2);
-  // }, [length2]);
-  
-  // // Repeat the pattern for isFinished3, endDate3, length3, and other states
-  // // Repeat the pattern for isFinished3, endDate3, length3, and other states
-  
+
+     
   const GenerateData = () => {
     if (!hasHistory1 && !hasHistory2 && !hasHistory3){
       const data = {
@@ -447,22 +434,19 @@ function MedicalInfoModal({ showModal, toggleModal, daySelected, doctorId , resT
     const selectedValue = event.target.value.toString().trim();
     if (selectedValue === "yes") {
       setIsFinished1((prevValue) => {
-        return true; // Return the new value
+        return true;
       });
       setIsFinished1str("yes");
-      // console.log(isFinished1); // Log previous value
 
     } else if (selectedValue === "no") {
       setIsFinished1((prevValue) => {
-        return false; // Return the new value
+        return false; 
       });
-      // console.log(isFinished1); // Log previous value
       setIsFinished1str("no");
 
     } else {
       setIsFinished1(null);
       setIsFinished1str("");
-
     }
   };
 
@@ -470,17 +454,15 @@ function MedicalInfoModal({ showModal, toggleModal, daySelected, doctorId , resT
     const selectedValue = event.target.value.toString().trim();
     if (selectedValue === "yes") {
       setIsFinished2((prevValue) => {
-        return true; // Return the new value
+        return true; 
       });
-      // console.log(isFinished2); // Log previous value
       setIsFinished2str("yes");
 
 
     } else if (selectedValue === "no") {
       setIsFinished2((prevValue) => {
-        return false; // Return the new value
+        return false;
       });
-      // console.log(isFinished1); // Log previous value
       setIsFinished2str("no");
 
 
@@ -495,20 +477,15 @@ function MedicalInfoModal({ showModal, toggleModal, daySelected, doctorId , resT
     const selectedValue = event.target.value.toString().trim();
     if (selectedValue === "yes") {
       setIsFinished3((prevValue) => {
-        return true; // Return the new value
+        return true; 
       });
       setIsFinished3str("yes");
 
-      // console.log(isFinished1); // Log previous value
-
     } else if (selectedValue === "no") {
       setIsFinished3((prevValue) => {
-        return false; // Return the new value
+        return false; 
       });
       setIsFinished3str("no");
-
-
-      // console.log(isFinished1); // Log previous value
 
     } else {
       setIsFinished3(null);
@@ -581,19 +558,19 @@ function MedicalInfoModal({ showModal, toggleModal, daySelected, doctorId , resT
               <div className="medical-field_modal">
                 <input
                   className="input"
-                  type="number" // Change input type to number
+                  type="number" 
                   id="childrenNum"
                   placeholder="تعداد"
-                  min="0" // Optionally set minimum value
-                  max="120" // Optionally set maximum value
-                  onChange={(e) => setChildrenNum(e.target.value)}
+                  min="0" 
+                  max="120" 
+                  onChange={(e) => {setChildrenNum(e.target.value); console.log(childrenNum)} }
                   style={{
                     backgroundImage: `url(${kid_icon})`,
                     backgroundRepeat: "no-repeat",
                     paddingRight: "40px",
                     backgroundPosition: "right",
                   }}
-                  value={childrenNum}
+                  value={childrenNum ? convertToPersianNumbers(childrenNum) : ""}
                 />
               </div>
               <pre></pre>
@@ -605,7 +582,7 @@ function MedicalInfoModal({ showModal, toggleModal, daySelected, doctorId , resT
                   paddingRight: "40px",
                   backgroundPosition: "right",
                   textShadow: "0px 0px 6px rgba(0, 0, 0, 0.2)"
-                }}>آیا در خانواده شما تاریخچه پزشکی وجود دارد؟</h4>
+                }}>آیا در خانواده شما سابقۀ مشکلات و ناراحتی‌های روحی و روانی وجود دارد؟</h4>
               </div>
               <div style={{ justifyContent: "center", alignItems: "center" }} className="medical-field_modal">
               <label style={{ direction: "rtl", marginRight: "30%" }}>
@@ -620,8 +597,8 @@ function MedicalInfoModal({ showModal, toggleModal, daySelected, doctorId , resT
                   <input
                     type="radio"
                     value="yes"
-                    checked={medicalHistory === true} // Check if medicalHistory is true
-                    onChange={() => {setMedicalHistory(true); console.log(medicalHistory)}}
+                    checked={medicalHistory === true} 
+                    onChange={() => {setMedicalHistory(true)}}
                   /> بله
                 </label>
 
@@ -663,7 +640,7 @@ function MedicalInfoModal({ showModal, toggleModal, daySelected, doctorId , resT
                   paddingRight: "40px",
                   backgroundPosition: "right",
                   textShadow: "0px 0px 6px rgba(0, 0, 0, 0.2)"
-                }}>در این بخش سوابق پزشکی خود را کامل کنید.</h4>
+                }}>در صورتی که از قبل تجربۀ درمان داشته اید، سوابق پزشکی خود را در این بخش وارد کنید.</h4>
               </div>
               <div style={{paddingRight: "3%", marginTop: "3%"}}>
                 <h5 style={{
@@ -686,12 +663,10 @@ function MedicalInfoModal({ showModal, toggleModal, daySelected, doctorId , resT
               <div style={{marginRight: "7%"}}>
               <div
                 style={{
-                  // backgroundImage: `url(${date_icon})`,
                   backgroundRepeat: "no-repeat",
                   paddingRight: "0px",
                   backgroundPosition: "right",
                   borderBottom: "2px solid #adadad",
-                  // transition: "border-color 0.3s ease"
                   marginBottom: "20px",
                   
                 }}
@@ -743,7 +718,7 @@ function MedicalInfoModal({ showModal, toggleModal, daySelected, doctorId , resT
                 }}>طول درمان شما چند ماه بوده است؟</h4>
               </div>
               <div style={{marginRight: "7%"}}>
-              <div  className="medical-field_modal2">
+              <div className="medical-field_modal2">
 
                 <input
                   className="input"
@@ -759,6 +734,7 @@ function MedicalInfoModal({ showModal, toggleModal, daySelected, doctorId , resT
                     paddingRight: "20px",
                     backgroundPosition: "right",
                   }}
+                  // value={length1 ? convertToPersianNumbers(length1) : ""}
                 />
               </div>
               </div>
@@ -769,7 +745,7 @@ function MedicalInfoModal({ showModal, toggleModal, daySelected, doctorId , resT
                   backgroundRepeat: "no-repeat",
                   paddingRight: "40px",
                   marginTop: "5%",
-                  backgroundPosition: "right"}}>آیا درمان شما به طور کامل تمام شده است؟</h5>
+                  backgroundPosition: "right"}}>آیا درمان شما به طور کامل انجام شده است؟</h5>
               </div>
               <div style={{marginRight: "7%"}}> 
               <div className="medical-field_modal2">
@@ -789,14 +765,14 @@ function MedicalInfoModal({ showModal, toggleModal, daySelected, doctorId , resT
                   }}
                   className="input">
                   <option value="finished" disabled hidden>
-                    آیا دورۀ درمانی تمام شده است؟
+                     انتخاب کنید
                   </option>
                   <option value="yes">بله</option>
                   <option value="no">خیر</option>
                 </select>
               </div>
               </div>
-              {!isFinished1 && (<>
+              {(isFinished1 !== null && isFinished1 === false) && (<>
                 <div style={{paddingRight: "4%", marginTop: "3%"}}>
                 <h5 style={{
                   color: "rgb(149, 147, 147)", fontSize: "18px", direction: "rtl",
@@ -979,7 +955,8 @@ function MedicalInfoModal({ showModal, toggleModal, daySelected, doctorId , resT
                     paddingRight: "20px",
                     backgroundPosition: "right",
                   }}
-                  value={length2}
+                  // value={length2 ? convertToPersianNumbers(length2) : ""}
+
                 />
               </div>
               </div>
@@ -990,7 +967,7 @@ function MedicalInfoModal({ showModal, toggleModal, daySelected, doctorId , resT
                   backgroundRepeat: "no-repeat",
                   paddingRight: "40px",
                   marginTop: "5%",
-                  backgroundPosition: "right"}}>آیا درمان شما به طور کامل تمام شده است؟</h5>
+                  backgroundPosition: "right"}}>آیا درمان شما به طور کامل انجام شده است؟</h5>
               </div>
               <div style={{marginRight: "7%"}}> 
               <div className="medical-field_modal2">
@@ -1010,14 +987,14 @@ function MedicalInfoModal({ showModal, toggleModal, daySelected, doctorId , resT
                   }}
                   className="input">
                   <option value="finished" disabled hidden>
-                    آیا دورۀ درمانی تمام شده است؟
+                  انتخاب کنید 
                   </option>
                   <option value="yes">بله</option>
                   <option value="no">خیر</option>
                 </select>
               </div>
               </div>
-              {!isFinished2 && (<>
+              {(isFinished2 !== null && isFinished2 === false) && (<>
                 <div style={{paddingRight: "4%", marginTop: "3%"}}>
                 <h5 style={{
                   color: "rgb(149, 147, 147)", fontSize: "18px", direction: "rtl",
@@ -1200,7 +1177,7 @@ function MedicalInfoModal({ showModal, toggleModal, daySelected, doctorId , resT
                     paddingRight: "20px",
                     backgroundPosition: "right",
                   }}
-                  value={length3}
+                  // value={length3 ? convertToPersianNumbers(length3) : ""}
                 />
               </div>
               </div>
@@ -1211,7 +1188,7 @@ function MedicalInfoModal({ showModal, toggleModal, daySelected, doctorId , resT
                   backgroundRepeat: "no-repeat",
                   paddingRight: "40px",
                   marginTop: "5%",
-                  backgroundPosition: "right"}}>آیا درمان شما به طور کامل تمام شده است؟</h5>
+                  backgroundPosition: "right"}}>آیا درمان شما به طور کامل انجام شده است؟</h5>
               </div>
               <div style={{marginRight: "7%"}}> 
               <div className="medical-field_modal2">
@@ -1231,14 +1208,14 @@ function MedicalInfoModal({ showModal, toggleModal, daySelected, doctorId , resT
                   }}
                   className="input">
                   <option value="finished" disabled hidden>
-                    آیا دورۀ درمانی تمام شده است؟
+                  انتخاب کنید
                   </option>
                   <option value="yes">بله</option>
                   <option value="no">خیر</option>
                 </select>
               </div>
               </div>
-              {!isFinished3 && (<>
+              {(isFinished3 !== null && isFinished3 === false) && (<>
                 <div style={{paddingRight: "4%", marginTop: "3%"}}>
                 <h5 style={{
                   color: "rgb(149, 147, 147)", fontSize: "18px", direction: "rtl",

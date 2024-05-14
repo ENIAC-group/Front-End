@@ -32,6 +32,17 @@
   display: inline-block;
 }
 
+.reserve_docProfile .doctor_a .a_2 {
+  border: none;
+  border: 0px solid rgba(4, 9, 29, 0.3);
+}
+/* ._reserve_docProfile_c49cg_20 a {
+  border-radius: 0;
+  -webkit-border-radius: 50%;
+  border: 0px solid rgba(4, 9, 29, 0.3);
+  display: inline-block;
+} */
+
 .reserve_docProfile a img {
   width: 150px;
   height: 150px;

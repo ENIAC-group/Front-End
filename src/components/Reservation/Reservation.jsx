@@ -86,9 +86,8 @@ const ReservationPage = () => {
     setShowModal(!showModal);
   };
 
-  async function CheckMedicalInfo(event) {
+  async function CheckMedicalInfo() {
     try {
-      event.preventDefault();
       const token = localStorage.getItem("accessToken");
       // console.log(token);
       const response = await axios.get(
@@ -172,6 +171,7 @@ const ReservationPage = () => {
           },
         }
       );
+      CheckMedicalInfo();
       console.log(doctor_id)
       if (response.status === 200 || response.status === 201) {
         setResponseData(response.data);
@@ -238,6 +238,7 @@ const ReservationPage = () => {
           draggable: true,
           progress: undefined,
         });
+        CheckMedicalInfo();
       }
     } catch (error) {
       console.log(error);
@@ -258,8 +259,8 @@ const ReservationPage = () => {
       <NavBar_SideBar />
       <ToastContainer />
       <div className={styles.reserve_body} onLoad={getReservation}>
-        <div className={styles.reserve_Box}>
-          <div className={styles.reserve_docProfile}>
+        <div className={styles.reserve_Box}>  
+        <div className={styles.reserve_docProfile}> 
             <a href="#">
               <img src={img} alt="Avatar" />
             </a>
@@ -358,7 +359,7 @@ const ReservationPage = () => {
                 <button
                   className={styles.button_74}
                   onClick={(e) => {
-                    // CheckMedicalInfo(e);
+                    console.log(hasMedicalInfo);
                     setSelectVal(selected);
                     setSelect(-1);
                     if (hasMedicalInfo) {
