@@ -40,9 +40,9 @@ function MedicalInfoModal({ showModal, toggleModal, daySelected, doctorId , resT
   const [isFinished2str, setIsFinished2str] = useState("finished");
   const [isFinished3str, setIsFinished3str] = useState("finished");
 
-  const [length1, setLength1] = useState("");
-  const [length2, setLength2] = useState("");
-  const [length3, setLength3] = useState("");
+  const [length1, setLength1] = useState(null);
+  const [length2, setLength2] = useState(null);
+  const [length3, setLength3] = useState(null);
 
   const [length1str, setLength1str] = useState("");
   const [length2str, setLength2str] = useState("");
@@ -139,20 +139,20 @@ function MedicalInfoModal({ showModal, toggleModal, daySelected, doctorId , resT
 
     
 
-    if ((endDate1 === "" || length1 === "") && (isFinished1 !== null || reason2leave1 !== "" || method1 !== "" || drugs1 !== "")
-    || (endDate1 !== "" && length1 === "") || (endDate1 === "" && length1 !== "")){
+    if ((endDate1 === "" || length1 === null) && (isFinished1 !== null || reason2leave1 !== "" || method1 !== "" || drugs1 !== "")
+    || (endDate1 !== "" && length1 === null) || (endDate1 === "" && length1 !== null)){
       errors.firstHist = ".پر کردن دو فیلد اول درمان اول اجباری است";
       errorMessages.push(errors.firstHist);
     }
 
-    if (((endDate2 === "" || length2 === "") && (isFinished2 !== null || reason2leave2 !== "" || method2 !== "" || drugs2 !== ""))
-         || (endDate2 !== "" && length2 === "") || (endDate2 === "" && length2 !== "")){
+    if (((endDate2 === "" || length2 === null) && (isFinished2 !== null || reason2leave2 !== "" || method2 !== "" || drugs2 !== ""))
+         || (endDate2 !== "" && length2 === null) || (endDate2 === "" && length2 !== null)){
       errors.secondHist = ".پر کردن دو فیلد اول درمان دوم اجباری است";
       errorMessages.push(errors.secondHist);
     }
 
-    if ((endDate3 === "" || length3 === "") && (isFinished3 !== null || reason2leave3 !== "" || method3 !== "" || drugs3 !== "")
-    || (endDate3 !== "" && length3 === "") || (endDate3 === "" && length3 !== "")){
+    if ((endDate3 === "" || length3 === null) && (isFinished3 !== null || reason2leave3 !== "" || method3 !== "" || drugs3 !== "")
+    || (endDate3 !== "" && length3 === null) || (endDate3 === "" && length3 !== null)){
       errors.thirdHist = ".پر کردن دو فیلد اول درمان سوم اجباری است";
       errorMessages.push(errors.thirdHist);
     }
@@ -286,7 +286,7 @@ function MedicalInfoModal({ showModal, toggleModal, daySelected, doctorId , resT
       if (response.status === 200 || response.status === 201) {
         console.log("you reserved successfully");
         getReserved(event);
-        toast.success("رزرو شما با موفقیت انجام شد", {
+        toast.success("رزرو وقت شما با موفقیت انجام شد", {
           position: "bottom-left",
           autoClose: 3000,
           hideProgressBar: false,
@@ -317,9 +317,9 @@ function MedicalInfoModal({ showModal, toggleModal, daySelected, doctorId , resT
   
 
   const updateHistoryStates = () => {
-    setHasHistory1(!(endDate1 === "" && length1 === "" && isFinished1 === null && reason2leave1 === "" && method1 === "" && drugs1 === ""));
-    setHasHistory2(!(endDate2 === "" && length2 === "" && isFinished2 === null && reason2leave2 === "" && method2 === "" && drugs2 === ""));
-    setHasHistory3(!(endDate3 === "" && length3 === "" && isFinished3 === null && reason2leave3 === "" && method3 === "" && drugs3 === ""));
+    setHasHistory1(!(endDate1 === "" && length1 === null && isFinished1 === null && reason2leave1 === "" && method1 === "" && drugs1 === ""));
+    setHasHistory2(!(endDate2 === "" && length2 === null && isFinished2 === null && reason2leave2 === "" && method2 === "" && drugs2 === ""));
+    setHasHistory3(!(endDate3 === "" && length3 === null && isFinished3 === null && reason2leave3 === "" && method3 === "" && drugs3 === ""));
     GenerateData()
   };
   
@@ -585,15 +585,15 @@ function MedicalInfoModal({ showModal, toggleModal, daySelected, doctorId , resT
                 }}>آیا در خانواده شما سابقۀ مشکلات و ناراحتی‌های روحی و روانی وجود دارد؟</h4>
               </div>
               <div style={{ justifyContent: "center", alignItems: "center" }} className="medical-field_modal">
-              <label style={{ direction: "rtl", marginRight: "30%" }}>
+              <label style={{ direction: "rtl", marginRight: "30%" , color: "gray", fontSize: "18px"}}>
                   <input
                     type="radio"
                     value="no"
                     checked={medicalHistory === false} 
                     onChange={() => {setMedicalHistory(false) ;console.log(medicalHistory)}}
-                  /> خیر
+                  />    خیر
                 </label>
-                <label style={{ direction: "rtl"}}>
+                <label style={{ direction: "rtl", color: "gray", fontSize: "18px"}}>
                   <input
                     type="radio"
                     value="yes"
@@ -611,13 +611,13 @@ function MedicalInfoModal({ showModal, toggleModal, daySelected, doctorId , resT
                   paddingRight: "40px",
                   backgroundPosition: "right",
                   textShadow: "0px 0px 6px rgba(0, 0, 0, 0.2)"
-                }}>کد ملی خود را وارد کنید.</h4>
+                }}>کد ملّی خود را وارد کنید.</h4>
               </div>
               <div className="medical-field_modal">
                 <input
                   className="input"
                   type="text"
-                  placeholder="کد ملی"
+                  placeholder="کد ملّی"
                   value={
                     ssid ? convertToPersianNumbers(ssid) : ""
                   }
@@ -640,7 +640,7 @@ function MedicalInfoModal({ showModal, toggleModal, daySelected, doctorId , resT
                   paddingRight: "40px",
                   backgroundPosition: "right",
                   textShadow: "0px 0px 6px rgba(0, 0, 0, 0.2)"
-                }}>در صورتی که از قبل تجربۀ درمان داشته اید، سوابق پزشکی خود را در این بخش وارد کنید.</h4>
+                }}>در صورتی که از قبل تجربۀ درمان داشته اید، به تعداد سوابق پزشکی خود بخش‌های زیر را تکمیل کنید.</h4>
               </div>
               <div style={{paddingRight: "3%", marginTop: "3%"}}>
                 <h5 style={{
@@ -649,7 +649,9 @@ function MedicalInfoModal({ showModal, toggleModal, daySelected, doctorId , resT
                   backgroundRepeat: "no-repeat",
                   paddingRight: "40px",
                   marginTop: "7%",
-                  backgroundPosition: "right"}}>سابقۀ پزشکی اول:</h5>
+                  backgroundPosition: "right",
+                  fontWeight: "bold",
+                  color: "rgb(127, 161, 249)"}}>سابقۀ پزشکی اول:</h5>
               </div>
               <div style={{paddingRight: "4%", marginTop: "3%"}}>
                 <h5 style={{
@@ -685,7 +687,7 @@ function MedicalInfoModal({ showModal, toggleModal, daySelected, doctorId , resT
                   }}
                 >
                   <JBDateInput
-                    placeholder=".تاریخ را انتخاب کنید"
+                    placeholder="تاریخ را انتخاب کنید"
                     usePersianNumber={true}
                     onSelect={(event) => {
                       setEndDate1(event.target.value);
@@ -734,7 +736,7 @@ function MedicalInfoModal({ showModal, toggleModal, daySelected, doctorId , resT
                     paddingRight: "20px",
                     backgroundPosition: "right",
                   }}
-                  // value={length1 ? convertToPersianNumbers(length1) : ""}
+                  value={length1 ? convertToPersianNumbers(length1) : ""}
                 />
               </div>
               </div>
@@ -868,7 +870,9 @@ function MedicalInfoModal({ showModal, toggleModal, daySelected, doctorId , resT
                   backgroundRepeat: "no-repeat",
                   paddingRight: "40px",
                   marginTop: "7%",
-                  backgroundPosition: "right"}}>سابقۀ پزشکی دوم:</h5>
+                  backgroundPosition: "right",
+                  fontWeight: "bold",
+                  color: "rgb(127, 161, 249)"}}>سابقۀ پزشکی دوم:</h5>
               </div>
               <div style={{paddingRight: "4%", marginTop: "3%"}}>
                 <h5 style={{
@@ -955,7 +959,7 @@ function MedicalInfoModal({ showModal, toggleModal, daySelected, doctorId , resT
                     paddingRight: "20px",
                     backgroundPosition: "right",
                   }}
-                  // value={length2 ? convertToPersianNumbers(length2) : ""}
+                  value={length2 ? convertToPersianNumbers(length2) : ""}
 
                 />
               </div>
@@ -1090,7 +1094,9 @@ function MedicalInfoModal({ showModal, toggleModal, daySelected, doctorId , resT
                   backgroundRepeat: "no-repeat",
                   paddingRight: "40px",
                   marginTop: "7%",
-                  backgroundPosition: "right"}}>سابقۀ پزشکی سوم:</h5>
+                  backgroundPosition: "right",
+                  fontWeight: "bold",
+                  color: "rgb(127, 161, 249)"}}>سابقۀ پزشکی سوم:</h5>
               </div>
               <div style={{paddingRight: "4%", marginTop: "3%"}}>
                 <h5 style={{
@@ -1177,7 +1183,7 @@ function MedicalInfoModal({ showModal, toggleModal, daySelected, doctorId , resT
                     paddingRight: "20px",
                     backgroundPosition: "right",
                   }}
-                  // value={length3 ? convertToPersianNumbers(length3) : ""}
+                  value={length3 ? convertToPersianNumbers(length3) : ""}
                 />
               </div>
               </div>

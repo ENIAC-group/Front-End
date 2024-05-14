@@ -124,6 +124,8 @@
   font-family: Vazir, Arial, sans-serif;
 
 }
+
+
 .medical-form_details_modal form .medical-field_modal {
   display: flex;
   align-items: center;
@@ -154,22 +156,38 @@
 
 }
 
-
-.medical-form_details_modal form .medical-field_modal:hover {
-  border-bottom-color: #dcbdf3;
+.medical-form_details_modal form .medical-field_modal .input:hover {
+  border-bottom-color: #e1c8f9;
 }
 
-.medical-form_details_modal form .medical-field_modal:focus {
-  border-bottom-color: #b396f6;
+.medical-form_details_modal form .medical-field_modal .input:focus {
+  border-bottom-color: #dea7fd;
 }
 
-.medical-form_details_modal form .medical-field_modal::placeholder {
+.medical-form_details_modal form .medical-field_modal input::placeholder {
   font-family: Vazir, Arial, sans-serif;
   color: #999;
   transition: all 0.3s ease;
   font-family: Vazir, Arial, sans-serif;
   
 }
+
+
+
+form .medical-field_modal input:focus::placeholder{
+  color:#b67bf9;
+  font-family: Vazir, Arial, sans-serif;
+
+}
+
+
+form .medical-field_modal input:hover::placeholder {
+  color: #cc99ff;
+  font-family: Vazir, Arial, sans-serif;
+
+}
+
+
 
 .medical-form_details_modal .form .medical-field_modal_date .medical-input_date {
   width: 95%;
@@ -183,7 +201,7 @@
 
   font-size: 18px;
 
-  color: gray;
+  color: rgb(122, 122, 122);
   caret-color: rgb(152, 103, 175);
   font-family: Vazir, Arial, sans-serif;
 
@@ -203,7 +221,7 @@
   /* border-bottom: 2px solid #adadad; */
   font-size: 18px;
   /* transition: border-color 0.3s ease; */
-  color: gray;
+  color: rgb(189, 188, 188);
   caret-color: rgb(152, 103, 175);
   font-family: Vazir, Arial, sans-serif;
   background-color: white;
@@ -241,19 +259,29 @@
   --jb-date-input-border: none !important;
   --jb-date-input-border-radius:none;
   --jb-date-input-border-color: white;
-  --jb-date-input-border-size: 2px;
+  --jb-date-input-border-size: 0px;
   --jb-date-input-border-color-focus:white;
   --jb-date-input-bgcolor:#fff;
   --jb-date-input-border-bottom-width:1px;
-  --jb-date-input-label-font-size  :12px;
-  --jb-date-input-value-color:rgb(117, 117, 117);
+  --jb-date-input-label-font-size  :9px;
+  /* --jb-date-field-margin-right  :50%; */
+  --jb-date-input-value-color:rgb(152, 151, 151);
   --jb-date-input-value-font-size:18px;
   --jb-date-input-placeholder-font-size:18px;
+  --jb-date-input-placeholder-color:rgb(136, 136, 136);
   --jb-date-input-calender-wrapper-bg-color:#ACBCFF;
   --jb-date-input-calender-wrapper-border-radius:0;
   --jb-calendar-arrow-button-border-radius:5px;
   --jb-date-input-calendar-wrapper-z-index: 9999999;
   --jb-date-input-web-component-calendar-container---show-transform: translateY(-600px);
+}
+
+.medical-field-date::placeholder {
+  color: rgb(136, 136, 136); /* Default placeholder color */
+}
+
+.medical-field-date:hover::placeholder {
+  color:rgb(12, 7, 14) /* Your desired hover color */ 
 }
 
 .medical-custom-calendar {
@@ -321,36 +349,7 @@ form .medical-field_modal_date .medical-input_date:hover::placeholder {
 ************************** */
 
 
-.medical-form_details_modal form .medical-field_modal .input:hover {
-  border-bottom-color: #e1c8f9;
-}
 
-.medical-form_details_modal form .medical-field_modal .input:focus {
-  border-bottom-color: #dea7fd;
-}
-
-.medical-form_details_modal form .medical-field_modal input::placeholder {
-  font-family: Vazir, Arial, sans-serif;
-  color: #999;
-  transition: all 0.3s ease;
-  font-family: Vazir, Arial, sans-serif;
-  
-}
-
-
-
-form .medical-field_modal input:focus::placeholder{
-  color:#b67bf9;
-  font-family: Vazir, Arial, sans-serif;
-
-}
-
-
-form .medical-field_modal input:hover::placeholder {
-  color: #cc99ff;
-  font-family: Vazir, Arial, sans-serif;
-
-}
 
 
 form .medical-field_modal:focus::placeholder{
@@ -598,12 +597,12 @@ form .medical-btn input[type="submit"]{
   
   
   .medical-form_details_modal form .medical-field_modal2:hover {
-    border-bottom-color: #54bafd;
+    border-bottom-color: #77c5f8;
     color: #729dfa;
   }
   
   .medical-form_details_modal form .medical-field_modal2:focus {
-    border-bottom-color: #54bafd;
+    border-bottom-color: #80c8f8;
   }
   
   .medical-form_details_modal form .medical-field_modal2::placeholder {
@@ -616,11 +615,11 @@ form .medical-btn input[type="submit"]{
   
 
   .medical-form_details_modal form .medical-field_modal2 .input:hover {
-    border-bottom-color:#54bafd
+    border-bottom-color:#77add0
   }
   
   .medical-form_details_modal form .medical-field_modal2 .input:focus {
-    border-bottom-color:#54bafd;
+    border-bottom-color:#649fc7;
   }
   
   .medical-form_details_modal form .medical-field_modal2 input::placeholder {
@@ -634,7 +633,7 @@ form .medical-btn input[type="submit"]{
   
   
   form .medical-field_modal2 input:focus::placeholder{
-    color:#54bafd;
+    color:#4bb6fd;
     font-family: Vazir, Arial, sans-serif;
   
   }

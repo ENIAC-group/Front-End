@@ -229,7 +229,7 @@ const ReservationPage = () => {
       if (response.status === 200 || response.status === 201) {
         console.log("you reserved successfully");
         getReservation();
-        toast.success("رزرو شما با موفقیت انجام شد", {
+        toast.success("رزرو وقت شما با موفقیت انجام شد", {
           position: "bottom-left",
           autoClose: 3000,
           hideProgressBar: false,
