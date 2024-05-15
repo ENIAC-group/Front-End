@@ -194,6 +194,7 @@ function MedicalInfoModal({ showModal, toggleModal, daySelected, doctorId , resT
         );
 
         if (response.status === 200 || response.status === 201) {
+          getReserve(event);
           handleClose(event);
           Swal.fire({
             icon: "success",
@@ -209,10 +210,8 @@ function MedicalInfoModal({ showModal, toggleModal, daySelected, doctorId , resT
           }).then((response) => {
             if (response.isConfirmed) {
               CreateReservation(event);
-              getReserve(event);
             } else {
               CreateReservation(event);
-              getReserve(event);
             }
           });
           
@@ -334,6 +333,18 @@ function MedicalInfoModal({ showModal, toggleModal, daySelected, doctorId , resT
 
      
   const GenerateData = () => {
+    if (isFinished1 == true) {
+      setReason2leave1("");
+    }
+
+    if (isFinished2 == true) {
+      setReason2leave2("");
+    }
+
+    if (isFinished3 == true) {
+      setReason2leave3("");
+    }
+
     if (!hasHistory1 && !hasHistory2 && !hasHistory3){
       const data = {
         child_num: parseInt(childrenNum),
@@ -343,7 +354,7 @@ function MedicalInfoModal({ showModal, toggleModal, daySelected, doctorId , resT
       setrecord(data);
     }
     else if (hasHistory1 && !hasHistory2 && !hasHistory3){
-      console.log("alan tooye if1 am")
+      // console.log("alan tooye if1 am")
       const treatHist1 = JSON.stringify({
         end_date: endDate1,
         length: parseInt(length1),
@@ -430,70 +441,7 @@ function MedicalInfoModal({ showModal, toggleModal, daySelected, doctorId , resT
       setrecord(data);
     }
   }
-  const ChangeIsFinished1 = (event) => {
-    const selectedValue = event.target.value.toString().trim();
-    if (selectedValue === "yes") {
-      setIsFinished1((prevValue) => {
-        return true;
-      });
-      setIsFinished1str("yes");
-
-    } else if (selectedValue === "no") {
-      setIsFinished1((prevValue) => {
-        return false; 
-      });
-      setIsFinished1str("no");
-
-    } else {
-      setIsFinished1(null);
-      setIsFinished1str("");
-    }
-  };
-
-  const ChangeIsFinished2 = (event) => {
-    const selectedValue = event.target.value.toString().trim();
-    if (selectedValue === "yes") {
-      setIsFinished2((prevValue) => {
-        return true; 
-      });
-      setIsFinished2str("yes");
-
-
-    } else if (selectedValue === "no") {
-      setIsFinished2((prevValue) => {
-        return false;
-      });
-      setIsFinished2str("no");
-
-
-    } else {
-      setIsFinished2(null);
-      setIsFinished2str("");
-
-    }
-  };
-
-  const ChangeIsFinished3 = (event) => {
-    const selectedValue = event.target.value.toString().trim();
-    if (selectedValue === "yes") {
-      setIsFinished3((prevValue) => {
-        return true; 
-      });
-      setIsFinished3str("yes");
-
-    } else if (selectedValue === "no") {
-      setIsFinished3((prevValue) => {
-        return false; 
-      });
-      setIsFinished3str("no");
-
-    } else {
-      setIsFinished3(null);
-      setIsFinished1str("");
-
-    }
-  };
-
+  
   const convertToPersianNumbers = (value) => {
     const persianNumbersMap = {
       '0': '۰',
@@ -644,7 +592,7 @@ function MedicalInfoModal({ showModal, toggleModal, daySelected, doctorId , resT
               </div>
               <div style={{paddingRight: "3%", marginTop: "3%"}}>
                 <h5 style={{
-                  color: "rgb(77, 76, 76)", fontSize: "18px", direction: "rtl",
+                  fontSize: "18px", direction: "rtl",
                   backgroundImage: `url(${doc_icon})`,
                   backgroundRepeat: "no-repeat",
                   paddingRight: "40px",
@@ -749,31 +697,26 @@ function MedicalInfoModal({ showModal, toggleModal, daySelected, doctorId , resT
                   marginTop: "5%",
                   backgroundPosition: "right"}}>آیا درمان شما به طور کامل انجام شده است؟</h5>
               </div>
-              <div style={{marginRight: "7%"}}> 
-              <div className="medical-field_modal2">
-                <select 
-                style={{
-                  backgroundColor: "white",
-                  // backgroundImage: `url(${finished_icon})`,
-                  backgroundRepeat: "no-repeat",
-                  paddingRight: "20px",
-                  backgroundPosition: "right",
-                  color: "rgb(188, 186, 186)",
-                }}
-                  defaultValue={isFinished1str}
-                  onChange={(event) => {
-                    ChangeIsFinished1(event);
-                    console.log(event.target.value);
-                  }}
-                  className="input">
-                  <option value="finished" disabled hidden>
-                     انتخاب کنید
-                  </option>
-                  <option value="yes">بله</option>
-                  <option value="no">خیر</option>
-                </select>
+              <div style={{ justifyContent: "center", alignItems: "center" }} className="medical-field_modal">
+              <label style={{ direction: "rtl", marginRight: "30%" , color: "gray", fontSize: "18px"}}>
+                  <input
+                    type="radio"
+                    value="no"
+                    checked={isFinished1 === false} 
+                    onChange={() => {setIsFinished1(false)}}
+                  />    خیر
+                </label>
+                <label style={{ direction: "rtl", color: "gray", fontSize: "18px"}}>
+                  <input
+                    type="radio"
+                    value="yes"
+                    checked={isFinished1 === true} 
+                    onChange={() => {setIsFinished1(true)}}
+                  /> بله
+                </label>
+
               </div>
-              </div>
+              
               {(isFinished1 !== null && isFinished1 === false) && (<>
                 <div style={{paddingRight: "4%", marginTop: "3%"}}>
                 <h5 style={{
@@ -865,7 +808,7 @@ function MedicalInfoModal({ showModal, toggleModal, daySelected, doctorId , resT
 
               <div style={{paddingRight: "3%", marginTop: "3%"}}>
                 <h5 style={{
-                  color: "rgb(77, 76, 76)", fontSize: "18px", direction: "rtl",
+                  fontSize: "18px", direction: "rtl",
                   backgroundImage: `url(${doc_icon})`,
                   backgroundRepeat: "no-repeat",
                   paddingRight: "40px",
@@ -973,30 +916,24 @@ function MedicalInfoModal({ showModal, toggleModal, daySelected, doctorId , resT
                   marginTop: "5%",
                   backgroundPosition: "right"}}>آیا درمان شما به طور کامل انجام شده است؟</h5>
               </div>
-              <div style={{marginRight: "7%"}}> 
-              <div className="medical-field_modal2">
-                <select 
-                style={{
-                  backgroundColor: "white",
-                  // backgroundImage: `url(${finished_icon})`,
-                  backgroundRepeat: "no-repeat",
-                  paddingRight: "20px",
-                  backgroundPosition: "right",
-                  color: "rgb(188, 186, 186)",
-                }}
-                  defaultValue={isFinished2str}
-                  onChange={(event) => {
-                    ChangeIsFinished2(event);
-                    console.log(event.target.value);
-                  }}
-                  className="input">
-                  <option value="finished" disabled hidden>
-                  انتخاب کنید 
-                  </option>
-                  <option value="yes">بله</option>
-                  <option value="no">خیر</option>
-                </select>
-              </div>
+              <div style={{ justifyContent: "center", alignItems: "center" }} className="medical-field_modal">
+              <label style={{ direction: "rtl", marginRight: "30%" , color: "gray", fontSize: "18px"}}>
+                  <input
+                    type="radio"
+                    value="no"
+                    checked={isFinished2 === false} 
+                    onChange={() => {setIsFinished2(false)}}
+                  />    خیر
+                </label>
+                <label style={{ direction: "rtl", color: "gray", fontSize: "18px"}}>
+                  <input
+                    type="radio"
+                    value="yes"
+                    checked={isFinished2 === true} 
+                    onChange={() => {setIsFinished2(true)}}
+                  /> بله
+                </label>
+
               </div>
               {(isFinished2 !== null && isFinished2 === false) && (<>
                 <div style={{paddingRight: "4%", marginTop: "3%"}}>
@@ -1089,7 +1026,7 @@ function MedicalInfoModal({ showModal, toggleModal, daySelected, doctorId , resT
 
               <div style={{paddingRight: "3%", marginTop: "3%"}}>
                 <h5 style={{
-                  color: "rgb(77, 76, 76)", fontSize: "18px", direction: "rtl",
+                  fontSize: "18px", direction: "rtl",
                   backgroundImage: `url(${doc_icon})`,
                   backgroundRepeat: "no-repeat",
                   paddingRight: "40px",
@@ -1196,30 +1133,24 @@ function MedicalInfoModal({ showModal, toggleModal, daySelected, doctorId , resT
                   marginTop: "5%",
                   backgroundPosition: "right"}}>آیا درمان شما به طور کامل انجام شده است؟</h5>
               </div>
-              <div style={{marginRight: "7%"}}> 
-              <div className="medical-field_modal2">
-                <select 
-                style={{
-                  backgroundColor: "white",
-                  // backgroundImage: `url(${finished_icon})`,
-                  backgroundRepeat: "no-repeat",
-                  paddingRight: "20px",
-                  backgroundPosition: "right",
-                  color: "rgb(188, 186, 186)",
-                }}
-                  defaultValue={isFinished3str}
-                  onChange={(event) => {
-                    ChangeIsFinished3(event);
-                    console.log(event.target.value);
-                  }}
-                  className="input">
-                  <option value="finished" disabled hidden>
-                  انتخاب کنید
-                  </option>
-                  <option value="yes">بله</option>
-                  <option value="no">خیر</option>
-                </select>
-              </div>
+              <div style={{ justifyContent: "center", alignItems: "center" }} className="medical-field_modal">
+              <label style={{ direction: "rtl", marginRight: "30%" , color: "gray", fontSize: "18px"}}>
+                  <input
+                    type="radio"
+                    value="no"
+                    checked={isFinished3 === false} 
+                    onChange={() => {setIsFinished3(false)}}
+                  />    خیر
+                </label>
+                <label style={{ direction: "rtl", color: "gray", fontSize: "18px"}}>
+                  <input
+                    type="radio"
+                    value="yes"
+                    checked={isFinished3 === true} 
+                    onChange={() => {setIsFinished3(true)}}
+                  /> بله
+                </label>
+
               </div>
               {(isFinished3 !== null && isFinished3 === false) && (<>
                 <div style={{paddingRight: "4%", marginTop: "3%"}}>
