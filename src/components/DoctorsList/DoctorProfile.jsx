@@ -7,7 +7,7 @@ import { useNavigate } from "react-router-dom";
 import { useState, useEffect } from 'react';
 import CompleteInfoModal from "../CompleteInfoModal/Complete_Info.jsx";
 import { ToastContainer } from 'react-toastify';
-import DoctorPage from './DoctorPage.jsx';
+import DoctorPage from '../SeeingDoctorReservation/DoctorPage.jsx';
 import RatingModal from '../RatingDoctor/RatingModal.jsx';
 
 

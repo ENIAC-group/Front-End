@@ -1,5 +1,5 @@
 import React from "react";
-import LoginContainer from "./components/LoginSignUp/LoginSignup.jsx";
+import LoginContainer from "./components/LoginSignUp/LoginSignUp.jsx";
 import Landing from "./components/LandingPage/LandingPage.jsx";
 import AboutUS from "./components/aboutus/aboutus.jsx";
 import Verification from "./components/Verification/verification.jsx";
@@ -13,7 +13,7 @@ import CourseList from "./components/TestPage/TestPage.jsx";
 import MBTITest from "./components/Tests_lib/test_MBTI.jsx";
 import GlasserTest from "./components/Tests_lib/test_Glasser.jsx";
 import ReservationPage from "./components/Reservation/Reservation.jsx";
-import DoctorPage from "./components/DoctorsList/DoctorPage.jsx";
+import DoctorPage from "./components/SeeingDoctorReservation/DoctorPage.jsx";
 import Patient_Panel from "./components/Patient_Panel/Patient_Panel.jsx";
 
 function App() {
