@@ -25,7 +25,7 @@ import Patient_Result from "./Patient_Results";
 const Patient_Panel = () => {
   const navigate = useNavigate();
   const location = useLocation();
-  const PatientId = location.state.PatiantId;
+  const PatientId = location.state;
   // const PatientId = 1;
   const [pages, setPageNum] = useState(1);
   const [userRecord, setRecord] = useState({
@@ -56,7 +56,7 @@ const Patient_Panel = () => {
       );
       if (response.status == 200 || response.status == 201) {
         const user = response.data;
-        console.log(user)
+        console.log(user);
         setRecord({
           Patient_age: user.age,
           Patient_child_num: user.child_num,
@@ -90,7 +90,10 @@ const Patient_Panel = () => {
         });
       }
       if (error.response.status == 400) {
-        if(error.response.data.message == 'ordinary user can not access this Information.')
+        if (
+          error.response.data.message ==
+          "ordinary user can not access this Information."
+        )
           withReactContent(Swal).fire({
             icon: "error",
             title: "! دسترسی به این صفحه مختص پزشک هست",
@@ -106,22 +109,22 @@ const Patient_Panel = () => {
               navigate("/Home");
             },
           });
-          if(error.response.data.message == 'there is no record with this id.')
-            withReactContent(Swal).fire({
-              icon: "error",
-              title: "! مریض مورد نظر پیدا نشد",
-              background: "#473a67",
-              color: "#b4b3b3",
-              width: "40rem",
-              backdrop: `
+        if (error.response.data.message == "there is no record with this id.")
+          withReactContent(Swal).fire({
+            icon: "error",
+            title: "! مریض مورد نظر پیدا نشد",
+            background: "#473a67",
+            color: "#b4b3b3",
+            width: "40rem",
+            backdrop: `
                 rgba(84, 75, 87.0.9)
                 left top
                 no-repeat`,
-              confirmButtonText: "تایید",
-              preConfirm: () => {
-                navigate("/Home");
-              },
-            });
+            confirmButtonText: "تایید",
+            preConfirm: () => {
+              navigate("/Home");
+            },
+          });
       }
 
       console.log(error);
@@ -144,14 +147,14 @@ const Patient_Panel = () => {
         // style={pages == 2 ? { paddingTop: "1.5%" } : {}}
         onLoad={GetHealthInfo}
       >
-        <div className="prof_Box" style={{minWidth:'500px'}}>
+        <div className="prof_Box" style={{ minWidth: "500px" }}>
           <link
             href="https://maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css"
             rel="stylesheet"
           />
           <div className="container bootstrap snippets bootdey">
-            <div className="row" >
-              <div className="col-md-0" style={{ marginTop: "20px"}}>
+            <div className="row">
+              <div className="col-md-0" style={{ marginTop: "20px" }}>
                 <div className="panel" style={{ direction: "rtl" }}>
                   <div className="patient_prof_header">
                     <h1>اطلاعات پزشکی</h1>
@@ -202,12 +205,15 @@ const Patient_Panel = () => {
                       FamilyHistory={userRecord.Patient_family_history}
                     />
                   ) : pages == 2 ? (
-                    <Patient_Result results={userRecord.Patient_TestResult} G={userRecord.Patient_gender}/>
+                    <Patient_Result
+                      results={userRecord.Patient_TestResult}
+                      G={userRecord.Patient_gender}
+                    />
                   ) : (
-                    <Patient_History 
-                    TreatmentNum1={userRecord.Patient_Treatment1}
-                    TreatmentNum2={userRecord.Patient_Treatment2}
-                    TreatmentNum3={userRecord.Patient_Treatment3}
+                    <Patient_History
+                      TreatmentNum1={userRecord.Patient_Treatment1}
+                      TreatmentNum2={userRecord.Patient_Treatment2}
+                      TreatmentNum3={userRecord.Patient_Treatment3}
                     />
                   )}
                 </div>
