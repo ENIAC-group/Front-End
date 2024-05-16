@@ -22,6 +22,7 @@ const Patient_History = ({ TreatmentNum1, TreatmentNum2, TreatmentNum3 }) => {
           <MdOutlineHistoryToggleOff className="patient_prof_box_header_ic" />
           <h1>تاریخچه درمان های گذشته</h1>
         </div>
+        {(TreatmentNum1==null && TreatmentNum2==null && TreatmentNum3==null) ? <h5>"نتیجه ای برای نشان دادن وجود ندارد"</h5> : 
         <div className="patient_prof_res">
           {TreatmentNum1 != null ? (
             <div className="patient_prof_history_card">
@@ -110,7 +111,7 @@ const Patient_History = ({ TreatmentNum1, TreatmentNum2, TreatmentNum3 }) => {
           ) : (
             <></>
           )}
-        </div>
+        </div>}
       </div>
     </>
   );
