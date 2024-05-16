@@ -14,7 +14,7 @@ import MBTITest from "./components/Tests_lib/test_MBTI.jsx";
 import GlasserTest from "./components/Tests_lib/test_Glasser.jsx";
 import ReservationPage from "./components/Reservation/Reservation.jsx";
 import DoctorPage from "./components/DoctorsList/DoctorPage.jsx";
-
+import Patient_Panel from "./components/Patient_Panel/Patient_Panel.jsx";
 
 function App() {
   return (
@@ -61,6 +61,9 @@ function App() {
           {" "}
         </Router.Route>
         <Router.Route path="/DoctorPage" element={<DoctorPage />}>
+          {" "}
+        </Router.Route>
+        <Router.Route path="/Patient_Panel" element={<Patient_Panel />}>
           {" "}
         </Router.Route>
       </Router.Routes>
