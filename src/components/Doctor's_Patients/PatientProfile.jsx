@@ -9,12 +9,12 @@ import male_avatar from "../../assets/Male_Avatar.jpg";
 import female_avatar from "../../assets/Female_Avatar.jpg";
 import nogender_avatar from "../../assets/NoGender.png";
 
-const Patient_Profile = ({ Id, name, nationalID, gender }) => {
+const Patient_Profile = ({ PatiantId, name, nationalID, gender }) => {
   {
     const navigate = useNavigate();
-    // const handleClickToDoctorPage = () => {
-    //   navigate("/DoctorPage", { state: Id });
-    // };
+    const handleClickToPatientPanel = () => {
+      navigate("/Patient_Panel", { state: PatiantId });
+    };
 
     return (
       <div
@@ -59,7 +59,7 @@ const Patient_Profile = ({ Id, name, nationalID, gender }) => {
               <div className="team-icon d-flex justify-content-center pb-4">
                 <a
                   className="btn btn-square btn-secondary text-white rounded-circle m-1"
-                  // onClick={handleClickToDoctorPage}
+                  onClick={handleClickToPatientPanel}
                 >
                   <i className="fab material-symbols-outlined">
                     account_circle

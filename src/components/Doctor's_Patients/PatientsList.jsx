@@ -123,7 +123,7 @@ const PatientsList = () => {
               <div className="distanceBetween">
                 {Patients_data.map((index) => (
                   <Patient_Profile
-                    Id={index?.id}
+                    PatiantId={index?.id}
                     name={index?.name}
                     nationalID={index?.nationalID}
                     gender={index?.gender}
