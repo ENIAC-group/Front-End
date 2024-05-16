@@ -9,13 +9,15 @@ const ReservationTable = ({ PatiantId, PatiantName, Day, Date, time, type, Meeti
     console.log(PatiantName);
     const navigate = useNavigate();
     const handleClickToPatiantPanel = () => {
+        console.log(PatiantId) ; 
+        console.log("heloooooooooooooooooooooooooooooo") ; 
         navigate("/Patient_Panel", { state: PatiantId });
     };
     return (
         <div>
             <li className="table-row">
                 <div className="col col-2" style={{ fontFamily: "Ios15Medium" }} data-label="پرونده پزشکی بیمار">
-                    <button className="button-24" role="button" style={{ fontFamily: "Ios15Medium" }} OnClick={handleClickToPatiantPanel}>پرونده</button>
+                    <button className="button-24" role="button" style={{ fontFamily: "Ios15Medium" }} onClick= {handleClickToPatiantPanel} >پرونده</button>
                 </div>
                 <div className="col col-2" style={{ fontFamily: "Ios15Medium" }} data-label="لینک جلسه مجازی">
                     {MeetingLink ? (

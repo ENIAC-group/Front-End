@@ -39,8 +39,9 @@ const DoctorPage = () => {
                             Authorization: `Bearer ${token}`,
                           },
                     });
+                console.log( response1 ) ; 
                 setReservations(response1.data.reservations_next_seven_days);
-                console.log(response1);
+                console.log(Reservations); 
             } catch (error) {
                 console.error("Error fetching reservations:", error);
             }
@@ -89,7 +90,7 @@ const DoctorPage = () => {
 
                     {Reservations.map((index) => (
                         <ReservationTable
-                            PatiantId={index}
+                            PatiantId={index?.pationt}
                             PatiantName={index?.patient_full_name}
                             Day={index?.day}
                             Date={index?.date}
