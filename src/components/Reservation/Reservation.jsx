@@ -17,6 +17,9 @@ import { useNavigate } from "react-router-dom";
 import * as shamsi from "shamsi-date-converter";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
+import MedicalInfoModal from "../MedicalInfoModal/MedicalInfoModal";
+import Swal from "sweetalert2";
+
 
 function DateString(input) {
   var changed = shamsi.jalaliToGregorian(input.year, input.month, input.day);
@@ -68,13 +71,55 @@ const ReservationPage = () => {
     "20:00:00",
   ];
   const [responseData, setResponseData] = useState([]);
-
+  const [selectVal, setSelectVal] = useState(-1);
   const [selectedDay, setSelectedDay] = useState(
     ChangeDate(utils().getToday())
   );
   const [LeftTimes, setTime] = useState([]);
   const today = ChangeDate(utils().getToday());
   const [selected, setSelect] = useState(-1);
+  const [showModal, setShowModal] = useState(false);
+  const [hasMedicalInfo, setHasMedicalInfo] = useState(null);
+
+  // Function to toggle the modal state
+  const toggleModal = () => {
+    setShowModal(!showModal);
+  };
+
+  async function CheckMedicalInfo() {
+    try {
+      const token = localStorage.getItem("accessToken");
+      // console.log(token);
+      const response = await axios.get(
+        "http://127.0.0.1:8000/TherapyTests/record_check/",
+        {
+          headers: {
+            "Content-Type": "application/json",
+            Authorization: `Bearer ${token}`,
+          },
+        }
+      );
+      console.log(response.status);
+
+      if (response.status === 200) {
+        setHasMedicalInfo(response.data.message);
+      }
+    } catch (error) {
+      console.log("something went wrong: ", error);
+      Swal.fire({
+        icon: "error",
+        title: "!خطا ",
+        background: "#473a67",
+        color: "#b4b3b3",
+        width: "26rem",
+        height: "18rem",
+        confirmButtonText: "تایید",
+        customClass: {
+          container: "custom-swal-container",
+        },
+      });
+    }
+  }
 
   const setdatetime = () => {
     var d = new Date(
@@ -126,7 +171,8 @@ const ReservationPage = () => {
           },
         }
       );
-
+      CheckMedicalInfo();
+      console.log(doctor_id)
       if (response.status === 200 || response.status === 201) {
         setResponseData(response.data);
       }
@@ -160,10 +206,12 @@ const ReservationPage = () => {
 
     fetchDoctorProfile();
   }, []);
+
   async function CreateReservation() {
     try {
       const ReservationDate = DateString(selectedDay); // Format today's date as "yyyy-mm-dd" string
       const token = localStorage.getItem("accessToken");
+      console.log(LeftTimes[selected])
       const response = await axios("http://127.0.0.1:8000/reserve/create/", {
         method: "POST",
         headers: {
@@ -181,7 +229,7 @@ const ReservationPage = () => {
       if (response.status === 200 || response.status === 201) {
         console.log("you reserved successfully");
         getReservation();
-        toast.success("رزرو شما با موفقیت انجام شد", {
+        toast.success("رزرو وقت شما با موفقیت انجام شد", {
           position: "bottom-left",
           autoClose: 3000,
           hideProgressBar: false,
@@ -190,6 +238,7 @@ const ReservationPage = () => {
           draggable: true,
           progress: undefined,
         });
+        CheckMedicalInfo();
       }
     } catch (error) {
       console.log(error);
@@ -210,8 +259,8 @@ const ReservationPage = () => {
       <NavBar_SideBar />
       <ToastContainer />
       <div className={styles.reserve_body} onLoad={getReservation}>
-        <div className={styles.reserve_Box}>
-          <div className={styles.reserve_docProfile}>
+        <div className={styles.reserve_Box}>  
+        <div className={styles.reserve_docProfile}> 
             <a href="#">
               <img src={img} alt="Avatar" />
             </a>
@@ -310,16 +359,50 @@ const ReservationPage = () => {
                 <button
                   className={styles.button_74}
                   onClick={(e) => {
-                    CreateReservation(e);
+                    console.log(hasMedicalInfo);
+                    setSelectVal(selected);
                     setSelect(-1);
+                    if (hasMedicalInfo) {
+                      CreateReservation(e);
+                    } else {
+                      Swal.fire({
+                        icon: "info",
+                        title: "!توجه ",
+                        html: "برای ادامۀ فرایند رزرو باید اطلاعات پزشکی خود را کامل کنید",
+                        background: "#473a67",
+                        color: "#b4b3b3",
+                        width: "26rem",
+                        height: "18rem",
+                        showCancelButton: true,
+                        cancelButtonText: "انصراف",
+                        confirmButtonText: "تکمیل اطلاعات",
+                        customClass: {
+                          container: "custom-swal-container",
+                        },
+                      }).then((result) => {
+                        if (result.isConfirmed) {
+                          toggleModal();
+                        } else {
+
+                        }
+                      });
+                    // console.log(LeftTimes[selected])
+                      console.log(showModal);
+                    }
+                    
+                    
                   }}
                 >
                   ثبت
                 </button>
               </div>
+
             </div>
+            <MedicalInfoModal getReserve = {getReservation} selectIndex = {selectVal} doctorId = {doctor_id} resType = {res_type} left_times = {LeftTimes} daySelected = {selectedDay}  showModal={showModal} toggleModal={toggleModal}/>
+
           </div>
         </div>
+
       </div>
       <Footer />
     </>
