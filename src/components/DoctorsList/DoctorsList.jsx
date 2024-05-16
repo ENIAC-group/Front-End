@@ -75,16 +75,14 @@ const DoctorsList = () => {
 
   const [doctorProfileFardi, setDoctorProfileFardi] = useState([]);
   useEffect(() => {
-
     const fetchDoctorProfileFardi = async () => {
       try {
         const response1 = await axios.get(
           "http://127.0.0.1:8000/profile/doctors/typed/",
           {
             params: {
-              "profile_type": "فردی"
-            }
-
+              profile_type: "فردی",
+            },
           }
         );
         setDoctorProfileFardi(response1.data);
@@ -99,15 +97,14 @@ const DoctorsList = () => {
 
   const [doctorProfileBaby, setDoctorProfileBaby] = useState([]);
   useEffect(() => {
-
     const fetchDoctorProfileBaby = async () => {
       try {
         const response1 = await axios.get(
           "http://127.0.0.1:8000/profile/doctors/typed/",
           {
             params: {
-              "profile_type": "کودک"
-            }
+              profile_type: "کودک",
+            },
           }
         );
         setDoctorProfileBaby(response1.data);
@@ -122,15 +119,14 @@ const DoctorsList = () => {
 
   const [doctorProfileFamily, setDoctorProfileFamily] = useState([]);
   useEffect(() => {
-
     const fetchDoctorProfileFamily = async () => {
       try {
         const response1 = await axios.get(
           "http://127.0.0.1:8000/profile/doctors/typed/",
           {
             params: {
-              "profile_type": "زوج"
-            }
+              profile_type: "زوج",
+            },
           }
         );
         setDoctorProfileFamily(response1.data);
@@ -144,15 +140,14 @@ const DoctorsList = () => {
 
   const [doctorProfileEdu, setDoctorProfileEdu] = useState([]);
   useEffect(() => {
-
     const fetchDoctorProfileEdu = async () => {
       try {
         const response1 = await axios.get(
           "http://127.0.0.1:8000/profile/doctors/typed/",
           {
             params: {
-              "profile_type": "نوجوان"
-            }
+              profile_type: "نوجوان",
+            },
           }
         );
         setDoctorProfileEdu(response1.data);
@@ -163,9 +158,6 @@ const DoctorsList = () => {
 
     fetchDoctorProfileEdu();
   }, []);
-
-
-
 
   return (
     <>
@@ -208,7 +200,7 @@ const DoctorsList = () => {
               <div className="distanceBetween">
                 {doctorProfile.map((index) => (
                   <DoctorProfile
-                    Id={index?.id}
+                    Id={index?.psychiatrist}
                     name={index?.name}
                     Description={index?.description}
                     Image={index?.image}
@@ -228,7 +220,10 @@ const DoctorsList = () => {
         <h1
           className="text-center mx-auto pb-2 wow fadeIn Doctor_List_title"
           data-wow-delay=".3s"
-          style={{ maxWidth: "600px", fontFamily: "Ios15Medium" }}>حوزه فردی</h1>
+          style={{ maxWidth: "600px", fontFamily: "Ios15Medium" }}
+        >
+          حوزه فردی
+        </h1>
         <div className="distanceBetween">
           {doctorProfileFardi.map((index) => (
             <DoctorProfile
@@ -241,19 +236,18 @@ const DoctorsList = () => {
               Psychiatrist={index?.psychiatrist}
             />
           ))}
-          
-
-
         </div>
       </div>
       <div className="scallop-down"></div>
 
       <div id="Baby" className="white-block">
         <h1
-        className="text-center mx-auto pb-2 wow fadeIn Doctor_List_title"
-        data-wow-delay=".3s"
-        style={{ maxWidth: "600px", fontFamily: "Ios15Medium" }}
-        >حوزه کودک</h1>
+          className="text-center mx-auto pb-2 wow fadeIn Doctor_List_title"
+          data-wow-delay=".3s"
+          style={{ maxWidth: "600px", fontFamily: "Ios15Medium" }}
+        >
+          حوزه کودک
+        </h1>
         <div className="distanceBetween">
           {doctorProfileBaby.map((index) => (
             <DoctorProfile
@@ -274,7 +268,10 @@ const DoctorsList = () => {
         <h1
           className="text-center mx-auto pb-2 wow fadeIn Doctor_List_title"
           data-wow-delay=".3s"
-          style={{ maxWidth: "600px", fontFamily: "Ios15Medium" }}>حوزه تحصیلی</h1>
+          style={{ maxWidth: "600px", fontFamily: "Ios15Medium" }}
+        >
+          حوزه تحصیلی
+        </h1>
         <div className="distanceBetween">
           {doctorProfileEdu.map((index) => (
             <DoctorProfile
@@ -293,10 +290,12 @@ const DoctorsList = () => {
 
       <div id="Family" className="white-block">
         <h1
-        className="text-center mx-auto pb-2 wow fadeIn Doctor_List_title"
-        data-wow-delay=".3s"
-        style={{ maxWidth: "600px", fontFamily: "Ios15Medium" }}
-        >حوزه خانواده</h1>
+          className="text-center mx-auto pb-2 wow fadeIn Doctor_List_title"
+          data-wow-delay=".3s"
+          style={{ maxWidth: "600px", fontFamily: "Ios15Medium" }}
+        >
+          حوزه خانواده
+        </h1>
         <div className="distanceBetween">
           {doctorProfileFamily.map((index) => (
             <DoctorProfile
@@ -317,7 +316,10 @@ const DoctorsList = () => {
         <h1
           className="text-center mx-auto pb-2 wow fadeIn Doctor_List_title"
           data-wow-delay=".3s"
-          style={{ maxWidth: "600px", fontFamily: "Ios15Medium" }}>حوزه کوچینگ</h1>
+          style={{ maxWidth: "600px", fontFamily: "Ios15Medium" }}
+        >
+          حوزه کوچینگ
+        </h1>
         <div className="distanceBetween">
           {/* {doctorProfileFardi.map((index) => (
             <DoctorProfile
@@ -336,10 +338,12 @@ const DoctorsList = () => {
 
       <div id="psychiatry" className="white-block">
         <h1
-        className="text-center mx-auto pb-2 wow fadeIn Doctor_List_title"
-        data-wow-delay=".3s"
-        style={{ maxWidth: "600px", fontFamily: "Ios15Medium" }}
-        >حوزه روان پزشکی</h1>
+          className="text-center mx-auto pb-2 wow fadeIn Doctor_List_title"
+          data-wow-delay=".3s"
+          style={{ maxWidth: "600px", fontFamily: "Ios15Medium" }}
+        >
+          حوزه روان پزشکی
+        </h1>
         <div className="distanceBetween">
           {/* {doctorProfileFardi.map((index) => (
             <DoctorProfile

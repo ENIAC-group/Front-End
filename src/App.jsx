@@ -15,6 +15,8 @@ import GlasserTest from "./components/Tests_lib/test_Glasser.jsx";
 import ReservationPage from "./components/Reservation/Reservation.jsx";
 import DoctorPage from "./components/DoctorsList/DoctorPage.jsx";
 import Patient_Panel from "./components/Patient_Panel/Patient_Panel.jsx";
+import PatientsList from "./components/Doctor's_Patients/PatientsList.jsx";
+
 
 function App() {
   return (
@@ -63,7 +65,13 @@ function App() {
         <Router.Route path="/DoctorPage" element={<DoctorPage />}>
           {" "}
         </Router.Route>
+
         <Router.Route path="/Patient_Panel" element={<Patient_Panel />}>
+
+        {" "}
+        </Router.Route>
+        <Router.Route path="/PatientsList" element={<PatientsList />}>
+
           {" "}
         </Router.Route>
       </Router.Routes>

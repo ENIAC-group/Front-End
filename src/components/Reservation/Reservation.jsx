@@ -242,15 +242,31 @@ const ReservationPage = () => {
       }
     } catch (error) {
       console.log(error);
-      toast.error("!رزرو موفقیت آمیز نبود، رفرش کنید", {
-        position: "bottom-left",
-        autoClose: 3000,
-        hideProgressBar: false,
-        closeOnClick: true,
-        pauseOnHover: true,
-        draggable: true,
-        progress: undefined,
-      });
+      if (
+        error.response.data.hasOwnProperty("message") &&
+        error.response.data.message ===
+          "you can not reservere 2 times under 8 days drift"
+      ) {
+        toast.error("!حداقل فاصله رزرو ها 8 روز می باشد", {
+          position: "bottom-left",
+          autoClose: 3000,
+          hideProgressBar: false,
+          closeOnClick: true,
+          pauseOnHover: true,
+          draggable: true,
+          progress: undefined,
+        });
+      } else {
+        toast.error("رزرو موفقیت آمیز نبود، رفرش کنید", {
+          position: "bottom-left",
+          autoClose: 3000,
+          hideProgressBar: false,
+          closeOnClick: true,
+          pauseOnHover: true,
+          draggable: true,
+          progress: undefined,
+        });
+      }
     }
   }
 
