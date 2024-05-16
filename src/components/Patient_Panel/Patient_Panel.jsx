@@ -26,7 +26,6 @@ const Patient_Panel = () => {
   const navigate = useNavigate();
   const location = useLocation();
   const PatientId = location.state;
-  // const PatientId = 1;
   const [pages, setPageNum] = useState(1);
   const [userRecord, setRecord] = useState({
     Patient_age: 0,
@@ -35,7 +34,7 @@ const Patient_Panel = () => {
     Patient_gender: "",
     Patient_name: "",
     Patient_nationalID: "",
-    Patient_TestResult: [],
+    Patient_TestResult: {glasserTest:null,MBTItest:null},
     Patient_Treatment1: null,
     Patient_Treatment2: null,
     Patient_Treatment3: null,
@@ -56,20 +55,33 @@ const Patient_Panel = () => {
       );
       if (response.status == 200 || response.status == 201) {
         const user = response.data;
-        console.log(user);
-        setRecord({
-          Patient_age: user.age,
-          Patient_child_num: user.child_num,
-          Patient_family_history: user.family_history,
-          Patient_gender: user.gender,
-          Patient_name: user.name,
-          Patient_nationalID: user.nationalID,
-          Patient_TestResult: user.therapyTests,
-          Patient_Treatment1: user.treatementHistory1,
-          Patient_Treatment2: user.treatementHistory2,
-          Patient_Treatment3: user.treatementHistory3,
-        });
-      }
+        var d1 = {glasserTest:null,MBTItest:null};
+        var d2 = null;
+        var d3 = null;
+        var d4 = null;
+        
+        if (Object.keys(user).includes("therapyTests"))
+          d1 = user.therapyTests;
+        if (Object.keys(user).includes("treatementHistory1"))
+          d2 = user.treatementHistory1;
+        if (Object.keys(user).includes("treatementHistory2"))
+          d3 = user.treatementHistory2;
+        if (Object.keys(user).includes("treatementHistory3"))
+          d4 = user.treatementHistory3;
+      setRecord({
+        Patient_age: user.age,
+        Patient_child_num: user.child_num,
+        Patient_family_history: user.family_history,
+        Patient_gender: user.gender,
+        Patient_name: user.name,
+        Patient_nationalID: user.nationalID,
+        Patient_TestResult: d1,
+        Patient_Treatment1: d2,
+        Patient_Treatment2: d3,
+        Patient_Treatment3: d4,
+      });
+      console.log(userRecord);
+    }
     } catch (error) {
       console.log(error.response.data.message);
       if (error.response.status == 404) {

@@ -21,6 +21,15 @@
 
 }
 
+.patient_prof_insidebox h5{
+    text-align: center;
+    color: #5e5e5e;
+    font-family: Ios15Medium;
+    font-size: 25px;
+    font-weight: bold;
+    margin: 0 0 20px;
+}
+
 .patient_prof_header {
     display: flex;
     align-items: center;
@@ -95,7 +104,7 @@
     font-family:Ios15Medium ;
     background-color: #ffffff;
     box-shadow:  0 1px 6px rgba(0,0,0, .35);
-    width: 330px;
+    width: 400px;
     height: fit-content;
     padding: 3%;
     border-radius: 5px;
