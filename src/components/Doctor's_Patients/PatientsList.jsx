@@ -6,12 +6,11 @@ import withReactContent from "sweetalert2-react-content";
 import { useNavigate } from "react-router-dom";
 import { useState, useEffect } from "react";
 import { ToastContainer, toast } from "react-toastify";
-import "./DoctorProfile.jsx";
-import DoctorProfile from "./DoctorProfile.jsx";
+import "./PatientProfile.jsx";
+import Patient_Profile from "./PatientProfile.jsx";
 import Footer from "../Footer/Footer.jsx";
 import "bootstrap/dist/css/bootstrap.min.css";
 import NavBar_SideBar from "../SidebarNabar/NavBar_SideBar.jsx";
-import Patient_Profile from "./DoctorProfile.jsx";
 
 const PatientsList = () => {
   const navigate = useNavigate();
