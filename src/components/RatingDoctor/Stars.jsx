@@ -6,16 +6,14 @@ const DEFAULT_ICON = "★";
 const DEFAULT_UNSELECTED_COLOR = "grey";
 const DEFAULT_COLOR = "hsl(47, 90%, 60%)";
 
-export default function Stars({ count, defaultRating, icon, color, iconSize }) {
-  const [rating, setRating] = useState(defaultRating);
+export default function Stars({ count, rating,setRating, defaultRating, icon, color, iconSize }) {
+  // const [rating, setRating] = useState(defaultRating);
   const [temporaryRating, setTemporaryRating] = useState(0);
 
   let stars = Array(count || DEFAULT_COUNT).fill(icon || DEFAULT_ICON);
 
   const handleClick = (rating) => {
     setRating(rating);
-    localStorage.setItem("starRating", rating);
-	console.log(rating);
   };
 
   return (
