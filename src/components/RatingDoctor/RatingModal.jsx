@@ -49,15 +49,28 @@ const RatingModal = (doctorId) => {
         });
       }
     } catch (error) {
-      toast.error("!متاسفانه مشکلی به وجود آمده", {
-        position: "bottom-left",
-        autoClose: 2000,
-        hideProgressBar: false,
-        closeOnClick: true,
-        pauseOnHover: true,
-        draggable: true,
-        progress: undefined,
-      });
+      console.log(error) ; 
+      if(error.response.status === 400)
+        toast.error("!امتیاز دهی قبلا انجام شده", {
+          position: "bottom-left",
+          autoClose: 2000,
+          hideProgressBar: false,
+          closeOnClick: true,
+          pauseOnHover: true,
+          draggable: true,
+          progress: undefined,
+        });
+      else{
+        toast.error("!متاسفانه مشکلی به وجود آمده", {
+          position: "bottom-left",
+          autoClose: 2000,
+          hideProgressBar: false,
+          closeOnClick: true,
+          pauseOnHover: true,
+          draggable: true,
+          progress: undefined,
+        });
+      }
     }
   }
 
@@ -97,7 +110,7 @@ const RatingModal = (doctorId) => {
               direction: "rtl",
               justifyContent: "center",
               alignItems: "center",
-              marginTop: "2%",
+              marginBottom: "-2%",
             }}
           >
             به این درمانگر از ۱ تا ۵ چه امتیازی می‌دهید؟
@@ -107,7 +120,7 @@ const RatingModal = (doctorId) => {
             <h4
               style={{
                 fontFamily: "Ios15Medium",
-                marginBottom: "6%",
+                // marginBottom: "6%",
                 color: "gray",
                 fontSize: "22px",
                 textAlign: "center",
@@ -122,7 +135,7 @@ const RatingModal = (doctorId) => {
             <TextField
               fullWidth
               multiline
-              rows={4}
+              rows={1}
               rowsMax={4}
               autoComplete="off"
               variant="outlined"

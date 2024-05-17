@@ -89,7 +89,7 @@ const ReservationPage = () => {
   async function CheckMedicalInfo() {
     try {
       const token = localStorage.getItem("accessToken");
-      // console.log(token);
+      console.log(token);
       const response = await axios.get(
         "http://127.0.0.1:8000/TherapyTests/record_check/",
         {
@@ -182,7 +182,7 @@ const ReservationPage = () => {
   }
 
   const [doctorProfile, setDoctorProfile] = useState([]);
-  const baseUrl = "http://127.0.0.1:8000/profile/doctors/";
+  const baseUrl = "http://127.0.0.1:8000/profile/doctors";
 
   // Alternatively, you can use string concatenation:
   const url = baseUrl + doctor_id + "/";

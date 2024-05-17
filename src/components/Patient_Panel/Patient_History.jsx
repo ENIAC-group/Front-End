@@ -51,7 +51,7 @@ const Patient_History = ({ TreatmentNum1, TreatmentNum2, TreatmentNum3 }) => {
               </ul>
             </div>
           ) : (
-            {}
+            <></>
           )}
           {TreatmentNum2 != null ? (
             <div className="patient_prof_history_card">
@@ -80,7 +80,7 @@ const Patient_History = ({ TreatmentNum1, TreatmentNum2, TreatmentNum3 }) => {
               </ul>
             </div>
           ) : (
-            {}
+            <></>
           )}
           {TreatmentNum3 != null ? (
             <div className="patient_prof_history_card">
