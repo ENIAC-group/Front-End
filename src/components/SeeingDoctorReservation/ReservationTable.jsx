@@ -16,9 +16,9 @@ const ReservationTable = ({ PatiantId, PatiantName, Day, Date, time, type, Meeti
     return (
         <div>
             <li className="table-row">
-                <div className="col col-2" style={{ fontFamily: "Ios15Medium" }} data-label="پرونده پزشکی بیمار">
+                {/* <div className="col col-2" style={{ fontFamily: "Ios15Medium" }} data-label="پرونده پزشکی بیمار">
                     <button className="button-24" role="button" style={{ fontFamily: "Ios15Medium" }} onClick= {handleClickToPatiantPanel} >پرونده</button>
-                </div>
+                </div> */}
                 <div className="col col-2" style={{ fontFamily: "Ios15Medium" }} data-label="لینک جلسه مجازی">
                     {MeetingLink ? (
                         <button className="button-24" role="button" style={{ fontFamily: "Ios15Medium" }} onClick={() => window.open(MeetingLink, "_blank")}>

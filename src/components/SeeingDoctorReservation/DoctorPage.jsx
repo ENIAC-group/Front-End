@@ -80,7 +80,7 @@ const DoctorPage = () => {
                 <h1 style={{ fontFamily: "Ios15Medium", textAlign: "center", color: 'gray' }}>نوبت های رزرو شده</h1>
                 <ul className="responsive-table">
                     <li className="table-header">
-                        <div className="col col-1" style={{ fontFamily: "Ios15Medium" }}>پرونده پزشکی بیمار</div>
+                        {/* <div className="col col-1" style={{ fontFamily: "Ios15Medium" }}>پرونده پزشکی بیمار</div> */}
                         <div className="col col-1" style={{ fontFamily: "Ios15Medium" }}>لینک جلسه مجازی</div>
                         <div className="col col-1" style={{ fontFamily: "Ios15Medium" }}>نوع مراجعه</div>
                         <div className="col col-1" style={{ fontFamily: "Ios15Medium" }}>ساعت</div>
