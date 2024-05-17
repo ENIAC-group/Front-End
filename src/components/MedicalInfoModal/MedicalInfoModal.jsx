@@ -22,7 +22,16 @@ import circle_icon from "../../assets/circle.png";
 
 
 
-function MedicalInfoModal({ showModal, toggleModal, daySelected, doctorId , resType , left_times, selectIndex, getReserve}) {
+function MedicalInfoModal
+({ showModal, 
+  toggleModal, 
+  daySelected, 
+  doctorId , 
+  resType , 
+  left_times, 
+  selectIndex, 
+  getReserve}) {
+
   const [childrenNum, setChildrenNum] = useState(null);
   const [childrenNumStr, setChildrenNumStr] = useState(null);
   const [medicalHistory, setMedicalHistory] = useState(null);
@@ -44,9 +53,9 @@ function MedicalInfoModal({ showModal, toggleModal, daySelected, doctorId , resT
   const [length2, setLength2] = useState(null);
   const [length3, setLength3] = useState(null);
 
-  const [length1str, setLength1str] = useState("");
-  const [length2str, setLength2str] = useState("");
-  const [length3str, setLength3str] = useState("");
+  // const [length1str, setLength1str] = useState("");
+  // const [length2str, setLength2str] = useState("");
+  // const [length3str, setLength3str] = useState("");
 
   const [reason2leave1, setReason2leave1] = useState("");
   const [reason2leave2, setReason2leave2] = useState("");
@@ -266,7 +275,7 @@ function MedicalInfoModal({ showModal, toggleModal, daySelected, doctorId , resT
       event.preventDefault()
       const ReservationDate = DateString(daySelected); // Format today's date as "yyyy-mm-dd" string
       const token = localStorage.getItem("accessToken");
-
+      console.log(doctorId);
       const response = await axios("http://127.0.0.1:8000/reserve/create/", {
         method: "POST",
         headers: {
@@ -347,7 +356,7 @@ function MedicalInfoModal({ showModal, toggleModal, daySelected, doctorId , resT
 
     if (!hasHistory1 && !hasHistory2 && !hasHistory3){
       const data = {
-        child_num: 2,  //parseInt(childrenNum),
+        child_num: parseInt(childrenNum),
         nationalID: ssid,
         family_history: medicalHistory,
       }
@@ -364,7 +373,7 @@ function MedicalInfoModal({ showModal, toggleModal, daySelected, doctorId , resT
         special_drugs: drugs1
       });
       const data = {
-        child_num: 2 , //parseInt(childrenNum),
+        child_num: parseInt(childrenNum),
         nationalID: ssid,
         family_history: medicalHistory,
         treatementHistory1: treatHist1,
@@ -392,7 +401,7 @@ function MedicalInfoModal({ showModal, toggleModal, daySelected, doctorId , resT
       });
 
       const data = {
-        child_num: 2 , //parseInt(childrenNum),
+        child_num: parseInt(childrenNum),
         nationalID: ssid,
         family_history: medicalHistory,
         treatementHistory1: treatHist1,
@@ -430,7 +439,7 @@ function MedicalInfoModal({ showModal, toggleModal, daySelected, doctorId , resT
       });
 
       const data = {
-        child_num: 2 , // parseInt(childrenNum),
+        child_num: parseInt(childrenNum),
         nationalID: ssid,
         family_history: medicalHistory,
         treatementHistory1: treatHist1,

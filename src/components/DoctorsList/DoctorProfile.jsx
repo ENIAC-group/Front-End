@@ -239,7 +239,7 @@ const DoctorProfile = ({ Id, name, Description, Image, ProfileType, IsPrivate, P
                                     </a>
                                 </div>
                                 <div className='buttonReserve' onLoad={GetUserInfo} onClick={GetUserInfo2}>
-                                    <CompleteInfoModal />
+                                    <CompleteInfoModal doctorId={Id}/>
                                     <RatingModal doctorId={Id}/>
                                     <ToastContainer />
                                 </div>

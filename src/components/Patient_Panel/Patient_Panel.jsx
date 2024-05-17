@@ -26,6 +26,7 @@ const Patient_Panel = () => {
   const navigate = useNavigate();
   const location = useLocation();
   const PatientId = location.state;
+  console.log("*************", PatientId);
   const [pages, setPageNum] = useState(1);
   const [userRecord, setRecord] = useState({
     Patient_age: 0,

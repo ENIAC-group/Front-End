@@ -47,7 +47,7 @@ const Patient_Info = ({ Name, Age, ChildNum, Gender , NationalId , FamilyHistory
             <div className="bio-row">
               <p>
                 <MdDriveFileRenameOutline style={{ color: "#754bd7" }} />
-                <span style={{width:'180px'}}>تعداد فرزند</span>:{ChildNum}
+                <span style={{width:'180px'}}>فرزند چندم</span>:{ChildNum}
               </p>
             </div>
             <div className="bio-row">

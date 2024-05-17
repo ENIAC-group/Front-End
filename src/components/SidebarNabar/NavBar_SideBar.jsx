@@ -4,6 +4,7 @@ import { useHref } from "react";
 import { FaUserDoctor } from "react-icons/fa6";
 import { GrContactInfo } from "react-icons/gr";
 import { FaBars, FaBell, FaUserCircle } from "react-icons/fa";
+import { IoIosAlarm, IoIosAlbums } from "react-icons/io";
 import styles from "./NavBar.module.css";
 import axios from "axios";
 import Swal from "sweetalert2";
@@ -196,11 +197,23 @@ const NavBar_SideBar = () => {
               className={styles1.side_list_element}
               onClick={(e) => {
                 handsidebarToggle();
-                navigate("/Setting");
+                navigate("/PatientsList");
               }}
             >
               <label href="" className={styles1.side_list_element_text}>
-                <FaCog className={styles1.side_icons} /> تنظیمات
+                <IoIosAlbums className={styles1.side_icons} />
+                پرونده مراجعین{" "}
+              </label>
+            </li>
+            <li
+              className={styles1.side_list_element}
+              onClick={(e) => {
+                handsidebarToggle();
+                navigate("/DoctorPage");
+              }}
+            >
+              <label href="" className={styles1.side_list_element_text}>
+                <IoIosAlarm className={styles1.side_icons} /> رزرو های من{" "}
               </label>
             </li>
           </ul>
