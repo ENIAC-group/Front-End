@@ -48,9 +48,9 @@ const weekdays = [
   "شنبه",
   "یکشنبه",
   "دوشنبه",
-  "سه شنبه",
+  "سه‌شنبه",
   "چهارشنبه",
-  "پنج شنبه",
+  "پنج‌شنبه",
   "جمعه",
 ];
 const MONTHs = [
@@ -224,10 +224,10 @@ const Doctor_FreeTime = () => {
         setDoctorProfile(response.data);
         console.log(response);
         //console.log(doctorProfile[0]);
-          // console.log(doctorProfile[0].image
+        // console.log(doctorProfile[0].image
 
-          // );
-       // console.log(doctorProfile[0].name);
+        // );
+        // console.log(doctorProfile[0].name);
       } catch (error) {
         console.error("Error fetching doctor profile:", error);
       }
@@ -250,7 +250,7 @@ const Doctor_FreeTime = () => {
             Authorization: `Bearer ${token}`,
           },
           data: {
-            month: MONTHs[utils().getToday().month],
+            month: MONTHs[utils().getToday().month - 1],
             day: weekdays[selectedDayweek],
             time: selectedTimes.join(","),
           },
@@ -262,11 +262,38 @@ const Doctor_FreeTime = () => {
         console.log(response);
         setResponseData(response.data);
         //console.log(response);
+        toast.success("زمان منتخب شما با موفقیت ثبت شد", {
+          position: "bottom-left",
+          autoClose: 3000,
+          hideProgressBar: false,
+          closeOnClick: true,
+          pauseOnHover: true,
+          draggable: true,
+          progress: undefined,
+        });
       } else {
         console.log(response);
+        toast.error("ثبت موفقیت آمیز نبود، رفرش کنید", {
+          position: "bottom-left",
+          autoClose: 3000,
+          hideProgressBar: false,
+          closeOnClick: true,
+          pauseOnHover: true,
+          draggable: true,
+          progress: undefined,
+        });
       }
     } catch (error) {
       console.log(error);
+      toast.error("ثبت موفقیت آمیز نبود، رفرش کنید", {
+        position: "bottom-left",
+        autoClose: 3000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+      });
     }
   }
   const selectedTimes = selectedHours.map((index) => hours[index]);
@@ -278,11 +305,12 @@ const Doctor_FreeTime = () => {
       <div className={styles.reserve_body}>
         <div className={styles.reserve_Box}>
           <div className={styles.reserve_docProfile}>
-            <a href="#">
-              {/* <img src={img} alt="Avatar" /> */}
-               <img src={doctorProfile[0].image} className="img-fluid w-100 rounded-circle" alt={img} /> 
-            </a>
-             <h2 className={styles.reserve_docName}>{doctorProfile[0].name}</h2>  
+            {/* <a href="#"> */}
+            {/* <img src={img} alt="Avatar" /> */}
+            {/* <img src={doctorProfile[0].image} className="img-fluid w-100 rounded-circle" alt={img} />  */}
+            {/* </a> */}
+            {/* <h2 className={styles.reserve_docName}>{doctorProfile[0].name}</h2>   */}
+            <h2 className={styles.reserve_docName}>انتخاب ساعت کاری </h2>
           </div>
 
           <div className={styles.reserve_wrap}>
