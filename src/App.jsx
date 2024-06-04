@@ -16,7 +16,7 @@ import ReservationPage from "./components/Reservation/Reservation.jsx";
 import DoctorPage from "./components/SeeingDoctorReservation/DoctorPage.jsx";
 import Patient_Panel from "./components/Patient_Panel/Patient_Panel.jsx";
 import PatientsList from "./components/Doctor's_Patients/PatientsList.jsx";
-
+import Doctor_FreeTime from "./components/Doctor_FreeTime/Doctor_FreeTime.jsx";
 
 function App() {
   return (
@@ -67,11 +67,12 @@ function App() {
         </Router.Route>
 
         <Router.Route path="/Patient_Panel" element={<Patient_Panel />}>
-
-        {" "}
+          {" "}
         </Router.Route>
         <Router.Route path="/PatientsList" element={<PatientsList />}>
-
+          {" "}
+        </Router.Route>
+        <Router.Route path="/DoctorFreeTime" element={<Doctor_FreeTime />}>
           {" "}
         </Router.Route>
       </Router.Routes>
