@@ -20,7 +20,6 @@ import "react-toastify/dist/ReactToastify.css";
 import MedicalInfoModal from "../MedicalInfoModal/MedicalInfoModal";
 import Swal from "sweetalert2";
 
-
 function DateString(input) {
   var changed = shamsi.jalaliToGregorian(input.year, input.month, input.day);
   var y = `${changed[0]}`;
@@ -59,18 +58,8 @@ const ReservationPage = () => {
   const initialState = location.state || {};
   const [res_type, setres_type] = useState("حضوری");
   const [doctor_id, setCode] = useState(initialState.doctorId || "");
-  const hours = [
-    "9:00:00",
-    "10:00:00",
-    "11:00:00",
-    "14:00:00",
-    "15:00:00",
-    "16:30:00",
-    "18:00:00",
-    "19:00:00",
-    "20:00:00",
-  ];
   const [responseData, setResponseData] = useState([]);
+  const [FreeTiems, setFreeTimes] = useState([]);
   const [selectVal, setSelectVal] = useState(-1);
   const [selectedDay, setSelectedDay] = useState(
     ChangeDate(utils().getToday())
@@ -89,7 +78,6 @@ const ReservationPage = () => {
   async function CheckMedicalInfo() {
     try {
       const token = localStorage.getItem("accessToken");
-      console.log(token);
       const response = await axios.get(
         "http://127.0.0.1:8000/TherapyTests/record_check/",
         {
@@ -127,11 +115,10 @@ const ReservationPage = () => {
       selectedDay.month,
       selectedDay.day
     ).getDay();
-    var temp;
-    if (d == 1) temp = [];
-    else {
-      temp = hours.slice();
-      setTime(temp);
+    var temp = [];    
+      for (let i = 0; i < FreeTiems.length; i++)
+        if (FreeTiems[i].date == DateString(selectedDay))
+          temp.push(FreeTiems[i].time);
       for (let i = 0; i < responseData.length; i++) {
         if (responseData[i].date == DateString(selectedDay)) {
           var ind = temp.indexOf(responseData[i].time);
@@ -139,7 +126,6 @@ const ReservationPage = () => {
             temp.splice(ind, 1);
           }
         }
-      }
     }
     return temp;
   };
@@ -148,8 +134,38 @@ const ReservationPage = () => {
       {
         setTime(setdatetime(selectedDay));
       }
-    }, 10);
+    }, 100);
   });
+
+  useEffect(() => {
+    setTimeout(() => {
+      {
+        getFreeTime();
+      }
+    }, 5000);
+  });
+
+  async function getFreeTime() {
+    try {
+      const token = localStorage.getItem("accessToken");
+      const response = await axios(
+        `http://127.0.0.1:8000/reserve/get-free-time/${doctor_id}/`,
+        {
+          method: "GET",
+          headers: {
+            "Content-Type": "application/json",
+            Authorization: `Bearer ${token}`,
+          },
+        }
+      );
+
+      if (response.status === 200 || response.status === 201) {
+        setFreeTimes(response.data["Free Time List"]);
+      }
+    } catch (error) {
+      console.log(error);
+    }
+  }
 
   async function getReservation() {
     try {
@@ -172,7 +188,6 @@ const ReservationPage = () => {
         }
       );
       CheckMedicalInfo();
-      console.log(doctor_id)
       if (response.status === 200 || response.status === 201) {
         setResponseData(response.data);
       }
@@ -182,7 +197,7 @@ const ReservationPage = () => {
   }
 
   const [doctorProfile, setDoctorProfile] = useState([]);
-  const baseUrl = "http://127.0.0.1:8000/profile/doctors";
+  const baseUrl = "http://127.0.0.1:8000/profile/doctors/";
 
   // Alternatively, you can use string concatenation:
   const url = baseUrl + doctor_id + "/";
@@ -211,7 +226,7 @@ const ReservationPage = () => {
     try {
       const ReservationDate = DateString(selectedDay); // Format today's date as "yyyy-mm-dd" string
       const token = localStorage.getItem("accessToken");
-      console.log(LeftTimes[selected])
+      console.log(LeftTimes[selected]);
       const response = await axios("http://127.0.0.1:8000/reserve/create/", {
         method: "POST",
         headers: {
@@ -228,7 +243,7 @@ const ReservationPage = () => {
 
       if (response.status === 200 || response.status === 201) {
         console.log("you reserved successfully");
-        getReservation();
+        // getReservation();
         toast.success("رزرو وقت شما با موفقیت انجام شد", {
           position: "bottom-left",
           autoClose: 3000,
@@ -275,8 +290,8 @@ const ReservationPage = () => {
       <NavBar_SideBar />
       <ToastContainer />
       <div className={styles.reserve_body} onLoad={getReservation}>
-        <div className={styles.reserve_Box}>  
-        <div className={styles.reserve_docProfile}> 
+        <div className={styles.reserve_Box} onLoad={getFreeTime}>
+          <div className={styles.reserve_docProfile}>
             <a href="#">
               <img src={img} alt="Avatar" />
             </a>
@@ -399,26 +414,29 @@ const ReservationPage = () => {
                         if (result.isConfirmed) {
                           toggleModal();
                         } else {
-
                         }
                       });
-                    // console.log(LeftTimes[selected])
+                      console.log(LeftTimes[selected])
                       console.log(showModal);
                     }
-                    
-                    
                   }}
                 >
                   ثبت
                 </button>
               </div>
-
             </div>
-            <MedicalInfoModal getReserve = {getReservation} selectIndex = {selectVal} doctorId = {doctor_id} resType = {res_type} left_times = {LeftTimes} daySelected = {selectedDay}  showModal={showModal} toggleModal={toggleModal}/>
-
+            <MedicalInfoModal
+              getReserve={getReservation}
+              selectIndex={selectVal}
+              doctorId={doctor_id}
+              resType={res_type}
+              left_times={LeftTimes}
+              daySelected={selectedDay}
+              showModal={showModal}
+              toggleModal={toggleModal}
+            />
           </div>
         </div>
-
       </div>
       <Footer />
     </>
