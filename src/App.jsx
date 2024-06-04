@@ -16,6 +16,7 @@ import ReservationPage from "./components/Reservation/Reservation.jsx";
 import DoctorPage from "./components/SeeingDoctorReservation/DoctorPage.jsx";
 import Patient_Panel from "./components/Patient_Panel/Patient_Panel.jsx";
 import PatientsList from "./components/Doctor's_Patients/PatientsList.jsx";
+import Testresult from "./components/User_TestResult/TestResult.jsx";
 
 
 function App() {
@@ -72,6 +73,9 @@ function App() {
         </Router.Route>
         <Router.Route path="/PatientsList" element={<PatientsList />}>
 
+          {" "}
+        </Router.Route>
+        <Router.Route path="/TestResult" element={<Testresult />}>
           {" "}
         </Router.Route>
       </Router.Routes>
