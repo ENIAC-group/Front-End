@@ -1,6 +1,6 @@
 import React from "react";
 import "./doctor.css";
-import { HashLink } from 'react-router-hash-link'
+import { HashLink } from 'react-router-hash-link';
 
 import myImage1 from "./img/teenagers2.jpg";
 import myImage2 from "./img/kids.jpg";
@@ -19,8 +19,15 @@ const Doctor_Home = () => {
           style={{ maxWidth: "600px" }}
         >
           {/* <h5 className="text-primary">معرفی روان درمانگر ها</h5> */}
-          <h1 className="doctor_h1">معرفی روان درمانگر ها</h1>
+          <h1 className="doctor_h1">معرفی روان درمانگرها</h1>
         </div>
+
+        <div align='center'>
+            <a className="button-64" href="/RecommendationPage">
+              <span style={{ fontFamily: "Ios15Medium" }}>پیشنهاد روان درمانگر</span>
+        </a></div>
+        <br /> <br />
+
         <div className="row g-5">
           <div className="col-md-6 col-lg-4 wow fadeIn" data-wow-delay=".3s">
             <div className="project1-item">

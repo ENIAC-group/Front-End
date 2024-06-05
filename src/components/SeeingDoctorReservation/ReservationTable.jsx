@@ -9,26 +9,22 @@ const ReservationTable = ({ PatiantId, PatiantName, Day, Date, time, type, Meeti
     console.log(PatiantName);
     const navigate = useNavigate();
     const handleClickToPatiantPanel = () => {
-        console.log(PatiantId) ; 
-        console.log("heloooooooooooooooooooooooooooooo") ; 
+        console.log(PatiantId);
         navigate("/Patient_Panel", { state: PatiantId });
     };
     return (
         <div>
             <li className="table-row">
-                {/* <div className="col col-2" style={{ fontFamily: "Ios15Medium" }} data-label="پرونده پزشکی بیمار">
-                    <button className="button-24" role="button" style={{ fontFamily: "Ios15Medium" }} onClick= {handleClickToPatiantPanel} >پرونده</button>
-                </div> */}
+                <div className="col col-2" style={{ fontFamily: "Ios15Medium" }} data-label="پرونده پزشکی بیمار">
+                    <button className="button-24" role="button" style={{ fontFamily: "Ios15Medium" }} onClick={handleClickToPatiantPanel} >پرونده</button>
+                </div>
                 <div className="col col-2" style={{ fontFamily: "Ios15Medium" }} data-label="لینک جلسه مجازی">
-                    {MeetingLink ? (
+                    {MeetingLink && type == "مجازی" ? (
                         <button className="button-24" role="button" style={{ fontFamily: "Ios15Medium" }} onClick={() => window.open(MeetingLink, "_blank")}>
                             لینک جلسه
                         </button>
-                    ) : ( <p></p> )
+                    ) : (<p></p>)
                     }
-                    {/* if (type == "حضوری") {
-                     <a className="button-24" role="button" href={MeetingLink}>لینک جلسه</a>   
-                    } */}
                 </div>
                 <div className="col col-2" style={{ fontFamily: "Ios15Medium" }} data-label="نوع مراجعه">{type}</div>
                 <div className="col col-2" style={{ fontFamily: "Ios15Medium" }} data-label="ساعت">{time}</div>
