@@ -233,11 +233,11 @@ const DoctorProfile = ({ Id, name, Description, Image, ProfileType, IsPrivate, P
                             </div>
 
                             <div className='buttonReserveAndProfile'>
-                                <div className="team-icon d-flex justify-content-center pb-4">
+                                {/* <div className="team-icon d-flex justify-content-center pb-4">
                                     <a className="btn btn-square btn-secondary text-white rounded-circle m-1" onClick={handleClickToDoctorPage}>
                                     <i className="fab material-symbols-outlined">account_circle</i>
                                     </a>
-                                </div>
+                                </div> */}
                                 <div className='buttonReserve' onLoad={GetUserInfo} onClick={GetUserInfo2}>
                                     <CompleteInfoModal doctorId={Id}/>
                                     <RatingModal doctorId={Id}/>
