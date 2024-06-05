@@ -24,7 +24,6 @@ const PatientsList = () => {
     //  تابع برای دریافت اطلاعات پروفایل دکترها از بک‌اند
     const fetchPatientsProfile = async () => {
       try {
-        console.log("im called");
         const token = localStorage.getItem("accessToken");
         const response = await axios(
           "http://127.0.0.1:8000/TherapyTests/record/query/",
@@ -42,7 +41,7 @@ const PatientsList = () => {
         if (response.status == 200) {
           setPatientsData(response.data.records);
           setShowErrorMessage(false);
-          console.log(response);
+          console.log(response.data.records);
         }
       } catch (error) {
         console.log(error);
@@ -123,7 +122,7 @@ const PatientsList = () => {
               <div className="distanceBetween">
                 {Patients_data.map((index) => (
                   <Patient_Profile
-                    PatiantId={index?.id}
+                    PatiantId={index?.patient}
                     name={index?.name}
                     nationalID={index?.nationalID}
                     gender={index?.gender}

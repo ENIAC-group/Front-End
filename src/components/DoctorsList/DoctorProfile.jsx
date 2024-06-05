@@ -14,8 +14,10 @@ import RatingModal from '../RatingDoctor/RatingModal.jsx';
 const DoctorProfile = ({ Id, name, Description, Image, ProfileType, IsPrivate, Psychiatrist }) => {
     {
         const navigate = useNavigate();
-        const handleClickToDoctorPage = () => {
-            navigate("/DoctorPage", { state: Id });
+        const load = () => {
+            console.log("++")
+            console.log(name);
+            console.log(Image);
         };
 
         async function GetUserInfo(event) {
@@ -219,7 +221,7 @@ const DoctorProfile = ({ Id, name, Description, Image, ProfileType, IsPrivate, P
             //             no-repeat`})
         } else {
             return (
-                <div className="rounded team-item" style={{ fontFamily: 'Ios15Medium', width: '298.668px' }}>
+                <div className="rounded team-item" style={{ fontFamily: 'Ios15Medium', width: '298.668px' }} onLoad={load}>
                     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,400,0,0" />
                     <div className="team-content">
                         <div className="team-img-icon">
@@ -233,11 +235,11 @@ const DoctorProfile = ({ Id, name, Description, Image, ProfileType, IsPrivate, P
                             </div>
 
                             <div className='buttonReserveAndProfile'>
-                                <div className="team-icon d-flex justify-content-center pb-4">
+                                {/* <div className="team-icon d-flex justify-content-center pb-4">
                                     <a className="btn btn-square btn-secondary text-white rounded-circle m-1" onClick={handleClickToDoctorPage}>
                                     <i className="fab material-symbols-outlined">account_circle</i>
                                     </a>
-                                </div>
+                                </div> */}
                                 <div className='buttonReserve' onLoad={GetUserInfo} onClick={GetUserInfo2}>
                                     <CompleteInfoModal doctorId={Id}/>
                                     <RatingModal doctorId={Id}/>

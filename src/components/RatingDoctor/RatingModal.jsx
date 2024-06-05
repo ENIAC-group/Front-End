@@ -51,6 +51,18 @@ const RatingModal = (doctorId) => {
     } catch (error) {
       console.log(error) ; 
       if(error.response.status === 400)
+      {
+        if(error.response.data.error == "You can only rate a psychiatrist if you have had a reservation with them.")
+        toast.error("!رزرو وقت برای امتیاز دهی الزامی است", {
+          position: "bottom-left",
+          autoClose: 2000,
+          hideProgressBar: false,
+          closeOnClick: true,
+          pauseOnHover: true,
+          draggable: true,
+          progress: undefined,
+        });
+        else
         toast.error("!امتیاز دهی قبلا انجام شده", {
           position: "bottom-left",
           autoClose: 2000,
@@ -60,6 +72,7 @@ const RatingModal = (doctorId) => {
           draggable: true,
           progress: undefined,
         });
+      }
       else{
         toast.error("!متاسفانه مشکلی به وجود آمده", {
           position: "bottom-left",
