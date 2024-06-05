@@ -16,8 +16,10 @@ import ReservationPage from "./components/Reservation/Reservation.jsx";
 import DoctorPage from "./components/SeeingDoctorReservation/DoctorPage.jsx";
 import Patient_Panel from "./components/Patient_Panel/Patient_Panel.jsx";
 import PatientsList from "./components/Doctor's_Patients/PatientsList.jsx";
+import DoctorRating from "./components/DoctorPannelRating/DoctorPannelRating.jsx";
 import Doctor_FreeTime from "./components/Doctor_FreeTime/Doctor_FreeTime.jsx";
 import Testresult from "./components/User_TestResult/TestResult.jsx";
+import RecommendationPage from "./components/RecommendationPage/RecommendationPage.jsx";
 
 function App() {
   return (
@@ -77,6 +79,13 @@ function App() {
           {" "}
         </Router.Route>
         <Router.Route path="/TestResult" element={<Testresult />}>
+          {" "}
+        </Router.Route>
+        <Router.Route path="/DoctorRatings" element={<DoctorRating />}>
+
+          {" "}
+        </Router.Route>
+        <Router.Route path="/RecommendationPage" element={<RecommendationPage />}>
           {" "}
         </Router.Route>
       </Router.Routes>
