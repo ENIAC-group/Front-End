@@ -61,8 +61,7 @@ const ReservationPage = () => {
   const [responseData, setResponseData] = useState([]);
   const [FreeTiems, setFreeTimes] = useState([]);
   const [selectVal, setSelectVal] = useState(-1);
-  const [selectedDay, 
-    setSelectedDay] = useState(
+  const [selectedDay, setSelectedDay] = useState(
     ChangeDate(utils().getToday())
   );
   const [LeftTimes, setTime] = useState([]);
@@ -116,17 +115,17 @@ const ReservationPage = () => {
       selectedDay.month,
       selectedDay.day
     ).getDay();
-    var temp = [];    
-      for (let i = 0; i < FreeTiems.length; i++)
-        if (FreeTiems[i].date == DateString(selectedDay))
-          temp.push(FreeTiems[i].time);
-      for (let i = 0; i < responseData.length; i++) {
-        if (responseData[i].date == DateString(selectedDay)) {
-          var ind = temp.indexOf(responseData[i].time);
-          if (ind > -1) {
-            temp.splice(ind, 1);
-          }
+    var temp = [];
+    for (let i = 0; i < FreeTiems.length; i++)
+      if (FreeTiems[i].date == DateString(selectedDay))
+        temp.push(FreeTiems[i].time);
+    for (let i = 0; i < responseData.length; i++) {
+      if (responseData[i].date == DateString(selectedDay)) {
+        var ind = temp.indexOf(responseData[i].time);
+        if (ind > -1) {
+          temp.splice(ind, 1);
         }
+      }
     }
     return temp;
   };
@@ -206,6 +205,7 @@ const ReservationPage = () => {
   useEffect(() => {
     //  تابع برای دریافت اطلاعات پروفایل دکتراز بک‌اند
     const fetchDoctorProfile = async () => {
+      
       const token = localStorage.getItem("accessToken");
       try {
         const response = await axios.get(url, {
@@ -294,7 +294,11 @@ const ReservationPage = () => {
         <div className={styles.reserve_Box} onLoad={getFreeTime}>
           <div className={styles.reserve_docProfile}>
             <a href="#">
-              <img src={img} alt="Avatar" />
+              <img
+                src={doctorProfile.image}
+                className="img-fluid w-100 rounded-circle"
+                alt="image"
+              />
             </a>
             <h2 className={styles.reserve_docName}>{doctorProfile.name}</h2>
           </div>
@@ -417,7 +421,7 @@ const ReservationPage = () => {
                         } else {
                         }
                       });
-                      console.log(LeftTimes[selected])
+                      console.log(LeftTimes[selected]);
                       console.log(showModal);
                     }
                   }}

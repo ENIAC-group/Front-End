@@ -7,7 +7,6 @@ import { PiNotepadLight } from "react-icons/pi";
 import { FaBars, FaBell, FaUserCircle } from "react-icons/fa";
 import { MdOutlineMoreTime } from "react-icons/md";
 import { FaStar } from "react-icons/fa";
-import { IoIosAlarm, IoIosAlbums } from "react-icons/io";
 import { ImProfile } from "react-icons/im";
 import { IoIosAlarm, IoIosAlbums, IoIosStar } from "react-icons/io";
 import styles from "./NavBar.module.css";
