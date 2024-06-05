@@ -87,9 +87,9 @@
     color: #8e8d8d;
 }
 
-.profile_btn:not(:hover) .profile_menu {
-    display: none;
-}
+/* .profile_btn:not(:hover) .profile_menu { */
+    /* display: none;
+} */
 
 .profile_menu {
     direction: rtl;
