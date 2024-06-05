@@ -12,6 +12,7 @@ import nogender_avatar from "../../assets/NoGender.png";
 const Patient_Profile = ({ PatiantId, name, nationalID, gender }) => {
   {
     const navigate = useNavigate();
+    console.log("++++++++" + PatiantId);
     const handleClickToPatientPanel = () => {
       navigate("/Patient_Panel", { state: PatiantId });
     };

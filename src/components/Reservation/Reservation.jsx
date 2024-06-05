@@ -61,7 +61,8 @@ const ReservationPage = () => {
   const [responseData, setResponseData] = useState([]);
   const [FreeTiems, setFreeTimes] = useState([]);
   const [selectVal, setSelectVal] = useState(-1);
-  const [selectedDay, setSelectedDay] = useState(
+  const [selectedDay, 
+    setSelectedDay] = useState(
     ChangeDate(utils().getToday())
   );
   const [LeftTimes, setTime] = useState([]);
