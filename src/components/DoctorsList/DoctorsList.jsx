@@ -197,7 +197,7 @@ const DoctorsList = () => {
               data-wow-delay=".5s"
               style={{ visibility: "visible" }}
             >
-              <div className="distanceBetween">
+              <div className="distanceBetween" style={{display:"flex",flexWrap:'wrap',gap:'4px'}}>
                 {doctorProfile.map((index) => (
                   <DoctorProfile
                     Id={index?.psychiatrist}

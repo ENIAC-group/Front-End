@@ -14,8 +14,10 @@ import RatingModal from '../RatingDoctor/RatingModal.jsx';
 const DoctorProfile = ({ Id, name, Description, Image, ProfileType, IsPrivate, Psychiatrist }) => {
     {
         const navigate = useNavigate();
-        const handleClickToDoctorPage = () => {
-            navigate("/DoctorPage", { state: Id });
+        const load = () => {
+            console.log("++")
+            console.log(name);
+            console.log(Image);
         };
 
         async function GetUserInfo(event) {
@@ -219,7 +221,7 @@ const DoctorProfile = ({ Id, name, Description, Image, ProfileType, IsPrivate, P
             //             no-repeat`})
         } else {
             return (
-                <div className="rounded team-item" style={{ fontFamily: 'Ios15Medium', width: '298.668px' }}>
+                <div className="rounded team-item" style={{ fontFamily: 'Ios15Medium', width: '298.668px' }} onLoad={load}>
                     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,400,0,0" />
                     <div className="team-content">
                         <div className="team-img-icon">

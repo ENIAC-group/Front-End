@@ -201,15 +201,16 @@ const RecommendationPage = () => {
         <h1 align="center" style={{ fontFamily: "Ios15medium" }}>پیشنهاد روان درمانگر</h1>
         <br />
         {!showResult &&
-        <div className="recomBox">
+        <div className="recomBox" dir='rtl'>
           <form className='recform'>
             <label className='question-style' style={{ fontFamily: "Ios15medium" }}>
               {questions[activeQuestion].question}
             </label>
             <br />
-            <ul>
+            <ul style={{display:'flex',flexWrap:'wrap',gap:'5px'}}>
               {questions[activeQuestion].choices.map((choice, index) => (
                 <li
+                  style={{}}
                   key={index}
                   className={
                     (activeQuestion === 3)
@@ -256,6 +257,7 @@ const RecommendationPage = () => {
                 className='choice-style bottom-button-hover'
                 type="button"
                 onClick={cancelTest}
+                style={{width:'250px'}}
               >
                 انصراف و بازگشت به صفحه اصلی
               </button>
@@ -265,7 +267,7 @@ const RecommendationPage = () => {
         }
 
         {showResult && (
-        <div className="recomBox">
+        <div className='recomBox'>
         <h1 align="center" style={{ fontFamily: "Ios15medium", fontSize: "25px" }}>نتایج:</h1>
 
           <div
@@ -273,13 +275,13 @@ const RecommendationPage = () => {
               data-wow-delay=".5s"
               style={{ visibility: "visible" }}
             >
-              <div className="distanceBetween">
+              <div className="distanceBetween" style={{display:"flex",flexWrap:'wrap',gap:'5px'}}>
                 {Array.isArray(doctorProfile) && doctorProfile.map((index) => (
                   <DoctorProfile
                     Id={index?.psychiatrist}
                     name={index?.name}
                     Description={index?.description}
-                    Image={index?.image}
+                    Image={"http://127.0.0.1:8000"+index?.image}
                     ProfileType={index?.profile_type}
                     IsPrivate={index?.is_private}
                     Psychiatrist={index?.psychiatrist}

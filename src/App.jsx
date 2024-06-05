@@ -82,7 +82,6 @@ function App() {
           {" "}
         </Router.Route>
         <Router.Route path="/DoctorRatings" element={<DoctorRating />}>
-
           {" "}
         </Router.Route>
         <Router.Route path="/RecommendationPage" element={<RecommendationPage />}>
