@@ -178,17 +178,23 @@ const LoginContainer = () => {
       if (response.status === 200) {
         const accessToken = response.data.access;
         const refreshToken = response.data.refresh;
+        const role = response.data.user.role;
 
         // Set tokens in local storage
         localStorage.setItem("accessToken", accessToken);
         localStorage.setItem("refreshToken", refreshToken);
+        localStorage.setItem("role", role);
+        localStorage.setItem("LogIn", true);
       } else if (response.status === 201) {
         const accessToken = response.data.access;
         const refreshToken = response.data.refresh;
+        const role = response.data.user.role;
 
         // Set tokens in local storage
         localStorage.setItem("accessToken", accessToken);
         localStorage.setItem("refreshToken", refreshToken);
+        localStorage.setItem("role", role);
+        localStorage.setItem("LogIn", true);
       }
       withReactContent(Swal).fire({
         icon: "success",
