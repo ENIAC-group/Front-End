@@ -608,7 +608,7 @@ function MedicalInfoModal
                   marginTop: "7%",
                   backgroundPosition: "right",
                   fontWeight: "bold",
-                  color: "rgb(127, 161, 249)"}}>سابقۀ پزشکی اول:</h5>
+                  color: "rgb(127, 161, 249)"}}>سابقۀ پزشکی اول (اختیاری):</h5>
               </div>
               <div style={{paddingRight: "4%", marginTop: "3%"}}>
                 <h5 style={{
@@ -824,7 +824,7 @@ function MedicalInfoModal
                   marginTop: "7%",
                   backgroundPosition: "right",
                   fontWeight: "bold",
-                  color: "rgb(127, 161, 249)"}}>سابقۀ پزشکی دوم:</h5>
+                  color: "rgb(127, 161, 249)"}}>سابقۀ پزشکی دوم (اختیاری):</h5>
               </div>
               <div style={{paddingRight: "4%", marginTop: "3%"}}>
                 <h5 style={{
@@ -1042,7 +1042,7 @@ function MedicalInfoModal
                   marginTop: "7%",
                   backgroundPosition: "right",
                   fontWeight: "bold",
-                  color: "rgb(127, 161, 249)"}}>سابقۀ پزشکی سوم:</h5>
+                  color: "rgb(127, 161, 249)"}}>سابقۀ پزشکی سوم (اختیاری):</h5>
               </div>
               <div style={{paddingRight: "4%", marginTop: "3%"}}>
                 <h5 style={{

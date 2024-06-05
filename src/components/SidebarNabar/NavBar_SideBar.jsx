@@ -9,6 +9,7 @@ import { MdOutlineMoreTime } from "react-icons/md";
 import { FaStar } from "react-icons/fa";
 import { IoIosAlarm, IoIosAlbums } from "react-icons/io";
 import { ImProfile } from "react-icons/im";
+import { IoIosAlarm, IoIosAlbums, IoIosStar } from "react-icons/io";
 import styles from "./NavBar.module.css";
 import axios from "axios";
 import Swal from "sweetalert2";
@@ -48,7 +49,7 @@ const NavBar_SideBar = () => {
       const response = await axios("http://127.0.0.1:8000/accounts/Logout/", {
         method: "GET",
         headers: {
-          Authorization: `Bearer ${accessToken}`, // Bearer <access token >
+          Authorization: `Bearer ${accessToken}`, 
           "Content-Type": "application/json",
         },
       });
@@ -195,7 +196,7 @@ const NavBar_SideBar = () => {
               }}
             >
               <label href="" className={styles1.side_list_element_text}>
-                <FaRegFileAlt className={styles1.side_icons} /> تست ها
+                <FaRegFileAlt className={styles1.side_icons} /> تست‌ها
               </label>
             </li>
             {/* <li
