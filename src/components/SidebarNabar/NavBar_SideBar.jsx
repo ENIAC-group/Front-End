@@ -26,6 +26,7 @@ const NavBar_SideBar = () => {
   var role = localStorage.getItem("role");
   var log = localStorage.getItem("IN");
   const navigate = useNavigate();
+  const [inside, setIN] = useState(false);
   const [sideBarToggle, setsideBarToggle] = useState(false);
   const [MenueToggle, setMenueToggle] = useState(false);
   const handsidebarToggle = () => {
@@ -37,9 +38,17 @@ const NavBar_SideBar = () => {
       {
         role = localStorage.getItem("role");
         log = localStorage.getItem("LogIn");
+        if (log == "true") setIN(true);
+        else setIN(false);
       }
     }, 90);
   });
+
+  const getlog = () => {
+    log = localStorage.getItem("IN");
+    if (log == "true") setIN(true);
+    else setIN(false);
+  };
 
   async function LogOut(event) {
     event.preventDefault();
@@ -48,12 +57,14 @@ const NavBar_SideBar = () => {
       const response = await axios("http://127.0.0.1:8000/accounts/Logout/", {
         method: "GET",
         headers: {
-          Authorization: `Bearer ${accessToken}`, 
+          Authorization: `Bearer ${accessToken}`,
           "Content-Type": "application/json",
         },
       });
       if (response.status === 200) {
         localStorage.setItem("LogIn", false);
+        localStorage.setItem("role", "-");
+        setIN(false);
         localStorage.removeItem("accessToken");
         console.log(response);
         const data = response.data;
@@ -94,6 +105,7 @@ const NavBar_SideBar = () => {
       <div
         className={styles.navbar}
         style={sideBarToggle ? { marginRight: "16rem" } : {}}
+        onLoad={(e) => getlog()}
       >
         <div className={styles.navcontainer}>
           <div style={{ position: "relative" }}>
@@ -112,7 +124,7 @@ const NavBar_SideBar = () => {
                       پروفایل
                     </label>
                   </li>
-                  {log == "true" ? (
+                  {inside == true ? (
                     <li>
                       <label
                         onClick={(e) => {
@@ -172,7 +184,7 @@ const NavBar_SideBar = () => {
                 <FaHome className={styles1.side_icons} /> خانه
               </label>
             </li>
-            {localStorage.getItem("accessToken") != null ? (
+            {inside ? (
               <li
                 className={styles1.side_list_element}
                 onClick={(e) => {
@@ -270,7 +282,7 @@ const NavBar_SideBar = () => {
                   </label>
                 </li>
               </>
-            ) : (
+            ) : role == "user" ? (
               <>
                 <li
                   className={styles1.side_list_element}
@@ -285,6 +297,8 @@ const NavBar_SideBar = () => {
                   </label>
                 </li>
               </>
+            ) : (
+              <></>
             )}
           </ul>
         </div>
