@@ -21,7 +21,6 @@ const GlasserTest = () => {
   const { questions } = Glasser;
   const { question, choices } = questions[activeQuestion];
 
-
   useEffect(() => {
     setSelectedAnswers(prevSelectedAnswers => {
       const updatedAnswers = [...prevSelectedAnswers];
@@ -265,8 +264,8 @@ const GlasserTest = () => {
             {activeQuestion !== 0 && ( 
               <>
                 <ProgressBar animated className='mbti-progress-bar custom-color'now={(activeQuestion + 1) * (100 / questions.length)} />
-                <span className="glasser-active-question-no">{addLeadingZero(activeQuestion)}</span>
-                <span className="glasser-total-question">/{addLeadingZero(questions.length - 1)}</span>
+                <span className="glasser-active-question-no">{convertToPersianNumbers(addLeadingZero(activeQuestion))}</span>
+                <span className="glasser-total-question">/{convertToPersianNumbers(addLeadingZero(questions.length - 1))}</span>
               </>
             )}
           </div>
