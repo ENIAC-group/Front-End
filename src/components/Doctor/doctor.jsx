@@ -11,7 +11,7 @@ import myImage6 from "./img/couching.jpg";
 
 const Doctor_Home = () => {
   return (
-    <div className="container-fluid project py-5 mb-5">
+    <div className="container-fluid project py-5 mb-5" >
       <div className="container">
         <div
           className="text-center mx-auto pb-5 wow fadeIn"

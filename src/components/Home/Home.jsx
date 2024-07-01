@@ -11,8 +11,8 @@ function Home() {
     <>
       <NavBar_SideBar />
       <Slider />
-      <Doctors_Home />
       <Statistic />
+      <Doctors_Home />
       <Tests />
       <Footer />
     </>
