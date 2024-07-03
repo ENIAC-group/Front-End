@@ -22,10 +22,10 @@ const Doctor_Home = () => {
           <h1 className="doctor_h1">معرفی روان درمانگرها</h1>
         </div>
 
-        <div align='center'>
+        {/* <div align='center'>
             <a className="button-64" href="/RecommendationPage">
               <span style={{ fontFamily: "Ios15Medium" }}>پیشنهاد روان درمانگر</span>
-        </a></div>
+        </a></div> */}
         <br /> <br />
 
         <div className="row g-5">
