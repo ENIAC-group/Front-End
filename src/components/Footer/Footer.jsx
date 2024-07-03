@@ -1,6 +1,8 @@
 import React from "react";
 import { MdEmail, MdSettings } from "react-icons/md";
 import { FaPhone, FaGithubSquare, FaInfo, FaHome } from "react-icons/fa";
+import { IoIosLogIn } from "react-icons/io";
+
 
 import styles from "./Footer.module.css";
 
@@ -59,8 +61,8 @@ const Footer = () => {
                   href="/Setting"
                   style={{ color: "#a0aec0", textDecoration: "none" }}
                 >
-                  <MdSettings className={styles.social_icon} />
-                  تنظیمات
+                  <IoIosLogIn className={styles.social_icon} />
+                  ورود به سایت
                 </a>
               </li>
             </ul>
