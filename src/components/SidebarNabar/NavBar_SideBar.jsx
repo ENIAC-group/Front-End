@@ -29,6 +29,7 @@ const NavBar_SideBar = () => {
   const [inside, setIN] = useState(false);
   const [sideBarToggle, setsideBarToggle] = useState(false);
   const [MenueToggle, setMenueToggle] = useState(false);
+
   const handsidebarToggle = () => {
     setsideBarToggle(!sideBarToggle);
   };
@@ -109,18 +110,20 @@ const NavBar_SideBar = () => {
       >
         <div className={styles.navcontainer}>
           <div style={{ position: "relative" }}>
-            <div className={styles.profile_btn}>
+            <div className={styles.profile_btn} onMouseEnter={(e)=>setMenueToggle(true)}
+                >
               <FaUserCircle
-                style={{ width: "18px", height: "18px" }}
+                style={{ width: "23px", height: "23px" }}
                 onClick={(e) => setMenueToggle(~MenueToggle)}
               />
               <div
                 className={styles.profile_menu}
-                style={MenueToggle ? {} : { display: "none" }}
+                style={MenueToggle ? {} : { display: "none" }}onMouseLeave={(e)=>setMenueToggle(false)}
+
               >
                 <ul className={styles.prof_list}>
                   <li>
-                    <label onClick={(e) => navigate("/User_Panel")}>
+                    <label onClick={(e) => {navigate("/User_Panel");setMenueToggle(~MenueToggle);}}>
                       پروفایل
                     </label>
                   </li>
@@ -130,6 +133,7 @@ const NavBar_SideBar = () => {
                         onClick={(e) => {
                           LogOut(e);
                           navigate("/Signup");
+                          setMenueToggle(~MenueToggle);
                         }}
                       >
                         خروج از حساب کاربری
@@ -137,7 +141,7 @@ const NavBar_SideBar = () => {
                     </li>
                   ) : (
                     <li>
-                      <label onClick={(e) => navigate("/signup")}>
+                      <label onClick={(e) => {navigate("/signup");setMenueToggle(~MenueToggle);}}>
                         ورود به حساب کاربری
                       </label>
                     </li>
@@ -147,11 +151,11 @@ const NavBar_SideBar = () => {
             </div>
           </div>
           <a className={styles.con} onClick={(e) => navigate("/Doctors")}>
-            <FaUserDoctor className={styles.FB} />
+            <FaUserDoctor style={{ width: "23px", height: "23px" }} className={styles.FB} />
           </a>
           {role == "doctor" ? (
             <a className={styles.con} onClick={(e) => navigate("/DoctorPage")}>
-              <ImProfile className={styles.FB} />
+              <ImProfile style={{ width: "23px", height: "23px" }}className={styles.FB} />
             </a>
           ) : (
             <></>
@@ -162,7 +166,7 @@ const NavBar_SideBar = () => {
         </div>
         <div className={styles.p1}>
           <div style={{ width: "90px" }}></div>
-          <FaBars className={styles.fBar} onClick={handsidebarToggle} />
+          <FaBars style={{ width: "23px", height: "23px" }} className={styles.fBar} onClick={handsidebarToggle} />
         </div>
       </div>
       {/* ----------------------------------------------------------------- */}
