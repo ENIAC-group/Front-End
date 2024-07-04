@@ -8,6 +8,8 @@ import './RecommendationPageCopy.css';
 import DoctorProfile from '../DoctorsList/DoctorProfile';
 import '../DoctorsList/DoctorsList.css'
 import axios from 'axios';
+import { TextField } from "@material-ui/core";
+
 
 const RecommendationPage = () => {
   const navigate = useNavigate();
@@ -198,8 +200,7 @@ const RecommendationPage = () => {
       <NavBar_SideBar />
       <div align='center' className="recomBody">
         <br />
-        <h1 align="center" style={{ fontFamily: "Ios15medium" }}>پیشنهاد روان درمانگر</h1>
-        <br />
+        <h1 align="center" style={{ fontFamily: "Ios15medium", fontSize: "27px", marginBottom: "20px", marginTop: "0px"}}>پیشنهاد روان درمانگر</h1>
         {!showResult &&
         <div className="recomBox" dir='rtl'>
           <form className='recform'>
@@ -207,10 +208,10 @@ const RecommendationPage = () => {
               {questions[activeQuestion].question}
             </label>
             <br />
-            <ul style={{display:'flex',flexWrap:'wrap',gap:'5px'}}>
+            <ul style={{}}>
               {questions[activeQuestion].choices.map((choice, index) => (
                 <li
-                  style={{}}
+                  style={{  }}
                   key={index}
                   className={
                     (activeQuestion === 3)
@@ -222,19 +223,29 @@ const RecommendationPage = () => {
                   {choice.text}
                 </li>
               ))}
-            </ul>
-            {(activeQuestion === 3 && selectedAnswers[activeQuestion]?.includes(7)) ? 
-                  <input type="text"
+              </ul>
+              {(activeQuestion === 3 && selectedAnswers[activeQuestion]?.includes(7)) ?
+                <TextField
+                  multiline
+                  rows={1}
+                  rowsMax={4}
+                  autoComplete="off"
+                  variant="outlined"
+                  // value={_comment}
+                  onChange={handleInputChange}
+                  dir="rtl" // Set the direction to RTL
+                  InputLabelProps={{
+                    dir: "rtl", // Set the direction of the label to RTL
+                  }}
                   placeholder="موارد دیگر"
                   className='textbox-other'
-                  onChange={handleInputChange}
-                  />
+                />
                 : ""}
 
             <div className='button-group' style={{ fontFamily: "Ios15medium" }}>
               <button
                 type="button"
-                className='choice-style bottom-button-hover'
+                className='button-style bottom-button-hover'
                 onClick={onClickNext}
                 disabled={
                   (activeQuestion === 3)
@@ -246,7 +257,7 @@ const RecommendationPage = () => {
               </button>
               {activeQuestion !== 0 && (
                 <button
-                  className='choice-style bottom-button-hover'
+                  className='button-style bottom-button-hover'
                   type="button"
                   onClick={onClickPrevious}
                 >
@@ -254,10 +265,10 @@ const RecommendationPage = () => {
                 </button>
               )}
               <button
-                className='choice-style bottom-button-hover'
+                className='button-style bottom-button-hover'
                 type="button"
                 onClick={cancelTest}
-                style={{width:'250px'}}
+                style={{width:'200px'}}
               >
                 انصراف و بازگشت به صفحه اصلی
               </button>

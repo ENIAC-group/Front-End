@@ -434,9 +434,9 @@ form .btn input[type="submit"]{
   font-weight: 500;
   line-height: 1.5;
   margin-bottom: 10px;
-  margin-left: -65px;
-  margin-right: -16%;
-  padding: .5rem 1rem;
+  margin-left: -60px;
+  margin-right: -25%;
+  /* padding: .5rem 1rem; */
   text-align: center;
   text-transform: none;
   transition: color .15s ease-in-out,background-color .15s ease-in-out,border-color .15s ease-in-out,box-shadow .15s ease-in-out;

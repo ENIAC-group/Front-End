@@ -3,12 +3,16 @@ import "./DoctorsList.css";
 import axios from "axios";
 import Swal from "sweetalert2";
 import withReactContent from "sweetalert2-react-content";
-import { useNavigate } from "react-router-dom";
+import { useLocation, useNavigate } from "react-router-dom";
 import { useState, useEffect } from "react";
 import "./DoctorProfile.jsx";
 import DoctorProfile from "./DoctorProfile.jsx";
 import Footer from "../Footer/Footer.jsx";
 import NavBar_SideBar from "../SidebarNabar/NavBar_SideBar.jsx";
+import Slider from "react-slick";
+import "slick-carousel/slick/slick.css";
+import "slick-carousel/slick/slick-theme.css";
+
 
 const DoctorsList = () => {
   const navigate = useNavigate();
@@ -159,193 +163,190 @@ const DoctorsList = () => {
     fetchDoctorProfileEdu();
   }, []);
 
+
+
+  const settings = {
+    className: "center",
+    infinite: true,
+    centerPadding: "60px",
+    slidesToShow: 4,
+    swipeToSlide: true,
+    afterChange: function(index) {
+      console.log(
+        `Slider Changed to: ${index + 1}, background: #222; color: #bada55`
+      );
+    }
+  };
+
+
+
+
   return (
     <>
       <NavBar_SideBar />
-      <div
-        className="container-fluid my-5 team"
-        style={{ paddingTop: "0rem", paddingBottom: "3rem" }}
-      >
-        <html>
-          <head>
-            <link
-              href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.10.0/css/all.min.css"
-              rel="stylesheet"
-            />
-            <link
-              href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.4.1/font/bootstrap-icons.css"
-              rel="stylesheet"
-            />
-            <link href="lib/animate/animate.min.css" rel="stylesheet" />
-            <link href="./owl.carousel.min.css" rel="stylesheet" />
-          </head>
-        </html>
+        <div id="root" className="purple-block-up" style={{ background:"#e0f5ff" }}>
+        <div
+          className="container-fluid my-1 team"
+          style={{ paddingTop: "0rem", paddingBottom: "3rem" }}
+        >
+          <html>
+            <head>
+              <link
+                href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.10.0/css/all.min.css"
+                rel="stylesheet"
+              />
+              <link
+                href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.4.1/font/bootstrap-icons.css"
+                rel="stylesheet"
+              />
+              <link href="lib/animate/animate.min.css" rel="stylesheet" />
+              <link href="./owl.carousel.min.css" rel="stylesheet" />
+            </head>
+          </html>
 
-        <div className="container-fluid py-0 my-0 team">
-          <div className="container py-0">
-            <div
-              className="text-center mx-auto pb-2 wow fadeIn Doctor_List_title"
-              data-wow-delay=".3s"
-              style={{ maxWidth: "600px" }}
-            >
-              <h1 style={{ fontFamily: "Ios15Medium" }}>لیست مشاورها</h1>
-            </div>
-            <br />
+          <div className="container-fluid py-0 my-0 team">
+            <div className="container py-0">
+              <div
+                className="text-center mx-auto pb-2 wow fadeIn Doctor_List_title"
+                data-wow-delay=".3s"
+                style={{ maxWidth: "600px" }}
+              >
+                <h1 style={{ fontFamily: "Ios15Medium" }}>لیست مشاورها</h1>
+              </div>
+              {/* <br /> */}
+              <div
+                className="owl-carousel team-carousel wow fadeIn owl-loaded owl-drag"
+                data-wow-delay=".5s"
+                style={{ visibility: "visible" }}
+              >
 
-            <div
-              className="owl-carousel team-carousel wow fadeIn owl-loaded owl-drag"
-              data-wow-delay=".5s"
-              style={{ visibility: "visible" }}
-            >
-              <div className="distanceBetween" style={{display:"flex",flexWrap:'wrap',gap:'4px'}}>
-                {doctorProfile.map((index) => (
-                  <DoctorProfile
-                    Id={index?.psychiatrist}
-                    name={index?.name}
-                    Description={index?.description}
-                    Image={index?.image}
-                    ProfileType={index?.profile_type}
-                    IsPrivate={index?.is_private}
-                    Psychiatrist={index?.psychiatrist}
-                  />
-                ))}
+                  <Slider {...settings}>
+                    {doctorProfile.map((index) => (
+                      <DoctorProfile
+                        Id={index?.psychiatrist}
+                        name={index?.name}
+                        Description={index?.description}
+                        Image={index?.image}
+                        ProfileType={index?.profile_type}
+                        IsPrivate={index?.is_private}
+                        Psychiatrist={index?.psychiatrist}
+                      />
+                    ))}
+                  </Slider>
               </div>
             </div>
           </div>
         </div>
-      </div>
-
-      <div className="scallop-up"></div>
-      <div id="Individual" className="colour-block">
-        <h1
-          className="text-center mx-auto pb-2 wow fadeIn Doctor_List_title"
-          data-wow-delay=".3s"
-          style={{ maxWidth: "600px", fontFamily: "Ios15Medium" }}
-        >
-          حوزه فردی
-        </h1>
-        <div className="distanceBetween">
-          {doctorProfileFardi.map((index) => (
-            <DoctorProfile
-              Id={index?.id}
-              name={index?.name}
-              Description={index?.description}
-              Image={index?.image}
-              ProfileType={index?.profile_type}
-              IsPrivate={index?.is_private}
-              Psychiatrist={index?.psychiatrist}
-            />
-          ))}
         </div>
-      </div>
-      <div className="scallop-down"></div>
 
-      <div id="Baby" className="white-block">
-        <h1
-          className="text-center mx-auto pb-2 wow fadeIn Doctor_List_title"
-          data-wow-delay=".3s"
-          style={{ maxWidth: "600px", fontFamily: "Ios15Medium" }}
-        >
-          حوزه کودک
-        </h1>
-        <div className="distanceBetween">
-          {doctorProfileBaby.map((index) => (
-            <DoctorProfile
-              Id={index?.id}
-              name={index?.name}
-              Description={index?.description}
-              Image={index?.image}
-              ProfileType={index?.profile_type}
-              IsPrivate={index?.is_private}
-              Psychiatrist={index?.psychiatrist}
-            />
-          ))}
+        <div className="scallop-up-new"></div>
+        <div id="Individual" className="color-block">
+          <h1
+            className="text-center mx-auto pb-2 wow fadeIn Doctor_List_title"
+            data-wow-delay=".3s"
+            style={{ maxWidth: "600px", fontFamily: "Ios15Medium" }}
+          >
+            حوزه فردی
+          </h1>
+          <div className="distanceBetween2">
+            {doctorProfileFardi.map((index) => (
+              <DoctorProfile
+                Id={index?.id}
+                name={index?.name}
+                Description={index?.description}
+                Image={index?.image}
+                ProfileType={index?.profile_type}
+                IsPrivate={index?.is_private}
+                Psychiatrist={index?.psychiatrist}
+              />
+            ))}
+          </div>
         </div>
-      </div>
+        <div className="scallop-down-new"></div>
 
-      <div className="scallop-up"></div>
-      <div id="edu" className="colour-block">
-        <h1
-          className="text-center mx-auto pb-2 wow fadeIn Doctor_List_title"
-          data-wow-delay=".3s"
-          style={{ maxWidth: "600px", fontFamily: "Ios15Medium" }}
-        >
-          حوزه تحصیلی
-        </h1>
-        <div className="distanceBetween">
-          {doctorProfileEdu.map((index) => (
-            <DoctorProfile
-              Id={index?.id}
-              name={index?.name}
-              Description={index?.description}
-              Image={index?.image}
-              ProfileType={index?.profile_type}
-              IsPrivate={index?.is_private}
-              Psychiatrist={index?.psychiatrist}
-            />
-          ))}
+
+        <div id="Baby" className="color-block">
+          <h1
+            className="text-center mx-auto pb-2 wow fadeIn Doctor_List_title"
+            data-wow-delay=".3s"
+            style={{ maxWidth: "600px", fontFamily: "Ios15Medium" }}
+          >
+            حوزه کودک
+          </h1>
+          <div className="distanceBetween2">
+            {doctorProfileBaby.map((index) => (
+              <DoctorProfile
+                Id={index?.id}
+                name={index?.name}
+                Description={index?.description}
+                Image={index?.image}
+                ProfileType={index?.profile_type}
+                IsPrivate={index?.is_private}
+                Psychiatrist={index?.psychiatrist}
+              />
+            ))}
+          </div>
         </div>
-      </div>
-      <div className="scallop-down"></div>
 
-      <div id="Family" className="white-block">
-        <h1
-          className="text-center mx-auto pb-2 wow fadeIn Doctor_List_title"
-          data-wow-delay=".3s"
-          style={{ maxWidth: "600px", fontFamily: "Ios15Medium" }}
-        >
-          حوزه خانواده
-        </h1>
-        <div className="distanceBetween">
-          {doctorProfileFamily.map((index) => (
-            <DoctorProfile
-              Id={index?.id}
-              name={index?.name}
-              Description={index?.description}
-              Image={index?.image}
-              ProfileType={index?.profile_type}
-              IsPrivate={index?.is_private}
-              Psychiatrist={index?.psychiatrist}
-            />
-          ))}
+        <div className="scallop-up-new"></div>
+        <div id="edu" className="color-block">
+          <h1
+            className="text-center mx-auto pb-2 wow fadeIn Doctor_List_title"
+            data-wow-delay=".3s"
+            style={{ maxWidth: "600px", fontFamily: "Ios15Medium" }}
+          >
+            حوزه تحصیلی
+          </h1>
+          <div className="distanceBetween2">
+            {doctorProfileEdu.map((index) => (
+              <DoctorProfile
+                Id={index?.id}
+                name={index?.name}
+                Description={index?.description}
+                Image={index?.image}
+                ProfileType={index?.profile_type}
+                IsPrivate={index?.is_private}
+                Psychiatrist={index?.psychiatrist}
+              />
+            ))}
+          </div>
         </div>
-      </div>
+        <div className="scallop-down-new"></div>
 
-      <div className="scallop-up"></div>
-      <div id="migration" className="colour-block">
-        <h1
-          className="text-center mx-auto pb-2 wow fadeIn Doctor_List_title"
-          data-wow-delay=".3s"
-          style={{ maxWidth: "600px", fontFamily: "Ios15Medium" }}
-        >
-          حوزه کوچینگ
-        </h1>
-        <div className="distanceBetween">
-          {/* {doctorProfileFardi.map((index) => (
-            <DoctorProfile
-              Id={index?.id}
-              name={index?.name}
-              Description={index?.description}
-              Image={index?.image}
-              ProfileType={index?.profile_type}
-              IsPrivate={index?.is_private}
-              Psychiatrist={index?.psychiatrist}
-            />
-          ))} */}
+        <div id="Family" className="color-block">
+          <h1
+            className="text-center mx-auto pb-2 wow fadeIn Doctor_List_title"
+            data-wow-delay=".3s"
+            style={{ maxWidth: "600px", fontFamily: "Ios15Medium" }}
+          >
+            حوزه خانواده
+          </h1>
+          <div className="distanceBetween2">
+            {doctorProfileFamily.map((index) => (
+              <DoctorProfile
+                Id={index?.id}
+                name={index?.name}
+                Description={index?.description}
+                Image={index?.image}
+                ProfileType={index?.profile_type}
+                IsPrivate={index?.is_private}
+                Psychiatrist={index?.psychiatrist}
+              />
+            ))}
+          </div>
         </div>
-      </div>
-      <div className="scallop-down"></div>
 
-      <div id="psychiatry" className="white-block">
-        <h1
-          className="text-center mx-auto pb-2 wow fadeIn Doctor_List_title"
-          data-wow-delay=".3s"
-          style={{ maxWidth: "600px", fontFamily: "Ios15Medium" }}
-        >
-          حوزه روان پزشکی
-        </h1>
-        <div className="distanceBetween">
-          {/* {doctorProfileFardi.map((index) => (
+        <div className="scallop-up-new"></div>
+        <div id="migration" className="color-block">
+          <h1
+            className="text-center mx-auto pb-2 wow fadeIn Doctor_List_title"
+            data-wow-delay=".3s"
+            style={{ maxWidth: "600px", fontFamily: "Ios15Medium" }}
+          >
+            حوزه کوچینگ
+          </h1>
+          <div className="distanceBetween2">
+            {/* {doctorProfileFardi.map((index) => (
             <DoctorProfile
               Id={index?.id}
               name={index?.name}
@@ -356,8 +357,32 @@ const DoctorsList = () => {
               Psychiatrist={index?.psychiatrist}
             />
           ))} */}
+          </div>
         </div>
-      </div>
+        <div className="scallop-down-new"></div>
+
+        <div id="psychiatry" className="color-block">
+          <h1
+            className="text-center mx-auto pb-2 wow fadeIn Doctor_List_title"
+            data-wow-delay=".3s"
+            style={{ maxWidth: "600px", fontFamily: "Ios15Medium" }}
+          >
+            حوزه روان پزشکی
+          </h1>
+          <div className="distanceBetween2">
+            {/* {doctorProfileFardi.map((index) => (
+            <DoctorProfile
+              Id={index?.id}
+              name={index?.name}
+              Description={index?.description}
+              Image={index?.image}
+              ProfileType={index?.profile_type}
+              IsPrivate={index?.is_private}
+              Psychiatrist={index?.psychiatrist}
+            />
+          ))} */}
+          </div>
+        </div>
 
       <Footer />
     </>
