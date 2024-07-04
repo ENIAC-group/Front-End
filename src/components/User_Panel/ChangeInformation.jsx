@@ -16,6 +16,7 @@ import gregorian from "react-date-object/calendars/gregorian";
 import persian_fa from "react-date-object/locales/persian_fa";
 import DateObject from "react-date-object";
 
+
 function ChangeInformation({ p_pages, user_info, setinfo }) {
   const eng = '0123456789';
   const fars = "۰۱۲۳۴۵۶۷۸۹";
@@ -41,6 +42,12 @@ function ChangeInformation({ p_pages, user_info, setinfo }) {
   var date = new DateObject(user_info.BirthDay);
   date.convert(persian);
   const [in_Date, setDate] = useState(date.format().toString())
+
+  const [number, setnum] = useState(convertlan(user_info.PhoneNumber,eng,fars));
+  var date = new DateObject(user_info.BirthDay);
+  date.convert(persian);
+  const [in_Date, setDate] = useState(date.format().toString())
+
   const GetFirstName = (event) => {
     if (
       validator.isAlpha(event.target.value.replace(" ", ""), "fa-IR") |
@@ -313,7 +320,8 @@ function ChangeInformation({ p_pages, user_info, setinfo }) {
               <input
                 type="text"
                 id="user_phonenumber"
-                value={number ? convertlan(number,eng,fars) : number}
+                defaultValue={convertlan(user_info.PhoneNumber,eng,fars)}
+                value={number ? convertlan(number,eng,fars): ""}
                 className="profile_input"
                 onChange={(e) => {
                   GetNumber(e);
