@@ -7,6 +7,11 @@ import Swal from "sweetalert2";
 import axios from "axios";
 import { JBDateInput } from "jb-date-input-react";
 import DatePicker from "react-multi-date-picker"
+import persian from "react-date-object/calendars/persian";
+import persian_fa from "react-date-object/locales/persian_fa";
+import gregorian from "react-date-object/calendars/gregorian";
+
+
 // import 'react-datepicker/dist/react-datepicker.css';
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
@@ -20,6 +25,7 @@ import date_icon from "../../assets/date.png";
 import phone_icon from "../../assets/phone.png";
 import person_icon from "../../assets/person.png";
 import "./styles.css";
+import DateObject from "react-date-object";
 
 const CompleteInfo = (doctorId) => {
   const navigate = useNavigate();
@@ -205,7 +211,19 @@ const CompleteInfo = (doctorId) => {
     }
 
     // date of brith validation
-    const dateOfBirthDate = new Date(dateOfBirth);
+    var _date = dateOfBirth.format();
+    console.log(_date);
+    const eng_date= convertToEnglishNumbers(_date);
+    console.log(eng_date
+    );
+    var rr = new DateObject({
+      date: eng_date,
+      format: "YYYY-MM-DD",
+      calendar: persian  })
+      rr.convert(gregorian)
+      console.log(rr.format()
+      );
+    const dateOfBirthDate = new Date(rr.format());
     const today = new Date();
     if (dateOfBirth === "") {
       errors.dateOfBirthError = "!وارد کردن تاریخ تولد الزامی است";
@@ -236,7 +254,7 @@ const CompleteInfo = (doctorId) => {
             firstname,
             lastname,
             phone_number: phonenumber,
-            date_of_birth: dateOfBirth,
+            date_of_birth: rr.format(),
             gender,
           },
           {
@@ -278,6 +296,7 @@ const CompleteInfo = (doctorId) => {
           });
         }
       } catch (error) {
+        console.log(error);
         Swal.fire({
           icon: "error",
           title: "!خطا در ارسال درخواست",
@@ -427,6 +446,7 @@ const CompleteInfo = (doctorId) => {
                   backgroundPosition: "right",
                   borderBottom: "2px solid #adadad",
                   marginBottom: "20px",
+                  display:'flex'
                 }}
                 className="field_modal"
               >
@@ -464,14 +484,17 @@ const CompleteInfo = (doctorId) => {
                   <DatePicker 
                     placeholder="تاریخ تولد"
                     value={dateOfBirth} 
-                    format="MM/DD/YYYY"
-                    onChange={(event) => {
-                      setDateOfBirth(event.target.value);
-                    }} 
+                    format="YYYY-MM-DD"
+                    onChange={setDateOfBirth} 
                     style={{
-                      border: "none !important",
+                      border: "0px",
+                      width:'350px',
                       backgroundColor: "white",
+                      direction:'rtl'
                     }}
+                    fixRelativePosition={"start"}
+                    calendar={persian}
+                    locale={persian_fa}
                   />
                   {/* <JBDateInput
                     placeholder="تاریخ تولد"
