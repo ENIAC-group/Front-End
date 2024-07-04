@@ -6,6 +6,7 @@ import { useNavigate } from "react-router-dom";
 import Swal from "sweetalert2";
 import axios from "axios";
 import { JBDateInput } from "jb-date-input-react";
+import DatePicker from "react-multi-date-picker"
 // import 'react-datepicker/dist/react-datepicker.css';
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
@@ -423,10 +424,8 @@ const CompleteInfo = (doctorId) => {
                 style={{
                   backgroundImage: `url(${date_icon})`,
                   backgroundRepeat: "no-repeat",
-                  // paddingRight: "40px",
                   backgroundPosition: "right",
                   borderBottom: "2px solid #adadad",
-                  // transition: "border-color 0.3s ease"
                   marginBottom: "20px",
                 }}
                 className="field_modal"
@@ -451,18 +450,30 @@ const CompleteInfo = (doctorId) => {
                   // }}
                   onChange={handleDateChange}
                 /> */}
-                <div
+                {/* <div
                   className="field-date"
-                  style={{
-                    border: "none",
-                    height: "40px",
-                    width: "92%",
-                    direction: "rtl",
-                    fonySize: "15px",
-                    marginBottom: "10px",
-                  }}
-                >
-                  <JBDateInput
+                  // style={{
+                  //   border: "none",
+                  //   height: "40px",
+                  //   width: "92%",
+                  //   direction: "rtl",
+                  //   fonySize: "15px",
+                  //   marginBottom: "10px",
+                  // }}
+                > */}
+                  <DatePicker 
+                    placeholder="تاریخ تولد"
+                    value={dateOfBirth} 
+                    format="MM/DD/YYYY"
+                    onChange={(event) => {
+                      setDateOfBirth(event.target.value);
+                    }} 
+                    style={{
+                      border: "none !important",
+                      backgroundColor: "white",
+                    }}
+                  />
+                  {/* <JBDateInput
                     placeholder="تاریخ تولد"
                     usePersianNumber={true}
                     onSelect={(event) => {
@@ -480,8 +491,8 @@ const CompleteInfo = (doctorId) => {
                     value={dateOfBirth}
                     className="jb-date-input-web-component .calendar-container"
                     calendarClassName="custom-calendar"
-                  ></JBDateInput>
-                </div>
+                  ></JBDateInput> */}
+                {/* </div> */}
               </div>
               <pre></pre>
               {/* <div className="field_modal btn">
