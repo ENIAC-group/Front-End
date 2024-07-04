@@ -1,5 +1,6 @@
 :root {
     font-family: Ios15Medium;
+    background: #e0f5ff;
 }
 
 /*** Spinner Start ***/
@@ -514,9 +515,13 @@
 
 /*** Team Start ***/
 
-.team-item {
-    border-top: 30px solid #B799FF !important;
+.team-item-new {
+    border-top: 20px solid #B799FF !important;
     background: rgba(239, 239, 241, 0.8);
+    width: 225px;
+    height: 355px;
+    /* box-shadow: rgba(0, 0, 0, 0.1) 0px 4px 12px; */
+    box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
 }
 
 .team-content::before {
@@ -714,12 +719,12 @@
     font-family: Ios15Medium;
 }
 
-.distanceBetween {
+.distanceBetween2 {
     display: flex;
-    flex-direction: row;
-    gap: 2rem;
+    flex-direction: row-reverse;
+    gap: 25px;
     justify-content: center;
-    flex-wrap: nowrap;
+    flex-wrap: wrap;
 }
 
 @media (max-width: 800px) {
@@ -734,18 +739,35 @@
     justify-content: space-evenly;
 }
 
-.colour-block {
-    background: #AEE2FF;
+.color-block {
+    background: #e0f5ff;
     width: 100%;
-    padding: 7% 20% 10% 20%;
-    color: #fff;
+    padding: 2% 15% 3% 15%;
+    /* color: #fff; */
+    height: 475px;
 }
 
-.white-block {
-    background: #fff;
+.purple-block {
+    background-color: #e0f5ff;
     width: 100%;
     padding: 7% 20% 10% 20%;
-    color: #369A7E;
+    /* color: #369A7E; */
+
+    margin: auto;
+    /* font-family: -apple-system, BlinkMacSystemFont, sans-serif; */
+    overflow: auto;
+    /* background: linear-gradient(315deg, rgba(101,0,94,1) 3%, rgba(60,132,206,1) 38%, rgba(48,238,226,1) 68%, rgba(255,25,25,1) 98%); */
+    animation: gradient 15s ease infinite;
+    background-size: 400% 400%;
+    background-attachment: fixed;
+}
+
+.purple-block-up {
+    background-color: #e0f5ff;
+    width: 100%;
+    padding: 1%;
+    margin: auto;
+
 }
 
 /* h1 {
@@ -764,10 +786,10 @@ p {
 /*----------------*/
 /*  SCALLOP down  */
 /*----------------*/
-.scallop-down {
-    height: 100px;
+.scallop-down-new {
+    height: 27px;
     width: 100%;
-    background: -webkit-gradient(radial, 50% 0, 10, 50% 0, 40, from(#AEE2FF), color-stop(0.49, #AEE2FF), color-stop(0.51, #fff), to(white));
+    background: -webkit-gradient(radial, 50% 0, 10, 50% 0, 40, from(#d3c1ff), color-stop(0.49, #d3c1ff), color-stop(0.51, #e0f5ff));
     -webkit-background-size: 49px 100%;
 }
 
@@ -775,9 +797,27 @@ p {
 /*----------------*/
 /*  SCALLOP up    */
 /*----------------*/
-.scallop-up {
-    height: 100px;
+.scallop-up-new {
+    height: 27px;
     width: 100%;
-    background: -webkit-gradient(radial, 50% 100%, 10, 50% 100%, 40, from(#AEE2FF), color-stop(0.49, #AEE2FF), color-stop(0.51, #fff), to(white));
+    background: -webkit-gradient(radial, 50% 100%, 10, 50% 100%, 40, from(#d3c1ff), color-stop(0.49, #d3c1ff), color-stop(0.51, #e0f5ff));
     -webkit-background-size: 49px 100%;
+}
+
+
+/* d3c1ff دالبر */
+/* e0f5ff  داخل */
+
+
+
+.slick-prev:before,
+.slick-next:before {
+    font-family: 'slick';
+    font-size: 35px !important;
+    line-height: 1;
+    opacity: .75;
+    color: #b396f6 !important;
+    -webkit-font-smoothing: antialiased;
+    margin-left: -30px;
+    -moz-osx-font-smoothing: grayscale;
 }

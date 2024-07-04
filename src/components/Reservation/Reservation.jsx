@@ -64,7 +64,7 @@ const ReservationPage = () => {
   const [selectedDay, setSelectedDay] = useState(
     ChangeDate(utils().getToday())
   );
-  const [LeftTimes, setTime] = useState([]);
+  const [LeftTimes, setTime] = useState(["10:00:00","11:00:00","12:00:00"]);
   const today = ChangeDate(utils().getToday());
   const [selected, setSelect] = useState(-1);
   const [showModal, setShowModal] = useState(false);
@@ -129,21 +129,21 @@ const ReservationPage = () => {
     }
     return temp;
   };
-  useEffect(() => {
-    setTimeout(() => {
-      {
-        setTime(setdatetime(selectedDay));
-      }
-    }, 100);
-  });
+  // useEffect(() => {
+  //   setTimeout(() => {
+  //     {
+  //       setTime(setdatetime(selectedDay));
+  //     }
+  //   }, 100);
+  // });
 
-  useEffect(() => {
-    setTimeout(() => {
-      {
-        getFreeTime();
-      }
-    }, 5000);
-  });
+  // useEffect(() => {
+  //   setTimeout(() => {
+  //     {
+  //       getFreeTime();
+  //     }
+  //   }, 5000);
+  // });
 
   async function getFreeTime() {
     try {
@@ -301,50 +301,6 @@ const ReservationPage = () => {
               />
             </a>
             <h2 className={styles.reserve_docName}>{doctorProfile.name}</h2>
-          </div>
-          <div className={styles.reserve_wrap}>
-            <div className={styles.reserve_date_wrap}>
-              <Calendar
-                value={selectedDay}
-                onChange={(e) => {
-                  setSelectedDay(e);
-                  setSelect(-1);
-                }}
-                minimumDate={today}
-                maximumDate={{
-                  year: today.year,
-                  month: today.month + 1,
-                  day: today.day,
-                }}
-                shouldHighlightWeekends
-                locale="fa"
-                colorPrimary="#9c7aed"
-                calendarClassName={styles.custom_calendar}
-                calendarTodayClassName="custom-today-day"
-                // disabledDays = [{utils().weekDaysList}]
-              />
-            </div>
-
-            <div className={styles.reserve_hour_wrap}>
-              <h6>ساعت های قابل رزرو</h6>
-              <div className={styles.reserve_hour_items}>
-                {LeftTimes.length == 0 && (
-                  <div className={styles.Reservation_error_input}>
-                    زمانی جهت مشاوره یافت نشد
-                  </div>
-                )}
-                {LeftTimes.map((time, index, key) => (
-                  <HourCard
-                    time={time}
-                    index={index}
-                    selected={selected}
-                    onClick={(event) =>
-                      setSelect(selected == index ? -1 : index)
-                    }
-                  />
-                ))}
-              </div>
-            </div>
             <div
               className={styles.reserve_result}
               style={selected == -1 ? { display: "none" } : {}}
@@ -428,6 +384,50 @@ const ReservationPage = () => {
                 >
                   ثبت
                 </button>
+              </div>
+            </div>
+          </div>
+          <div className={styles.reserve_wrap}>
+            <div className={styles.reserve_date_wrap}>
+              <Calendar
+                value={selectedDay}
+                onChange={(e) => {
+                  setSelectedDay(e);
+                  setSelect(-1);
+                }}
+                minimumDate={today}
+                maximumDate={{
+                  year: today.year,
+                  month: today.month + 1,
+                  day: today.day,
+                }}
+                shouldHighlightWeekends
+                locale="fa"
+                colorPrimary="#9c7aed"
+                calendarClassName={styles.custom_calendar}
+                calendarTodayClassName="custom-today-day"
+                // disabledDays = [{utils().weekDaysList}]
+              />
+            </div>
+
+            <div className={styles.reserve_hour_wrap}>
+              <h6>ساعت های قابل رزرو</h6>
+              <div className={styles.reserve_hour_items}>
+                {LeftTimes.length == 0 && (
+                  <div className={styles.Reservation_error_input}>
+                    زمانی جهت مشاوره یافت نشد
+                  </div>
+                )}
+                {LeftTimes.map((time, index, key) => (
+                  <HourCard
+                    time={time}
+                    index={index}
+                    selected={selected}
+                    onClick={(event) =>
+                      setSelect(selected == index ? -1 : index)
+                    }
+                  />
+                ))}
               </div>
             </div>
             <MedicalInfoModal

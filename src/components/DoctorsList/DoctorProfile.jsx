@@ -221,7 +221,7 @@ const DoctorProfile = ({ Id, name, Description, Image, ProfileType, IsPrivate, P
             //             no-repeat`})
         } else {
             return (
-                <div className="rounded team-item" style={{ fontFamily: 'Ios15Medium', width: '298.668px' }} onLoad={load}>
+                <div className="rounded team-item-new" style={{ fontFamily: 'Ios15Medium' }} onLoad={load}>
                     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,400,0,0" />
                     <div className="team-content">
                         <div className="team-img-icon">
@@ -229,7 +229,7 @@ const DoctorProfile = ({ Id, name, Description, Image, ProfileType, IsPrivate, P
                                 <img src={Image} className="img-fluid w-100 rounded-circle" alt={`${name}'s Image`} />
                             </div>
                             <div className="team-name text-center py-3">
-                                <h4 className="" style={{ color: 'gray', fontFamily: "Ios15Medium" }}>{name}</h4>
+                                <h4 className="m-0" style={{ color: 'gray', fontFamily: "Ios15Medium" }}>{name}</h4>
                                 <p className="m-0" style={{ fontFamily: "Ios15Medium", color:'gray' }}>{ProfileType}</p>
                                 <p className="m-0" style={{ fontFamily: "Ios15Medium", color:'gray' }}>{Description}</p>
                             </div>
