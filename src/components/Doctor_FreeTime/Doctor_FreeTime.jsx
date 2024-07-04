@@ -152,12 +152,12 @@ const Doctor_FreeTime = () => {
     "11:00:00",
     "14:00:00",
     "15:00:00",
-    "16:30:00",
+    "16:00:00",
+    "17:00:00",
     "18:00:00",
     "19:00:00",
-    "20:00:00",
   ];
-
+  const [sel_hours, setsel_hours] = useState([  ]);
   const [responseData, setResponseData] = useState([]);
   const [selectVal, setSelectVal] = useState(-1);
   const [selectedDay, setSelectedDay] = useState(
@@ -166,12 +166,13 @@ const Doctor_FreeTime = () => {
   const [selectedHours, setSelectedHours] = useState([]);
   const [LeftTimes, setTime] = useState([]);
   const today = ChangeDate(utils().getToday());
-  const [selected, setSelect] = useState(-1);
+  const [selected, setSelect] = useState([]);
 
   const [selectedDayweek, setSelectedDayweek] = useState(0);
 
   const handleDayChange = (event, value) => {
     setSelectedDayweek(value);
+    setsel_hours([]);
   };
 
   const setdatetime = () => {
@@ -261,6 +262,7 @@ const Doctor_FreeTime = () => {
       if (response.status === 200 || response.status === 201) {
         console.log(response);
         setResponseData(response.data);
+        setsel_hours([]);
         //console.log(response);
         toast.success("زمان منتخب شما با موفقیت ثبت شد", {
           position: "bottom-left",
@@ -314,10 +316,11 @@ const Doctor_FreeTime = () => {
           </div>
 
           <div className={styles.reserve_wrap}>
-            <div className={styles.reserve_date_wrap}>
+            <div className={styles.reserve_date_wrap} >
               <p className={styles.reserve_paragraph}>روز های هفته </p>
+              <br/>
               <StyledToggleButtonGroup
-                size="small"
+                size={"medium"}
                 aria-label="Days of the week"
                 value={selectedDayweek}
                 exclusive
@@ -348,12 +351,16 @@ const Doctor_FreeTime = () => {
                   <HourCard
                     time={time}
                     index={index}
-                    selected={selected}
+                    selected={sel_hours.indexOf(index)==-1?false:true}
                     // onClick={(event) =>
                     //   setSelect(selected == index ? -1 : index)
                     // }
                     onClick={(event) => {
                       const selectedIndex = selectedHours.indexOf(index);
+                      if(sel_hours.indexOf(index)==-1)
+                      sel_hours.push(index);
+                      else
+                      sel_hours.splice(sel_hours.indexOf(index), 1);
                       if (selectedIndex === -1) {
                         setSelect(selected == index ? -1 : index);
                         // Hour is not selected, add it to the array
@@ -371,7 +378,7 @@ const Doctor_FreeTime = () => {
             </div>
             <div
               className={styles.reserve_result}
-              style={selected == -1 ? { display: "none" } : {}}
+              style={sel_hours.length == 0 ? { display: "none" } : {}}
             >
               روز هفته و ساعات انتخابی:
               <br />
