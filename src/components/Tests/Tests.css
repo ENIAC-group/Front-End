@@ -329,7 +329,7 @@
     border-radius: 10px;
     padding: 10px 0;
     position: relative;
-    background: light;
+    background: white;
 
 }
 
@@ -344,7 +344,7 @@
     border-radius: 10px 10px 0 0;
     transition: .5s;
     text-align: center;
-    background-color: #AEE2FF;
+    background-color: #cbe8f8;
 }
 
 .services-content::after {

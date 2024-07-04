@@ -11,7 +11,7 @@ import myImage6 from "./img/couching.jpg";
 
 const Doctor_Home = () => {
   return (
-    <div className="container-fluid project py-5 mb-5">
+    <div className="container-fluid project py-5 mb-5" >
       <div className="container">
         <div
           className="text-center mx-auto pb-5 wow fadeIn"
@@ -22,10 +22,10 @@ const Doctor_Home = () => {
           <h1 className="doctor_h1">معرفی روان درمانگرها</h1>
         </div>
 
-        <div align='center'>
+        {/* <div align='center'>
             <a className="button-64" href="/RecommendationPage">
               <span style={{ fontFamily: "Ios15Medium" }}>پیشنهاد روان درمانگر</span>
-        </a></div>
+        </a></div> */}
         <br /> <br />
 
         <div className="row g-5">

@@ -5,7 +5,7 @@ import "./Tests.css";
 
 const Tests = () => {
   return (
-    <div className="container-fluid services py-5 my-5">
+    <div className="container-fluid services py-5 my-5" style={{backgroundColor: "rgba(234, 222, 249, 0.993)"}}>
       <html>
         <head>
           <link
@@ -18,7 +18,7 @@ const Tests = () => {
           />
         </head>
       </html>
-      <h1 className="TestHeader">تست ها</h1>
+      <h1 className="TestHeader">تست‌ها</h1>
       <div className="container py-48">
         <div className="row g-5 services-inner">
           <div className="col-md-6 col-lg-4 wow fadeIn" data-wow-delay=".3s">
@@ -29,14 +29,14 @@ const Tests = () => {
                     className="fa fa-user fa-7x mb-4 text-primary"
                     style={{ color: "#ACBCFF" }}
                   ></i>
-                  <h5 className="TestName">تست های فردی</h5>
+                  <h5 className="TestName">تست‌های فردی</h5>
                   <HashLink
                     to="/TestPage#testTitle"
                     className="btn btn-secondary text-white px-5 py-3 rounded-pill
                     "
                     style={{ fontFamily: "Ios15Medium" }}
                   >
-                    دیدن تست ها
+                    دیدن تست‌ها
                   </HashLink>
                 </div>
               </div>
@@ -52,7 +52,7 @@ const Tests = () => {
                     href="http://localhost:5173/TestPage#testTitle"
                     className="btn btn-secondary text-white px-5 py-3 rounded-pill"
                   >
-                    دیدن تست ها
+                    دیدن تست‌ها
                   </a>
                 </div>
               </div>
@@ -66,14 +66,14 @@ const Tests = () => {
                     className="fa fa-venus-double fa-7x mb-4 text-primary"
                     style={{ color: "#ACBCFF" }}
                   ></i>
-                  <h5 className="TestName">تست های پیش از ازدواج</h5>
+                  <h5 className="TestName">تست‌های پیش از ازدواج</h5>
                   <HashLink
                     to="/TestPage#testTitle2"
                     className="btn btn-secondary text-white px-5 py-3 rounded-pill
                     "
                     style={{ fontFamily: "Ios15Medium" }}
                   >
-                    دیدن تست ها
+                    دیدن تست‌ها
                   </HashLink>
                 </div>
               </div>

@@ -24,11 +24,11 @@ const CounterUp = ({ EndNum, label }) => {
       <div
         className="CounterUpContainer"
         onMouseEnter={(e) => {
-          e.target.style.backgroundColor = "#cf95fc";
+          e.target.style.backgroundColor = "#710bbe";
           e.currentTarget.style.transform = "translateY(-10px)";
         }}
         onMouseLeave={(e) => {
-          e.target.style.backgroundColor = " #763ef9";
+          e.target.style.backgroundColor = " #8b42f7";
           e.currentTarget.style.transform = "translateY(0px)";
         }}
       >
