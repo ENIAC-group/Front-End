@@ -15,7 +15,7 @@ import persian from "react-date-object/calendars/persian";
 import gregorian from "react-date-object/calendars/gregorian";
 import persian_fa from "react-date-object/locales/persian_fa";
 import DateObject from "react-date-object";
-// import persian from "react-date-object/calendars/persian";
+
 
 function ChangeInformation({ p_pages, user_info, setinfo }) {
   const eng = '0123456789';
@@ -36,6 +36,13 @@ function ChangeInformation({ p_pages, user_info, setinfo }) {
   const [sub2, setSub2] = useState(true);
   const [sub3, setSub3] = useState(true);
   const [sub4, setSub4] = useState(true);
+  const num = convertlan(user_info.PhoneNumber,eng,fars);
+  const [number, setnum] = useState(user_info.PhoneNumber.toString());
+  console.log("-" + number);
+  var date = new DateObject(user_info.BirthDay);
+  date.convert(persian);
+  const [in_Date, setDate] = useState(date.format().toString())
+
   const [number, setnum] = useState(convertlan(user_info.PhoneNumber,eng,fars));
   var date = new DateObject(user_info.BirthDay);
   date.convert(persian);
