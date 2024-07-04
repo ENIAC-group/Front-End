@@ -43,11 +43,6 @@ function ChangeInformation({ p_pages, user_info, setinfo }) {
   date.convert(persian);
   const [in_Date, setDate] = useState(date.format().toString())
 
-  const [number, setnum] = useState(convertlan(user_info.PhoneNumber,eng,fars));
-  var date = new DateObject(user_info.BirthDay);
-  date.convert(persian);
-  const [in_Date, setDate] = useState(date.format().toString())
-
   const GetFirstName = (event) => {
     if (
       validator.isAlpha(event.target.value.replace(" ", ""), "fa-IR") |

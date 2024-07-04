@@ -8,7 +8,7 @@ const HourCard = ({ time, index, onClick, selected }) => {
         className={styles.reserve_hcard_bd}
         onClick={onClick}
         style={
-          index == selected ? { background: "#9c7aed", color: "#e2e2e2" } : {}
+          selected  ? { background: "#9c7aed", color: "#e2e2e2" } : {}
         }
       >
         {time}
