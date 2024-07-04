@@ -107,20 +107,20 @@ VERSION:	Versoin Number
     font-size: 14px;
   }
 }
-
 /* Button style */
 .Test_btn {
   font-size: 16px;
   font-family: Ios15Medium;
   text-transform: capitalize;
   padding: 15px 40px;
-  border-radius: 0;
+  border-radius: 25px; /* Make the button rounder */
   font-weight: 500;
   border: 0;
   position: relative;
   z-index: 1;
-  transition: .2s ease;
+  transition: all .3s ease; /* Smooth transition for all properties */
   overflow: hidden;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Add shadow */
 }
 
 .Test_btn::before {
@@ -131,30 +131,25 @@ VERSION:	Versoin Number
   left: 0;
   bottom: 10%;
   z-index: -1;
-  transition: -webkit-transform .2s ease-in-out;
-  transition: transform .2s ease-in-out;
-  transition: transform .2s ease-in-out, -webkit-transform .2s ease-in-out;
-  -webkit-transform-origin: top;
-          transform-origin: top;
-  -webkit-transform: scaleY(0);
-          transform: scaleY(0);
+  transition: transform .3s ease-in-out; /* Smooth transition for transform */
+  transform-origin: top;
+  transform: scaleY(0);
+  background-color: rgba(0, 0, 0, 0.05); /* Add a slight background color for motion effect */
 }
 
 .Test_btn:focus {
   outline: 0;
-  /* box-shadow: none !important; */
 }
 
 .Test_btn:active {
-  box-shadow: none;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2); /* Adjust shadow on active */
+  transform: scale(0.98);
 }
 
-.Test_btn:hover::before {
-  -webkit-transform: scaleY(1);
-          transform: scaleY(1);
-  -webkit-transform-origin: bottom;
-          transform-origin: bottom;
+.Test_btn:hover {
+  box-shadow: 0 6px 12px rgba(0, 0, 0, 0.2);
 }
+
 
 .btn-sm {
   font-size: 14px;
@@ -213,14 +208,14 @@ VERSION:	Versoin Number
 }
 
 .Test_btn-secondary:hover {
-  background: #ffffff;
+  background-color: #ffffff;
   color: #8d8d8d;
   border: 1px solid #fff;
 }
 
 .btn-primary-outline {
   border: 1px solid #B799FF;
-  /* color: #B799FF; */
+
   background: transparent;
 }
 
@@ -242,13 +237,13 @@ VERSION:	Versoin Number
   background-color: #fff;
   overflow-x: hidden;
 } */
-
+ 
 ::-moz-selection {
   background: #B799FF;
   color: #fff;
 }
 
-::selection {
+ ::selection {
   background: #B799FF;
   color: #fff;
 }
@@ -286,10 +281,10 @@ VERSION:	Versoin Number
 
 }
 
-
+/* 
 .Ta:hover {
   text-decoration: none;
-}
+} */
 
 .Ta,
 button,
@@ -311,9 +306,9 @@ select:focus {
   transition: .2s ease;
 } 
 
-.Ta .h4:hover {
+/* .Ta .h4:hover {
   color: #B799FF;
-}
+} */
 
 .slick-slide {
   outline: 0;
