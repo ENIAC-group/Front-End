@@ -5,9 +5,8 @@ import Footer from "../Footer/Footer";
 import img from "../../assets/Female_Avatar.jpg";
 import styles from "./reservation.module.css";
 import "react-modern-calendar-datepicker/lib/DatePicker.css";
-import { Calendar, utils } from "react-modern-calendar-datepicker";
+import { utils } from "react-modern-calendar-datepicker";
 import DateObject from "react-date-object";
-import persian from "react-date-object/calendars/persian";
 import HourCard from "./HourCard";
 import { BsCalendarDate } from "react-icons/bs";
 import { IoMdTime } from "react-icons/io";
@@ -19,6 +18,9 @@ import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import MedicalInfoModal from "../MedicalInfoModal/MedicalInfoModal";
 import Swal from "sweetalert2";
+import { Calendar } from "react-multi-date-picker";
+import persian from "react-date-object/calendars/persian";
+import persian_fa from "react-date-object/locales/persian_fa";
 
 function DateString(input) {
   var changed = shamsi.jalaliToGregorian(input.year, input.month, input.day);
@@ -64,7 +66,7 @@ const ReservationPage = () => {
   const [selectedDay, setSelectedDay] = useState(
     ChangeDate(utils().getToday())
   );
-  const [LeftTimes, setTime] = useState(["10:00:00","11:00:00","12:00:00"]);
+  const [LeftTimes, setTime] = useState(["10:00:00", "11:00:00", "12:00:00"]);
   const today = ChangeDate(utils().getToday());
   const [selected, setSelect] = useState(-1);
   const [showModal, setShowModal] = useState(false);
@@ -129,21 +131,21 @@ const ReservationPage = () => {
     }
     return temp;
   };
-  // useEffect(() => {
-  //   setTimeout(() => {
-  //     {
-  //       setTime(setdatetime(selectedDay));
-  //     }
-  //   }, 100);
-  // });
+  useEffect(() => {
+    setTimeout(() => {
+      {
+        setTime(setdatetime(selectedDay));
+      }
+    }, 100);
+  });
 
-  // useEffect(() => {
-  //   setTimeout(() => {
-  //     {
-  //       getFreeTime();
-  //     }
-  //   }, 5000);
-  // });
+  useEffect(() => {
+    setTimeout(() => {
+      {
+        getFreeTime();
+      }
+    }, 5000);
+  });
 
   async function getFreeTime() {
     try {
@@ -205,7 +207,6 @@ const ReservationPage = () => {
   useEffect(() => {
     //  تابع برای دریافت اطلاعات پروفایل دکتراز بک‌اند
     const fetchDoctorProfile = async () => {
-      
       const token = localStorage.getItem("accessToken");
       try {
         const response = await axios.get(url, {
@@ -261,7 +262,7 @@ const ReservationPage = () => {
       if (
         error.response.data.hasOwnProperty("message") &&
         error.response.data.message ===
-          "you can not reservere 2 times under 8 days drift"
+        "you can not reservere 2 times under 8 days drift"
       ) {
         toast.error("!حداقل فاصله رزرو ها 8 روز می باشد", {
           position: "bottom-left",
@@ -286,6 +287,11 @@ const ReservationPage = () => {
     }
   }
 
+  useEffect(() => {
+    getFreeTime();
+    getReservation();
+  }, []);
+
   return (
     <>
       <NavBar_SideBar />
@@ -293,6 +299,28 @@ const ReservationPage = () => {
       <div className={styles.reserve_body} onLoad={getReservation}>
         <div className={styles.reserve_Box} onLoad={getFreeTime}>
           <div className={styles.reserve_docProfile}>
+            <button
+              className={styles.button_back}
+              onClick={(e) => {
+                navigate(-1);
+              }}
+            >
+              <p>بازگشت</p>
+              <svg
+                xmlns="/Doctors"
+                className="h-6 w-6"
+                fill="none"
+                viewBox="0 0 23 22"
+                stroke="currentColor"
+                strokeWidth="4"
+              >
+                <path
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                  d="M14 5l7 7m0 0l-7 7m7-7H3"
+                ></path>
+              </svg>
+            </button>
             <a href="#">
               <img
                 src={doctorProfile.image}
@@ -386,33 +414,27 @@ const ReservationPage = () => {
                 </button>
               </div>
             </div>
+
           </div>
-          <div className={styles.reserve_wrap}>
+          <div className={styles.reserve_wrap} >
             <div className={styles.reserve_date_wrap}>
               <Calendar
+                calendar={persian}
+                locale={persian_fa}
                 value={selectedDay}
                 onChange={(e) => {
                   setSelectedDay(e);
                   setSelect(-1);
                 }}
-                minimumDate={today}
-                maximumDate={{
-                  year: today.year,
-                  month: today.month + 1,
-                  day: today.day,
-                }}
-                shouldHighlightWeekends
-                locale="fa"
-                colorPrimary="#9c7aed"
-                calendarClassName={styles.custom_calendar}
-                calendarTodayClassName="custom-today-day"
-                // disabledDays = [{utils().weekDaysList}]
+                minDate={new DateObject()}
+                maxDate={new DateObject().add(1, "month")}
+                // style={window="500px"}
+                style={{ width: '270px', hieght: '500px', borderRadius: "15px 0px 0px 15px", mar: '100px', height: '100%' }}
               />
             </div>
-
             <div className={styles.reserve_hour_wrap}>
               <h6>ساعت های قابل رزرو</h6>
-              <div className={styles.reserve_hour_items}>
+              <div className={styles.reserve_hour_items} style={{}}>
                 {LeftTimes.length == 0 && (
                   <div className={styles.Reservation_error_input}>
                     زمانی جهت مشاوره یافت نشد

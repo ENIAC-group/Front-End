@@ -59,6 +59,7 @@
   padding-top: 30px;
   display: flex;
   flex-wrap: wrap;
+  /* height: 460px; */
 }
 
 .reserve_wrap .reserve_hour_wrap {
@@ -258,4 +259,78 @@ input[type="radio"] {
   transition: border-color 0.3s ease;
   color: #bba2f7;
   caret-color: #bba2f7;
+}
+
+
+.button_back {
+  padding: 0;
+  margin: 0;
+  border: none;
+  background: none;
+  cursor: pointer;
+}
+
+.button_back {
+  --primary-color: #111;
+  --hovered-color: #B799FF;
+  position: relative;
+  display: flex;
+  font-weight: 600;
+  font-size: 20px;
+  gap: 0.5rem;
+  align-items: center;
+  margin-left: auto;
+  display: flex;
+  margin-right: -65px;
+}
+
+.button_back p {
+  margin: 0;
+  position: relative;
+  font-size: 20px;
+  color: var(--primary-color);
+  font-family: "Ios15medium";
+}
+
+.button_back::after {
+  position: absolute;
+  content: "";
+  width: 0;
+  left: 0;
+  bottom: -7px;
+  background: var(--hovered-color);
+  height: 2px;
+  transition: 0.3s ease-out;
+}
+
+.button_back p::before {
+  position: absolute;
+  /*   box-sizing: border-box; */
+  content: "بازگشت";
+  width: 0%;
+  inset: 0;
+  color: var(--hovered-color);
+  overflow: hidden;
+  transition: 0.3s ease-out;
+}
+
+.button_back:hover::after {
+  width: 100%;
+}
+
+.button_back:hover p::before {
+  width: 100%;
+}
+
+.button_back:hover svg {
+  transform: translateX(4px);
+  color: var(--hovered-color);
+}
+
+.button_back svg {
+  color: var(--primary-color);
+  transition: 0.2s;
+  position: relative;
+  width: 15px;
+  transition-delay: 0.2s;
 }
