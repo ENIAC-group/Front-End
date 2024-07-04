@@ -34,6 +34,20 @@ const User_Panel = () => {
   });
   var date = new DateObject(user_info.BirthDay);
   date.convert(persian);
+  const eng = "0123456789";
+  const fars = '۰۱۲۳۴۵۶۷۸۹';
+  const convertPersian = (input) =>
+    {
+      let res = "";
+      const str = input.toString();
+      for (let c of str) {
+        if(eng.indexOf(c)!=-1)
+        res += fars.charAt(c);
+        else
+        res+=c;
+      }
+      return res;
+    }
   async function GetUserInfo(event) {
     event.preventDefault();
     const accessToken = localStorage.getItem("accessToken");
@@ -41,9 +55,10 @@ const User_Panel = () => {
       withReactContent(Swal)
         .fire({
           icon: "warning",
-          title: "!برای مشاهده اطلاعات شخصی ورود به  اکانت خود الزامی است",
+          html: '<div dir=\'rtl\'>برای مشاهده اطلاعات شخصی ورود به اکانت خود الزامی است!</div>',
           background: "#473a67",
           color: "#b4b3b3",
+          direction:'rtl',
           width: "35rem",
           backdrop: `
       rgba(84, 75, 87.0.9)
@@ -84,6 +99,7 @@ const User_Panel = () => {
         );
         if (response.status == 200) {
           const data = response.data.user;
+          
           setinfo({
             FirstName: data.firstname == null ? "" : data.firstname,
             LastName: data.lastname == null ? "" : data.lastname,
@@ -93,12 +109,13 @@ const User_Panel = () => {
             Gender: data.gender == null ? "" : data.gender,
             PhoneNumber: data.phone_number == null ? "" : data.phone_number,
           });
+          console.log(convertPersian(data.date_of_birth));
         }
       } catch (error) {
         if (error.response.status == 403) {
           withReactContent(Swal).fire({
             icon: "error",
-            title: "!برای مشاهده اطلاعات شخصی ورود به  اکانت خود الزامی است",
+            html: '<div dir=\'rtl\'>برای مشاهده اطلاعات شخصی ورود به اکانت خود الزامی است!</div>',
             background: "#473a67",
             color: "#b4b3b3",
             width: "35rem",
@@ -261,7 +278,7 @@ const User_Panel = () => {
                         <MdDriveFileRenameOutline
                           style={{ color: "#ACBCFF" }}
                         />
-                        <span>نام </span>: {user_info.FirstName}
+                        <span style={{width:'150px'}}>نام </span>: {user_info.FirstName}
                       </p>
                     </div>
                     <div className="bio-row">
@@ -269,13 +286,13 @@ const User_Panel = () => {
                         <MdDriveFileRenameOutline
                           style={{ color: "#ACBCFF" }}
                         />
-                        <span>نام خانوادگی </span>: {user_info.LastName}
+                        <span style={{width:'150px'}}>نام خانوادگی </span>: {user_info.LastName}
                       </p>
                     </div>
                     <div className="bio-row">
                       <p>
                         <TbGenderBigender style={{ color: "#ACBCFF" }} />
-                        <span>جنسیت</span>:{" "}
+                        <span style={{width:'150px'}}>جنسیت</span>:{" "}
                         {user_info.Gender === "F"
                           ? "مونث"
                           : user_info.Gender === "M"
@@ -286,20 +303,20 @@ const User_Panel = () => {
                     <div className="bio-row">
                       <p>
                         <FaRegCalendarDays style={{ color: "#ACBCFF" }} />
-                        <span>تاریخ تولد</span>:{" "}
-                        {date.format("YYYY/MM/DD")}
+                        <span style={{width:'150px'}}>تاریخ تولد</span>:{" "}
+                        {convertPersian(date.format("YYYY/MM/DD"))}
                       </p>
                     </div>
                     <div className="bio-row">
                       <p>
                         <FaPhoneFlip style={{ color: "#ACBCFF" }} />
-                        <span>شماره همراه </span>: {user_info.PhoneNumber}
+                        <span style={{width:'150px'}}>شماره همراه </span>: {convertPersian(user_info.PhoneNumber)}
                       </p>
                     </div>
                     <div className="bio-row">
                       <p>
                         <MdAlternateEmail style={{ color: "#ACBCFF" }} />
-                        <span>ایمیل </span>: {user_info.Email}
+                        <span style={{width:'150px'}}>ایمیل </span>: {user_info.Email}
                       </p>
                     </div>
                   </div>

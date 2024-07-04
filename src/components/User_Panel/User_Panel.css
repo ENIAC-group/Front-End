@@ -158,8 +158,13 @@
 .bio-row p span {
     font-family: Ios15Medium;
     padding-right: 10px;
-    width: 150px;
+    /* width: 150px; */
     display: inline-block;
+}
+.component-wrapper span
+{
+    width: auto;
+
 }
 
 .row label {
