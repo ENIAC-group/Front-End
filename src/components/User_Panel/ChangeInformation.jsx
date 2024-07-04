@@ -9,13 +9,45 @@ import { TbGenderBigender } from "react-icons/tb";
 import { FaRegCalendarDays, FaPhoneFlip } from "react-icons/fa6";
 import { MdDriveFileRenameOutline, MdAlternateEmail } from "react-icons/md";
 
-import {JBDateInput} from 'jb-date-input-react';
+import { JBDateInput } from "jb-date-input-react";
+import DatePicker from "react-multi-date-picker";
+import persian from "react-date-object/calendars/persian";
+import gregorian from "react-date-object/calendars/gregorian";
+import persian_fa from "react-date-object/locales/persian_fa";
+import DateObject from "react-date-object";
+
 
 function ChangeInformation({ p_pages, user_info, setinfo }) {
+  const eng = '0123456789';
+  const fars = "۰۱۲۳۴۵۶۷۸۹";
+  const convertlan = (input,s,e) =>
+    {
+      let res = "";
+      const str = input.toString();
+      for (let c of str) {
+        if(s.indexOf(c)!=-1)
+        res += e[s.indexOf(c)];
+        else
+        res+=c;
+      }
+      return res;
+    }
   const [sub1, setSub1] = useState(true);
   const [sub2, setSub2] = useState(true);
   const [sub3, setSub3] = useState(true);
   const [sub4, setSub4] = useState(true);
+  const num = convertlan(user_info.PhoneNumber,eng,fars);
+  const [number, setnum] = useState(user_info.PhoneNumber.toString());
+  console.log("-" + number);
+  var date = new DateObject(user_info.BirthDay);
+  date.convert(persian);
+  const [in_Date, setDate] = useState(date.format().toString())
+
+  const [number, setnum] = useState(convertlan(user_info.PhoneNumber,eng,fars));
+  var date = new DateObject(user_info.BirthDay);
+  date.convert(persian);
+  const [in_Date, setDate] = useState(date.format().toString())
+
   const GetFirstName = (event) => {
     if (
       validator.isAlpha(event.target.value.replace(" ", ""), "fa-IR") |
@@ -39,9 +71,10 @@ function ChangeInformation({ p_pages, user_info, setinfo }) {
     else setSub2(false);
   };
   const GetNumber = (event) => {
+    const num = convertlan(event.target.value,fars,eng);
     if (
-      validator.isNumeric(event.target.value) &
-      (event.target.value.length == 11)
+      validator.isNumeric(num) &
+      (num.length == 11)
     )
       setSub3(true);
     else setSub3(false);
@@ -51,8 +84,15 @@ function ChangeInformation({ p_pages, user_info, setinfo }) {
     const n_firstname = document.getElementById("user_firstname").value;
     const n_lastname = document.getElementById("user_lastname").value;
     const n_gender = document.getElementById("user_gender").value;
-    const n_birthday = document.querySelector("jb-date-input").value;
-    const n_phonenumber = document.getElementById("user_phonenumber").value;
+    const n_birthday = in_Date?.format();
+    const n_phonenumber = convertlan(number,fars,eng);
+    console.log(n_phonenumber);
+    var d = new DateObject({
+      date: convertlan(n_birthday,fars,eng),
+      format: "YYYY-MM-DD",
+      calendar: persian  });
+    d.convert(gregorian)
+    console.log("_"+d.format());
     event.preventDefault();
     if (!(sub1 & sub2 & sub3))
       withReactContent(Swal).fire({
@@ -94,8 +134,8 @@ function ChangeInformation({ p_pages, user_info, setinfo }) {
             data: {
               firstname: n_firstname,
               lastname: n_lastname,
-              phone_number: n_phonenumber,
-              date_of_birth: n_birthday,
+              phone_number: convertlan(n_phonenumber,fars,eng),
+              date_of_birth: d.format("YYYY-MM-DD"),
               gender: n_gender,
             },
           }
@@ -114,11 +154,15 @@ function ChangeInformation({ p_pages, user_info, setinfo }) {
         no-repeat`,
             confirmButtonText: "تایید",
           });
+          var dd = new DateObject({
+            date: convertlan(n_birthday,fars,eng),
+            format: "YYYY-MM-DD",
+            calendar: persian  });
           setinfo({
             FirstName: n_firstname,
             LastName: n_lastname,
             Email: user_info.Email,
-            BirthDay: n_birthday,
+            BirthDay: d.format("YYYY-MM-DD"),
             Gender: n_gender,
             PhoneNumber: n_phonenumber,
           });
@@ -139,7 +183,7 @@ function ChangeInformation({ p_pages, user_info, setinfo }) {
           });
         if (error.response.status == 400) {
           const msg = error.response.data;
-          console.log(msg);
+          console.log(n_phonenumber)
           if (msg.phone_number != null)
             withReactContent(Swal).fire({
               icon: "error",
@@ -231,7 +275,7 @@ function ChangeInformation({ p_pages, user_info, setinfo }) {
                   مذکر
                 </option>
                 <option value="B" className="profile_input_B">
-                نامشخص
+                  نامشخص
                 </option>
               </select>
             </p>
@@ -239,17 +283,31 @@ function ChangeInformation({ p_pages, user_info, setinfo }) {
           <div className="bio-row" style={{ display: "flex" }}>
             <p>
               <FaRegCalendarDays style={{ color: "#ACBCFF" }} />
-              <span>تاریخ تولد:</span>
+              <span >تاریخ تولد:</span>
               <br />
-              <div class="component-wrapper">
-                <jb-date-input
-                  onClick={(e) => {
+              <div class="component-wrapper" onClick={(e) => {
                     setSub4(false);
-                  }}
-                  id="user_birthday"
-                  input-type="JALALI"
+                  }}>
+                <DatePicker
                   format="YYYY-MM-DD"
-                  value={user_info.BirthDay}
+                  id="user_birthday"
+                  value={in_Date}
+                  onChange={setDate}
+                  style={{
+                    width: "400px",
+                    borderRadius: "15px",
+                    paddingRight: "15px",
+                    marginLeft: "10px",
+                    height: "35px",
+                    border: "2px solid #adadad",
+                    fontSize: "17px",
+                    color: "rgb(149, 147, 147)",
+                    caretColor: "#AEE2FF",
+                    boxSizing: "border-box",
+                  }}
+                  fixRelativePosition={"start"}
+                  calendar={persian}
+                  locale={persian_fa}
                 />
               </div>
             </p>
@@ -262,11 +320,13 @@ function ChangeInformation({ p_pages, user_info, setinfo }) {
               <input
                 type="text"
                 id="user_phonenumber"
-                defaultValue={user_info.PhoneNumber}
+                defaultValue={convertlan(user_info.PhoneNumber,eng,fars)}
+                value={number ? convertlan(number,eng,fars): ""}
                 className="profile_input"
                 onChange={(e) => {
                   GetNumber(e);
                   setSub4(false);
+                  setnum(convertlan(e.target.value,eng,fars));
                 }}
               />
               <div
