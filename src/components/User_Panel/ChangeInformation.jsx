@@ -18,13 +18,6 @@ import DateObject from "react-date-object";
 // import persian from "react-date-object/calendars/persian";
 
 function ChangeInformation({ p_pages, user_info, setinfo }) {
-  const [sub1, setSub1] = useState(true);
-  const [sub2, setSub2] = useState(true);
-  const [sub3, setSub3] = useState(true);
-  const [sub4, setSub4] = useState(true);
-  var date = new DateObject(user_info.BirthDay);
-  date.convert(persian);
-  const [in_Date, setDate] = useState(date.format().toString())
   const eng = '0123456789';
   const fars = "۰۱۲۳۴۵۶۷۸۹";
   const convertlan = (input,s,e) =>
@@ -39,6 +32,14 @@ function ChangeInformation({ p_pages, user_info, setinfo }) {
       }
       return res;
     }
+  const [sub1, setSub1] = useState(true);
+  const [sub2, setSub2] = useState(true);
+  const [sub3, setSub3] = useState(true);
+  const [sub4, setSub4] = useState(true);
+  const [number, setnum] = useState(convertlan(user_info.PhoneNumber,eng,fars));
+  var date = new DateObject(user_info.BirthDay);
+  date.convert(persian);
+  const [in_Date, setDate] = useState(date.format().toString())
 
   const GetFirstName = (event) => {
     if (
@@ -77,8 +78,8 @@ function ChangeInformation({ p_pages, user_info, setinfo }) {
     const n_lastname = document.getElementById("user_lastname").value;
     const n_gender = document.getElementById("user_gender").value;
     const n_birthday = in_Date?.format();
-    const n_phonenumber = document.getElementById("user_phonenumber").value;
-    console.log(convertlan(n_birthday,fars,eng))
+    const n_phonenumber = convertlan(number,fars,eng);
+    console.log(n_phonenumber);
     var d = new DateObject({
       date: convertlan(n_birthday,fars,eng),
       format: "YYYY-MM-DD",
@@ -313,10 +314,12 @@ function ChangeInformation({ p_pages, user_info, setinfo }) {
                 type="text"
                 id="user_phonenumber"
                 defaultValue={convertlan(user_info.PhoneNumber,eng,fars)}
+                value={number ? convertlan(number,eng,fars): ""}
                 className="profile_input"
                 onChange={(e) => {
                   GetNumber(e);
                   setSub4(false);
+                  setnum(convertlan(e.target.value,eng,fars));
                 }}
               />
               <div
