@@ -64,7 +64,7 @@ const ForgetPassword = () => {
     if (validator.isEmail(fp_Email)) {
       try {
         const response = await axios(
-          "http://127.0.0.1:8000/accounts/forgot_password/",
+          "https://sinaharaeeni.ir/accounts/forgot_password/",
           {
             method: "POST",
             headers: {
@@ -85,6 +85,7 @@ const ForgetPassword = () => {
             token: data.url,
             verificationcode: data.code,
           });
+          console.log(data.code);
           withReactContent(Swal).fire({
             icon: "success",
             title: "!کد تایید صحت با موفقیت ارسال شد",
@@ -169,7 +170,7 @@ const ForgetPassword = () => {
           confirmButtonText: "باشه",
         });
       } else {
-        navigate("/Home");
+        navigate("/Signup");
       }
     }
   }

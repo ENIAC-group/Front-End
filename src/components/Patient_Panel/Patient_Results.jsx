@@ -64,7 +64,7 @@ const Patient_Result = ({ results, G }) => {
             ) : (
               <ul style={{ listStyleType: "none",lineHeight:'49px' }}>
                 <li>
-                  <IoHeart style={{color:'red',marginRight:'-13px'}}/>
+                  <IoHeart style={{color:'red',marginRight:'0px'}}/>
                   <span>عشق</span>:{results.glasserTest.love}
                 </li>
                 <li>

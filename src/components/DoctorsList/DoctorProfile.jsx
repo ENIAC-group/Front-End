@@ -24,7 +24,7 @@ const DoctorProfile = ({ Id, name, Description, Image, ProfileType, IsPrivate, P
             event.preventDefault();
             const accessToken = localStorage.getItem("accessToken");
             try {
-                const response = await axios("http://127.0.0.1:8000/accounts/get_user/", {
+                const response = await axios("https://sinaharaeeni.ir/accounts/get_user/", {
                     method: "GET",
                     headers: {
                         Authorization: `Bearer ${accessToken}`, // Bearer <access token >
@@ -47,7 +47,9 @@ const DoctorProfile = ({ Id, name, Description, Image, ProfileType, IsPrivate, P
                 if (error.response.status == 403) {
                     withReactContent(Swal).fire({
                         icon: "error",
-                        title: "!برای مشاهده اطلاعات شخصی ورود به اکانت خود الزامی است",
+                        
+html: '<div dir=\'rtl\'>برای مشاهده اطلاعات شخصی ورود به اکانت خود الزامی است!</div>',
+
                         background: "#473a67",
                         color: "#b4b3b3",
                         width: "35rem",
@@ -72,7 +74,8 @@ const DoctorProfile = ({ Id, name, Description, Image, ProfileType, IsPrivate, P
                 withReactContent(Swal)
                     .fire({
                         icon: "warning",
-                        title: "!برای رزور وقت ورود به  اکانت خود الزامی است",
+                        
+html: '<div dir=\'rtl\'>!برای رزرو وقت ورود به  اکانت خود الزامی است!</div>',
                         background: "#473a67",
                         color: "#b4b3b3",
                         width: "35rem",
@@ -101,7 +104,7 @@ const DoctorProfile = ({ Id, name, Description, Image, ProfileType, IsPrivate, P
             else {
                 try {
                     const response = await axios(
-                        "http://127.0.0.1:8000/accounts/get_user/",
+                        "https://sinaharaeeni.ir/accounts/get_user/",
                         {
                             method: "GET",
                             headers: {
@@ -137,7 +140,7 @@ const DoctorProfile = ({ Id, name, Description, Image, ProfileType, IsPrivate, P
                         withReactContent(Swal)
                             .fire({
                                 icon: "warning",
-                                title: "!برای رزور وقت ورود به  اکانت خود الزامی است",
+html: '<div dir=\'rtl\'>!برای رزرو وقت ورود به  اکانت خود الزامی است!</div>',
                                 background: "#473a67",
                                 color: "#b4b3b3",
                                 width: "35rem",

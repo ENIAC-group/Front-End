@@ -84,7 +84,7 @@ function ChangePassword({ p_pages }) {
     else {
       try {
         const response = await axios(
-          "http://127.0.0.1:8000/accounts/change_password/",
+          "https://sinaharaeeni.ir/accounts/change_password/",
           {
             method: "POST",
             headers: {
@@ -184,7 +184,7 @@ function ChangePassword({ p_pages }) {
               </span>
               <div
                 className="profile_sub_error"
-                style={sub_1 ? { display: "none" } : { marginRight: "260px" }}
+                style={sub_1 ? { display: "none" } : { marginRight: "260px", fontSize:"small" }}
               >
                 رمز عبور باید حداقل 8 کاراکتر داشته باشد!
               </div>
@@ -214,7 +214,7 @@ function ChangePassword({ p_pages }) {
               </span>
               <div
                 className="profile_sub_error"
-                style={(sub_4&sub_2) ? { display: "none" } : { marginRight: "260px"  }}
+                style={(sub_4&sub_2) ? { display: "none" } : { marginRight: "260px" ,fontSize:"small" }}
               >
                 رمز عبور باید از حداقل 8 کاراکتر و عدد ساخته شده باشد!
               </div>
@@ -243,7 +243,7 @@ function ChangePassword({ p_pages }) {
               </span>
               <div
                 className="profile_sub_error"
-                style={sub_3  ? { display: "none" } : { marginRight: "260px"  }}
+                style={sub_3  ? { display: "none" } : { marginRight: "260px" ,fontSize:"small" }}
               >
                 رمز عبور باید حداقل 8 کاراکتر داشته باشد!
               </div>

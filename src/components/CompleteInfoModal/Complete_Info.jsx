@@ -66,7 +66,7 @@ const CompleteInfo = (doctorId) => {
       const token = localStorage.getItem("accessToken");
       // console.log(token);
       const response = await axios.get(
-        "http://127.0.0.1:8000/accounts/get_user/",
+        "https://sinaharaeeni.ir/accounts/get_user/",
         {
           headers: {
             "Content-Type": "application/json",
@@ -249,7 +249,7 @@ const CompleteInfo = (doctorId) => {
         const token = localStorage.getItem("accessToken");
         // console.log(token);
         const response = await axios.post(
-          "http://127.0.0.1:8000/accounts/complete_info/",
+          "https://sinaharaeeni.ir/accounts/complete_info/",
           {
             firstname,
             lastname,

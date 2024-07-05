@@ -20,7 +20,7 @@ const DoctorsList = () => {
     event.preventDefault();
     const accessToken = localStorage.getItem("accessToken");
     try {
-      const response = await axios("http://127.0.0.1:8000/accounts/get_user/", {
+      const response = await axios("https://sinaharaeeni.ir/accounts/get_user/", {
         method: "GET",
         headers: {
           Authorization: `Bearer ${accessToken}`, // Bearer <access token >
@@ -43,7 +43,9 @@ const DoctorsList = () => {
       if (error.response.status == 403) {
         withReactContent(Swal).fire({
           icon: "error",
-          title: "!برای مشاهده اطلاعات شخصی ورود به اکانت خود الزامی است",
+          
+html: '<div dir=\'rtl\'>برای مشاهده اطلاعات شخصی ورود به اکانت خود الزامی است!</div>',
+
           background: "#473a67",
           color: "#b4b3b3",
           width: "35rem",
@@ -66,7 +68,7 @@ const DoctorsList = () => {
     const fetchDoctorProfile = async () => {
       try {
         const response = await axios.get(
-          "http://127.0.0.1:8000/profile/doctors/"
+          "https://sinaharaeeni.ir/profile/doctors/"
         );
         setDoctorProfile(response.data);
       } catch (error) {
@@ -82,7 +84,7 @@ const DoctorsList = () => {
     const fetchDoctorProfileFardi = async () => {
       try {
         const response1 = await axios.get(
-          "http://127.0.0.1:8000/profile/doctors/typed/",
+          "https://sinaharaeeni.ir/profile/doctors/typed/",
           {
             params: {
               profile_type: "فردی",
@@ -104,7 +106,7 @@ const DoctorsList = () => {
     const fetchDoctorProfileBaby = async () => {
       try {
         const response1 = await axios.get(
-          "http://127.0.0.1:8000/profile/doctors/typed/",
+          "https://sinaharaeeni.ir/profile/doctors/typed/",
           {
             params: {
               profile_type: "کودک",
@@ -126,7 +128,7 @@ const DoctorsList = () => {
     const fetchDoctorProfileFamily = async () => {
       try {
         const response1 = await axios.get(
-          "http://127.0.0.1:8000/profile/doctors/typed/",
+          "https://sinaharaeeni.ir/profile/doctors/typed/",
           {
             params: {
               profile_type: "زوج",
@@ -147,7 +149,7 @@ const DoctorsList = () => {
     const fetchDoctorProfileEdu = async () => {
       try {
         const response1 = await axios.get(
-          "http://127.0.0.1:8000/profile/doctors/typed/",
+          "https://sinaharaeeni.ir/profile/doctors/typed/",
           {
             params: {
               profile_type: "نوجوان",

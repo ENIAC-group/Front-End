@@ -33,7 +33,7 @@ const MBTITest = () => {
     try {
       const token = localStorage.getItem("accessToken");
       console.log(data)
-      const response = await axios.post("http://127.0.0.1:8000/TherapyTests/MBTI/",
+      const response = await axios.post("https://sinaharaeeni.ir/TherapyTests/MBTI/",
         data, {
         method: "POST",
         headers: {

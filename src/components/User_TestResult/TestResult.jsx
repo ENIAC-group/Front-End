@@ -58,7 +58,7 @@ const Testresult = () => {
     const accessToken = localStorage.getItem("accessToken");
     try {
       const response = await axios(
-        `http://127.0.0.1:8000/TherapyTests/tests/`,
+        `https://sinaharaeeni.ir/TherapyTests/tests/`,
         {
           method: "GET",
           headers: {
@@ -75,7 +75,7 @@ const Testresult = () => {
         });
         try {
           const response1 = await axios(
-            "http://127.0.0.1:8000/accounts/get_user/",
+            "https://sinaharaeeni.ir/accounts/get_user/",
             {
               method: "GET",
               headers: {
@@ -197,7 +197,7 @@ const Testresult = () => {
                           >
                             <li>
                               <IoHeart
-                                style={{ color: "red", marginRight: "-13px" }}
+                                style={{ color: "red", marginRight: "0px" }}
                               />
                               <span>عشق</span>:{results.glasserTest.love}
                             </li>

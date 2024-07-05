@@ -35,7 +35,7 @@ const GlasserTest = () => {
         const token = localStorage.getItem("accessToken");
         const dataString = JSON.stringify(data); 
         console.log(dataString);
-        const response = await axios.post("http://127.0.0.1:8000/TherapyTests/glasser/", 
+        const response = await axios.post("https://sinaharaeeni.ir/TherapyTests/glasser/", 
         {
             data: dataString 
         },{

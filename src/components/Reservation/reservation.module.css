@@ -281,7 +281,7 @@ input[type="radio"] {
   align-items: center;
   margin-left: auto;
   display: flex;
-  margin-right: -65px;
+  margin-right: -70px;
 }
 
 .button_back p {
@@ -306,12 +306,12 @@ input[type="radio"] {
 .button_back p::before {
   position: absolute;
   /*   box-sizing: border-box; */
-  content: "بازگشت";
+  content: "صفحه اصلی";
   width: 0%;
   inset: 0;
   color: var(--hovered-color);
   overflow: hidden;
-  transition: 0.3s ease-out;
+  transition: 0s ease-out;
 }
 
 .button_back:hover::after {
