@@ -3,8 +3,11 @@ import "./Recommendation.css";
 import first_image from "./img/psychology3.jpg";
 import second_image from "./img/psychology2.jpg";
 import { FcBusinessContact } from "react-icons/fc";
+import { useNavigate } from "react-router-dom";
+
 
 const AboutSection = () => {
+  const navigate = useNavigate();
   return (
     <div className="container-fluid custom-container py-5 my-5">
       <div className=" custom-container pt-5">
@@ -71,6 +74,7 @@ const AboutSection = () => {
             <a
               href="#"
               className="btn btn-secondary rounded-pill  px-5 py-3 text-white"
+              onClick={(e)=>{navigate("/RecommendationPage");}}
             >
               شروع
             </a>

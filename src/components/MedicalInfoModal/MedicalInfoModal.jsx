@@ -192,7 +192,7 @@ function MedicalInfoModal
         console.log(recordStr)
         console.log(recordStr.toString())
         const response = await axios.post(
-          "http://localhost:8000/TherapyTests/record/",
+          "https://sinaharaeeni.ir/TherapyTests/record/",
           JSON.stringify(record),
           {
             headers: {
@@ -276,7 +276,7 @@ function MedicalInfoModal
       const ReservationDate = DateString(daySelected); // Format today's date as "yyyy-mm-dd" string
       const token = localStorage.getItem("accessToken");
       console.log(doctorId);
-      const response = await axios("http://127.0.0.1:8000/reserve/create/", {
+      const response = await axios("https://sinaharaeeni.ir/reserve/create/", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",

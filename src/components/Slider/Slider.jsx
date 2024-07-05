@@ -1,25 +1,33 @@
 import React from "react";
 import { useState, useEffect } from "react";
 import styles from "./Slider.module.css";
-import img1 from "../../assets/image1.jpg";
-import img2 from "../../assets/image2.jpg";
-import img3 from "../../assets/image3.jpg";
-import img4 from "../../assets/image4.jpg";
+// import img1 from "../../assets/image1.jpg";
+// import img2 from "../../assets/image2.jpg";
+// import img3 from "../../assets/image3.jpg";
+// import img4 from "../../assets/image4.jpg";
+import img1 from "./carousel-1.jpg";
+import img2 from "./carousel-2.jpg";
+import img3 from "./img1.jpg";
+import img4 from "./img2.jpg";
+import img5 from "./img3.jpg";
+import img6 from "./img4.jpg";
+import img7 from "./img5.jpg";
+
+
 
 import { MdEmail } from "react-icons/md";
 
 const Slider = () => {
   const slides = [
-    { name: img1 },
-    { name: img2 },
     { name: img3 },
     { name: img4 },
+    { name: img5 },
   ];
 
   const [currentIndex, setCurrentUser] = useState(0);
   useEffect(() => {
     setTimeout(() => {
-      setCurrentUser(currentIndex == 3 ? 0 : currentIndex + 1);
+      setCurrentUser(currentIndex == 2? 0 : currentIndex + 1);
     }, 8000);
   });
   return (
@@ -28,20 +36,20 @@ const Slider = () => {
         <div
           style={{
             background: `url(${slides[currentIndex].name}) no-repeat center`,
-            height: "429px",
+            height: "1000px",
             width: "100%",
           }}
         >
           <div
-            style={
-              currentIndex == 0 ? { display: "grid" } : { display: "none" }
-            }
+            // style={
+            //   currentIndex == 0 ? { display: "grid" } : { display: "none" }
+            // }
           >
             <div className={styles.img1_title}>
-              سلامت روح <br />و<br /> روان
+              کلینیک روانشناسی اینیاک
             </div>
           </div>
-          <div
+          {/* <div
             style={
               currentIndex == 1 ? { display: "grid" } : { display: "none" }
             }
@@ -70,7 +78,7 @@ const Slider = () => {
             <div className={styles.img4_text2}>استرس</div>
             <div className={styles.img4_text5}>اختلال یادگیری کودکان</div>
             <div className={styles.img4_text4}>بیش فعالی</div>
-          </div>
+          </div> */}
         </div>
       </div>
     </>

@@ -119,7 +119,7 @@ function ChangeInformation({ p_pages, user_info, setinfo }) {
       const accessToken = localStorage.getItem("accessToken");
       try {
         const response = await axios(
-          "http://127.0.0.1:8000/accounts/complete_info/",
+          "https://sinaharaeeni.ir/accounts/complete_info/",
           {
             method: "POST",
             headers: {

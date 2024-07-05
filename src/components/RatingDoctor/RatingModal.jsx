@@ -23,7 +23,7 @@ const RatingModal = (doctorId) => {
   async function sendRating() {
     try {
       const token = localStorage.getItem("accessToken");
-      const response = await axios("http://127.0.0.1:8000/Rating/Rate/", {
+      const response = await axios("https://sinaharaeeni.ir/Rating/Rate/", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
@@ -32,7 +32,7 @@ const RatingModal = (doctorId) => {
         data: {
           psychiatrist: doctorId.doctorId,
           rating: _rating,
-          comments: _comment,
+          comments: "",
         },
       });
 
@@ -129,7 +129,7 @@ const RatingModal = (doctorId) => {
             به این درمانگر از ۱ تا ۵ چه امتیازی می‌دهید؟
           </h4>
           <Stars setRating={setRating} rating={_rating} />
-          <div>
+          {/* <div>
             <h4
               style={{
                 fontFamily: "Ios15Medium",
@@ -159,8 +159,8 @@ const RatingModal = (doctorId) => {
                 dir: "rtl", // Set the direction of the label to RTL
               }}
             />
-            {/* <input type="text"></input> */}
-          </div>
+            
+          </div> */}
           <div
             onClick={sendRating}
             className="rating-field_modal rating-btn"

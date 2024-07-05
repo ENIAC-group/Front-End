@@ -88,7 +88,7 @@ const User_Panel = () => {
     else {
       try {
         const response = await axios(
-          "http://127.0.0.1:8000/accounts/get_user/",
+          "https://sinaharaeeni.ir/accounts/get_user/",
           {
             method: "GET",
             headers: {

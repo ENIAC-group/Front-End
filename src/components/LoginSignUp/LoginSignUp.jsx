@@ -85,7 +85,7 @@ const LoginContainer = () => {
   async function ResendCode(email) {
     try {
       const response = await axios(
-        "http://127.0.0.1:8000/accounts/activation_resend/",
+        "https://sinaharaeeni.ir/accounts/activation_resend/",
         {
           method: "POST",
           headers: {
@@ -161,7 +161,7 @@ const LoginContainer = () => {
     try {
       axios.defaults.xsrfHeaderName = "X-CSRFTOKEN";
       axios.defaults.xsrfCookieName = "csrftoken";
-      const response = await axios("http://127.0.0.1:8000/accounts/Login/", {
+      const response = await axios("https://sinaharaeeni.ir/accounts/Login/", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
@@ -324,7 +324,7 @@ const LoginContainer = () => {
     try {
       axios.defaults.xsrfHeaderName = "X-CSRFTOKEN";
       axios.defaults.xsrfCookieName = "csrftoken";
-      const response = await axios("http://127.0.0.1:8000/accounts/signup/", {
+      const response = await axios("https://sinaharaeeni.ir/accounts/signup/", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",

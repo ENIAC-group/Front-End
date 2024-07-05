@@ -173,6 +173,7 @@ const Doctor_FreeTime = () => {
   const handleDayChange = (event, value) => {
     setSelectedDayweek(value);
     setsel_hours([]);
+    setSelectedHours([]);
   };
 
   const setdatetime = () => {
@@ -206,7 +207,7 @@ const Doctor_FreeTime = () => {
   });
 
   const [doctorProfile, setDoctorProfile] = useState([]);
-  const baseUrl = "http://127.0.0.1:8000/profile/doctors";
+  const baseUrl = "https://sinaharaeeni.ir/profile/doctors";
 
   // Alternatively, you can use string concatenation:
   const url = baseUrl + doctor_id + "/";
@@ -243,7 +244,7 @@ const Doctor_FreeTime = () => {
       //const endDate = formatDate(addDays(new Date(), 30)); // Format 30 days later as "yyyy-mm-dd" string
       const token = localStorage.getItem("accessToken");
       const response = await axios(
-        "http://127.0.0.1:8000/DoctorPanel/doctor/post-free-time/",
+        "https://sinaharaeeni.ir/DoctorPanel/doctor/post-free-time/",
         {
           method: "POST",
           headers: {
@@ -395,7 +396,7 @@ const Doctor_FreeTime = () => {
               ساعت:
               <br />
               {/* {LeftTimes[selected]} */}
-              {selectedTimes.join(", ")}
+              {selectedTimes.join(" ,")}
               <br />
               <div className={styles.reverse_choices_box}>
                 <button

@@ -273,8 +273,9 @@
 .profile_sub_error
 {
     margin-right: 60px;
-    font-size: x-small;
-    color: #496cf5;
+    font-size: small;
+    /* color: #496cf5; */
+    color:red;
 }
 
 

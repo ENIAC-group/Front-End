@@ -16,7 +16,7 @@ const DoctorPage = () => {
   async function GetUserInfo() {
     const accessToken = localStorage.getItem("accessToken");
     try {
-      const response = await axios("http://127.0.0.1:8000/accounts/get_user/", {
+      const response = await axios("https://sinaharaeeni.ir/accounts/get_user/", {
         method: "GET",
         headers: {
           Authorization: `Bearer ${accessToken}`, // Bearer <access token >
@@ -35,7 +35,7 @@ const DoctorPage = () => {
       GetUserInfo();
       try {
         const response1 = await axios.get(
-          `http://127.0.0.1:8000/profile/doctors/`
+          `https://sinaharaeeni.ir/profile/doctors/`
         );
         if (response1.status == 200 || response1.status == 201) {
           for (let i = 0; i < response1.data.length; i++) {
@@ -57,7 +57,7 @@ const DoctorPage = () => {
       const token = localStorage.getItem("accessToken");
       try {
         const response1 = await axios(
-          "http://127.0.0.1:8000/DoctorPanel/NextWeekReservations/",
+          "https://sinaharaeeni.ir/DoctorPanel/NextWeekReservations/",
           {
             method: "GET",
             headers: {
@@ -95,6 +95,7 @@ const DoctorPage = () => {
             fontFamily: "Ios15Medium",
             width: "298.668px",
             float: "right",
+            marginRight:"-10%",
           }}
         >
           <link

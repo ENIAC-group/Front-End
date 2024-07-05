@@ -39,7 +39,7 @@ const RecommendationPage = () => {
         console.log(dataString);
         const response = await axios({
           method: "POST",
-          url: "http://127.0.0.1:8000/recomSys/patient_recomend/",
+          url: "https://sinaharaeeni.ir/recomSys/patient_recomend/",
           headers: {
             Authorization: `Bearer ${token}`,
             "Content-Type": "application/json",
@@ -292,7 +292,7 @@ const RecommendationPage = () => {
                     Id={index?.psychiatrist}
                     name={index?.name}
                     Description={index?.description}
-                    Image={"http://127.0.0.1:8000"+index?.image}
+                    Image={"https://sinaharaeeni.ir"+index?.image}
                     ProfileType={index?.profile_type}
                     IsPrivate={index?.is_private}
                     Psychiatrist={index?.psychiatrist}

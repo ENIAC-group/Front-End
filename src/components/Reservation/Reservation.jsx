@@ -81,7 +81,7 @@ const ReservationPage = () => {
     try {
       const token = localStorage.getItem("accessToken");
       const response = await axios.get(
-        "http://127.0.0.1:8000/TherapyTests/record_check/",
+        "https://sinaharaeeni.ir/TherapyTests/record_check/",
         {
           headers: {
             "Content-Type": "application/json",
@@ -151,7 +151,7 @@ const ReservationPage = () => {
     try {
       const token = localStorage.getItem("accessToken");
       const response = await axios(
-        `http://127.0.0.1:8000/reserve/get-free-time/${doctor_id}/`,
+        `https://sinaharaeeni.ir/reserve/get-free-time/${doctor_id}/`,
         {
           method: "GET",
           headers: {
@@ -175,7 +175,7 @@ const ReservationPage = () => {
       const endDate = formatDate(addDays(new Date(), 30)); // Format 30 days later as "yyyy-mm-dd" string
       const token = localStorage.getItem("accessToken");
       const response = await axios(
-        "http://127.0.0.1:8000/reserve/between_dates/",
+        "https://sinaharaeeni.ir/reserve/between_dates/",
         {
           method: "POST",
           headers: {
@@ -199,7 +199,7 @@ const ReservationPage = () => {
   }
 
   const [doctorProfile, setDoctorProfile] = useState([]);
-  const baseUrl = "http://127.0.0.1:8000/profile/doctors/";
+  const baseUrl = "https://sinaharaeeni.ir/profile/doctors/";
 
   // Alternatively, you can use string concatenation:
   const url = baseUrl + doctor_id + "/";
@@ -229,7 +229,7 @@ const ReservationPage = () => {
       const ReservationDate = DateString(selectedDay); // Format today's date as "yyyy-mm-dd" string
       const token = localStorage.getItem("accessToken");
       console.log(LeftTimes[selected]);
-      const response = await axios("http://127.0.0.1:8000/reserve/create/", {
+      const response = await axios("https://sinaharaeeni.ir/reserve/create/", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
@@ -302,10 +302,10 @@ const ReservationPage = () => {
             <button
               className={styles.button_back}
               onClick={(e) => {
-                navigate(-1);
+                navigate("/Home");
               }}
             >
-              <p>بازگشت</p>
+              <p>صفحه اصلی</p>
               <svg
                 xmlns="/Doctors"
                 className="h-6 w-6"
