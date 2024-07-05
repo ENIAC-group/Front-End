@@ -95,7 +95,6 @@ const DoctorPage = () => {
             fontFamily: "Ios15Medium",
             width: "298.668px",
             float: "right",
-            marginRight:"-10%",
           }}
         >
           <link
